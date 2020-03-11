@@ -1,0 +1,12 @@
+ComponentDefinition ComponentWebotsCameraRecognition logo "/ComponentWebotsCameraRecognition/model/logo.png"
+{
+InputPort BaseStateServiceIn implements CommBasicObjects.BaseStateService {
+	}
+	Activity CameraRecognitionTask
+	{
+		InputPortLink BaseStateServiceIn { oversamplingOk undersamplingOk }
+		DefaultTrigger PeriodicTimer 1.0 Hz
+	}
+	OutputPort RGBImagePushServiceOut implements DomainVision.RGBImagePushService realizedBy CameraRecognitionTask {
+	}
+}
