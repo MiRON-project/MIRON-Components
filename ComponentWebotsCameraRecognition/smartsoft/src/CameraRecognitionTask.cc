@@ -133,25 +133,21 @@ int CameraRecognitionTask::on_execute()
 		++imageCounter;
 
 		comm_video_image.setSeq_count(imageCounter);
-		comm_video_image.set_parameters(cols, rows, DomainVision::FormatType::RGB32);
+		comm_video_image.set_parameters(cols, rows, 
+			DomainVision::FormatType::RGB32);
 		comm_video_image.set_data(image);
-		/*
-		comm_video_image.set_intrinsic(color_intrinsics);
-		comm_video_image.setDistortion_model(DomainVision::ImageDistortionModel::BROWN_CONRADY);//TODO need to be verified
-		comm_video_image.set_distortion(color_distortion);
-		*/
 		comm_video_image.setIs_valid(true);
 		current_rgbd_image.setColor_image(comm_video_image);
 		current_rgbd_image.setSeq_count(imageCounter);
 		current_rgbd_image.setIs_valid(true);
-		std::cout << "New image!" << std::endl;
 		current_rgbd_image.setBase_state(baseState);
+		recognition();
 	}
 
 	else
 		current_rgbd_image.setIs_valid(false);
 
-	// send out laser scan through port
+	// send out image through port
 	COMP->rGBImagePushServiceOut->put(current_rgbd_image.getColor_image());
 
 	// start robot step thread
@@ -177,4 +173,34 @@ void CameraRecognitionTask::runStep(webots::Robot *robot)
 {
   _wbShouldQuit = robot->step(webotsTimeStep) == -1.0;
   _threadRunning = false;
+}
+
+void CameraRecognitionTask::recognition()
+{
+	int number_of_objects = wbcamera->getRecognitionNumberOfObjects();
+	printf("\nRecognized %d objects.\n", number_of_objects);
+
+	auto objects = wbcamera->getRecognitionObjects();
+	for (int i = 0; i < number_of_objects; ++i) 
+	{
+		printf("Model of object %d: %s\n", i, objects[i].model);
+		printf("Id of object %d: %d\n", i, objects[i].id);
+		printf("Relative position of object %d: %lf %lf %lf\n", i, 
+			objects[i].position[0], objects[i].position[1], 
+			objects[i].position[2]);
+		printf("Relative orientation of object %d: %lf %lf %lf %lf\n", i, 
+			objects[i].orientation[0], objects[i].orientation[1],
+			objects[i].orientation[2], objects[i].orientation[3]);
+		printf("Size of object %d: %lf %lf\n", i, objects[i].size[0], 
+			objects[i].size[1]);
+		printf("Position of the object %d on the camera image: %d %d\n", i, 
+			objects[i].position_on_image[0], objects[i].position_on_image[1]);
+		printf("Size of the object %d on the camera image: %d %d\n", i, 
+			objects[i].size_on_image[0], objects[i].size_on_image[1]);
+		
+		for (int j = 0; j < objects[i].number_of_colors; ++j)
+			printf("- Color %d/%d: %lf %lf %lf\n", j + 1, 
+				objects[i].number_of_colors, objects[i].colors[3 * j],
+				objects[i].colors[3 * j + 1], objects[i].colors[3 * j + 2]);
+	}
 }

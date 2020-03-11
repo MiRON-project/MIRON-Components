@@ -5,7 +5,7 @@ InputPort BaseStateServiceIn implements CommBasicObjects.BaseStateService {
 	Activity CameraRecognitionTask
 	{
 		InputPortLink BaseStateServiceIn { oversamplingOk undersamplingOk }
-		DefaultTrigger PeriodicTimer 1.0 Hz
+		DefaultTrigger PeriodicTimer 10.0 Hz
 	}
 	OutputPort RGBImagePushServiceOut implements DomainVision.RGBImagePushService realizedBy CameraRecognitionTask {
 	}

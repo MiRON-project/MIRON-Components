@@ -50,7 +50,7 @@ private:
 	bool _wbShouldQuit;
 	void runStep(webots::Robot *robot);
 
-	void visualization();
+	void recognition();
 public:
 	CameraRecognitionTask(SmartACE::SmartComponent *comp);
 	virtual ~CameraRecognitionTask();
