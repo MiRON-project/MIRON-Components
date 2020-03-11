@@ -37,8 +37,6 @@ CameraRecognitionTask::~CameraRecognitionTask()
 	std::cout << "destructor CameraRecognitionTask\n";
 }
 
-
-
 int CameraRecognitionTask::on_entry()
 {
 	// do initialization procedures here, which are called once, each time the task is started
@@ -68,7 +66,8 @@ int CameraRecognitionTask::on_entry()
 			wbcamera->enable(webotsTimeStep);
 			wbcamera->recognitionEnable(webotsTimeStep);
 			std::cout << "Device #" << i << " called " << cameraName << 
-				" is a camera." << std::endl;
+				" is a camera. Sampling time is: " << webotsTimeStep << 
+				std::endl;
 			break;
 		}
 	}
@@ -125,11 +124,7 @@ int CameraRecognitionTask::on_execute()
 
 	DomainVision::CommRGBDImage current_rgbd_image;
 
-	std::cout <<" Get Image: " << std::endl;
-	SmartACE::SmartGuard guard(COMP->mutex);
 	auto image = wbcamera->getImage();
-	guard.release();
-
 	if (wbcamera && image)
 	{
 		DomainVision::CommVideoImage comm_video_image;
@@ -149,7 +144,7 @@ int CameraRecognitionTask::on_execute()
 		current_rgbd_image.setColor_image(comm_video_image);
 		current_rgbd_image.setSeq_count(imageCounter);
 		current_rgbd_image.setIs_valid(true);
-		std::cout << "New image rcvd" << std::endl;
+		std::cout << "New image!" << std::endl;
 		current_rgbd_image.setBase_state(baseState);
 	}
 
