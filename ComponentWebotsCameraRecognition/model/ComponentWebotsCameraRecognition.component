@@ -9,4 +9,7 @@ InputPort BaseStateServiceIn implements CommBasicObjects.BaseStateService {
 	}
 	OutputPort RGBImagePushServiceOut implements DomainVision.RGBImagePushService realizedBy CameraRecognitionTask {
 	}
+
+	OutputPort ObjectPushServiceOut implements CommObjectRecognitionObjects.ObjectPushService realizedBy CameraRecognitionTask {
+	}
 }
