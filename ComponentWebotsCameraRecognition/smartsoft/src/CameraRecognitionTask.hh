@@ -17,6 +17,8 @@
 #ifndef _CAMERARECOGNITIONTASK_HH
 #define _CAMERARECOGNITIONTASK_HH
 
+#include "Utils.hpp"
+
 #include "CommBasicObjects/CommBasePose.hh"
 #include "CommBasicObjects/CommBaseState.hh"
 #include "CommBasicObjects/CommBaseVelocity.hh"
