@@ -9,9 +9,9 @@ This Component provides sensors raw data and it updates the robot controller. On
 | ------- | ------- |
 | **LocalizationUpdateServiceIn**: not implemented yet | **BatteryPushServiceOut**: Battery status (level, power and others) |
 | **NavigationVelocityServiceIn**: velocity commands (linear velocities and turnrate) | **BaseStateServiceOut**: state of the robot base (position and orientation) |
-| | | **LaserServiceOut**: Lidar values |
-| | | **ObjectPushServiceOut**: recognized objects and properties |
-| | | **RGBImagePushServiceOut**: Camera image |
+| | **LaserServiceOut**: Lidar values |
+| | **ObjectPushServiceOut**: recognized objects and properties |
+| | **RGBImagePushServiceOut**: Camera image |
 
 
 ## InternalParameter Settings
