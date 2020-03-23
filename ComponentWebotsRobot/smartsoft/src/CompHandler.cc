@@ -15,11 +15,18 @@
 // delete it before running the code generator.
 //--------------------------------------------------------------------------
 #include "CompHandler.hh"
-#include "ComponentWebotsCameraRecognition.hh"
+#include "ComponentWebotsRobot.hh"
 
 #include <iostream>
 
 // include communication objects
+#include <CommBasicObjects/CommBasePositionUpdate.hh>
+#include <CommBasicObjects/CommBaseState.hh>
+#include <CommBasicObjects/CommBatteryEvent.hh>
+#include <CommBasicObjects/CommBatteryParameter.hh>
+#include <CommBasicObjects/CommBatteryState.hh>
+#include <CommBasicObjects/CommNavigationVelocity.hh>
+#include <CommBasicObjects/CommVoid.hh>
 
 
 void CompHandler::onStartup() 

@@ -7,22 +7,22 @@
 case "$1" in
 
 pre-start)
-	echo "Triggering pre-start hooks FROM COMPONENT ComponentWebotsCameraRecognition ..."
+	echo "Triggering pre-start hooks FROM COMPONENT ComponentWebotsRobot ..."
 	# Insert commands you want to call prior to starting the components
 ;;
 
 post-start)
-	echo "Triggering post-start hooks FROM COMPONENT ComponentWebotsCameraRecognition ..."
+	echo "Triggering post-start hooks FROM COMPONENT ComponentWebotsRobot ..."
 	# Insert commands you want to call after all components were started
 ;;
 
 pre-stop)
-	echo "Triggering pre-stop hooks FROM COMPONENT ComponentWebotsCameraRecognition ..."
+	echo "Triggering pre-stop hooks FROM COMPONENT ComponentWebotsRobot ..."
 	# Insert commands you want to call before stopping all components
 ;;
 
 post-stop)
-	echo "Triggering post-stop hooks FROM COMPONENT ComponentWebotsCameraRecognition ..."
+	echo "Triggering post-stop hooks FROM COMPONENT ComponentWebotsRobot ..."
 	# Insert commands you want to call after all components were stopped
 ;;
 

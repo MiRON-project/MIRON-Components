@@ -14,21 +14,18 @@
 // If you want the toolchain to re-generate this file, please 
 // delete it before running the code generator.
 //--------------------------------------------------------------------------
-#include "SmartStateChangeHandler.hh"
-#include "ComponentWebotsCameraRecognition.hh"
+#ifndef _NAVIGATIONVELOCITYHANDLER_HH
+#define _NAVIGATIONVELOCITYHANDLER_HH
 
-#include <iostream>
+#include "NavigationVelocityHandlerCore.hh"
+	
+class NavigationVelocityHandler  : public NavigationVelocityHandlerCore
+{		
+public:
+	NavigationVelocityHandler(Smart::InputSubject<CommBasicObjects::CommNavigationVelocity> *subject, const int &prescaleFactor=1);
+	virtual ~NavigationVelocityHandler();
+	
+	virtual void on_NavigationVelocityServiceIn(const CommBasicObjects::CommNavigationVelocity &input);
+};
 
-// Called when a substate is entered
-void SmartStateChangeHandler::handleEnterState(const std::string & substate) throw()
-{
-	// change this code to your needs !!!
-
-}
-
-// Called when a substate is left
-void SmartStateChangeHandler::handleQuitState(const std::string & substate) throw()
-{
-	// change this code to your needs !!!
-
-}
+#endif

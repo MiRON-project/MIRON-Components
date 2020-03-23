@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>ComponentWebotsCameraRecognition</name>
+	<name>ComponentWebotsRobot</name>
 	<comment></comment>
 	<projects>
 		<project>CommBasicObjects</project>
+		<project>CommNavigationObjects</project>
 		<project>CommObjectRecognitionObjects</project>
 		<project>DomainVision</project>
 	</projects>

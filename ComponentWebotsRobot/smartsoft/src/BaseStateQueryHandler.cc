@@ -14,25 +14,21 @@
 // If you want the toolchain to re-generate this file, please 
 // delete it before running the code generator.
 //--------------------------------------------------------------------------
-#ifndef _COMPONENTWEBOTSCAMERARECOGNITIONCORE_HH
-#define _COMPONENTWEBOTSCAMERARECOGNITIONCORE_HH
-	
-#include "aceSmartSoft.hh"
-#include <iostream>
+#include "BaseStateQueryHandler.hh"
+#include "ComponentWebotsRobot.hh"
 
-#include <jsoncpp/json/json.h>
-
-#include <webots/Robot.hpp>
-
-class ComponentWebotsCameraRecognitionCore
+BaseStateQueryHandler::BaseStateQueryHandler(IQueryServer *server)
+:	BaseStateQueryHandlerCore(server)
 {
-private:
-
-public:
-	ComponentWebotsCameraRecognitionCore();
-	SmartACE::SmartMutex mutex;
-	Json::Value mConfiguration;
-	webots::Robot *webotsRobot;
-};
 	
-#endif
+}
+
+
+void BaseStateQueryHandler::handleQuery(const Smart::QueryIdPtr &id, const CommBasicObjects::CommVoid& request) 
+{
+	CommBasicObjects::CommBaseState answer;
+	
+	// implement your query handling logic here and fill in the answer object
+	
+	this->server->answer(id, answer);
+}

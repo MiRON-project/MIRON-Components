@@ -1,0 +1,11 @@
+##################
+# Specific rules #
+##################
+
+
+# untracked files
+BatteryEventServiceOutEventTestHandler.*
+LocalizationUpdateHandler.*
+ParameterStateStruct.*
+
+
