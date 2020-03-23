@@ -6,4 +6,3 @@ src-gen/
 __pycache__/
 /*/bin/
 .settings
-*.jpg
