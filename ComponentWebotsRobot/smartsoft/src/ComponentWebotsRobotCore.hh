@@ -31,6 +31,8 @@
 #include "webots/InertialUnit.hpp"
 #include "webots/Motor.hpp"
 
+#include "CommBasicObjects/CommBaseState.hh"
+
 using namespace std;
 
 class ComponentWebotsRobotCore
@@ -51,6 +53,7 @@ public:
   Json::Value mConfiguration;
   bool has_supervisor;
   bool battery_out;
+  std::shared_ptr<CommBasicObjects::CommBaseState> _pose;
 
   // Webots supervisor or Robot
   shared_ptr<webots::Supervisor> _supervisor;

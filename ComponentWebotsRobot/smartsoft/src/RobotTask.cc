@@ -111,9 +111,10 @@ int RobotTask::on_execute()
   double rightSpeed = 0.0;
   
   COMP->mRobotMutex.acquire();
-
-  CommBasicObjects::CommBaseState baseState = setBaseStateServiceOut();
-  baseStateServiceOutPut(baseState);
+  auto current_pose = setBaseStateServiceOut();
+  COMP->_pose->set_base_position(current_pose.getBasePose());
+  COMP->_pose->set_base_raw_position(current_pose.getBasePose());
+  baseStateServiceOutPut(current_pose);
 
   // Calculate wheel velocities using differential wheels
   if (left_wheel && right_wheel)
@@ -167,14 +168,12 @@ CommBasicObjects::CommBaseState RobotTask::setBaseStateServiceOut() const
     basePosition.set_x(GPS_value[2], 1.0);
     basePosition.set_y(GPS_value[0], 1.0);
     basePosition.set_z(GPS_value[1], 1.0);
-    baseState.set_base_position(basePosition);
   }
   else
   {
     basePosition.set_x(0.0, 1.0);
     basePosition.set_y(0.0, 1.0);
     basePosition.set_z(0.0, 1.0);
-    baseState.set_base_position(basePosition);
   }
 
   // Set IMU values for port BaseStateServiceOut
@@ -188,14 +187,13 @@ CommBasicObjects::CommBaseState RobotTask::setBaseStateServiceOut() const
     basePosition.set_base_roll(inertialInutValue[0]);
     basePosition.set_base_azimuth(inertialInutValue[2]);
     basePosition.set_base_elevation(inertialInutValue[1]);
-    baseState.set_base_position(basePosition);
   }
   else
   {
     basePosition.set_base_roll(0.0);
     basePosition.set_base_azimuth(0.0);
     basePosition.set_base_elevation(0.0);
-    baseState.set_base_position(basePosition);
   }
+  baseState.set_base_position(basePosition);
   return baseState;
 }

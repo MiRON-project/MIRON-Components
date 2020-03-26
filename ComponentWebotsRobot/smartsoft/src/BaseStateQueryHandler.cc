@@ -26,9 +26,17 @@ BaseStateQueryHandler::BaseStateQueryHandler(IQueryServer *server)
 
 void BaseStateQueryHandler::handleQuery(const Smart::QueryIdPtr &id, const CommBasicObjects::CommVoid& request) 
 {
-	CommBasicObjects::CommBaseState answer;
-	
-	// implement your query handling logic here and fill in the answer object
-	
-	this->server->answer(id, answer);
+	CommBasicObjects::CommBaseState commCurrentBaseState;
+	if (COMP->_pose != NULL) {
+		commCurrentBaseState.set_base_position(COMP->_pose->getBasePose());
+		commCurrentBaseState.set_base_raw_position(COMP->_pose->getBasePose());
+	}
+	else {
+		std::cout << "Webots Simulator not yet started !" << std::endl;
+	}
+	CommBasicObjects::CommTimeStamp time_stamp;
+	time_stamp.set_now();
+	commCurrentBaseState.set_time_stamp(time_stamp);
+
+    this->server->answer(id, commCurrentBaseState);
 }
