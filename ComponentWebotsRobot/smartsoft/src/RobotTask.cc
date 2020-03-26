@@ -111,9 +111,10 @@ int RobotTask::on_execute()
   double rightSpeed = 0.0;
   
   COMP->mRobotMutex.acquire();
-
-  CommBasicObjects::CommBaseState baseState = setBaseStateServiceOut();
-  baseStateServiceOutPut(baseState);
+  auto current_pose = setBaseStateServiceOut();
+  COMP->_pose->set_base_position(current_pose.getBasePose());
+  COMP->_pose->set_base_raw_position(current_pose.getBasePose());
+  baseStateServiceOutPut(current_pose);
 
   // Calculate wheel velocities using differential wheels
   if (left_wheel && right_wheel)

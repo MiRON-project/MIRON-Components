@@ -20,7 +20,8 @@
 ComponentWebotsRobotCore::ComponentWebotsRobotCore() :
   _supervisor(NULL),
   _imu(NULL),
-  _gps(NULL)
+  _gps(NULL),
+  _pose(NULL)
 {
   
 
@@ -56,6 +57,7 @@ ComponentWebotsRobotCore::ComponentWebotsRobotCore() :
   checkSupervisor();
   initDevices();
   getNavigationMotors();
+  _pose = std::make_shared<CommBasicObjects::CommBaseState>();
   battery_out = false;
 }
 
