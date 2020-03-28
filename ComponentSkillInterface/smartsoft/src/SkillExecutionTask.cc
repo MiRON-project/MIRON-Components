@@ -106,151 +106,57 @@ int SkillExecutionTask::on_entry()
 
 int SkillExecutionTask::on_execute()
 {
-	// this method is called from an outside loop,
-	// hence, NEVER use an infinite loop (like "while(1)") here inside!!!
-	// also do not use blocking calls which do not result from smartsoft kernel
-	
-	// to get the incoming data, use this methods:
-	Smart::StatusCode status;
-
-
-//	std::cout<<"["<<__FUNCTION__<<"] "<<"wait for msg"<<std::endl;
 	std::string inputMSG = this->popMsg();
-	std::cout<<"[SkillExecutionTask] "<<"got msg: "<<inputMSG<<std::endl;
-
 	QJsonParseError error;
-
 	QString line = QString::fromUtf8(inputMSG.c_str());
 	QJsonDocument doc = QJsonDocument::fromJson(line.toUtf8(),&error);
-
 	if(QJsonParseError::NoError != error.error)
 	{
-		std::cout<< "error: parsing json error:" << error.errorString().toStdString()<<std::endl;
+		std::cout<< "error: parsing json error:" << error.errorString().
+			toStdString() << std::endl;
 		return 0;
 	}
+	
+	auto parsed_json = ParsedJasonStr(doc);
 
-	QJsonObject root = doc.object();
-
-	QString msgType = root["msg-type"].toString();
-
-
-/////////////////////////////
-//P U S H    S K I L L
-/////////////////////////////
-
-	if(msgType == "push-skill")
+	if(parsed_json.msg_type == "push-skill")
 	{
-//		{ "msg-type" : "push-skill" , "id" : 1, "skill" : { "name" : "moverobot", "skillDefinitionFQN" : "CommNavigationObjects.CdlSkills.moverobot", "in-attribute" : { "location" : 1 }, "out-attribute" : { }}}
-
-/// READ THE SKILL AS A JSON
-
-		int id = root["id"].toInt();
-
-		QJsonObject jsonSKILL = root["skill"].toObject();
-
-		QString skillName = jsonSKILL["name"].toString();
-		QString skillDefinitionFQN = jsonSKILL["skill-definition-fqn"].toString();
-
-		QJsonObject jsonINATTRIB = jsonSKILL["in-attribute"].toObject();
-		QJsonObject jsonOUTATTRIB =jsonSKILL["out-attribute"].toObject();
-
-		auto in = parseJsonInput(jsonSKILL);
-		auto out = parseJsonOutput(jsonSKILL);
-
-//////////////////////////////////////////////////////////////////////
-// Updating the SKILL on the KB - its execution will be addressed by the Sequencer
-
 		std::string message;
 		CommBasicObjects::CommKBRequest request;
 		CommBasicObjects::CommKBResponse answer;
 
-		message = generateSkillKBMsg(skillName.toStdString(), in, out);
+		message = generateSkillKBMsg(parsed_json.skill_name, parsed_json.in, 
+			parsed_json.out);
 		request.setRequest(message);
-		std::cout<<"Petition to the KB for updating the skill"<<std::endl;
 		COMP->kBQueryClient->query(request, answer);
-		std::cout<<"Got KB Query Answer: "<<answer.getResponse()<<std::endl;
-/////////////////////////////////////////////////////////////////////////////////
-
-		std::cout<<"[SkillExecutionTask]"<<" EXECSKILL - id: "<<id<<" name: "<<skillName.toStdString()<<" fqn: "<< skillDefinitionFQN.toStdString() << std::endl;
-
-
-
-//////////////////////////////////////////////////////////////////////
-// Querying the SKILL from the KB - when its execution finishes, the SEQUENCER sets the name of the skill_result on the KB with the name of the executed skill
+		std::cout << "[SkillExecutionTask]" << " EXECSKILL - id: " << 
+			parsed_json.id << "\n name: " << parsed_json.skill_name <<
+			"\n fqn: " << parsed_json.skill_definition << "\n"; 
 		
-		message = "(KB-QUERY :KEY '(IS-A) :VALUE '((IS-A SKILL_RESULT)) )";
 		std::cout << "Waiting for skill execution to finish..." << std::endl;
 		while(true)
 		{
-			request.setRequest(message);
+			request.setRequest(SKILL_RESULT);
 			COMP->kBQueryClient->query(request,answer);
 			std::string answer_skill = parseKBSkillName(answer.getResponse());
-			std::string skill_name_str = skillName.toStdString();
-			if (stringCompareInsensitive(answer_skill, skill_name_str))
+			if (stringCompareInsensitive(answer_skill, parsed_json.skill_name))
+			{
+				auto ports_name = parseKBMsg(answer.getResponse());
 				break;
+			}
 		}
-
-		std::string answer_msg;
-		message = "(KB-QUERY :KEY '(IS-A) :VALUE '((IS-A SKILL)))";
-		std::cout << "Getting output..." << std::endl;
-		while(true)
-		{
-			request.setRequest(message);
-			COMP->kBQueryClient->query(request,answer);
-			std::string answer_skill = parseKBSkillName(answer.getResponse());
-			std::string skill_name_str = skillName.toStdString();
-			if (!stringCompareInsensitive(answer_skill, skill_name_str))
-				continue;
-
-			auto ports_name = parseKBMsg(answer.getResponse());
-			for(auto& out : ports_name.first)
-				std::cout<<"Got KB Query Answer: " << out <<std::endl;
-			break;
-		}
-		std::cout << "msg = " << answer.getResponse();
-/////////////////////////////////////////////////////////////////////////////////
-
-		message = "(KB-UPDATE :KEY '(IS-A) :VALUE '((IS-A SKILL_RESULT)(NAME NIL)) )";
-		request.setRequest(message);
-		std::cout<<"Petition to the KB for updating the skill_result to NIL"<<std::endl;
+		request.setRequest(SKILL_RESULT_NIL);
 		COMP->kBQueryClient->query(request,answer);
-		std::cout<<"Got KB Query Answer: "<<answer.getResponse()<<std::endl;
+		std::cout<<"Got KB Query Answer: " << answer.getResponse() 
+			<< std::endl;
 
-/////////////////////////////////////////////////////////////////////////////////
+		COMP->com->send(parsed_json.parseResult());
 
-		//return 0; /////////
-		{
-
-//		{ "msg-type" : "skill-result" , "id" : 1 , "result" : { "result" : "SUCCESS", "result-value" : "OK" }}
-
-
-
-		QJsonObject root;
-		QJsonObject result;
-		root["msg-type"] = "skill-result";
-		root["id"] = id;
-		result["result"] = "SUCCESS";
-		result["result-value"] = "OK";
-		root["result"] = result;
-		QJsonDocument answer(root);
-
-		QString jsonAnsw = answer.toJson(QJsonDocument::Compact);
-		COMP->com->send(jsonAnsw.toStdString());
-
-		}
-
-
-
-	/////////////////////////////
-	//A B O R  T    S K I L L
-	/////////////////////////////
-
-	} else if (msgType == "abort-current-running-skill"){
-
-//		{ "msg-type" : "abort-current-running-skill" }
-
+	} // "push-skill"
+	
+	else if (parsed_json.msg_type == "abort-current-running-skill")
+	{
 		std::cout<<"[SkillExecutionTask]"<<" abort current running skill"<<std::endl;
-
 		{
 //		{ "msg-type" : "abort-current-running-skill-result", "result" : "SUCCESS"}
 
@@ -267,22 +173,18 @@ int SkillExecutionTask::on_execute()
 		//{ "msg-type" : "abort-current-running-skill" }
 
 		//TODO impl abort current skill
-
-	} else if (msgType == "abort-skill"){
+	} 
+	
+	else if (parsed_json.msg_type == "abort-skill")
+	{
 
 //		{ "msg-type" : "abort-skill" , "id" : 2 }
-		int id = root["id"].toInt();
-
-		std::cout<<"[SkillExecutionTask]"<<" abort skill id: "<<id<<std::endl;
-
-		//TODO impl abort skill
-
 		{
 //		{ "msg-type" : "abort-skill-result", "id" : 2, "result" : "SUCCESS"}
 
 		QJsonObject root;
 		root["msg-type"] = "abort-skill-result";
-		root["id"] = id;
+		root["id"] = parsed_json.id;
 		root["result"] = "SUCCESS";
 		QJsonDocument answer(root);
 

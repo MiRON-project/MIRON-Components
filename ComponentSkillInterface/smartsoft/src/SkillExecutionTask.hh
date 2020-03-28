@@ -53,6 +53,9 @@
 #include <utility>
 #include <condition_variable>
 
+#define SKILL_RESULT "(KB-QUERY :KEY '(IS-A) :VALUE '((IS-A SKILL_RESULT)) )"
+#define SKILL_RESULT_NIL "(KB-UPDATE :KEY '(IS-A) :VALUE '((IS-A SKILL_RESULT)(NAME NIL)) )"
+
 class SkillExecutionTask  : public SkillExecutionTaskCore
 {
 private:
