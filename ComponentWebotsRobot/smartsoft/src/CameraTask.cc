@@ -60,10 +60,10 @@ int CameraTask::on_entry()
 	{
 		std::cerr << "You enable a Camera, but robot has not such device!" 
 			<< std::endl;
+		COMP->mRobotMutex.release();
 		return -1;
 	}
 
-	// release
 	COMP->mRobotMutex.release();
 
 	return 0;
