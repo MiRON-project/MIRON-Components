@@ -1,0 +1,17 @@
+ComponentDefinition ComponentWebotsPersonRecognition logo "/ComponentWebotsPersonRecognition/model/logo.png"
+{
+	Activity RecognitionTask
+	{
+		InputPortLink  RGBImagePushServiceIn { optional oversamplingOk undersamplingOk }
+		InputPortLink ObjectPushServiceIn { optional oversamplingOk undersamplingOk }
+		DefaultTrigger PeriodicTimer 1.0 Hz
+	}
+	OutputPort PersonRecognitionServiceOut implements CommObjectRecognitionObjects.PersonPushService realizedBy RecognitionTask {}
+	InputPort ObjectPushServiceIn implements CommObjectRecognitionObjects.ObjectPushService {}
+InputPort RGBImagePushServiceIn implements DomainVision.RGBImagePushService {
+	}
+	CoordinationSlavePort CoordinationPort implements CommBasicObjects.DefaultCoordinationService
+	{
+	}
+	ComponentParameters ComponentWebotsPersonRecognition slave CoordinationPort
+}
