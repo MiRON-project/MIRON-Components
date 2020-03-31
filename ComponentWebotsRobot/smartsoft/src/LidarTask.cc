@@ -54,6 +54,7 @@ int LidarTask::on_entry()
 	{
 		std::cerr << "You enable a Lidar, but robot has not such device!" 
 		<< std::endl;
+		COMP->mRobotMutex.release();
 		return -1;
 	}
 
