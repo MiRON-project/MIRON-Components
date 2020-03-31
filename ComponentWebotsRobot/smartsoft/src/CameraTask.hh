@@ -21,6 +21,7 @@
 #include <DomainVision/CommRGBDImage.hh>
 #include <DomainVision/CommVideoImage.hh>
 #include "CommObjectRecognitionObjects/CommObjectRecognitionObjectProperties.hh"
+#include "CommObjectRecognitionObjects/CommObjectDominantColor.hh"
 
 #include "Utils.hpp"
 #include <webots/Camera.hpp>

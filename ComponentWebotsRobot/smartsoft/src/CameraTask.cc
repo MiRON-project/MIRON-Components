@@ -143,6 +143,19 @@ void CameraTask::recognition()
 		obj_properties.set_dimension(objects[i].size[0], objects[i].size[1], 
 			0);
 		obj_properties.setIs_valid(true);
+		
+		std::vector<CommObjectRecognitionObjects::CommObjectDominantColor> 
+			colors;
+		for (size_t j = 0; j < objects[j].number_of_colors; ++j)
+		{
+			CommObjectRecognitionObjects::CommObjectDominantColor color;
+			color.setR(objects[i].colors[3 * j]);
+			color.setG(objects[i].colors[3 * j + 1]);
+			color.setB(objects[i].colors[3 * j + 2]);
+			color.setDominance(1.0 / objects[i].number_of_colors);
+			colors.push_back(color);
+		}
+		obj_properties.setObject_colors(colors);
 		COMP->objectPushServiceOut->put(obj_properties);
 
 		/*
@@ -154,16 +167,19 @@ void CameraTask::recognition()
 			objects[i].orientation[2], objects[i].orientation[3]);
 		printf("Size of object %d: %lf %lf\n", i, objects[i].size[0], 
 			objects[i].size[1]);
-		printf("Id of object %d: %d\n", i, objects[i].id);		
+		printf("Id of object %d: %d\n", i, objects[i].id);	
+		*/	
 		printf("Model of object %d: %s\n", i, objects[i].model);
+		/*
 		printf("Position of the object %d on the camera image: %d %d\n", i, 
 			objects[i].position_on_image[0], objects[i].position_on_image[1]);
 		printf("Size of the object %d on the camera image: %d %d\n", i, 
 			objects[i].size_on_image[0], objects[i].size_on_image[1]);
+		*/
 		for (int j = 0; j < objects[i].number_of_colors; ++j)
 			printf("- Color %d/%d: %lf %lf %lf\n", j + 1, 
 				objects[i].number_of_colors, objects[i].colors[3 * j],
 				objects[i].colors[3 * j + 1], objects[i].colors[3 * j + 2]);
-		*/
+		
 	}
 }

@@ -53,8 +53,9 @@ ComponentDefinition ComponentWebotsRobot logo "/ComponentWebotsRobot/model/logo.
   Activity CameraTask{
 		DefaultTrigger PeriodicTimer 10.0 Hz
   }
-  OutputPort ObjectPushServiceOut implements CommObjectRecognitionObjects.ObjectPushService realizedBy CameraTask {
+
+	OutputPort RGBImagePushServiceOut implements DomainVision.RGBImagePushService realizedBy CameraTask {
   }
-  OutputPort RGBImagePushServiceOut implements DomainVision.RGBImagePushService realizedBy CameraTask {
-  }
+OutputPort ObjectPushServiceOut implements CommObjectRecognitionObjects.ObjectPushService realizedBy CameraTask {
+	}
 }
