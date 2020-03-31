@@ -14,30 +14,44 @@
 // If you want the toolchain to re-generate this file, please 
 // delete it before running the code generator.
 //--------------------------------------------------------------------------
-#ifndef _CAMERATASK_HH
-#define _CAMERATASK_HH
+#ifndef _RECOGNITIONTASK_HH
+#define _RECOGNITIONTASK_HH
 
-#include "CameraTaskCore.hh"
-#include <DomainVision/CommRGBDImage.hh>
-#include <DomainVision/CommVideoImage.hh>
-#include "CommObjectRecognitionObjects/CommObjectRecognitionObjectProperties.hh"
+#include "RecognitionTaskCore.hh"
+
+#include <memory.h>
+#include <jsoncpp/json/json.h>
+
 #include "CommObjectRecognitionObjects/CommObjectDominantColor.hh"
 
-#include "Utils.hpp"
-#include <webots/Camera.hpp>
+#define COLOR_THRESHOLD 1e-2
+#define DOMINANCE_THRESHOLD 1e-2
 
-class CameraTask  : public CameraTaskCore
+struct Person
+{
+	int id;
+	std::string name;
+	std::vector<CommObjectRecognitionObjects::CommObjectDominantColor> colors;
+	bool unvisited;
+
+	Person(){};
+};
+
+class RecognitionTask  : public RecognitionTaskCore
 {
 private:
-	webots::Camera *_camera;
-	DomainVision::CommRGBDImage rgbd_image;
-	DomainVision::CommVideoImage comm_video_image;
-	int image_counter;
-	void recognition();
-	int computeCameraUpdate() const;
+	std::vector<Person> _people;
+	SmartACE::SmartMutex mutex;
+
+	int extractPeopleFromJson();
+	void comparePeopleJson();
+	bool checkColors(
+		const Person& person,
+		const CommObjectRecognitionObjects::
+			CommObjectRecognitionObjectProperties& obj) const;
 public:
-	CameraTask(SmartACE::SmartComponent *comp);
-	virtual ~CameraTask();
+	RecognitionTask(SmartACE::SmartComponent *comp);
+	virtual ~RecognitionTask();
 	
 	virtual int on_entry();
 	virtual int on_execute();
