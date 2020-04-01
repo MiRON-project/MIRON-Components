@@ -23,6 +23,7 @@
 #include <jsoncpp/json/json.h>
 
 #include "CommObjectRecognitionObjects/CommObjectDominantColor.hh"
+#include "CommObjectRecognitionObjects/CommObjectRecognitionEnvironment.hh"
 
 #define COLOR_THRESHOLD 1e-2
 #define DOMINANCE_THRESHOLD 1e-2

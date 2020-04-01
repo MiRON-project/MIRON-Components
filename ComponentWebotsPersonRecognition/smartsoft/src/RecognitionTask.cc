@@ -105,8 +105,8 @@ int RecognitionTask::extractPeopleFromJson()
 
 void RecognitionTask::comparePeopleJson()
 {
-	CommObjectRecognitionObjects::CommObjectRecognitionObjectProperties obj;
-	Smart::StatusCode obj_status = this->objectPushServiceInGetUpdate(obj);
+	CommObjectRecognitionObjects::CommObjectRecognitionEnvironment objs;
+	Smart::StatusCode obj_status = objectsPushServiceInGetUpdate(objs);
 	CommObjectRecognitionObjects::CommPerson comm_person;
 
 	if (obj_status != Smart::SMART_OK)
@@ -116,45 +116,51 @@ void RecognitionTask::comparePeopleJson()
 		return;
 	}
 	
-	if (obj.getObject_type() != "pedestrian")
+	if (!objs.getIs_valid())
 	{
-		std::cout << "Not a person found !\n";
+		std::cout << "Not a valid object\n";
 		return;
 	}
 
-	std::cout << "Pedestrian found!\n";
-	for (auto& person : _people)
+	for (auto& obj : objs.getObjectsCopy())
 	{
-		if (person.unvisited == true)
-			if (checkColors(person, obj))
-			{
-				person.id = obj.getObject_id();
-				person.unvisited = false;
-				std::cout << "Found person: " << person.name << "\n";
-				std::cout << "Registering person with id: " << person.id << 
-					"\n";
-				comm_person.setId(person.id);
-				comm_person.setName(person.name);
-				personRecognitionServiceOutPut(comm_person);
-				return;
-			}
-			else
-				continue;
-		
-		else
+		if (obj.getObject_type() != "pedestrian")
+			continue;
+
+		for (auto& person : _people)
 		{
-			if (obj.getObject_id() != person.id)
-				continue;
+			if (person.unvisited == true)
+				if (checkColors(person, obj))
+				{
+					person.id = obj.getObject_id();
+					person.unvisited = false;
+					std::cout << "Found match in database: " << person.name << "\n";
+					std::cout << "Registering person with id: " << person.id << 
+						"\n";
+					comm_person.setId(person.id);
+					comm_person.setName(person.name);
+					personRecognitionServiceOutPut(comm_person);
+					break;
+				}
+				else
+					continue;
 			else
 			{
-				comm_person.setId(person.id);
-				comm_person.setName(person.name);
-				personRecognitionServiceOutPut(comm_person);
-				std::cout << "Found person: " << person.name << "\n";
+				if (obj.getObject_id() != person.id)
+					continue;
+					
+				else
+				{
+					comm_person.setId(person.id);
+					comm_person.setName(person.name);
+					personRecognitionServiceOutPut(comm_person);
+					std::cout << "Found person: " << person.name << "\n";
+					break;
+				}
 			}
+			std::cout << "Unknown Person found !\n";
 		}
 	}
-	std::cout << "Unknown Person found !\n";
 }
 
 bool RecognitionTask::checkColors(const Person& person,
@@ -167,13 +173,12 @@ bool RecognitionTask::checkColors(const Person& person,
 	for (size_t i = 0; i < obj.getObject_colorsSize(); ++i)
 	{
 		auto color = obj.getObject_colorsElemAtPos(i);
-		if(abs(color.getR() - person.colors[i].getR()) <= COLOR_THRESHOLD &&
-		abs(color.getB() - person.colors[i].getB()) <= COLOR_THRESHOLD &&
-		abs(color.getG() - person.colors[i].getG()) <= COLOR_THRESHOLD &&
-		abs(color.getDominance() - person.colors[i].getDominance()) <= 
+		if(abs(color.getR() - person.colors[i].getR()) >= COLOR_THRESHOLD ||
+		abs(color.getB() - person.colors[i].getB()) >= COLOR_THRESHOLD ||
+		abs(color.getG() - person.colors[i].getG()) >= COLOR_THRESHOLD ||
+		abs(color.getDominance() - person.colors[i].getDominance()) >= 
 			DOMINANCE_THRESHOLD)
-			continue;
-		return false;
+			return false;
 	}
 	return true;
 }
