@@ -123,14 +123,16 @@ int CameraTask::computeCameraUpdate() const
 
 void CameraTask::recognition()
 {
-	CommObjectRecognitionObjects::CommObjectRecognitionObjectProperties 
-		obj_properties;
-	int number_of_objects = _camera->getRecognitionNumberOfObjects();
-	// printf("\nRecognized %d objects.\n", number_of_objects);
+	CommObjectRecognitionObjects::CommObjectRecognitionEnvironment env;
+	std::vector<CommObjectRecognitionObjects::
+		CommObjectRecognitionObjectProperties> objs;
 
+	int number_of_objects = _camera->getRecognitionNumberOfObjects();
 	auto objects = _camera->getRecognitionObjects();
 	for (int i = 0; i < number_of_objects; ++i) 
 	{
+		CommObjectRecognitionObjects::CommObjectRecognitionObjectProperties 
+			obj_properties;
 		obj_properties.setObject_type(objects[i].model);
 		obj_properties.setObject_id(objects[i].id);
 		Quaternion quat(objects[i].orientation[0], objects[i].orientation[1],
@@ -156,7 +158,7 @@ void CameraTask::recognition()
 			colors.push_back(color);
 		}
 		obj_properties.setObject_colors(colors);
-		COMP->objectPushServiceOut->put(obj_properties);
+		objs.push_back(obj_properties);
 
 		/*
 		printf("Relative position of object %d: %lf %lf %lf\n", i, 
@@ -182,4 +184,7 @@ void CameraTask::recognition()
 				objects[i].colors[3 * j + 1], objects[i].colors[3 * j + 2]);
 		
 	}
+	env.setObjects(objs);
+	env.setIs_valid(true);
+	objectsPushServiceOutPut(env);
 }
