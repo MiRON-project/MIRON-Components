@@ -139,6 +139,9 @@ void RecognitionTask::comparePeopleJson()
 						"\n";
 					comm_person.setId(person.id);
 					comm_person.setName(person.name);
+					comm_person.setDimension(obj.getDimension());
+					comm_person.setPose(obj.getPose());
+					comm_person.setIs_valid(true);
 					personRecognitionServiceOutPut(comm_person);
 					break;
 				}
@@ -153,6 +156,9 @@ void RecognitionTask::comparePeopleJson()
 				{
 					comm_person.setId(person.id);
 					comm_person.setName(person.name);
+					comm_person.setDimension(obj.getDimension());
+					comm_person.setPose(obj.getPose());
+					comm_person.setIs_valid(true);
 					personRecognitionServiceOutPut(comm_person);
 					std::cout << "Found person: " << person.name << "\n";
 					break;
