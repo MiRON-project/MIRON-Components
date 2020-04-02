@@ -48,8 +48,9 @@
 #include "CommunicationTaskCore.hh"
 #include <deque>
 #include "aceSmartSoft.hh"
+#include "SkillKbParser.hh"
 
-
+#define GET_ALL_POSITION "(let ( (obj-list (kb-query-all :key '(is-a) :value '((is-a location))))) (encode-msg (read-from-string (format NIL \"( (msg-type . query-response) (response . ((type . get-all-positions) (positions . (~{~/format-locations-json/~^ ~})))))\" obj-list))))"
 class CommunicationTask  : public CommunicationTaskCore
 {
 private:

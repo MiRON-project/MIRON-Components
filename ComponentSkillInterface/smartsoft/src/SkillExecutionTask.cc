@@ -117,7 +117,7 @@ int SkillExecutionTask::on_execute()
 		return 0;
 	}
 	
-	auto parsed_json = ParsedJasonStr(doc);
+	auto parsed_json = ParsedSkillDefinition(doc);
 
 	if(parsed_json.msg_type == "push-skill")
 	{

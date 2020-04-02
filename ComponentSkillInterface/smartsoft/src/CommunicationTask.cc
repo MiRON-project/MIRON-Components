@@ -172,11 +172,11 @@ int CommunicationTask::on_execute()
 
 				std::cout<<"KB Answer: "<<answerString<<std::endl;
 				try{
-					if(answerString.compare("NIL") == 0)
-					{
+					if(answerString == "NIL"){
 						std::cout<<"Got NIL as answer! --> send empty answer string!"<<std::endl;
 						answerString = "";
-					} else {
+					} 
+					else {
 						//remove none content chars
 						answerString.erase(std::remove_if(answerString.begin(),answerString.end(),
 								[] (const char& c) {
@@ -203,7 +203,8 @@ int CommunicationTask::on_execute()
 				}
 
 				COMP->com->send(answerString + "\n");
-			} else {
+			} 
+			else {
 				std::cout<<"ERROR - query KB: "<<Smart::StatusCodeConversion(status)<<std::endl;
 
 				if(status == Smart::SMART_DISCONNECTED){
@@ -242,53 +243,49 @@ int CommunicationTask::separateQuery(std::deque <std::string> &in, std::deque <s
 
 	ParameterStateStruct localstate = COMP->getGlobalState();
 
-	//line by line
 	for(std::deque<std::string>::iterator it=in.begin(); it!=in.end();)
 	{
-		QJsonParseError error;
-		//QJsonParseError *error;
-//		std::cout<<__FUNCTION__<<": in item: "<<*it<<std::endl;
-		QString line = QString::fromUtf8(it->c_str());
-//		std::cout<<"line: "<<line.toStdString()<<std::endl;
-		QJsonDocument doc = QJsonDocument::fromJson(line.toUtf8(),&error);
+		auto parsed_jason = ParsedJasonStr(*it);
 
-		if(QJsonParseError::NoError != error.error)
+		if(QJsonParseError::NoError != parsed_jason.error.error)
 		{
-			std::cout<< "error: parsing json error:" << error.errorString().toStdString()<<std::endl;
-			it++;
+			++it;
 			continue;
 		}
 
-		QJsonObject root = doc.object();
-
-		QString msgType = root["msg-type"].toString();
-		if(msgType == "query")
-		{
-			QJsonObject jsonMSG = root["query"].toObject();
-			QString queryType = jsonMSG["type"].toString();
+		if (parsed_jason.msg_type == "query"){
+			
+			auto parsed_query = ParsedJasonQuery(parsed_jason);
 
 			//handeled by jobdispatcher
 			//{ "msg-type" : "query" , "query" :  { "type" : "get-robot-id-master-master-components-run-on" }}
 			//if(queryType == "get-robot-id-master-master-components-run-on") {}
 
 			//{ "msg-type" : "query" , "query" :  { "type" : "get-all-positions" }}
-			if (queryType == "get-all-positions") {
+			if (parsed_query.query_type == "get-all-positions"){
 				std::cout<<"get-all-positions"<<std::endl;
-				query.push_back("(let ((obj-list     (kb-query-all :key '(is-a) :value '((is-a location))))) (encode-msg (read-from-string (format NIL \"( (msg-type . query-response) (response . ((type . get-all-positions) (positions . (~{~/format-locations-json/~^ ~})))))\" obj-list))))");
-
-				//remove msg from input dequee
+				query.push_back(GET_ALL_POSITION);
 				it = in.erase(it);
 			}
 
-			/////////////////////////////
-			//J O B  Q U E R Y
+			else if(parsed_query.query_type == "abort-current-skill"){
+
+			}
+
+			else if(parsed_query.query_type == "change-parameter"){
+				auto parsed_parameter = ParsedQueryParameterChanged(
+					parsed_query);
+				query.push_back(parsed_parameter.parseResult());
+				it = in.erase(it);
+			}
 
 			else {
 				std::cout<<"Error unkown query type, keep: "<< *it <<std::endl;
 				++it;
 			}
 
-		} else {
+		} 
+		else {
 			//std::cout<<"Other msg type found --> skip"<<std::endl;
 			++it;
 		}
