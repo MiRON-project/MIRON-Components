@@ -9,6 +9,7 @@
 #include <QtCore>
 #include <algorithm>
 #include <unordered_map>
+#include "AceSmartSoftKernel/smartCommParameterRequest.hh"
 
 std::pair<std::vector<std::string>, std::string> parseKBMsg(
     const std::string& answer);
@@ -153,9 +154,18 @@ struct ParsedQueryParameterChanged : ParsedJasonQuery
             values.insert({it.key().toStdString(), it.value().toDouble()});
     }
 
-    std::string parseResult()
+    SmartACE::CommParameterRequest buildRequest()
     {
-        return "";
+        SmartACE::CommParameterRequest parameterRequest;
+        parameterRequest.setTag(buildTag());
+        for (auto it = values.begin(); it != values.end(); ++it)
+            parameterRequest.setDouble(it->first, it->second);
+        return parameterRequest;
+    }
+
+    std::string buildTag()
+    {
+        return param_repository + "." + param_set + "." + parameter;
     }
 
 };

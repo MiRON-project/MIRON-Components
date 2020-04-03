@@ -275,7 +275,12 @@ int CommunicationTask::separateQuery(std::deque <std::string> &in, std::deque <s
 			else if(parsed_query.query_type == "change-parameter"){
 				auto parsed_parameter = ParsedQueryParameterChanged(
 					parsed_query);
-				query.push_back(parsed_parameter.parseResult());
+				
+				Smart::StatusCode status;
+				SmartACE::CommParameterResponse response;
+				status = COMP->paramMaster->sendParameterWait(
+					parsed_parameter.buildRequest(), response, 
+					parsed_parameter.component, "param");
 				it = in.erase(it);
 			}
 
