@@ -9,6 +9,7 @@
 #include <QtCore>
 #include <algorithm>
 #include <unordered_map>
+#include "AceSmartSoftKernel/smartCommParameterRequest.hh"
 
 std::pair<std::vector<std::string>, std::string> parseKBMsg(
     const std::string& answer);
@@ -26,6 +27,8 @@ std::vector<std::string> parseJsonOutput(const QJsonObject& skill);
 std::string generateSkillKBMsg(std::string skill_name,
     const std::vector<std::string>& in, 
     const std::vector<std::string>& out);
+
+std::string stringToupper(const std::string& str);
 
 struct ParsedSkillDefinition
 {
@@ -153,11 +156,31 @@ struct ParsedQueryParameterChanged : ParsedJasonQuery
             values.insert({it.key().toStdString(), it.value().toDouble()});
     }
 
-    std::string parseResult()
+    SmartACE::CommParameterRequest buildRequest()
     {
-        return "";
+        SmartACE::CommParameterRequest parameterRequest;
+        parameterRequest.setTag(buildTag());
+        
+        size_t i = 1;
+        for (auto it = values.begin(); it != values.end(); ++it, 
+            ++i)
+            parameterRequest.setString(std::to_string(i), 
+                std::to_string(it->second));
+        return parameterRequest;
     }
 
+    SmartACE::CommParameterRequest commitRequest()
+    {
+        SmartACE::CommParameterRequest parameterRequest;
+        parameterRequest.setTag("COMMIT");
+        return parameterRequest;
+    }
+
+    std::string buildTag()
+    {
+        return stringToupper(param_repository) + "." + 
+            stringToupper(param_set) + "." + stringToupper(parameter);
+    }
 };
 
 #endif
