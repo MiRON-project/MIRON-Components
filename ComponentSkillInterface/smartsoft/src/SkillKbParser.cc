@@ -127,3 +127,11 @@ std::string generateSkillKBMsg(std::string skill_name,
     message += "))";
     return message;
 }
+
+std::string stringToupper(const std::string& str)
+{
+    std::string t_str = str;
+    std::for_each(t_str.begin(), t_str.end(), [](char & c){
+        c = ::toupper(c);});
+    return t_str;
+}

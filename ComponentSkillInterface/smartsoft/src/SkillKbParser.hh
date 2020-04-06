@@ -28,6 +28,8 @@ std::string generateSkillKBMsg(std::string skill_name,
     const std::vector<std::string>& in, 
     const std::vector<std::string>& out);
 
+std::string stringToupper(const std::string& str);
+
 struct ParsedSkillDefinition
 {
     int id;
@@ -158,16 +160,27 @@ struct ParsedQueryParameterChanged : ParsedJasonQuery
     {
         SmartACE::CommParameterRequest parameterRequest;
         parameterRequest.setTag(buildTag());
-        for (auto it = values.begin(); it != values.end(); ++it)
-            parameterRequest.setDouble(it->first, it->second);
+        
+        size_t i = 1;
+        for (auto it = values.begin(); it != values.end(); ++it, 
+            ++i)
+            parameterRequest.setString(std::to_string(i), 
+                std::to_string(it->second));
+        return parameterRequest;
+    }
+
+    SmartACE::CommParameterRequest commitRequest()
+    {
+        SmartACE::CommParameterRequest parameterRequest;
+        parameterRequest.setTag("COMMIT");
         return parameterRequest;
     }
 
     std::string buildTag()
     {
-        return param_repository + "." + param_set + "." + parameter;
+        return stringToupper(param_repository) + "." + 
+            stringToupper(param_set) + "." + stringToupper(parameter);
     }
-
 };
 
 #endif
