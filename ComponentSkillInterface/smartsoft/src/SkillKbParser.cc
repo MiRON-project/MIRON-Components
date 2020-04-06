@@ -63,22 +63,27 @@ bool stringCompareInsensitive(std::string & str1, std::string &str2)
             );
 }
 
-std::vector<std::string> parseJsonInput(const QJsonObject& skill)
+std::map<std::string, std::string> parseJsonInput(const QJsonObject& skill)
 {
-    std::vector<std::string> input;
+    std::map<std::string, std::string> input;
     QJsonObject skill_in_attribute = skill["in-attribute"].toObject();
 	QJsonObject::iterator att = skill_in_attribute.begin();
     for (; att != skill_in_attribute.end(); ++att)
     {
+        const auto key = att.key();
         QJsonValue value = att.value();
         if (value.isString())
-            input.push_back(value.toString().toStdString());   
+        input.insert(std::make_pair(key.toStdString(), 
+            value.toString().toStdString()));
         else if (value.isDouble())
-            input.push_back(std::to_string(value.toDouble()));
+            input.insert(std::make_pair(key.toStdString(), 
+                std::to_string(value.toDouble())));
         else if (value.isBool())
-            input.push_back(std::to_string(value.toBool()));
+            input.insert(std::make_pair(key.toStdString(), 
+                std::to_string(value.toBool())));
         else
-            input.push_back(std::to_string(value.toInt()));
+            input.insert(std::make_pair(key.toStdString(), 
+                std::to_string(value.toInt())));
     }
     return input;
 }
@@ -103,20 +108,19 @@ std::vector<std::string> parseJsonOutput(const QJsonObject& skill)
     return output;
 }
 
-std::string generateSkillKBMsg(std::string skill_name,
-    const std::vector<std::string>& in, 
+std::string generateSkillKBMsg(const std::string& skill_name,
+    const std::map<std::string, std::string>& in, 
     const std::vector<std::string>& out)
 {
-    std::transform(skill_name.begin(), skill_name.end(), skill_name.begin(), 
-        ::toupper);
+    auto t_skill_name = stringToupper(skill_name);
     std::string message = "";
     message += "(KB-UPDATE :KEY '(IS-A) :VALUE '((IS-A SKILL)(NAME ";
-    message += skill_name + ")";
-
-    for (size_t i = 0; i < in.size(); ++i)
+    message += t_skill_name + ")";
+    
+    for (auto it = in.begin(); it != in.end(); ++it)
     {
-        message += "(IN_" + std::to_string(i + 1) + " ";
-        message += in[i] + ")";
+        message += "(" + it->first + " ";
+        message += it->second + ")";
     }
 
     for (size_t i = 0; i < out.size(); ++i)
@@ -126,4 +130,12 @@ std::string generateSkillKBMsg(std::string skill_name,
     }
     message += "))";
     return message;
+}
+
+std::string stringToupper(const std::string& str)
+{
+    std::string t_str = str;
+    std::for_each(t_str.begin(), t_str.end(), [](char & c){
+        c = ::toupper(c);});
+    return t_str;
 }
