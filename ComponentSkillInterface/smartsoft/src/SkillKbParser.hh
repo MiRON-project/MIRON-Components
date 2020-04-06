@@ -20,12 +20,12 @@ std::string parseKBSkillName(const std::string& answer);
 
 bool stringCompareInsensitive(std::string & str1, std::string &str2);
 
-std::vector<std::string> parseJsonInput(const QJsonObject& skill);
+std::map<std::string, std::string> parseJsonInput(const QJsonObject& skill);
 
 std::vector<std::string> parseJsonOutput(const QJsonObject& skill);
 
-std::string generateSkillKBMsg(std::string skill_name,
-    const std::vector<std::string>& in, 
+std::string generateSkillKBMsg(const std::string& skill_name,
+    const std::map<std::string, std::string>& in, 
     const std::vector<std::string>& out);
 
 std::string stringToupper(const std::string& str);
@@ -36,7 +36,7 @@ struct ParsedSkillDefinition
     std::string skill_name;
     std::string skill_definition;
     std::string msg_type;
-    std::vector<std::string> in;
+    std::map<std::string, std::string> in;
     std::vector<std::string> out;
     std::string result;
     std::string result_value;
@@ -137,7 +137,7 @@ struct ParsedQueryParameterChanged : ParsedJasonQuery
     std::string param_set;
     std::string component;
     std::string parameter;
-    std::unordered_map<std::string, double> values;
+    std::map<std::string, double> values;
 
     ParsedQueryParameterChanged(const ParsedJasonQuery& doc) : 
         ParsedJasonQuery(doc)
