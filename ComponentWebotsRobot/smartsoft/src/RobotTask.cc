@@ -116,12 +116,20 @@ int RobotTask::on_execute()
   // Calculate wheel velocities using differential wheels
   if (left_wheel && right_wheel)
   {
-    CommBasicObjects::CommBaseVelocity vel;
     if (COMP->getParameters().getRobot_properties().getKinematics() == 
       "DifferentialDrive")
+    {
+      CommBasicObjects::CommBaseVelocity vel;
       differentialWheelVelocityController(left_wheel, right_wheel, 
         {COMP->mVX, COMP->mOmega}, 
         COMP->getParameters().getRobot_properties().getWheel_distance());
+      vel.set_vX(
+        (left_wheel->getVelocity() + right_wheel->getVelocity()) / 2, 1.0);
+      vel.set_WZ_base(
+        (-left_wheel->getVelocity() + right_wheel->getVelocity()) /
+          COMP->getParameters().getRobot_properties().getWheel_distance());
+      COMP->_pose->set_base_velocity(vel);
+    }
   }
   baseStateServiceOutPut(current_pose);
   

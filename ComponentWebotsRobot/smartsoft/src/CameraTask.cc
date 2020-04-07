@@ -170,19 +170,16 @@ void CameraTask::recognition()
 		printf("Size of object %d: %lf %lf\n", i, objects[i].size[0], 
 			objects[i].size[1]);
 		printf("Id of object %d: %d\n", i, objects[i].id);	
-		*/	
 		printf("Model of object %d: %s\n", i, objects[i].model);
-		/*
 		printf("Position of the object %d on the camera image: %d %d\n", i, 
 			objects[i].position_on_image[0], objects[i].position_on_image[1]);
 		printf("Size of the object %d on the camera image: %d %d\n", i, 
 			objects[i].size_on_image[0], objects[i].size_on_image[1]);
-		*/
 		for (int j = 0; j < objects[i].number_of_colors; ++j)
 			printf("- Color %d/%d: %lf %lf %lf\n", j + 1, 
 				objects[i].number_of_colors, objects[i].colors[3 * j],
 				objects[i].colors[3 * j + 1], objects[i].colors[3 * j + 2]);
-		
+		*/
 	}
 	env.setObjects(objs);
 	env.setIs_valid(true);
