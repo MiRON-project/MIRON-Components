@@ -32,6 +32,14 @@ ComponentParameter ComponentWebotsRobotParams component ComponentWebotsRobot
 		//@doc"Enable the Camera recognition"
 		enable_recognition: Boolean=false
 	}
+	
+	InternalParameter robot_properties{
+		//@doc"Robot kinematics"
+		kinematics: String="DifferentialDrive"
+		
+		//@doc"Distance between wheels (meters)"
+		wheel_distance: Double = 1
+	}
 }
 
 
