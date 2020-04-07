@@ -28,6 +28,8 @@ class LidarTask  : public LidarTaskCore
 private:
 	int horizontalResolution;
   	unsigned int numberValidPoints;
+	double field_of_view;
+	
 	webots::Lidar* _lidar;
 	CommBasicObjects::CommMobileLaserScan scan;
 	unsigned long scanCount;

@@ -60,12 +60,13 @@ int LidarTask::on_entry()
 
 	_lidar->enablePointCloud();
 	horizontalResolution = _lidar->getHorizontalResolution();
+	field_of_view = _lidar->getFov();
 	numberValidPoints = _lidar->getNumberOfPoints();
+
 	scan.set_scan_size(numberValidPoints);
 	scan.set_scan_update_count(scanCount);
-	scan.set_scan_integer_field_of_view(
-		- horizontalResolution * 100.0 / 2.0, 
-		horizontalResolution * 100.0);
+	scan.set_scan_double_field_of_view(- 180 * field_of_view / (2 * M_PI), 
+		field_of_view * 180 / (horizontalResolution * M_PI));
 	scan.set_max_distance((int)
 		std::min(65535.0, _lidar->getMaxRange() * 1000.0));
 	scan.set_min_distance(_lidar->getMinRange() * 1000.0);
@@ -81,7 +82,7 @@ int LidarTask::on_execute()
 		return -1;
 
 	COMP->mRobotMutex.acquire();
-	
+	double x,y,z;
 	auto rangeImageVector = _lidar->getRangeImage();
 	if (rangeImageVector)
 	{
@@ -90,7 +91,6 @@ int LidarTask::on_execute()
 		::gettimeofday(&_receiveTime, 0);
 		scan.set_scan_time_stamp(CommBasicObjects::CommTimeStamp(_receiveTime));
 		scan.set_scan_update_count(scanCount);
-
 		for (unsigned int i = 0; i < numberValidPoints; ++i)
 		{
 			unsigned int dist = (unsigned int)
