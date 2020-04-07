@@ -19,18 +19,16 @@
 #include <iostream>
 
 void differentialWheelVelocityController(webots::Motor *left_wheel, 
-  webots::Motor *right_wheel, std::array<double, 2> vel)
+  webots::Motor *right_wheel, std::array<double, 2> vel, double wheel_distance)
 {
   double speed = vel[0];
   double omega = vel[1];
   double max_vel = std::min(left_wheel->getMaxVelocity(), 
     right_wheel->getMaxVelocity());
   
-  double right_wheel_coef = (omega + 2 * speed) / (2 * max_vel);
-  double left_wheel_coef = (2 * speed - omega) / (2 * max_vel);
+  double right_wheel_vel = (wheel_distance * omega + 2 * speed) / 2;
+  double left_wheel_vel = (2 * speed - omega * wheel_distance) / 2;
 
-  double left_wheel_vel = left_wheel_coef * max_vel;
-  double right_wheel_vel = right_wheel_coef * max_vel;
   if (abs(left_wheel_vel) > max_vel)
     left_wheel_vel = ((left_wheel_vel > 0) - (left_wheel_vel < 0)) * 
       max_vel;
@@ -114,13 +112,19 @@ int RobotTask::on_execute()
   auto current_pose = setBaseStateServiceOut();
   COMP->_pose->set_base_position(current_pose.getBasePose());
   COMP->_pose->set_base_raw_position(current_pose.getBasePose());
-  baseStateServiceOutPut(current_pose);
-
+  
   // Calculate wheel velocities using differential wheels
   if (left_wheel && right_wheel)
-    differentialWheelVelocityController(left_wheel, right_wheel, 
-      {COMP->mVX, COMP->mOmega});
-
+  {
+    CommBasicObjects::CommBaseVelocity vel;
+    if (COMP->getParameters().getRobot_properties().getKinematics() == 
+      "DifferentialDrive")
+      differentialWheelVelocityController(left_wheel, right_wheel, 
+        {COMP->mVX, COMP->mOmega}, 
+        COMP->getParameters().getRobot_properties().getWheel_distance());
+  }
+  baseStateServiceOutPut(current_pose);
+  
   // start robot step thread
   mThreadRunning = true;
   if (mThread.joinable())
