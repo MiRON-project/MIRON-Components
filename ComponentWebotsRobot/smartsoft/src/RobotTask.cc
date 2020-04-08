@@ -18,6 +18,8 @@
 
 #include <iostream>
 
+#include "Utils.hh"
+
 void differentialWheelVelocityController(webots::Motor *left_wheel, 
   webots::Motor *right_wheel, std::array<double, 2> vel, double wheel_distance)
 {
@@ -164,7 +166,6 @@ int RobotTask::computeWebotsControlDuration() const
     COMP->connections.robotTask.periodicActFreq;
   int duration = (int) (
     ceil(robot_control_step / simulation_step) * simulation_step);
-  std::cout << "Robot duration is: " << duration << "\n";
   return duration;
 }
 
@@ -176,10 +177,11 @@ CommBasicObjects::CommBaseState RobotTask::setBaseStateServiceOut() const
   // set GPS values for port BaseStateServiceOut
   if (COMP->_gps)
   {
-    auto GPS_value = COMP->_gps->getValues();
-    basePosition.set_x(GPS_value[2], 1.0);
-    basePosition.set_y(GPS_value[0], 1.0);
-    basePosition.set_z(GPS_value[1], 1.0);
+    auto gps_values = COMP->_gps->getValues();
+    auto gps_enu = nedToEnu({gps_values[0], gps_values[1], gps_values[2]});
+    basePosition.set_x(gps_enu[0], 1.0);
+    basePosition.set_y(gps_enu[1], 1.0);
+    basePosition.set_z(gps_enu[2], 1.0);
   }
   else
   {
@@ -195,10 +197,10 @@ CommBasicObjects::CommBaseState RobotTask::setBaseStateServiceOut() const
   // Be aware of this in your calculation
   if (COMP->_imu)
   {
-    auto inertialInutValue = COMP->_imu->getRollPitchYaw();
-    basePosition.set_base_roll(inertialInutValue[0]);
-    basePosition.set_base_azimuth(inertialInutValue[2]);
-    basePosition.set_base_elevation(inertialInutValue[1]);
+    auto imu_values = COMP->_imu->getRollPitchYaw();
+    basePosition.set_base_roll(imu_values[0]);
+    basePosition.set_base_elevation(imu_values[1]);
+    basePosition.set_base_azimuth(-imu_values[2]);
   }
   else
   {

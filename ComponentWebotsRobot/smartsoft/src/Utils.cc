@@ -1,4 +1,4 @@
-#include "Utils.hpp"
+#include "Utils.hh"
 
 EulerAngles ToEulerAngles(Quaternion q) 
 {
@@ -22,4 +22,9 @@ EulerAngles ToEulerAngles(Quaternion q)
     angles.yaw = std::atan2(siny_cosp, cosy_cosp);
 
     return angles;
+}
+
+std::array<double, 3> nedToEnu(const std::array<double, 3> xyz)
+{
+    return {xyz[0], -xyz[2], xyz[1]};
 }
