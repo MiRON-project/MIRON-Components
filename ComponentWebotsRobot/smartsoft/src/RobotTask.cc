@@ -200,7 +200,7 @@ CommBasicObjects::CommBaseState RobotTask::setBaseStateServiceOut() const
     auto imu_values = COMP->_imu->getRollPitchYaw();
     basePosition.set_base_roll(imu_values[0]);
     basePosition.set_base_elevation(imu_values[1]);
-    basePosition.set_base_azimuth(-imu_values[2]);
+    basePosition.set_base_azimuth(imu_values[2]);
   }
   else
   {
