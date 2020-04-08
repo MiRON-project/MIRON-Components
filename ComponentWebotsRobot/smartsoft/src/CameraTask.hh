@@ -24,7 +24,7 @@
 #include "CommObjectRecognitionObjects/CommObjectDominantColor.hh"
 #include "CommObjectRecognitionObjects/CommObjectRecognitionEnvironment.hh"
 
-#include "Utils.hpp"
+#include "Utils.hh"
 #include <webots/Camera.hpp>
 
 class CameraTask  : public CameraTaskCore
