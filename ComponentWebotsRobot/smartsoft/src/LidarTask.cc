@@ -82,7 +82,7 @@ int LidarTask::on_execute()
 		return -1;
 
 	COMP->mRobotMutex.acquire();
-	double x,y,z;
+	
 	auto rangeImageVector = _lidar->getRangeImage();
 	if (rangeImageVector)
 	{
