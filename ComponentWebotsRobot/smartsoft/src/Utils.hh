@@ -1,7 +1,8 @@
-#include <cmath>
-
 #ifndef _CAMERARECOGNITIONUTILS_HH
 #define _CAMERARECOGNITIONUTILS_HH
+
+#include <cmath>
+#include <array>
 
 struct Quaternion {
     Quaternion();
@@ -15,5 +16,7 @@ struct EulerAngles {
 };
 
 EulerAngles ToEulerAngles(Quaternion q); 
+
+std::array<double, 3> nedToEnu(const std::array<double, 3> xyz);
 
 #endif
