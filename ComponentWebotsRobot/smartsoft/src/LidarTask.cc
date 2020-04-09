@@ -100,7 +100,7 @@ int LidarTask::on_execute()
 		}
 		scan.set_base_state(*COMP->_pose.get());
 		//TODO: This should translate to the sensor real pose
-		scan.set_sensor_pose(COMP->_pose.get()->getBasePose().getPose3D());
+		// scan.set_sensor_pose(...);
 		scan.set_scan_valid(true);
 	}
 	else
