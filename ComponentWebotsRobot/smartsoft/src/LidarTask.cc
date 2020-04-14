@@ -82,7 +82,8 @@ int LidarTask::on_execute()
 		return -1;
 
 	COMP->mRobotMutex.acquire();
-	
+
+	// From left to right
 	auto rangeImageVector = _lidar->getRangeImage();
 	if (rangeImageVector)
 	{
@@ -93,12 +94,19 @@ int LidarTask::on_execute()
 		scan.set_scan_update_count(scanCount);
 		for (unsigned int i = 0; i < numberValidPoints; ++i)
 		{
+			// From right to left
 			unsigned int dist = (unsigned int)
 				(rangeImageVector[numberValidPoints - 1 - i] * 1000.0);
 			scan.set_scan_index(i, i);
 			scan.set_scan_integer_distance(i, dist);
 		}
 		scan.set_base_state(*COMP->_pose.get());
+		scan.set_scanner_x(COMP->_pose->get_base_position().get_x());
+		scan.set_scanner_y(COMP->_pose->get_base_position().get_y());
+		scan.set_scanner_z(COMP->_pose->get_base_position().get_z());
+		scan.set_scanner_azimuth(COMP->_pose->get_base_position().get_base_azimuth());
+		scan.set_scanner_roll(COMP->_pose->get_base_position().get_base_roll());
+		scan.set_scanner_elevation(COMP->_pose->get_base_position().get_base_elevation());
 		//TODO: This should translate to the sensor real pose
 		// scan.set_sensor_pose(...);
 		scan.set_scan_valid(true);
@@ -107,7 +115,7 @@ int LidarTask::on_execute()
 		scan.set_scan_valid(false);
 
 	laserServiceOutPut(scan);
-
+	
 	COMP->mRobotMutex.release();
 	
 	return 0;

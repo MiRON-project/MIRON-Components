@@ -90,7 +90,26 @@ int RobotTask::on_entry()
   if (COMP->_gps)
     COMP->_gps->enable(robot_duration);
   if (COMP->_imu)
+  {
     COMP->_imu->enable(robot_duration);
+    
+    while (true)
+    {
+      mThreadRunning = true;
+      if (mThread.joinable())
+        mThread.join();
+      mThread = std::thread(&RobotTask::runStep, this);
+      
+      auto imu_values = COMP->_imu->getRollPitchYaw();
+      if (imu_values == NULL || isnan(imu_values[0]) || isnan(imu_values[1]) 
+        || isnan(imu_values[2])) continue;
+
+      _init_euler_angles = {imu_values[0], _init_euler_angles[1], 
+        imu_values[2]};
+      break;
+    }
+  }
+
 
   COMP->mRobotMutex.release();
 
@@ -198,8 +217,8 @@ CommBasicObjects::CommBaseState RobotTask::setBaseStateServiceOut() const
   if (COMP->_imu)
   {
     auto imu_values = COMP->_imu->getRollPitchYaw();
-    basePosition.set_base_roll(imu_values[0]);
-    basePosition.set_base_elevation(imu_values[1]);
+    basePosition.set_base_roll(imu_values[0] - _init_euler_angles[0]);
+    basePosition.set_base_elevation(imu_values[1] - _init_euler_angles[1]);
     basePosition.set_base_azimuth(imu_values[2]);
   }
   else

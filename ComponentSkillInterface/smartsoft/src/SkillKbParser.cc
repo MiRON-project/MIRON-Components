@@ -82,8 +82,7 @@ std::map<std::string, std::string> parseJsonInput(const QJsonObject& skill)
             input.insert(std::make_pair(key.toStdString(), 
                 std::to_string(value.toBool())));
         else
-            input.insert(std::make_pair(key.toStdString(), 
-                std::to_string(value.toInt())));
+            std::cerr << "Input variable is not parsable" << std::endl;
     }
     return input;
 }
