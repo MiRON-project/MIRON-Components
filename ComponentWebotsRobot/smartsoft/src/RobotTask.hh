@@ -41,6 +41,7 @@ private:
   void runStep();
   int computeWebotsControlDuration() const;
   int robot_duration;
+  std::array<double, 3> _init_euler_angles;
   CommBasicObjects::CommBaseState setBaseStateServiceOut() const;
 
 public:
