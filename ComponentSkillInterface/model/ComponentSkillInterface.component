@@ -1,0 +1,13 @@
+ComponentDefinition ComponentSkillInterface logo "/ComponentSkillInterface/model/logo.png"
+{
+
+Activity communicationTask
+	{
+		RequestPortLink kBQueryClient
+	}
+	CoordinationSlavePort CoordinationPort implements CommBasicObjects.DefaultCoordinationService { }
+	ComponentParameters ComponentSkillInterfaceParams slave CoordinationPort
+	RequestPort kBQueryClient implements CommBasicObjects.CommKBQuery {}
+	Activity SkillExecutionTask	{}
+	CoordinationMasterPort CoordinationMaster implements CommBasicObjects.DefaultCoordinationService;
+}

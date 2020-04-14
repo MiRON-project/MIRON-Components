@@ -1,0 +1,8 @@
+bin/
+build/
+opcua-backend/
+datasheet-gen/
+src-gen/
+__pycache__/
+/*/bin/
+.settings

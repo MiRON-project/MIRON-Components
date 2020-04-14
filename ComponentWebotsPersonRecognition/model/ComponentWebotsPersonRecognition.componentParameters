@@ -1,0 +1,8 @@
+ComponentParameter ComponentWebotsPersonRecognition component ComponentWebotsPersonRecognition
+{
+	InternalParameter recognition_properties
+	{
+		//@doc"Color base algorithm"
+		color_base: Boolean=true
+	}
+}
