@@ -16,7 +16,6 @@
 //--------------------------------------------------------------------------
 #include "RecognitionTask.hh"
 #include "ComponentWebotsPersonRecognition.hh"
-#include "CommObjectRecognitionObjects/CommPerson.hh"
 
 #include <iostream>
 
@@ -107,7 +106,9 @@ void RecognitionTask::comparePeopleJson()
 {
 	CommObjectRecognitionObjects::CommObjectRecognitionEnvironment objs;
 	Smart::StatusCode obj_status = objectsPushServiceInGetUpdate(objs);
+	CommObjectRecognitionObjects::CommPeople comm_people;
 	CommObjectRecognitionObjects::CommPerson comm_person;
+	std::vector<CommObjectRecognitionObjects::CommPerson> people;
 
 	if (obj_status != Smart::SMART_OK)
 	{
@@ -134,15 +135,12 @@ void RecognitionTask::comparePeopleJson()
 				{
 					person.id = obj.getObject_id();
 					person.unvisited = false;
-					std::cout << "Found match in database: " << person.name << "\n";
-					std::cout << "Registering person with id: " << person.id << 
-						"\n";
 					comm_person.setId(person.id);
 					comm_person.setName(person.name);
 					comm_person.setDimension(obj.getDimension());
 					comm_person.setPose(obj.getPose());
 					comm_person.setIs_valid(true);
-					personRecognitionServiceOutPut(comm_person);
+					people.push_back(comm_person);
 					break;
 				}
 				else
@@ -159,14 +157,19 @@ void RecognitionTask::comparePeopleJson()
 					comm_person.setDimension(obj.getDimension());
 					comm_person.setPose(obj.getPose());
 					comm_person.setIs_valid(true);
-					personRecognitionServiceOutPut(comm_person);
-					std::cout << "Found person: " << person.name << "\n";
+					people.push_back(comm_person);
 					break;
 				}
 			}
-			std::cout << "Unknown Person found !\n";
 		}
 	}
+	
+	if (people.size() > 0)
+		comm_people.setIs_valid(true);
+	else
+		comm_people.setIs_valid(false);
+	comm_people.setPeople(people);
+	peoplePushServiceOutPut(comm_people);
 }
 
 bool RecognitionTask::checkColors(const Person& person,

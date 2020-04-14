@@ -24,6 +24,7 @@
 
 #include "CommObjectRecognitionObjects/CommObjectDominantColor.hh"
 #include "CommObjectRecognitionObjects/CommObjectRecognitionEnvironment.hh"
+#include "CommObjectRecognitionObjects/CommPeople.hh"
 
 #define COLOR_THRESHOLD 1e-2
 #define DOMINANCE_THRESHOLD 1e-2
@@ -52,6 +53,8 @@ private:
 			CommObjectRecognitionObjectProperties& obj) const;
 public:
 	RecognitionTask(SmartACE::SmartComponent *comp);
+	CommObjectRecognitionObjects::CommPeople _comm_people;
+
 	virtual ~RecognitionTask();
 	
 	virtual int on_entry();

@@ -1,1 +1,12 @@
-SkillRealizationModel { }
+SkillRealizationModel {
+	CoordinationModuleRealization recognitionInst coordModuleDef CommObjectRecognitionObjects.objRecognitionModule	uses {
+		CommObjectRecognitionObjects.ObjectRecognitionCoordinationService intsName recognition
+	} 
+	
+	{
+		SkillRealization getPeople 
+		{
+			action ( )
+		}
+	}
+}
