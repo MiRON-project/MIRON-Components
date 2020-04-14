@@ -23,7 +23,6 @@ RecognitionTask::RecognitionTask(SmartACE::SmartComponent *comp)
 :	RecognitionTaskCore(comp)
 {
 	std::cout << "constructor RecognitionTask\n";
-	_comm_people.setIs_valid(false);
 }
 RecognitionTask::~RecognitionTask() 
 {
@@ -170,7 +169,6 @@ void RecognitionTask::comparePeopleJson()
 	else
 		comm_people.setIs_valid(false);
 	comm_people.setPeople(people);
-	_comm_people = comm_people;
 	peoplePushServiceOutPut(comm_people);
 }
 

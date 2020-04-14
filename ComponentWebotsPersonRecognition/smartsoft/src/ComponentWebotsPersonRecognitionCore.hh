@@ -19,7 +19,6 @@
 	
 #include "aceSmartSoft.hh"
 #include <iostream>
-#include <CommObjectRecognitionObjects/CommPeople.hh>
 
 class ComponentWebotsPersonRecognitionCore
 {
