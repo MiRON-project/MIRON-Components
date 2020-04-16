@@ -14,13 +14,13 @@
 // If you want the toolchain to re-generate this file, please 
 // delete it before running the code generator.
 //--------------------------------------------------------------------------
-#ifndef _PEOPLEQUERYSERVICEANSWHANDLER_USER_HH
-#define _PEOPLEQUERYSERVICEANSWHANDLER_USER_HH
+#ifndef _PERSONQUERYSERVICEANSWHANDLER_USER_HH
+#define _PERSONQUERYSERVICEANSWHANDLER_USER_HH
 		
-#include "PeopleQueryServiceAnswHandlerCore.hh"
+#include "PersonQueryServiceAnswHandlerCore.hh"
 #include "CommObjectRecognitionObjects/CommPeople.hh"
 
-class PeopleQueryServiceAnswHandler : public PeopleQueryServiceAnswHandlerCore
+class PersonQueryServiceAnswHandler : public PersonQueryServiceAnswHandlerCore
 {
 
 private:
@@ -29,10 +29,9 @@ private:
 
 protected:
 	virtual void on_update_from(const RecognitionTask* recognitionTask);
-
 public:
-	PeopleQueryServiceAnswHandler(IQueryServer *server);
-	virtual ~PeopleQueryServiceAnswHandler() = default;
-	virtual void handleQuery(const QueryId &id, const CommBasicObjects::CommVoid& request);
+	PersonQueryServiceAnswHandler(IQueryServer *server);
+	virtual ~PersonQueryServiceAnswHandler() = default;
+	virtual void handleQuery(const QueryId &id, const CommObjectRecognitionObjects::CommPersonRecognitionId& request);
 };
 #endif

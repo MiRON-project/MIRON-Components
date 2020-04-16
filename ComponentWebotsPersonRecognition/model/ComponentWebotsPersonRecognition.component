@@ -10,15 +10,15 @@ ComponentDefinition ComponentWebotsPersonRecognition logo "/ComponentWebotsPerso
 		DefaultTrigger PeriodicTimer 1.0 Hz
 	}
 
-	AnswerPort PeopleQueryServiceAnsw implements CommObjectRecognitionObjects.PeopleQueryService {}
-	RequestHandler PeopleQueryServiceAnswHandler triggeredFrom PeopleQueryServiceAnsw {
+	AnswerPort PersonQueryServiceAnsw implements CommObjectRecognitionObjects.PersonQueryService {}
+	RequestHandler PersonQueryServiceAnswHandler triggeredFrom PersonQueryServiceAnsw {
 		Observe RecognitionTask
 	}
 	
 	CoordinationSlavePort CoordinationPort implements CommObjectRecognitionObjects.ObjectRecognitionCoordinationService
 	{
-		with peopleState realizedBy PeopleQueryServiceAnsw
-  		SkillRealizationsRef recognitionInst
+		with personquery realizedBy PersonQueryServiceAnsw
+  		SkillRealizationsRef personRecognition
 	}
 	ComponentParameters ComponentWebotsPersonRecognition slave CoordinationPort
 	
