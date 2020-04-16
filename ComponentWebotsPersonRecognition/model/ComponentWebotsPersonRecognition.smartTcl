@@ -1,0 +1,93 @@
+(realize-tcb (getPersonPose name => ?x ?y ?z)
+	(module "objRecognitionModule")
+	(action (	
+    (format t "===== getPersonPose~%")	
+    (let ( 
+      (personpose (tcl-query :server 'objrecog 
+                             :service 'personquery
+                             :request name))
+      (format t "got person pose Query ~a~%" personpose)
+      (tcl-bind-var :name '?x :value (third personpose))
+      (tcl-bind-var :name '?y :value (fourth personpose))
+      (tcl-bind-var :name '?z :value (fifth personpose))
+      )
+    )
+    '(SUCCESS (OK))
+    )
+  )
+)
+
+(defun show-people ()
+  (let ((obj-list (tcl-kb-query-all :key '(is-a) :value '((is-a person)))))
+    (dolist (obj obj-list)
+      (format t "~%--------------------------------~%")
+      (format t "  id                    : ~s ~%" (get-value obj 'id))
+      (format t "  name                  : ~s ~%" (get-value obj 'name))
+      (format t "  pose                  : ~s ~%" (get-value obj 'pose))
+    )
+  )
+) 
+
+(realize-tcb (recognize-people)
+  (module "objRecognitionModule")
+  (action (
+    (format t "=========================>>> tcb-recognize-people ~%")
+    '(SUCCESS ())
+    )
+  )
+  (plan (
+    (peoplerecognition => ?people)
+    (tcb-store-people-in-kb ?people)
+    )
+  )
+)
+
+(realize-tcb (peoplerecognition => ?people)
+  (module "objRecognitionModule")
+  (action (
+            (tcl-activate-event :name 'evt-recog
+                                :handler 'handler-people-recognition
+                                :server 'objrecog 
+                                :service 'peoplerecognitionevent
+                                :mode 'continuous)
+            '(SUCCESS ())
+          )
+    )
+)
+
+(define-event-handler (handler-people-recognition)
+  (action (
+            (format t "=========================>>> HANDLER PEOPLE RECOGNIZED ~s ~%~%" (tcl-event-message))
+            (tcl-bind-var :name '?people :value (read-from-string (tcl-event-message)))
+            (tcl-abort)
+          )
+  )
+)
+
+(realize-tcb (tcb-store-people-in-kb ?people)
+	(module "objRecognitionModule")
+  	(action (
+            (let* (
+                  (objs '?people)
+                  (obj nil))
+            (format t "=========================>>> tcb-store-people-in-kb -- size = ~s  -- objs = ~s~%" (list-lenght objs) objs)
+              (dolist (id objs)
+				        (format t "=========================>>> before setf obj")
+                (setf obj (tcl-query :server 'objrecog 
+                                     :service 'personquery
+                                     :request id))
+                (tcl-kb-update 
+                  :key '(is-a id) 
+                  :value `(
+                          (is-a PERSON)
+                              (id ,id)
+                              (name ,(second obj))
+                              (pose ,((third obj) (fourth obj) (fifth obj)))
+                          )
+                )
+              )
+            )
+            '(SUCCESS ())
+            )
+      )
+)        

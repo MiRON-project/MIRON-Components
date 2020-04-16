@@ -14,19 +14,17 @@
 // If you want the toolchain to re-generate this file, please 
 // delete it before running the code generator.
 //--------------------------------------------------------------------------
-#include "PeopleQueryServiceAnswHandler.hh"
+#include "PersonQueryServiceAnswHandler.hh"
 #include "ComponentWebotsPersonRecognition.hh"
 
-PeopleQueryServiceAnswHandler::PeopleQueryServiceAnswHandler(IQueryServer *server)
-:	PeopleQueryServiceAnswHandlerCore(server)
+PersonQueryServiceAnswHandler::PersonQueryServiceAnswHandler(IQueryServer *server)
+:	PersonQueryServiceAnswHandlerCore(server)
 {
 	_people.setIs_valid(false);
 }
 
-void PeopleQueryServiceAnswHandler::on_update_from(const RecognitionTask* recognitionTask)
+void PersonQueryServiceAnswHandler::on_update_from(const RecognitionTask* recognitionTask)
 {
-	// update triggered from RecognitionTask
-	// (use a local mutex here, because this method is called from within the thread of RecognitionTask)
 	mutex.acquire();
 
 	_people = recognitionTask->_comm_people;
@@ -34,7 +32,16 @@ void PeopleQueryServiceAnswHandler::on_update_from(const RecognitionTask* recogn
 	mutex.release();
 }
 
-void PeopleQueryServiceAnswHandler::handleQuery(const Smart::QueryIdPtr &id, const CommBasicObjects::CommVoid& request) 
+void PersonQueryServiceAnswHandler::handleQuery(const Smart::QueryIdPtr &id, const CommObjectRecognitionObjects::CommPersonRecognitionId& request) 
 {
-	this->server->answer(id, _people);
+	CommObjectRecognitionObjects::CommPerson answer;
+	for (auto person : _people.getPeopleCopy())
+		if (person.getId() == request.getId() || 
+			person.getName() == request.getName())
+		{
+			this->server->answer(id, person);
+			return;
+		}
+	answer.setName("NIL");
+	this->server->answer(id, answer);
 }

@@ -14,25 +14,18 @@
 // If you want the toolchain to re-generate this file, please 
 // delete it before running the code generator.
 //--------------------------------------------------------------------------
-#ifndef _PEOPLEQUERYSERVICEANSWHANDLER_USER_HH
-#define _PEOPLEQUERYSERVICEANSWHANDLER_USER_HH
+#ifndef _PEOPLEEVENTSERVICEOUT_EVENT_TEST_HANDLER_USER_HH
+#define _PEOPLEEVENTSERVICEOUT_EVENT_TEST_HANDLER_USER_HH
 		
-#include "PeopleQueryServiceAnswHandlerCore.hh"
-#include "CommObjectRecognitionObjects/CommPeople.hh"
+#include "PeopleEventServiceOutEventTestHandlerCore.hh"
 
-class PeopleQueryServiceAnswHandler : public PeopleQueryServiceAnswHandlerCore
+class PeopleEventServiceOutEventTestHandler : public PeopleEventServiceOutEventTestHandlerCore
 {
-
-private:
-	CommObjectRecognitionObjects::CommPeople _people;
-	SmartACE::SmartMutex mutex;
-
-protected:
-	virtual void on_update_from(const RecognitionTask* recognitionTask);
-
 public:
-	PeopleQueryServiceAnswHandler(IQueryServer *server);
-	virtual ~PeopleQueryServiceAnswHandler() = default;
-	virtual void handleQuery(const QueryId &id, const CommBasicObjects::CommVoid& request);
+	virtual bool testEvent(
+		CommBasicObjects::CommVoid &p,
+		CommObjectRecognitionObjects::CommObjectRecognitionEventResult &r,
+		const CommObjectRecognitionObjects::CommObjectRecognitionEventState &s
+	) throw();
 };
 #endif
