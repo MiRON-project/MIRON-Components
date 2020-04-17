@@ -1,8 +1,9 @@
 (realize-tcb (getPersonPose name => ?x ?y ?z)
 	(module "objRecognitionModule")
 	(action (	
+    (setf result '(SUCCESS (OK)))
     (format t "===== getPersonPose~%")	
-    (let ( 
+    (let* ( 
       (personpose (tcl-query :server 'objrecog 
                              :service 'personquery
                              :request name))
@@ -11,8 +12,12 @@
       (tcl-bind-var :name '?y :value (fourth personpose))
       (tcl-bind-var :name '?z :value (fifth personpose))
       )
+      (cond 
+        ((string-equal "NIL" (second personpose))  
+  			(setf result '(FAILURE (0))))
+      )
     )
-    '(SUCCESS (OK))
+    result
     )
   )
 )
@@ -45,20 +50,23 @@
 (realize-tcb (peoplerecognition => ?people)
   (module "objRecognitionModule")
   (action (
-            (tcl-activate-event :name 'evt-recog
-                                :handler 'handler-people-recognition
-                                :server 'objrecog 
-                                :service 'peoplerecognitionevent
-                                :mode 'continuous)
-            '(SUCCESS ())
-          )
+    (format t "=========================>>> peoplerecognition ~%")
+    (tcl-activate-event 
+      :name 'evt-recog
+      :handler 'handler-people-recognition
+      :server 'objrecog 
+      :service 'peoplerecognitionevent
+      :mode 'continuous)
+    '(SUCCESS ())
     )
+  )
 )
 
 (define-event-handler (handler-people-recognition)
   (action (
             (format t "=========================>>> HANDLER PEOPLE RECOGNIZED ~s ~%~%" (tcl-event-message))
             (tcl-bind-var :name '?people :value (read-from-string (tcl-event-message)))
+            (show-people)
             (tcl-abort)
           )
   )
