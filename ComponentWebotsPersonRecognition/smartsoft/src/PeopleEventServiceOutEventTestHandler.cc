@@ -21,9 +21,8 @@ bool PeopleEventServiceOutEventTestHandler::testEvent(
 	CommObjectRecognitionObjects::CommObjectRecognitionEventResult &r,
 	const CommObjectRecognitionObjects::CommObjectRecognitionEventState &s
 ) throw() {
-	// fire all events (without filtering) in the default implementation
-	// implement your own (specific) event-filtering code using the event-parameter as input
-	// true means that the current event will be fired to the according client
-	// false means that the current event is ignored (it will not be communicated to the according client)
+		if (s.get_state() == CommObjectRecognitionObjects::ObjectRecognitionState::VISIBLE)
+			r.setObject_id(s.getObject_idCopy());
+		r.set_state(r.get_state());
 	return true;
 }

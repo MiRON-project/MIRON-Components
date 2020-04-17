@@ -18,6 +18,7 @@ ComponentDefinition ComponentWebotsPersonRecognition logo "/ComponentWebotsPerso
 	CoordinationSlavePort CoordinationPort implements CommObjectRecognitionObjects.ObjectRecognitionCoordinationService
 	{
 		with personquery realizedBy PersonQueryServiceAnsw
+		with peoplerecognitionevent realizedBy PeopleEventServiceOut
   		SkillRealizationsRef personRecognition
 	}
 	ComponentParameters ComponentWebotsPersonRecognition slave CoordinationPort

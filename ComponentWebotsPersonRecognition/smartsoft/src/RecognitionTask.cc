@@ -106,9 +106,6 @@ void RecognitionTask::comparePeopleJson()
 {
 	CommObjectRecognitionObjects::CommObjectRecognitionEnvironment objs;
 	Smart::StatusCode obj_status = objectsPushServiceInGetUpdate(objs);
-	CommObjectRecognitionObjects::CommPeople comm_people;
-	CommObjectRecognitionObjects::CommPerson comm_person;
-	std::vector<CommObjectRecognitionObjects::CommPerson> people;
 
 	if (obj_status != Smart::SMART_OK)
 	{
@@ -123,11 +120,13 @@ void RecognitionTask::comparePeopleJson()
 		return;
 	}
 
+	std::vector<CommObjectRecognitionObjects::CommPerson> people;
 	for (auto& obj : objs.getObjectsCopy())
 	{
 		if (obj.getObject_type() != "pedestrian")
 			continue;
 
+		CommObjectRecognitionObjects::CommPerson comm_person;
 		for (auto& person : _people)
 		{
 			if (person.unvisited == true)
@@ -164,12 +163,27 @@ void RecognitionTask::comparePeopleJson()
 		}
 	}
 	
+	_comm_people.clearPeople();
+	_comm_people.setIs_valid(false);
+	CommObjectRecognitionObjects::CommObjectRecognitionEventState state;
 	if (people.size() > 0)
-		comm_people.setIs_valid(true);
+	{
+		_comm_people.setIs_valid(true);
+		state.set_state(CommObjectRecognitionObjects::ObjectRecognitionState::VISIBLE);
+		std::vector<int> ids;
+		state.set_object_id_size(people.size());
+		for (size_t i = 0; i < people.size(); ++i)
+			state.set_object_id(i, people[i].getId());
+		
+	}
 	else
-		comm_people.setIs_valid(false);
-	comm_people.setPeople(people);
-	peoplePushServiceOutPut(comm_people);
+	{
+		_comm_people.setIs_valid(false);
+		state.set_state(CommObjectRecognitionObjects::ObjectRecognitionState::INVISIBLE);
+	}
+	_comm_people.setPeople(people);	
+	COMP->peopleEventServiceOut->put(state);
+	peoplePushServiceOutPut(_comm_people);
 }
 
 bool RecognitionTask::checkColors(const Person& person,
