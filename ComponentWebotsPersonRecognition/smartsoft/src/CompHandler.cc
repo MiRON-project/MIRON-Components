@@ -20,6 +20,14 @@
 #include <iostream>
 
 // include communication objects
+#include <CommObjectRecognitionObjects/CommObjectRecognitionEventResult.hh>
+#include <CommObjectRecognitionObjects/CommObjectRecognitionEventState.hh>
+#include <CommObjectRecognitionObjects/CommObjectRecognitionId.hh>
+#include <CommObjectRecognitionObjects/CommObjectRecognitionObjectProperties.hh>
+#include <CommObjectRecognitionObjects/CommPeople.hh>
+#include <DomainVision/CommRGBDImage.hh>
+#include <DomainVision/CommVideoImage.hh>
+#include <CommBasicObjects/CommVoid.hh>
 
 
 void CompHandler::onStartup() 

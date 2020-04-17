@@ -5,6 +5,7 @@ SkillRealizationModel {
 	} 
 	
 	{
-		SkillRealization getPeoplePose {action ()}
+		SkillRealization getPersonPose {action ()}
+		SkillRealization peoplerecognition {action ()}
 	}
 }
