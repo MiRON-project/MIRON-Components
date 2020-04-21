@@ -1,7 +1,7 @@
 SkillRealizationModel {
 	CoordinationModuleRealization personRecognition coordModuleDef CommObjectRecognitionObjects.objRecognitionModule	
 	uses {
-		CommObjectRecognitionObjects.ObjectRecognitionCoordinationService intsName objrecog
+		CommObjectRecognitionObjects.PersonRecognitionCoordinationService intsName objrecog
 	} 
 	
 	{
