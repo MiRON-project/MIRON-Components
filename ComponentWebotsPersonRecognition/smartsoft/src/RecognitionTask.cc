@@ -182,7 +182,7 @@ void RecognitionTask::comparePeopleJson()
 		state.set_state(CommObjectRecognitionObjects::ObjectRecognitionState::INVISIBLE);
 	}
 	_comm_people.setPeople(people);	
-	COMP->peopleEventServiceOut->put(state);
+	peopleEventServiceOutPut(state);
 	peoplePushServiceOutPut(_comm_people);
 }
 

@@ -16,6 +16,7 @@
 //--------------------------------------------------------------------------
 #include "CameraTask.hh"
 #include "ComponentWebotsRobot.hh"
+#include "webots/Node.hpp"
 
 #include <iostream>
 
@@ -31,8 +32,6 @@ CameraTask::~CameraTask()
 	delete _camera;
 	std::cout << "destructor CameraTask\n";
 }
-
-
 
 int CameraTask::on_entry()
 {
@@ -63,6 +62,8 @@ int CameraTask::on_entry()
 		COMP->mRobotMutex.release();
 		return -1;
 	}
+
+	getCameraPoseRobotFrame();
 
 	COMP->mRobotMutex.release();
 
@@ -123,6 +124,7 @@ int CameraTask::computeCameraUpdate() const
 
 void CameraTask::recognition()
 {
+	auto robot_pose = webotsNodeToAffine3dGlobal(COMP->_supervisor->getSelf());
 	CommObjectRecognitionObjects::CommObjectRecognitionEnvironment env;
 	std::vector<CommObjectRecognitionObjects::
 		CommObjectRecognitionObjectProperties> objs;
@@ -135,13 +137,20 @@ void CameraTask::recognition()
 			obj_properties;
 		obj_properties.setObject_type(objects[i].model);
 		obj_properties.setObject_id(objects[i].id);
-		Quaternion quat(objects[i].orientation[0], objects[i].orientation[1],
-			objects[i].orientation[2], objects[i].orientation[3]);
-		auto euler_angles = ToEulerAngles(quat);
-		CommBasicObjects::CommPose3d obj_pose(objects[i].position[0],
-			objects[i].position[1], objects[i].position[2], euler_angles.yaw, 
-			euler_angles.pitch, euler_angles.roll);
-		obj_properties.setPose(obj_pose);
+
+		Eigen::Affine3d object_frame = (Eigen::Affine3d) Eigen::AngleAxisd(
+			objects[i].orientation[3], Eigen::Vector3d(
+				objects[i].orientation[0], objects[i].orientation[1], 
+				objects[i].orientation[2]));
+		object_frame.translation() = Eigen::Vector3d(
+			objects[i].position[0] * 1000, objects[i].position[1] * 1000,
+			objects[i].position[2] * 1000);
+
+		object_frame = robot_pose * _camera_pose * object_frame;
+		
+		auto pose = affine3dToPose3d(object_frame);
+		nedToEnu(pose);
+		obj_properties.setPose(pose);
 		obj_properties.set_dimension(objects[i].size[0], objects[i].size[1], 
 			0);
 		obj_properties.setIs_valid(true);
@@ -184,4 +193,52 @@ void CameraTask::recognition()
 	env.setObjects(objs);
 	env.setIs_valid(true);
 	objectsPushServiceOutPut(env);
+}
+
+void CameraTask::getCameraPoseRobotFrame()
+{
+	_camera_pose = Eigen::Affine3d::Identity();
+	if (!_camera || !COMP->has_supervisor)
+		return;
+
+	auto matrix_indexes = COMP->getParameters().getCamera_properties().
+		getCamera_rotation_matrix();
+	auto translation_indexes = COMP->getParameters().getCamera_properties().
+		getCamera_translation();
+	std::vector<double> m{std::make_move_iterator(std::begin(matrix_indexes)), 
+                  		  std::make_move_iterator(std::end(matrix_indexes))};
+	std::vector<double> t{
+		std::make_move_iterator(std::begin(translation_indexes)), 
+        std::make_move_iterator(std::end(translation_indexes))};
+	
+	Eigen::Matrix3d R;
+	if (matrix_indexes.size() == 9 && t.size() == 3)
+	{
+		R << m[0], m[1], m[2],
+			 m[3], m[4], m[5],
+			 m[6], m[7], m[8];
+		_camera_pose.linear() = R;
+		_camera_pose.translation() = Eigen::Vector3d(t[0] * 1000, t[1] * 1000, 
+			t[2] * 1000);
+		return;
+	}
+
+	// This may not be the actual pose of the camera wrt the robot 
+	// frame, since it is possble to define a rotation in a nested
+	// proto. The best way is to provide the matrix as a parameter
+	webots::Node* robot = COMP->_supervisor->getSelf();
+	auto children = robot->getField("cameraSlot");
+	if (!children)
+		return;
+	
+	size_t number_of_nodes = children->getCount();
+	for (size_t i = 0; i < number_of_nodes; ++i) 
+	{
+		auto node = children->getMFNode(i);
+		if(node->getType()==webots::Node::CAMERA)
+		{
+			_camera_pose = webotsNodeToAffine3d(node);
+			return;
+		}
+	}
 }

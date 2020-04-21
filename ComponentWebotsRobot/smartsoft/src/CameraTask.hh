@@ -27,6 +27,8 @@
 #include "Utils.hh"
 #include <webots/Camera.hpp>
 
+#include "Eigen/Geometry"
+
 class CameraTask  : public CameraTaskCore
 {
 private:
@@ -34,6 +36,9 @@ private:
 	DomainVision::CommRGBDImage rgbd_image;
 	DomainVision::CommVideoImage comm_video_image;
 	int image_counter;
+	Eigen::Affine3d _camera_pose; // Transform (sensor to robot)
+
+	void getCameraPoseRobotFrame();
 	void recognition();
 	int computeCameraUpdate() const;
 public:
