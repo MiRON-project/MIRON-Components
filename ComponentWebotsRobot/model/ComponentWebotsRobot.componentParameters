@@ -31,6 +31,16 @@ ComponentParameter ComponentWebotsRobotParams component ComponentWebotsRobot
 		
 		//@doc"Enable the Camera recognition"
 		enable_recognition: Boolean=false
+		
+		//@doc"Camera rotation matrix wrt to the robot frame"
+		camera_rotation_matrix: Double[*] = [   0.0, 	0.0,   -1.0,
+											   -1.0,	0.0,	0.0,
+											    0.0,    1.0,    0.0 
+										   ]
+		
+		//@doc"Camera translation vector wrt to the robot frame in meters"
+		camera_translation: Double[*] = [0, 0, 0]
+	
 	}
 	
 	InternalParameter robot_properties{
