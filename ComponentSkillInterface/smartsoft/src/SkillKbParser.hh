@@ -85,13 +85,14 @@ struct ParsedJasonStr
     {
         QJsonObject root = doc.object();
         msg_type = root["msg-type"].toString().toStdString();
+        id = root["id"].toInt();
     }
 
     ParsedJasonStr(const std::string& file)
     {
         auto cfile = file.c_str();
         QString line = QString::fromUtf8(cfile);
-		QJsonDocument _doc = QJsonDocument::fromJson(line.toUtf8(), &error);
+		_doc = QJsonDocument::fromJson(line.toUtf8(), &error);
         
         if(QJsonParseError::NoError != error.error)
 		{
@@ -102,13 +103,13 @@ struct ParsedJasonStr
         {
             QJsonObject root = _doc.object();
             msg_type = root["msg-type"].toString().toStdString();
+            id = root["id"].toInt();
         }
     }
 };
 
 struct ParsedJasonQuery : ParsedJasonStr
 {
-
     std::string query_type;
 
     ParsedJasonQuery(const QJsonDocument& doc) : 
@@ -118,7 +119,7 @@ struct ParsedJasonQuery : ParsedJasonStr
     }
 
     ParsedJasonQuery(const ParsedJasonStr& doc) :
-        ParsedJasonStr(doc._doc)
+        ParsedJasonStr(doc)
     {
         init();
     }
