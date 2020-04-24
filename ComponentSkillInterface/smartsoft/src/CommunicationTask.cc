@@ -201,8 +201,6 @@ int CommunicationTask::on_execute()
 					std::cout<<"exception ... "<<std::endl;
 					answerString = "";
 				}
-
-				COMP->com->send(answerString + "\n");
 			} 
 			else {
 				std::cout<<"ERROR - query KB: "<<Smart::StatusCodeConversion(status)<<std::endl;
