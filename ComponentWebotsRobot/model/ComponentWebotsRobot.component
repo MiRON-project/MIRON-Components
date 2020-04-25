@@ -3,6 +3,7 @@ ComponentDefinition ComponentWebotsRobot logo "/ComponentWebotsRobot/model/logo.
   Activity BatteryTask {
   	DefaultTrigger PeriodicTimer 10.0 Hz
   }
+  OutputPort BatteryPushServiceOut implements CommBasicObjects.BatteryPushService realizedBy BatteryTask {}
   
   Activity RobotTask {
     InputPortLink NavigationVelocityServiceIn {
@@ -11,52 +12,34 @@ ComponentDefinition ComponentWebotsRobot logo "/ComponentWebotsRobot/model/logo.
 		Observe LocalizationUpdateHandler
     DefaultTrigger PeriodicTimer 10.0 Hz
   }
+  OutputPort BaseStateServiceOut implements CommBasicObjects.BaseStateService realizedBy RobotTask {}
+  RequestHandler BaseStateQueryHandler triggeredFrom BaseStateAnswerer { Observe RobotTask }
   
-  InputPort LocalizationUpdateServiceIn implements CommNavigationObjects.LocalizationUpdateService {
-  }
-  
-  InputPort NavigationVelocityServiceIn implements CommNavigationObjects.NavigationVelocityService {
-  }
-  
-  InputHandler LocalizationUpdateHandler triggeredFrom LocalizationUpdateServiceIn {
-  }
-  
-  InputHandler NavigationVelocityHandler triggeredFrom NavigationVelocityServiceIn {
-  }
-  
-  OutputPort BaseStateServiceOut implements CommBasicObjects.BaseStateService realizedBy RobotTask {
-  }
-
-  AnswerPort BaseStateAnswerer implements CommBasicObjects.BaseStateQueryService {
-  }
-  
-  RequestHandler BaseStateQueryHandler triggeredFrom BaseStateAnswerer {
-  Observe RobotTask
-	}
+  InputPort LocalizationUpdateServiceIn implements CommNavigationObjects.LocalizationUpdateService {}
+  InputPort NavigationVelocityServiceIn implements CommNavigationObjects.NavigationVelocityService {}
+  InputHandler LocalizationUpdateHandler triggeredFrom LocalizationUpdateServiceIn {}
+  InputHandler NavigationVelocityHandler triggeredFrom NavigationVelocityServiceIn {}
   
   CoordinationSlavePort CoordinationPort implements CommNavigationObjects.BaseCoordinationService {
   	with baseState realizedBy BaseStateAnswerer
+  	with bumperEvent realizedBy BumperEventServiceOut
+  	with batteryEvent realizedBy BatteryEventServiceOut
   	SkillRealizationsRef baseInst
   }
+  AnswerPort BaseStateAnswerer implements CommBasicObjects.BaseStateQueryService {}
+  OutputPort BumperEventServiceOut implements CommBasicObjects.BumperEventService realizedBy LidarTask {}
+  OutputPort BatteryEventServiceOut implements CommNavigationObjects.BatteryEventService realizedBy BatteryTask {}
 
   ComponentParameters ComponentWebotsRobotParams slave CoordinationPort;
-  
-  OutputPort BatteryPushServiceOut implements CommBasicObjects.BatteryPushService realizedBy BatteryTask {
-	}
-  
+	  
   Activity LidarTask{
 	DefaultTrigger PeriodicTimer 10.0 Hz
   }
-  OutputPort LaserServiceOut implements CommBasicObjects.LaserService realizedBy LidarTask {
-  }
+  OutputPort LaserServiceOut implements CommBasicObjects.LaserService realizedBy LidarTask {}
   
   Activity CameraTask{
 		DefaultTrigger PeriodicTimer 10.0 Hz
   }
-
-	OutputPort RGBImagePushServiceOut implements DomainVision.RGBImagePushService realizedBy CameraTask {
-  }
-
-	OutputPort ObjectsPushServiceOut implements CommObjectRecognitionObjects.ObjectsPushService realizedBy CameraTask {
-	}
+  OutputPort RGBImagePushServiceOut implements DomainVision.RGBImagePushService realizedBy CameraTask {}
+  OutputPort ObjectsPushServiceOut implements CommObjectRecognitionObjects.ObjectsPushService realizedBy CameraTask {}
 }
