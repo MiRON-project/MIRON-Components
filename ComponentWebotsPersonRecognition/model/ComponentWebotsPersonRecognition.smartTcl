@@ -52,9 +52,9 @@
   (action (
     (format t "=========================>>> peoplerecognition ~%")
     (tcl-activate-event 
-      :name 'evt-recog
+      :name 'evt-personrecogpeoplerecognition
       :handler 'handler-people-recognition
-      :server 'objrecog 
+      :server 'personrecog 
       :service 'peoplerecognitionevent
       :mode 'continuous)
     '(SUCCESS ())
@@ -81,7 +81,7 @@
             (format t "=========================>>> tcb-store-people-in-kb -- size = ~s  -- objs = ~s~%" (list-lenght objs) objs)
               (dolist (id objs)
 				        (format t "=========================>>> before setf obj")
-                (setf obj (tcl-query :server 'objrecog 
+                (setf obj (tcl-query :server 'personrecog 
                                      :service 'personquery
                                      :request id))
                 (tcl-kb-update 
