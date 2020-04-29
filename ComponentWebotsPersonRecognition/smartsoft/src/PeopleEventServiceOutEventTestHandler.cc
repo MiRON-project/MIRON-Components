@@ -21,8 +21,8 @@ bool PeopleEventServiceOutEventTestHandler::testEvent(
 	CommObjectRecognitionObjects::CommObjectRecognitionEventResult &r,
 	const CommObjectRecognitionObjects::CommObjectRecognitionEventState &s
 ) throw() {
-		if (s.get_state() == CommObjectRecognitionObjects::ObjectRecognitionState::VISIBLE)
-			r.setObject_id(s.getObject_idCopy());
+		r.setObject_id(s.getObject_idCopy());
 		r.set_state(r.get_state());
+		std::cout << "recognition event: " << r << "\n";
 	return true;
 }

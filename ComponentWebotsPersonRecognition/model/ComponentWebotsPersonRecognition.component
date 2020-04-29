@@ -8,7 +8,6 @@ ComponentDefinition ComponentWebotsPersonRecognition logo "/ComponentWebotsPerso
 		InputPortLink  RGBImagePushServiceIn { optional oversamplingOk undersamplingOk }
 		InputPortLink ObjectsPushServiceIn { optional oversamplingOk undersamplingOk }
 		DefaultTrigger PeriodicTimer 1.0 Hz
-		OperationModeBinding CoordinationPort.active;
 	}
 
 	AnswerPort PersonQueryServiceAnsw implements CommObjectRecognitionObjects.PersonQueryService {}
@@ -18,12 +17,6 @@ ComponentDefinition ComponentWebotsPersonRecognition logo "/ComponentWebotsPerso
 	
 	CoordinationSlavePort CoordinationPort implements CommObjectRecognitionObjects.PersonRecognitionCoordinationService
 	{
-		PrivateOperationMode active;
-		
-		PublicOperationMode CommObjectRecognitionObjects.DefaultModes.Active {
-			activates ( active )
-		}
-		
 		with personquery realizedBy PersonQueryServiceAnsw
 		with peoplerecognitionevent realizedBy PeopleEventServiceOut
   		SkillRealizationsRef personRecognition
