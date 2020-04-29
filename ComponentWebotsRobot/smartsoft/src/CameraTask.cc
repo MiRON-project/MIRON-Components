@@ -157,7 +157,7 @@ void CameraTask::recognition()
 		
 		std::vector<CommObjectRecognitionObjects::CommObjectDominantColor> 
 			colors;
-		for (size_t j = 0; j < objects[j].number_of_colors; ++j)
+		for (size_t j = 0; j < objects[i].number_of_colors; ++j)
 		{
 			CommObjectRecognitionObjects::CommObjectDominantColor color;
 			color.setR(objects[i].colors[3 * j]);

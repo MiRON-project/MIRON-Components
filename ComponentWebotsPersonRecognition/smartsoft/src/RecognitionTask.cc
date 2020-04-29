@@ -166,15 +166,14 @@ void RecognitionTask::comparePeopleJson()
 	_comm_people.clearPeople();
 	_comm_people.setIs_valid(false);
 	CommObjectRecognitionObjects::CommObjectRecognitionEventState state;
+	state.set_object_id_size(people.size());
+	for (size_t i = 0; i < people.size(); ++i)
+		state.set_object_id(i, people[i].getId());
+	
 	if (people.size() > 0)
 	{
 		_comm_people.setIs_valid(true);
-		state.set_state(CommObjectRecognitionObjects::ObjectRecognitionState::VISIBLE);
-		std::vector<int> ids;
-		state.set_object_id_size(people.size());
-		for (size_t i = 0; i < people.size(); ++i)
-			state.set_object_id(i, people[i].getId());
-		
+		state.set_state(CommObjectRecognitionObjects::ObjectRecognitionState::ENUM_ObjectRecognitionState::VISIBLE);
 	}
 	else
 	{
