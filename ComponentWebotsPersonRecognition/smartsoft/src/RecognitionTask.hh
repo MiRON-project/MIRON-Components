@@ -34,7 +34,7 @@ struct Person
 	int id;
 	std::string name;
 	std::vector<CommObjectRecognitionObjects::CommObjectDominantColor> colors;
-	bool unvisited;
+	bool unvisited = true;
 
 	Person(){};
 };
@@ -42,7 +42,13 @@ struct Person
 class RecognitionTask  : public RecognitionTaskCore
 {
 private:
+	//! _people is the provided Json Database (json file)
 	std::vector<Person> _people;
+	
+	//! _comm_people is the Query Database. It starts empty and is updated 
+	//! from the environment 
+	CommObjectRecognitionObjects::CommPeople _comm_people;
+	
 	SmartACE::SmartMutex mutex;
 
 	int extractPeopleFromJson();
@@ -53,7 +59,9 @@ private:
 			CommObjectRecognitionObjectProperties& obj) const;
 public:
 	RecognitionTask(SmartACE::SmartComponent *comp);
-	CommObjectRecognitionObjects::CommPeople _comm_people;
+	
+	CommObjectRecognitionObjects::CommPeople getPeople() const 
+		{return _comm_people; };
 
 	virtual ~RecognitionTask();
 	

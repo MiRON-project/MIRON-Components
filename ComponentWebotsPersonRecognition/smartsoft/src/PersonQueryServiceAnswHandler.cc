@@ -20,28 +20,30 @@
 PersonQueryServiceAnswHandler::PersonQueryServiceAnswHandler(IQueryServer *server)
 :	PersonQueryServiceAnswHandlerCore(server)
 {
-	_people.setIs_valid(false);
 }
 
 void PersonQueryServiceAnswHandler::on_update_from(const RecognitionTask* recognitionTask)
 {
 	mutex.acquire();
 
-	_people = recognitionTask->_comm_people;
-
+	_people = recognitionTask->getPeople();
+  
 	mutex.release();
 }
 
 void PersonQueryServiceAnswHandler::handleQuery(const Smart::QueryIdPtr &id, const CommObjectRecognitionObjects::CommPersonRecognitionId& request) 
 {
 	CommObjectRecognitionObjects::CommPerson answer;
-	for (auto person : _people.getPeopleCopy())
+	for (size_t i = 0; i < _people.getPeopleSize(); ++i)
+	{
+		auto person = _people.getPeopleElemAtPos(i);
 		if (person.getId() == request.getId() || 
 			person.getName() == request.getName())
 		{
 			this->server->answer(id, person);
 			return;
 		}
+	}
 	answer.setName("NIL");
 	this->server->answer(id, answer);
 }
