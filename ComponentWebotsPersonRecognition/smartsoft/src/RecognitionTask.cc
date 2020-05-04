@@ -87,7 +87,6 @@ int RecognitionTask::extractPeopleFromJson()
 		Person _person;
 		_person.id = people[i]["id"].asUInt();
 		_person.name = people[i]["name"].asString();
-		_person.unvisited = true;
 		
 		const Json::Value& colors = people[i]["color"];
 		for (int j = 0; j < colors.size(); ++j)
@@ -120,69 +119,115 @@ void RecognitionTask::comparePeopleJson()
 		return;
 	}
 
+	// People is the output for events and data
 	std::vector<CommObjectRecognitionObjects::CommPerson> people;
 	for (auto& obj : objs.getObjectsCopy())
 	{
 		if (obj.getObject_type() != "pedestrian")
 			continue;
-
+		
+		bool found_in_json = false;
+    
+    // comm_person is a temporary object to build the People output
 		CommObjectRecognitionObjects::CommPerson comm_person;
+    comm_person.setDimension(obj.getDimension());
+    comm_person.setPose(obj.getPose());
+    comm_person.setId(obj.getObject_id());
+    comm_person.setIs_valid(true);
+		
+		// Checking if person is in the provided Json Database
 		for (auto& person : _people)
 		{
-			if (person.unvisited == true)
+			// if person was found before in Json Database, in this run, we just
+			// need to compare the object's id with the person's id. Otherwise
+			// we need to check colors
+			if (person.unvisited)
+			{
+				// Person not found before in this run, but colors match. Thus found
+        // for the first time
 				if (checkColors(person, obj))
 				{
+          // we have a match
+          found_in_json = true;
+
+					// fix person's id in the provided json file for future search
 					person.id = obj.getObject_id();
 					person.unvisited = false;
-					comm_person.setId(person.id);
+          
+          // complete the output's name
 					comm_person.setName(person.name);
-					comm_person.setDimension(obj.getDimension());
-					comm_person.setPose(obj.getPose());
-					comm_person.setIs_valid(true);
 					people.push_back(comm_person);
+					
+          // updating the Query Database
+          auto _comm_people_copy = _comm_people.getPeopleCopy();
+          _comm_people_copy.push_back(comm_person);
+          _comm_people.setPeople(_comm_people_copy);
 					break;
 				}
+				// person not yet visited and colors don't match. Continue loop
 				else
 					continue;
+			}
+      
+      // if person already visited before, we just need to compare its id
 			else
 			{
+        // person's id does not match. Continue loop
 				if (obj.getObject_id() != person.id)
 					continue;
-					
-				else
-				{
-					comm_person.setId(person.id);
-					comm_person.setName(person.name);
-					comm_person.setDimension(obj.getDimension());
-					comm_person.setPose(obj.getPose());
-					comm_person.setIs_valid(true);
-					people.push_back(comm_person);
-					break;
-				}
+
+        // we have a match! 
+        found_in_json = true;
+
+        // complete the output's name
+        comm_person.setName(person.name);
+        people.push_back(comm_person);
+
+        // update the Query Database with the new pose
+        for (size_t i = 0; i < _comm_people.getPeopleSize(); ++i)
+        {
+          auto _comm_person = _comm_people.getPeopleElemAtPos(i);
+          if (_comm_person.getId() == obj.getObject_id())
+          {
+            _comm_person.setDimension(obj.getDimension());
+            _comm_person.setPose(obj.getPose());
+            break;
+          }
+        }
+        break;
 			}
-		}
+    }
+      
+    if (!found_in_json)
+    {
+      // complete the output's name with unknown
+      comm_person.setName("unknown");
+      people.push_back(comm_person);
+
+      // updating the Query Database
+      auto _comm_people_copy = _comm_people.getPeopleCopy();
+      _comm_people_copy.push_back(comm_person);
+      _comm_people.setPeople(_comm_people_copy);
+    }  
 	}
 	
-	_comm_people.clearPeople();
-	_comm_people.setIs_valid(false);
 	CommObjectRecognitionObjects::CommObjectRecognitionEventState state;
-	state.set_object_id_size(people.size());
+	std::vector<unsigned> ids;
 	for (size_t i = 0; i < people.size(); ++i)
-		state.set_object_id(i, people[i].getId());
+		ids.push_back(people[i].getId());
+	state.setObject_id(ids);
 	
 	if (people.size() > 0)
-	{
-		_comm_people.setIs_valid(true);
-		state.set_state(CommObjectRecognitionObjects::ObjectRecognitionState::ENUM_ObjectRecognitionState::VISIBLE);
-	}
+		state.setState(CommObjectRecognitionObjects::ObjectRecognitionState::VISIBLE);
 	else
-	{
-		_comm_people.setIs_valid(false);
-		state.set_state(CommObjectRecognitionObjects::ObjectRecognitionState::INVISIBLE);
-	}
-	_comm_people.setPeople(people);	
-	peopleEventServiceOutPut(state);
-	peoplePushServiceOutPut(_comm_people);
+		state.setState(CommObjectRecognitionObjects::ObjectRecognitionState::INVISIBLE);
+	
+  peopleEventServiceOutPut(state);
+  
+  CommObjectRecognitionObjects::CommPeople people_out;
+  people_out.setIs_valid(true);
+  people_out.setPeople(people);
+  peoplePushServiceOutPut(people_out);
 }
 
 bool RecognitionTask::checkColors(const Person& person,
@@ -200,7 +245,7 @@ bool RecognitionTask::checkColors(const Person& person,
 		abs(color.getG() - person.colors[i].getG()) >= COLOR_THRESHOLD ||
 		abs(color.getDominance() - person.colors[i].getDominance()) >= 
 			DOMINANCE_THRESHOLD)
-			return false;
+      return false;
 	}
 	return true;
 }

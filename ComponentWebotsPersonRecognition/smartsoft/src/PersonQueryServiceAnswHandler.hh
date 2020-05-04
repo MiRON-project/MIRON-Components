@@ -18,7 +18,7 @@
 #define _PERSONQUERYSERVICEANSWHANDLER_USER_HH
 		
 #include "PersonQueryServiceAnswHandlerCore.hh"
-#include "CommObjectRecognitionObjects/CommPeople.hh"
+#include "RecognitionTask.hh"
 
 class PersonQueryServiceAnswHandler : public PersonQueryServiceAnswHandlerCore
 {

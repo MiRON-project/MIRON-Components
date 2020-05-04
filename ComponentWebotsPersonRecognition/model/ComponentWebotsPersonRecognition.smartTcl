@@ -66,7 +66,6 @@
   (action (
             (format t "=========================>>> HANDLER PEOPLE RECOGNIZED ~s ~%~%" (tcl-event-message))
             (tcl-bind-var :name '?people :value (read-from-string (tcl-event-message)))
-            (show-people)
             (tcl-abort)
           )
   )
@@ -77,20 +76,22 @@
   	(action (
             (let* (
                   (objs '?people)
-                  (obj nil))
-            (format t "=========================>>> tcb-store-people-in-kb -- size = ~s  -- objs = ~s~%" (list-lenght objs) objs)
+                  (obj nil)
+                  (name nil)
+                  (pose nil))
               (dolist (id objs)
-				        (format t "=========================>>> before setf obj")
                 (setf obj (tcl-query :server 'personrecog 
                                      :service 'personquery
                                      :request id))
+                (setf name (second obj))
+                (setf pose (list (third obj) (fourth obj) (fifth obj)))
                 (tcl-kb-update 
                   :key '(is-a id) 
                   :value `(
                           (is-a PERSON)
                               (id ,id)
-                              (name ,(second obj))
-                              (pose ,((third obj) (fourth obj) (fifth obj)))
+                              (name ,name)
+                              (pose ,pose)
                           )
                 )
               )
