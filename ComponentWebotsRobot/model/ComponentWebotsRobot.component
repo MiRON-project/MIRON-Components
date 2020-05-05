@@ -22,12 +22,10 @@ ComponentDefinition ComponentWebotsRobot logo "/ComponentWebotsRobot/model/logo.
   
   CoordinationSlavePort CoordinationPort implements CommNavigationObjects.BaseCoordinationService {
   	with baseState realizedBy BaseStateAnswerer
-  	with bumperEvent realizedBy BumperEventServiceOut
   	with batteryEvent realizedBy BatteryEventServiceOut
   	SkillRealizationsRef baseInst
   }
   AnswerPort BaseStateAnswerer implements CommBasicObjects.BaseStateQueryService {}
-  OutputPort BumperEventServiceOut implements CommBasicObjects.BumperEventService realizedBy LidarTask {}
   OutputPort BatteryEventServiceOut implements CommNavigationObjects.BatteryEventService realizedBy BatteryTask {}
 
   ComponentParameters ComponentWebotsRobotParams slave CoordinationPort;
