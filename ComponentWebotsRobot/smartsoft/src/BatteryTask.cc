@@ -32,8 +32,6 @@ BatteryTask::~BatteryTask()
 	std::cout << "destructor BatteryTask\n";
 }
 
-
-
 int BatteryTask::on_entry()
 {
 	if (!COMP->_supervisor)
@@ -74,6 +72,7 @@ int BatteryTask::on_execute()
 	COMP->mRobotMutex.acquire();
 
 	CommBasicObjects::CommBatteryLevel bt_level;
+  CommBasicObjects::CommBatteryState battery_state;
 	CommBasicObjects::CommTimeStamp timestamp;
 	
 	std::chrono::system_clock::time_point current_sample_time = 
@@ -95,10 +94,14 @@ int BatteryTask::on_execute()
 
 	//std::cout << "Battery Level is: " << battery_level << std::endl;
 	bt_level.setChargeLevel((int)battery_level);
+  battery_state.setChargeValue((int)battery_level);
+  
+  bt_level.setExternalPower(charging);
 	
-	COMP->batteryPushServiceOut->put(bt_level);
+  batteryEventServiceOutPut(battery_state);
+  batteryPushServiceOutPut(bt_level);
+  COMP->_pose->setBatteryState(bt_level);
 	COMP->mRobotMutex.release();
-
 	return 0;
 }
 int BatteryTask::on_exit()
@@ -124,13 +127,20 @@ void BatteryTask::computeCustomConsumption(double seconds)
 	for (auto motor : COMP->motors)
 		motor_energy += abs(motor->getVelocity());
 
-	auto robot_position = getRobotPosition();
-	
+  std::array<double,3> robot_position = {
+    COMP->_pose->get_base_position().get_x(1),
+    COMP->_pose->get_base_position().get_y(1),
+    COMP->_pose->get_base_position().get_z(1)};
+
+  charging = false;
 	for (auto charger : chargers)
 	{
 		if (checkChargerRange(robot_position, charger))
+    {
 			battery_level += charger->getField("battery")->getMFFloat(2) * 
 				seconds;
+      charging = true;
+    }
 	}
 
 	battery_level -= seconds * motor_energy * motor_consumption;
@@ -157,25 +167,16 @@ void BatteryTask::getCharges()
 	}
 }
 
-std::array<double, 3> BatteryTask::getRobotPosition() const
-{
-	if (COMP->_gps)
-	{
-		auto GPS_value = COMP->_gps->getValues();
-		return {GPS_value[0], GPS_value[1], GPS_value[2]};
-	}
-	else
-		return {0, 0, 0};
-} 
-
 bool BatteryTask::checkChargerRange(
 	const std::array<double,3>& robot_position, webots::Node* charger) const
 {
 	auto charger_position = charger->getPosition();
-	const double x2 = pow(robot_position[0] - charger_position[0], 2);
-	const double y2 = pow(robot_position[1] - charger_position[1], 2);
+  auto charger_enu_pos = nedToEnu(std::array<double,3>{{charger_position[0], 
+    charger_position[1], charger_position[2]}});
+
+	const double x2 = pow(robot_position[0] - charger_enu_pos[0], 2);
+	const double y2 = pow(robot_position[1] - charger_enu_pos[1], 2);
 	auto radius = charger->getField("radius")->getSFFloat();
-	//std::cout << "distance: " << sqrt(x2 + y2) << "\n";
 	return (sqrt(x2 + y2) <= radius);
 }
 

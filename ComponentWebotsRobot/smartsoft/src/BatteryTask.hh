@@ -35,6 +35,7 @@ private:
 	double motor_consumption;
 	double cpu_consumption;
 	bool custom_battery;
+	bool charging;
 	int webotsTimeStep;
 	std::chrono::time_point<std::chrono::system_clock> last_sample_time;
 	std::vector<webots::Node*> chargers;
@@ -42,7 +43,6 @@ private:
 	timeval timepointToTimeval(std::chrono::system_clock::time_point tp) const;
 	void computeCustomConsumption(double seconds);
 	void getCharges();
-	std::array<double,3> getRobotPosition() const;
 	bool checkChargerRange(const std::array<double, 3>& robot_position,
 		webots::Node* charger) const;
 	void computeWebotsTimestep();
