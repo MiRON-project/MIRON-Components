@@ -172,10 +172,12 @@ bool BatteryTask::checkChargerRange(
 	const std::array<double,3>& robot_position, webots::Node* charger) const
 {
 	auto charger_position = charger->getPosition();
-	const double x2 = pow(robot_position[0] - charger_position[0], 2);
-	const double y2 = pow(robot_position[1] - charger_position[1], 2);
+  auto charger_enu_pos = nedToEnu(std::array<double,3>{{charger_position[0], 
+    charger_position[1], charger_position[2]}});
+
+	const double x2 = pow(robot_position[0] - charger_enu_pos[0], 2);
+	const double y2 = pow(robot_position[1] - charger_enu_pos[1], 2);
 	auto radius = charger->getField("radius")->getSFFloat();
-	//std::cout << "distance: " << sqrt(x2 + y2) << "\n";
 	return (sqrt(x2 + y2) <= radius);
 }
 
