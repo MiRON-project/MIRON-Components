@@ -10,3 +10,13 @@
                     (tcl-bind-var :name '?y :value (second basepose))
                     (tcl-bind-var :name '?yaw :value (third basepose)))
                   '(SUCCESS (OK)))))
+
+;; getBaseCharging
+(realize-tcb (getBaseCharging => ?charging)
+	(module "MobileBaseModule")
+	(action (	
+                  (format t "===== getBaseCharging~%")	
+                  (let ((basepose (tcl-query :server 'base :service 'baseState)))
+                    (format t "got base pose Query ~a~%" basepose)
+                    (tcl-bind-var :name '?charging :value (fourth basepose)))
+                  '(SUCCESS (OK)))))

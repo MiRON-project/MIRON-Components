@@ -8,5 +8,10 @@ SkillRealizationModel {
 		{
 			action ( )
 		}
+		
+		SkillRealization getBaseCharging
+		{
+			action()
+		}
 	}
 }
