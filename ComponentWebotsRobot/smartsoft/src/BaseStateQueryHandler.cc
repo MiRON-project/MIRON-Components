@@ -30,6 +30,7 @@ void BaseStateQueryHandler::handleQuery(const Smart::QueryIdPtr &id, const CommB
 	if (COMP->_pose != NULL) {
 		commCurrentBaseState.set_base_position(COMP->_pose->getBasePose());
 		commCurrentBaseState.set_base_raw_position(COMP->_pose->getBasePose());
+		commCurrentBaseState.setBatteryState(COMP->_pose->getBatteryState());
 	}
 	else {
 		std::cout << "Webots Simulator not yet started !" << std::endl;
