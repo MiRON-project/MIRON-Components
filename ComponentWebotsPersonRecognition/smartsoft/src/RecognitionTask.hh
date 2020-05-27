@@ -48,6 +48,8 @@ private:
 	//! _comm_people is the Query Database. It starts empty and is updated 
 	//! from the environment 
 	CommObjectRecognitionObjects::CommPeople _comm_people;
+	std::string person_bump_name_;
+  	double people_bump_threshold_;
 	
 	SmartACE::SmartMutex mutex;
 
@@ -57,6 +59,7 @@ private:
 		const Person& person,
 		const CommObjectRecognitionObjects::
 			CommObjectRecognitionObjectProperties& obj) const;
+	void checkBump(const CommObjectRecognitionObjects::CommPeople& people_out);
 public:
 	RecognitionTask(SmartACE::SmartComponent *comp);
 	

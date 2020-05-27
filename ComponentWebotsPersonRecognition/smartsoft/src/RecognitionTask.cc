@@ -39,6 +39,11 @@ int RecognitionTask::on_entry()
 	if (COMP->getParameters().getRecognition_properties().getColor_base())
 		return extractPeopleFromJson();
 
+  person_bump_name_ = COMP->getParameters().getRecognition_properties().
+    getPerson_bump_name();
+  people_bump_threshold_ = COMP->getParameters().getRecognition_properties().
+    getPeople_bump_threshold();
+
 	return 0;
 }
 int RecognitionTask::on_execute()
@@ -227,6 +232,7 @@ void RecognitionTask::comparePeopleJson()
   CommObjectRecognitionObjects::CommPeople people_out;
   people_out.setIs_valid(true);
   people_out.setPeople(people);
+  checkBump(people_out);
   peoplePushServiceOutPut(people_out);
 }
 
@@ -248,4 +254,25 @@ bool RecognitionTask::checkColors(const Person& person,
       return false;
 	}
 	return true;
+}
+
+void RecognitionTask::checkBump(const CommObjectRecognitionObjects::CommPeople&
+  people_out) {
+  CommObjectRecognitionObjects::CommObjectRecognitionEventBumpState bump_state;
+  CommBasicObjects::CommBaseState pose;
+  Smart::StatusCode obj_status = baseStateServiceInGetUpdate(pose);
+  bump_state.setState(CommObjectRecognitionObjects::ObjectBumpState::NOT_BUMP);
+  std::vector<unsigned int> ids;
+  
+  for (auto& people : people_out.getPeopleCopy()) {
+    if (person_bump_name_.empty() || person_bump_name_ == people.getName()){
+      if(sqrt(pow(people.getPose().get_x(1) - pose.getBasePose().get_x(1), 2) +
+        pow(people.getPose().get_y(1) - pose.getBasePose().get_y(1), 2)) <
+        people_bump_threshold_) {
+        ids.push_back(people.getId());
+        bump_state.setState(CommObjectRecognitionObjects::ObjectBumpState::BUMP);
+      }
+    }
+  }
+  peopleEventBumpServiceOutPut(bump_state);
 }
