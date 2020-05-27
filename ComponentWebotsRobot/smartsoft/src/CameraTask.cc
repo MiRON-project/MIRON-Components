@@ -20,6 +20,9 @@
 
 #include <iostream>
 
+const std::unordered_map<std::string, CommObjectRecognitionObjects::
+    SimpleObjects> CameraTask::obj_str_enum = CameraTask::createObjStrToEnumMap();
+
 CameraTask::CameraTask(SmartACE::SmartComponent *comp) 
 :	CameraTaskCore(comp),
 	image_counter(0),
@@ -138,6 +141,14 @@ void CameraTask::recognition()
 		obj_properties.setObject_type(objects[i].model);
 		obj_properties.setObject_id(objects[i].id);
 
+    try {
+      obj_properties.setObject_simple_type(obj_str_enum.at(objects[i].model));
+    }
+    catch(...) {
+      obj_properties.setObject_simple_type(CommObjectRecognitionObjects::
+        SimpleObjects::UNKOWN);
+    }
+
 		Eigen::Affine3d object_frame = (Eigen::Affine3d) Eigen::AngleAxisd(
 			objects[i].orientation[3], Eigen::Vector3d(
 				objects[i].orientation[0], objects[i].orientation[1], 
@@ -241,4 +252,33 @@ void CameraTask::getCameraPoseRobotFrame()
 			return;
 		}
 	}
+}
+
+std::unordered_map<std::string, CommObjectRecognitionObjects::
+    SimpleObjects> CameraTask::createObjStrToEnumMap() {
+    
+  std::unordered_map<std::string, CommObjectRecognitionObjects::SimpleObjects> 
+    map;
+
+  map["sofa"] = CommObjectRecognitionObjects::SimpleObjects::SOFA;
+  map["chair"] = CommObjectRecognitionObjects::SimpleObjects::CHAIR;
+  map["portrait"] = CommObjectRecognitionObjects::SimpleObjects::PORTRAIT;
+  map["table"] = CommObjectRecognitionObjects::SimpleObjects::TABLE;
+  map["bed"] = CommObjectRecognitionObjects::SimpleObjects::BED;
+  map["can"] = CommObjectRecognitionObjects::SimpleObjects::CAN;
+  map["apple"] = CommObjectRecognitionObjects::SimpleObjects::APPLE;
+  map["gnome"] = CommObjectRecognitionObjects::SimpleObjects::GNOME;
+  map["swing couch"] = CommObjectRecognitionObjects::SimpleObjects::SWINGCOUCH;
+  map["watering can"] = CommObjectRecognitionObjects::SimpleObjects::WATERINGCAN;
+  map["biscuit box"] = CommObjectRecognitionObjects::SimpleObjects::BISCUITBOX;
+  map["jam jar"] = CommObjectRecognitionObjects::SimpleObjects::JAMJAR;
+  map["atm"] = CommObjectRecognitionObjects::SimpleObjects::ATM;
+  map["bench"] = CommObjectRecognitionObjects::SimpleObjects::BENCH;
+  map["public bin"] = CommObjectRecognitionObjects::SimpleObjects::PUBLICBIN;
+  map["simple bin"] = CommObjectRecognitionObjects::SimpleObjects::SIMPLEBENCH;
+  map["snack stand"] = CommObjectRecognitionObjects::SimpleObjects::SNACKSTAND;
+  map["trash bin"] = CommObjectRecognitionObjects::SimpleObjects::TRASHBIN;
+  map["trash container"] = CommObjectRecognitionObjects::SimpleObjects::TRASHCONTAINER;
+  map["pedestrian"] = CommObjectRecognitionObjects::SimpleObjects::PEDESTRIAN;
+  return map;
 }

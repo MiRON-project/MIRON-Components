@@ -23,11 +23,13 @@
 #include "CommObjectRecognitionObjects/CommObjectRecognitionObjectProperties.hh"
 #include "CommObjectRecognitionObjects/CommObjectDominantColor.hh"
 #include "CommObjectRecognitionObjects/CommObjectRecognitionEnvironment.hh"
+#include <CommObjectRecognitionObjects/enumSimpleObjects.hh>
 
 #include "Utils.hh"
 #include <webots/Camera.hpp>
 
 #include "Eigen/Geometry"
+#include <unordered_map>
 
 class CameraTask  : public CameraTaskCore
 {
@@ -38,9 +40,16 @@ private:
 	int image_counter;
 	Eigen::Affine3d _camera_pose; // Transform (sensor to robot)
 
+  static const std::unordered_map<std::string, CommObjectRecognitionObjects::
+    SimpleObjects> obj_str_enum;
+
 	void getCameraPoseRobotFrame();
 	void recognition();
 	int computeCameraUpdate() const;
+  
+  static std::unordered_map<std::string, CommObjectRecognitionObjects::
+    SimpleObjects> createObjStrToEnumMap();
+
 public:
 	CameraTask(SmartACE::SmartComponent *comp);
 	virtual ~CameraTask();
