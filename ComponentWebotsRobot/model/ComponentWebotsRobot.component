@@ -40,4 +40,10 @@ ComponentDefinition ComponentWebotsRobot logo "/ComponentWebotsRobot/model/logo.
   }
   OutputPort RGBImagePushServiceOut implements DomainVision.RGBImagePushService realizedBy CameraTask {}
   OutputPort ObjectsPushServiceOut implements CommObjectRecognitionObjects.ObjectsPushService realizedBy CameraTask {}
+  OutputPort ObjectEventBumpOut implements CommObjectRecognitionObjects.ObjectEventBump realizedBy CameraTask {}
+  
+  CoordinationSlavePort CoordinationPort2 implements CommObjectRecognitionObjects.ObjectRecognitionCoordinationService
+  {
+    with objectrecognitionbumpevent realizedBy ObjectEventBumpOut
+  }
 }
