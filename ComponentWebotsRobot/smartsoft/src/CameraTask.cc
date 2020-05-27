@@ -136,6 +136,7 @@ void CameraTask::recognition()
   CommObjectRecognitionObjects::CommObjectRecognitionEventBumpState bump_state;
 	std::vector<CommObjectRecognitionObjects::
 		CommObjectRecognitionObjectProperties> objs;
+  bump_state.setState(CommObjectRecognitionObjects::ObjectBumpState::NOT_BUMP);
 
 	int number_of_objects = _camera->getRecognitionNumberOfObjects();
 	auto objects = _camera->getRecognitionObjects();
