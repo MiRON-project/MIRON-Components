@@ -4,5 +4,10 @@ ComponentParameter ComponentWebotsPersonRecognition component ComponentWebotsPer
 	{
 		//@doc"Color base algorithm"
 		color_base: Boolean=true
+		
+		//@doc"Threshold for object bump event in meters [m]: it is useful if one wants to get close to a object, or one does not"
+		people_bump_threshold: Double = 0
+		//@doc"If string has a specific name, the event occurs only for that name"
+		person_bump_name: String = ""
 	}
 }

@@ -66,6 +66,10 @@ int CameraTask::on_entry()
 		return -1;
 	}
 
+  object_bump_type_ = COMP->getParameters().getCamera_properties().
+    getObject_bump_type();
+  object_bump_threshold_ = COMP->getParameters().getCamera_properties().
+    getObject_bump_threshold();
 	getCameraPoseRobotFrame();
 
 	COMP->mRobotMutex.release();
@@ -129,8 +133,10 @@ void CameraTask::recognition()
 {
 	auto robot_pose = webotsNodeToAffine3dGlobal(COMP->_supervisor->getSelf());
 	CommObjectRecognitionObjects::CommObjectRecognitionEnvironment env;
+  CommObjectRecognitionObjects::CommObjectRecognitionEventBumpState bump_state;
 	std::vector<CommObjectRecognitionObjects::
 		CommObjectRecognitionObjectProperties> objs;
+  bump_state.setState(CommObjectRecognitionObjects::ObjectBumpState::NOT_BUMP);
 
 	int number_of_objects = _camera->getRecognitionNumberOfObjects();
 	auto objects = _camera->getRecognitionObjects();
@@ -140,6 +146,8 @@ void CameraTask::recognition()
 			obj_properties;
 		obj_properties.setObject_type(objects[i].model);
 		obj_properties.setObject_id(objects[i].id);
+
+    checkBump(bump_state, objects[i].model, objects[i].position, objects[i].id);
 
     try {
       obj_properties.setObject_simple_type(obj_str_enum.at(objects[i].model));
@@ -201,6 +209,8 @@ void CameraTask::recognition()
 				objects[i].colors[3 * j + 1], objects[i].colors[3 * j + 2]);
 		*/
 	}
+  if (bump_state.getState() == CommObjectRecognitionObjects::ObjectBumpState::BUMP)
+    objectEventBumpOutPut(bump_state);
 	env.setObjects(objs);
 	env.setIs_valid(true);
 	objectsPushServiceOutPut(env);
@@ -281,4 +291,18 @@ std::unordered_map<std::string, CommObjectRecognitionObjects::
   map["trash container"] = CommObjectRecognitionObjects::SimpleObjects::TRASHCONTAINER;
   map["pedestrian"] = CommObjectRecognitionObjects::SimpleObjects::PEDESTRIAN;
   return map;
+}
+
+void CameraTask::checkBump(CommObjectRecognitionObjects::
+  CommObjectRecognitionEventBumpState& bump_state, char* model, 
+  const double position[3], int id) const {
+  if (object_bump_type_.empty() || object_bump_type_.c_str() == model){
+    if(sqrt(position[0]*position[0] + position[1]*position[1]) < 
+      object_bump_threshold_){
+      std::vector<unsigned int> ids = bump_state.getObject_idCopy();
+      ids.push_back(id);
+      bump_state.setObject_id(ids);
+      bump_state.setState(CommObjectRecognitionObjects::ObjectBumpState::BUMP);
+    }
+  }
 }

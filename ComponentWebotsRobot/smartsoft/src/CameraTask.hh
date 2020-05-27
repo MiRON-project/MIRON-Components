@@ -39,6 +39,8 @@ private:
 	DomainVision::CommVideoImage comm_video_image;
 	int image_counter;
 	Eigen::Affine3d _camera_pose; // Transform (sensor to robot)
+  std::string object_bump_type_;
+  double object_bump_threshold_;
 
   static const std::unordered_map<std::string, CommObjectRecognitionObjects::
     SimpleObjects> obj_str_enum;
@@ -46,6 +48,9 @@ private:
 	void getCameraPoseRobotFrame();
 	void recognition();
 	int computeCameraUpdate() const;
+  void checkBump(CommObjectRecognitionObjects::
+      CommObjectRecognitionEventBumpState& bump_state, char* model, 
+      const double position[3], int id) const;
   
   static std::unordered_map<std::string, CommObjectRecognitionObjects::
     SimpleObjects> createObjStrToEnumMap();

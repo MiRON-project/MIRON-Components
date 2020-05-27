@@ -32,7 +32,7 @@ ComponentParameter ComponentWebotsRobotParams component ComponentWebotsRobot
 		//@doc"Enable the Camera recognition"
 		enable_recognition: Boolean=false
 		
-		//@doc"Camera rotation matrix wrt to the robot frame"
+		//@doc"Camera rotation matrix wrt to the robot frame. This matrix is the TiagoIron setup"
 		camera_rotation_matrix: Double[*] = [   0.0, 	0.0,   -1.0,
 											   -1.0,	0.0,	0.0,
 											    0.0,    1.0,    0.0 
@@ -40,7 +40,11 @@ ComponentParameter ComponentWebotsRobotParams component ComponentWebotsRobot
 		
 		//@doc"Camera translation vector wrt to the robot frame in meters"
 		camera_translation: Double[*] = [0, 0, 0]
-	
+		
+		//@doc"Threshold for object bump event in meters [m]: it is useful if one wants to get close to a object, or one does not"
+		object_bump_threshold: Double = 0
+		//@doc"If string has a specific type, the event occurs only for that type"
+		object_bump_type: String = ""
 	}
 	
 	InternalParameter robot_properties{
