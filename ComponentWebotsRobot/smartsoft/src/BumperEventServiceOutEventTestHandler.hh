@@ -14,35 +14,18 @@
 // If you want the toolchain to re-generate this file, please 
 // delete it before running the code generator.
 //--------------------------------------------------------------------------
-#ifndef _LIDARTASK_HH
-#define _LIDARTASK_HH
+#ifndef _BUMPEREVENTSERVICEOUT_EVENT_TEST_HANDLER_USER_HH
+#define _BUMPEREVENTSERVICEOUT_EVENT_TEST_HANDLER_USER_HH
+		
+#include "BumperEventServiceOutEventTestHandlerCore.hh"
 
-#include "LidarTaskCore.hh"
-
-#include "CommBasicObjects/CommMobileLaserScan.hh"
-
-#include "webots/Lidar.hpp"
-
-class LidarTask  : public LidarTaskCore
+class BumperEventServiceOutEventTestHandler : public BumperEventServiceOutEventTestHandlerCore
 {
-private:
-	int horizontalResolution;
-  	unsigned int numberValidPoints;
-	double field_of_view;
-	
-	webots::Lidar* _lidar;
-	CommBasicObjects::CommMobileLaserScan scan;
-	unsigned long scanCount;
-	double bumper_threshold_;
-	CommBasicObjects::BumperEventType bumper_type_;
-	int computeLidarUpdate() const;
 public:
-	LidarTask(SmartACE::SmartComponent *comp);
-	virtual ~LidarTask();
-	
-	virtual int on_entry();
-	virtual int on_execute();
-	virtual int on_exit();
+	virtual bool testEvent(
+		CommBasicObjects::CommBumperEventParameter &p,
+		CommBasicObjects::CommBumperEventResult &r,
+		const CommBasicObjects::CommBumperEventState &s
+	) throw();
 };
-
 #endif

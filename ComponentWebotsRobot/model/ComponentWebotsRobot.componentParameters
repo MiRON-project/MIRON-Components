@@ -23,6 +23,9 @@ ComponentParameter ComponentWebotsRobotParams component ComponentWebotsRobot
 	InternalParameter lidar_properties{
 		//@doc"Enable the Lidar peripheral"
 		enable: Boolean=false
+		
+		//@doc"Min Distance to obstacle [m] to trigger event"
+		bumper_threshold: Double = 0.01
 	}
 	
 	InternalParameter camera_properties{

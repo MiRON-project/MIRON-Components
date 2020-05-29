@@ -22,7 +22,8 @@
 LidarTask::LidarTask(SmartACE::SmartComponent *comp) 
 :	LidarTaskCore(comp),
 	scanCount(0),
-	_lidar(NULL)
+	_lidar(NULL),
+  bumper_type_(CommBasicObjects::BumperEventType::BUMPER_UNKNOWN)
 {
 	std::cout << "constructor LidarTask\n";
 }
@@ -71,6 +72,9 @@ int LidarTask::on_entry()
 		std::min(65535.0, _lidar->getMaxRange() * 1000.0));
 	scan.set_min_distance(_lidar->getMinRange() * 1000.0);
 	scan.set_scan_length_unit(1);
+
+	bumper_threshold_ = COMP->getParameters().getLidar_properties().
+		getBumper_threshold();
 	
 	COMP->mRobotMutex.release();
 
@@ -84,6 +88,7 @@ int LidarTask::on_execute()
 	COMP->mRobotMutex.acquire();
 
 	// From left to right
+	double min_dist = bumper_threshold_ + .1;
 	auto rangeImageVector = _lidar->getRangeImage();
 	if (rangeImageVector)
 	{
@@ -95,8 +100,10 @@ int LidarTask::on_execute()
 		for (unsigned int i = 0; i < numberValidPoints; ++i)
 		{
 			// From right to left
-			unsigned int dist = (unsigned int)
-				(rangeImageVector[numberValidPoints - 1 - i] * 1000.0);
+      double ddist = rangeImageVector[numberValidPoints - 1 - i];
+			min_dist = (ddist < min_dist) ? ddist : min_dist; 
+
+			unsigned int dist = (unsigned int) (ddist * 1000.0);
 			scan.set_scan_index(i, i);
 			scan.set_scan_integer_distance(i, dist);
 		}
@@ -110,6 +117,16 @@ int LidarTask::on_execute()
 		//TODO: This should translate to the sensor real pose
 		// scan.set_sensor_pose(...);
 		scan.set_scan_valid(true);
+    
+    CommBasicObjects::BumperEventType current_bumper_type = 
+      (min_dist < bumper_threshold_) ? CommBasicObjects::BumperEventType::
+      BUMPER_PRESSED : CommBasicObjects::BumperEventType::BUMPER_NOT_PRESSED;
+    if (bumper_type_ != current_bumper_type){
+      CommBasicObjects::CommBumperEventState state;
+      state.setNewState(current_bumper_type);
+      bumperEventServiceOutPut(state);
+      bumper_type_ = current_bumper_type;
+    }
 	}
 	else
 		scan.set_scan_valid(false);
