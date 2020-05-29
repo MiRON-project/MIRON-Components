@@ -23,6 +23,7 @@ ComponentDefinition ComponentWebotsRobot logo "/ComponentWebotsRobot/model/logo.
   CoordinationSlavePort CoordinationPort implements CommNavigationObjects.BaseCoordinationService {
   	with baseState realizedBy BaseStateAnswerer
   	with batteryEvent realizedBy BatteryEventServiceOut
+  	with bumperEvent realizedBy BumperEventServiceOut
   	SkillRealizationsRef baseInst
   }
   AnswerPort BaseStateAnswerer implements CommBasicObjects.BaseStateQueryService {}
@@ -34,6 +35,7 @@ ComponentDefinition ComponentWebotsRobot logo "/ComponentWebotsRobot/model/logo.
 	DefaultTrigger PeriodicTimer 10.0 Hz
   }
   OutputPort LaserServiceOut implements CommBasicObjects.LaserService realizedBy LidarTask {}
+  OutputPort BumperEventServiceOut implements CommBasicObjects.BumperEventService realizedBy LidarTask {}
   
   Activity CameraTask{
 		DefaultTrigger PeriodicTimer 10.0 Hz
