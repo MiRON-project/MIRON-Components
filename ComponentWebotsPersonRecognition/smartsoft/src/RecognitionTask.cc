@@ -29,8 +29,6 @@ RecognitionTask::~RecognitionTask()
 	std::cout << "destructor RecognitionTask\n";
 }
 
-
-
 int RecognitionTask::on_entry()
 {
 	if (!COMP)
@@ -43,6 +41,8 @@ int RecognitionTask::on_entry()
     getPerson_bump_name();
   people_bump_threshold_ = COMP->getParameters().getRecognition_properties().
     getPeople_bump_threshold();
+	wanted_person_name_ = COMP->getParameters().getRecognition_properties().
+    getWanted_person_name();
 
 	return 0;
 }
@@ -217,9 +217,18 @@ void RecognitionTask::comparePeopleJson()
 	}
 	
 	CommObjectRecognitionObjects::CommObjectRecognitionEventState state;
+  CommObjectRecognitionObjects::CommObjectRecognitionEventState wanted_person_state;
+  wanted_person_state.setState(CommObjectRecognitionObjects::
+        ObjectRecognitionState::INVISIBLE);
 	std::vector<unsigned> ids;
-	for (size_t i = 0; i < people.size(); ++i)
-		ids.push_back(people[i].getId());
+	for (size_t i = 0; i < people.size(); ++i) {
+    if (people[i].getName() == wanted_person_name_) {
+      wanted_person_state.setState(CommObjectRecognitionObjects::
+        ObjectRecognitionState::VISIBLE);
+      wanted_person_state.setObject_id({(unsigned int) people[i].getId()});
+    }
+    ids.push_back(people[i].getId());
+  }
 	state.setObject_id(ids);
 	
 	if (people.size() > 0)
@@ -228,6 +237,7 @@ void RecognitionTask::comparePeopleJson()
 		state.setState(CommObjectRecognitionObjects::ObjectRecognitionState::INVISIBLE);
 	
   peopleEventServiceOutPut(state);
+  wantedPersonServiceOutPut(wanted_person_state);
   
   CommObjectRecognitionObjects::CommPeople people_out;
   people_out.setIs_valid(true);

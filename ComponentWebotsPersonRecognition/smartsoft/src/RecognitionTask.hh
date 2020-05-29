@@ -50,6 +50,7 @@ private:
 	CommObjectRecognitionObjects::CommPeople _comm_people;
 	std::string person_bump_name_;
   	double people_bump_threshold_;
+	std::string wanted_person_name_;
 	
 	SmartACE::SmartMutex mutex;
 

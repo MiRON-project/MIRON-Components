@@ -9,5 +9,8 @@ ComponentParameter ComponentWebotsPersonRecognition component ComponentWebotsPer
 		people_bump_threshold: Double = 0
 		//@doc"If string has a specific name, the event occurs only for that name"
 		person_bump_name: String = ""
+		
+		//@doc"The person to be found"
+		wanted_person_name: String = ""
 	}
 }
