@@ -1,4 +1,4 @@
-ComponentParameter ComponentWebotsPersonRecognition component ComponentWebotsPersonRecognition
+ComponentParameter ComponentWebotsPersonRecognitionParams component ComponentWebotsPersonRecognition
 {
 	InternalParameter recognition_properties
 	{
