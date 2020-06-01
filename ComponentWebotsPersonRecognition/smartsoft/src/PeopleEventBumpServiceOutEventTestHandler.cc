@@ -23,6 +23,7 @@ bool PeopleEventBumpServiceOutEventTestHandler::testEvent(
 ) throw() {
 	r.setObject_id(s.getObject_idCopy());
 	r.setState(s.getState());
+	std::cout << "Bump Person Event! Found: " << s.getObject_idCopy()[0] << "\n";
 	// fire all events (without filtering) in the default implementation
 	// implement your own (specific) event-filtering code using the event-parameter as input
 	// true means that the current event will be fired to the according client
