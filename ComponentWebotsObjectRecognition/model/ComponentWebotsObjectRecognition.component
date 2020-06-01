@@ -1,0 +1,18 @@
+ComponentDefinition ComponentWebotsObjectRecognition logo "/ComponentWebotsObjectRecognition/model/logo.png"
+{
+	Activity ObjectTask {
+		InputPortLink ObjectsPushServiceIn { oversamplingOk undersamplingOk }
+		InputPortLink BaseStateServiceIn { oversamplingOk undersamplingOk }
+		DefaultTrigger PeriodicTimer 1.0 Hz
+	}
+	InputPort BaseStateServiceIn implements CommBasicObjects.BaseStateService {}
+	InputPort ObjectsPushServiceIn implements CommObjectRecognitionObjects.ObjectsPushService {}
+	OutputPort ObjectEventBumpOut implements CommObjectRecognitionObjects.ObjectEventBump realizedBy ObjectTask {}
+	OutputPort ObjectsSimpleRecognitionPushServiceOut implements CommObjectRecognitionObjects.ObjectsSimpleRecognitionPushService realizedBy ObjectTask {}
+	
+	CoordinationSlavePort CoordinationPort implements CommObjectRecognitionObjects.ObjectRecognitionCoordinationService
+	{
+		with objectrecognitionbumpevent realizedBy ObjectEventBumpOut
+	}
+	ComponentParameters ComponentWebotsObjectRecognitionParams slave CoordinationPort
+}
