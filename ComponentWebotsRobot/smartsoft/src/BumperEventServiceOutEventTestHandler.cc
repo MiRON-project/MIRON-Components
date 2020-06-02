@@ -23,7 +23,6 @@ bool BumperEventServiceOutEventTestHandler::testEvent(
 ) throw() {
 	
 	r.setState(s.getNewState());
-	std::cout << "Bump Lider Event! Found!\n";
 	// fire all events (without filtering) in the default implementation
 	// implement your own (specific) event-filtering code using the event-parameter as input
 	// true means that the current event will be fired to the according client

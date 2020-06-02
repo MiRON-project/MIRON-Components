@@ -35,7 +35,7 @@ int RecognitionTask::on_entry()
     return -1;
 
   if (COMP->getParameters().getRecognition_properties().getColor_base())
-    return extractPeopleFromJson();
+    if(!extractPeopleFromJson()) return -1;
 
   person_bump_name_ = COMP->getParameters().getRecognition_properties().getPerson_bump_name();
   people_bump_threshold_ = COMP->getParameters().getRecognition_properties().getPeople_bump_threshold();
@@ -59,27 +59,27 @@ int RecognitionTask::on_exit()
   return 0;
 }
 
-int RecognitionTask::extractPeopleFromJson()
+bool RecognitionTask::extractPeopleFromJson()
 {
   Json::Value _config;
   std::ifstream file_input("people.json");
   if (!file_input.is_open())
   {
     std::cerr << "Can't open 'people.json' file." << std::endl;
-    return -1;
+    return false;
   }
 
   Json::Reader reader;
   if (!reader.parse(file_input, _config))
   {
     std::cerr << "Invalid 'people.json' file." << std::endl;
-    return -1;
+    return false;
   }
 
   if (!_config.isMember("people"))
   {
     std::cerr << "Missing or invalid 'name' key in 'configuration.json' file." << std::endl;
-    return -1;
+    return false;
   }
 
   const Json::Value &people = _config["people"];
@@ -99,6 +99,7 @@ int RecognitionTask::extractPeopleFromJson()
     }
     _people.push_back(_person);
   }
+  return true;
 }
 
 void RecognitionTask::comparePeopleJson()
@@ -218,6 +219,7 @@ void RecognitionTask::comparePeopleJson()
   std::vector<unsigned> ids;
   for (size_t i = 0; i < people.size(); ++i)
   {
+
     if (people[i].getName() == wanted_person_name_)
     {
       wanted_person_state.setState(CommObjectRecognitionObjects::

@@ -72,9 +72,10 @@ const BaseState& base) {
   std::vector<unsigned int> ids;
   for(auto& obj : objs.getObjectsCopy()){
     if (object_bump_type_.empty() || object_bump_type_ == obj.getObject_type()){
-      if (sqrt(pow(obj.getPose().get_x(1) - base.getBasePose().get_x(1), 2) +
-          pow(obj.getPose().get_y(1) - base.getBasePose().get_y(1), 2)) <
-          object_bump_threshold_) {
+      auto dist = sqrt(
+        pow(obj.getPose().get_x(1) - base.getBasePose().get_x(1), 2) +
+        pow(obj.getPose().get_y(1) - base.getBasePose().get_y(1), 2));
+      if (dist < object_bump_threshold_) {
         ids.push_back(obj.getObject_id());
         bump.setState(CommObjectRecognitionObjects::ObjectBumpState::BUMP);
       }
@@ -91,10 +92,7 @@ ObjectTask::createObjStrToEnumMap()
   std::unordered_map<std::string, CommObjectRecognitionObjects::SimpleObjects>
       map;
 
-  map["sofa"] = CommObjectRecognitionObjects::SimpleObjects::SOFA;
-  map["chair"] = CommObjectRecognitionObjects::SimpleObjects::CHAIR;
   map["portrait"] = CommObjectRecognitionObjects::SimpleObjects::PORTRAIT;
-  map["table"] = CommObjectRecognitionObjects::SimpleObjects::TABLE;
   map["bed"] = CommObjectRecognitionObjects::SimpleObjects::BED;
   map["can"] = CommObjectRecognitionObjects::SimpleObjects::CAN;
   map["apple"] = CommObjectRecognitionObjects::SimpleObjects::APPLE;
@@ -128,5 +126,4 @@ void ObjectTask::objectSimpleRecognition(const ObjectEnvironment& objs) {
   }
   rec_types.setTypes(simple_types);
   objectsSimpleRecognitionPushServiceOutPut(rec_types);
-  
 }

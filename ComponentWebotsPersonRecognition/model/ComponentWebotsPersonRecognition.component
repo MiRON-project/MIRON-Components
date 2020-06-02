@@ -24,7 +24,7 @@ ComponentDefinition ComponentWebotsPersonRecognition logo "/ComponentWebotsPerso
 		with peoplerecognitionbumpevent realizedBy PeopleEventBumpServiceOut
   		SkillRealizationsRef personRecognition
 	}
-	ComponentParameters ComponentWebotsPersonRecognition slave CoordinationPort
+	ComponentParameters ComponentWebotsPersonRecognitionParams slave CoordinationPort
 	
 	
 	OutputPort PeoplePushServiceOut implements CommObjectRecognitionObjects.PeoplePushService realizedBy RecognitionTask {}
