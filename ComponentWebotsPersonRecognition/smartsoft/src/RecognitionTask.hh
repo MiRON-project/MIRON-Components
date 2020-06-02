@@ -54,7 +54,7 @@ private:
 
   SmartACE::SmartMutex mutex;
 
-  int extractPeopleFromJson();
+  bool extractPeopleFromJson();
   void comparePeopleJson();
   bool checkColors(const Person &person, const CommObjectRecognitionObjects::
     CommObjectRecognitionObjectProperties &obj) const;
