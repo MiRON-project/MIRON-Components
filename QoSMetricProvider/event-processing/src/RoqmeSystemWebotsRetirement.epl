@@ -1,0 +1,82 @@
+module RoqmeSystemWebotsRetirement;
+import enums.*;
+create objectarray schema RobotBump(val RobotBump,ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema BatteryLevel(val double,ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema BatteryCharging(val bool,ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema ObjectBump(val ObjectBump,ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema ObjectBumpEventBump(ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema ObjectBumpEventNotBump(ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema PersonBump(val PersonBump,ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema PersonBumpEventBump(ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema PersonBumpEventNotBump(ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema WantedPersonFound(val WantedPersonFound,ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema WantedPersonFoundEvent(ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema WantedPersonFoundEventInvisible(ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema PeopleInRoom(val PeopleInRoom,ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema PeopleInRoomEventVisible(ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema PeopleInRoomEventInvisible(ts long) starttimestamp ts endtimestamp ts;
+
+INSERT INTO ObjectBumpEventBump
+SELECT current_timestamp as ts
+FROM pattern [ every ( ObjectBump(val=ObjectBump.BUMP) ) ];
+
+INSERT INTO ObjectBumpEventNotBump
+SELECT current_timestamp as ts
+FROM pattern [ every ( ObjectBump(val=ObjectBump.NOT_BUMP) ) ];
+
+INSERT INTO PersonBumpEventBump
+SELECT current_timestamp as ts
+FROM pattern [ every ( PersonBump(val=PersonBump.BUMP) ) ];
+
+INSERT INTO PersonBumpEventNotBump
+SELECT current_timestamp as ts
+FROM pattern [ every ( PersonBump(val=PersonBump.NOT_BUMP) ) ];
+
+INSERT INTO WantedPersonFoundEvent
+SELECT current_timestamp as ts
+FROM pattern [ every ( PeopleInRoom(val=PeopleInRoom.VISIBLE) ) ];
+
+INSERT INTO WantedPersonFoundEventInvisible
+SELECT current_timestamp as ts
+FROM pattern [ every ( PeopleInRoom(val=PeopleInRoom.INVISIBLE) ) ];
+
+INSERT INTO PeopleInRoomEventVisible
+SELECT current_timestamp as ts
+FROM pattern [ every ( PeopleInRoom(val=PeopleInRoom.VISIBLE) ) ];
+
+INSERT INTO PeopleInRoomEventInvisible
+SELECT current_timestamp as ts
+FROM pattern [ every ( PeopleInRoom(val=PeopleInRoom.INVISIBLE) ) ];
+
+INSERT INTO Observations
+SELECT 'o1' as val
+FROM pattern [ every ( WantedPersonFoundEventInvisible ) ];
+	
+INSERT INTO Observations
+SELECT 'o2' as val
+FROM pattern [ every ( PeopleInRoomEventVisible OR PersonBumpEventBump OR ObjectBumpEventBump OR RobotBump ) ];
+	
+INSERT INTO Observations
+SELECT 'o3' as val
+FROM pattern [ every ( WantedPersonFoundEvent ) ];
+	
+INSERT INTO Observations
+SELECT 'o4' as val
+FROM pattern [ every ( BatteryLevel(val < 20.0) ) ];
+	
+INSERT INTO Observations
+SELECT 'o5' as val
+FROM pattern [ every ( BatteryCharging(val>false) ) ];
+	
+INSERT INTO Observations
+SELECT 'o6' as val
+FROM pattern [ every ( BatteryCharging(val>false) ) ];
+	
+INSERT INTO Observations
+SELECT 'o7' as val
+FROM pattern [ every ( PeopleInRoomEventInvisible AND PersonBumpEventNotBump AND ObjectBumpEventNotBump ) ];
+	
+
+@Name('Observations')
+SELECT val
+FROM Observations;

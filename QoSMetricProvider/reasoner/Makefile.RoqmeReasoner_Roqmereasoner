@@ -1,0 +1,100 @@
+#----------------------------------------------------------------------------
+#       Macros
+#----------------------------------------------------------------------------
+CC            = gcc
+CXX           = g++
+LD            = $(CXX) $(CCFLAGS) $(CPPFLAGS)
+AR            = ar
+PICFLAGS      = -fPIC
+CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -I"." -I"$(ROQME_ROOT)/cpp/roqmeDDS/include" -I"$(ROQME_ROOT)/cpp/roqmeDDS/idl" -I"$(OSPL_HOME)/include/sys" -I"$(OSPL_HOME)/include" -I"$(OSPL_HOME)/include/dcps/C++/SACPP" -I"$(OSPL_HOME)/include/dcps/C++/isocpp2"
+OBJEXT        = .o
+OUTPUT_OPTION = -o "$@"
+COMPILE.c     = $(CC) $(CFLAGS) $(CPPFLAGS) -c
+COMPILE.cc    = $(CXX) $(CCFLAGS) $(CPPFLAGS) -c
+LDFLAGS       = -L"." -L"$(OSPL_HOME)/lib" -L"$(ROQME_ROOT)/roqmeDDS/lib"
+CCC           = $(CXX)
+MAKEFILE      = Makefile.RoqmeReasoner_Roqmereasoner
+DEPENDENCIES  = .depend.$(MAKEFILE)
+BTARGETDIR    = ./
+BIN           = $(BTARGETDIR)roqme-reasoner$(EXESUFFIX)$(EXEEXT)
+CAT           = cat
+MV            = mv -f
+RM            = rm -rf
+CP            = cp -p
+NUL           = /dev/null
+MKDIR         = mkdir -p
+TESTDIRSTART  = test -d
+TESTDIREND    = ||
+TOUCH         = touch
+EXEEXT        = 
+LIBPREFIX     = lib
+LIBSUFFIX     = 
+GENFLAGS      = -std=c++11
+LDLIBS        = -l"roqmedds" -l"dcpsisocpp2" -l"ddskernel" -l"ddsos" -l"ddsdatabase" -l"dcpsgapi" -l"dcpssacpp" -ldl $(subst lib,-l,$(sort $(basename $(notdir $(wildcard /usr/lib/librt.so /lib/librt.so))))) -lpthread
+OBJS          = src/ConfigurationParams$(OBJEXT) src/domain$(OBJEXT) src/factor$(OBJEXT) src/FilteringVarElimination$(OBJEXT) src/InferenceEngineFactory$(OBJEXT) src/io$(OBJEXT) src/variable$(OBJEXT) src/RoqmeReasoner$(OBJEXT) src/DDSConnRoqmeReasoner$(OBJEXT) src/main$(OBJEXT)
+SRC           = src/ConfigurationParams.cpp src/domain.cpp src/factor.cpp src/FilteringVarElimination.cpp src/InferenceEngineFactory.cpp src/io.cpp src/variable.cpp src/RoqmeReasoner.cpp src/DDSConnRoqmeReasoner.cpp src/main.cpp
+LINK.cc       = $(LD) $(LDFLAGS)
+EXPORTFLAGS   = 
+DEPLIBS       = $(foreach lib, roqmedds dcpsisocpp2 ddskernel ddsos ddsdatabase dcpsgapi dcpssacpp, $(foreach libpath, . $(OSPL_HOME)/lib $(ROQME_ROOT)/roqmeDDS/lib, $(wildcard $(libpath)/lib$(lib).a)))
+
+#----------------------------------------------------------------------------
+#       Local targets
+#----------------------------------------------------------------------------
+
+all: $(BIN)
+
+$(BIN): $(OBJS) $(DEPLIBS)
+	@$(TESTDIRSTART) "$(BTARGETDIR)" $(TESTDIREND) $(MKDIR) "$(BTARGETDIR)"
+	$(LINK.cc) $(OBJS) $(LDLIBS) $(OUTPUT_OPTION)
+
+generated: $(GENERATED_DIRTY)
+	@-:
+
+src/ConfigurationParams$(OBJEXT): src/ConfigurationParams.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) src/ConfigurationParams.cpp
+
+src/domain$(OBJEXT): src/domain.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) src/domain.cpp
+
+src/factor$(OBJEXT): src/factor.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) src/factor.cpp
+
+src/FilteringVarElimination$(OBJEXT): src/FilteringVarElimination.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) src/FilteringVarElimination.cpp
+
+src/InferenceEngineFactory$(OBJEXT): src/InferenceEngineFactory.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) src/InferenceEngineFactory.cpp
+
+src/io$(OBJEXT): src/io.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) src/io.cpp
+
+src/variable$(OBJEXT): src/variable.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) src/variable.cpp
+
+src/RoqmeReasoner$(OBJEXT): src/RoqmeReasoner.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) src/RoqmeReasoner.cpp
+
+src/DDSConnRoqmeReasoner$(OBJEXT): src/DDSConnRoqmeReasoner.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) src/DDSConnRoqmeReasoner.cpp
+
+src/main$(OBJEXT): src/main.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) src/main.cpp
+
+clean:
+	-$(RM) $(OBJS)
+
+realclean: clean
+	-$(RM) $(BIN)
+
+check-syntax:
+	$(COMPILE.cc) $(EXPORTFLAGS) -Wall -Wextra -pedantic -fsyntax-only $(CHK_SOURCES)
+
+#----------------------------------------------------------------------------
+#       Dependencies
+#----------------------------------------------------------------------------
+
+
+depend:
+	-$(MPC_ROOT)/depgen.pl  $(CFLAGS) $(CCFLAGS) $(CPPFLAGS) -f $(DEPENDENCIES) $(SRC) 2> $(NUL)
+
+-include $(DEPENDENCIES)
