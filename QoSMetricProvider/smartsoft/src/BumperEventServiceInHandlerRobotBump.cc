@@ -20,7 +20,7 @@ void BumperEventServiceInHandlerRobotBump::on_BumperEventServiceInRobotBump(cons
 		RoqmeDDSTopics::RoqmeEnumContext enumContext;
 		enumContext.name("RobotBump");
 		enumContext.value().push_back(input.event.getState().to_string());
-		std::cout << "Publishing data context" << std::endl;
+		std::cout << "Publishing RobotBump data context" << std::endl;
 		enum_dw.write(enumContext);
 	}
 	catch(Roqme::RoqmeDDSException& e)

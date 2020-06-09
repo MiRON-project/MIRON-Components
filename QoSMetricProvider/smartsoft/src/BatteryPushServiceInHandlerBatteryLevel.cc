@@ -20,7 +20,8 @@ void BatteryPushServiceInHandlerBatteryLevel::on_BatteryPushServiceInBatteryLeve
 		RoqmeDDSTopics::RoqmeIntContext int32Context;
 		int32Context.name("BatteryLevel");
 		int32Context.value().push_back(input.getChargeLevel());
-		std::cout << "Publishing data context" << std::endl;
+		std::cout << "Publishing BatteryLevel data context: " << input.
+			getChargeLevel() << std::endl;
 		int32_dw.write(int32Context);
 	}
 	catch(Roqme::RoqmeDDSException& e)

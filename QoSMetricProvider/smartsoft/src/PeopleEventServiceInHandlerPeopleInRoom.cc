@@ -20,7 +20,7 @@ void PeopleEventServiceInHandlerPeopleInRoom::on_PeopleEventServiceInPeopleInRoo
 		RoqmeDDSTopics::RoqmeEnumContext enumContext;
 		enumContext.name("PeopleInRoom");
 		enumContext.value().push_back(input.event.getState().to_string());
-		std::cout << "Publishing data context" << std::endl;
+		std::cout << "Publishing PeopleInRoom data context" << std::endl;
 		enum_dw.write(enumContext);
 	}
 	catch(Roqme::RoqmeDDSException& e)
