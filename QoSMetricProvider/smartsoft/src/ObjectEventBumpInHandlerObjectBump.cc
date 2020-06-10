@@ -20,7 +20,7 @@ void ObjectEventBumpInHandlerObjectBump::on_ObjectEventBumpInObjectBump(const Sm
 		RoqmeDDSTopics::RoqmeEnumContext enumContext;
 		enumContext.name("ObjectBump");
 		enumContext.value().push_back(input.event.getState().to_string());
-		std::cout << "Publishing data context" << std::endl;
+		std::cout << "Publishing ObjectBump data context" << std::endl;
 		enum_dw.write(enumContext);
 	}
 	catch(Roqme::RoqmeDDSException& e)

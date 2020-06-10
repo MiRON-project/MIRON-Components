@@ -20,7 +20,7 @@ void PeopleEventBumpInHandlerPersonBump::on_PeopleEventBumpInPersonBump(const Sm
 		RoqmeDDSTopics::RoqmeEnumContext enumContext;
 		enumContext.name("PersonBump");
 		enumContext.value().push_back(input.event.getState().to_string());
-		std::cout << "Publishing data context" << std::endl;
+		std::cout << "Publishing PersonBump data context" << std::endl;
 		enum_dw.write(enumContext);
 	}
 	catch(Roqme::RoqmeDDSException& e)

@@ -20,7 +20,8 @@ void BatteryPushServiceInHandlerBatteryCharging::on_BatteryPushServiceInBatteryC
 		RoqmeDDSTopics::RoqmeBoolContext booleanContext;
 		booleanContext.name("BatteryCharging");
 		booleanContext.value().push_back(input.getExternalPower());
-		std::cout << "Publishing data context" << std::endl;
+		std::cout << "Publishing BatteryCharging data context: " << 
+			input.getExternalPower() << std::endl;
 		boolean_dw.write(booleanContext);
 	}
 	catch(Roqme::RoqmeDDSException& e)
