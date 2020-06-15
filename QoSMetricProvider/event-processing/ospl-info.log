@@ -1191,3 +1191,58 @@ Node        : rsf
 Process     : java <24475>
 Thread      : conflictResolver 7fac54b1f700
 Internals   : 6.9.190403OSS/bb590263/bb590263/v_serviceChangeState/v_service.c/266/0/1592244543.928225827/0
+========================================================================================
+Report      : INFO
+Date        : 2020-06-15T16:27:44-0300
+Description : ---------------------------------------------------------------
+              -- The service is using the following configuration settings --
+              ---------------------------------------------------------------
+              Domain (id)          : ospl_sp_ddsi (0)
+              Storage              : 0 Kbytes
+              Storage threshold    : 1024 Kbytes
+              Storage address      : Not available
+              Locking              : default
+              Memory mode          : Heap memory
+              Builtin topics       : true
+              Priority inheritance : false
+              SystemId             : 364035565 from [1,2147483647]
+Node        : rsf
+Process     : java <2165>
+Thread      : spliced 7f1aec0f0700
+Internals   : 6.9.190403OSS/bb590263/bb590263/The OpenSplice domain service/u_domain.c/785/0/1592249264.168215890/0
+========================================================================================
+Report      : INFO
+Date        : 2020-06-15T16:27:44-0300
+Description : Service cmsoap disabled
+Node        : rsf
+Process     : java <2165>
+Thread      : spliced 7f1aec0f0700
+Internals   : 6.9.190403OSS/bb590263/bb590263/OpenSplice domain service/sr_componentInfo.c/446/0/1592249264.168428527/0
+========================================================================================
+Report      : INFO
+Date        : 2020-06-15T16:27:44-0300
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'splicedaemon' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : rsf
+Process     : java <2165>
+Thread      : spliced 7f1aec0f0700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_serviceChangeState/v_service.c/266/0/1592249264.168815852/0
+========================================================================================
+Report      : INFO
+Date        : 2020-06-15T16:27:44-0300
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'ddsi2' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : rsf
+Process     : java <2165>
+Thread      : ddsi2 7f1aa2b42700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_serviceChangeState/v_service.c/266/0/1592249264.173766847/0
+========================================================================================
+Report      : INFO
+Date        : 2020-06-15T16:27:44-0300
+Description : The durability service can be identified by ID: 364035565
+Node        : rsf
+Process     : java <2165>
+Thread      : durability 7f1aa2ee6700
+Internals   : 6.9.190403OSS/bb590263/bb590263/DurabilityService/d_durability.c/554/0/1592249264.685711900/0

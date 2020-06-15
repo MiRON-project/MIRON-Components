@@ -118,14 +118,16 @@ int LidarTask::on_execute()
 		// scan.set_sensor_pose(...);
 		scan.set_scan_valid(true);
     
-    CommBasicObjects::BumperEventType current_bumper_type = 
+    CommBasicObjects::BumperEventType new_bumper_type = 
       (min_dist < bumper_threshold_) ? CommBasicObjects::BumperEventType::
       BUMPER_PRESSED : CommBasicObjects::BumperEventType::BUMPER_NOT_PRESSED;
-    if (bumper_type_ != current_bumper_type){
+    if (bumper_type_ != new_bumper_type || 
+				new_bumper_type == CommBasicObjects::BumperEventType::BUMPER_PRESSED) {
+			std::cout << "Robot almost in collision! Distance is: " << min_dist << "\n";
       CommBasicObjects::CommBumperEventState state;
-      state.setNewState(current_bumper_type);
+      state.setNewState(new_bumper_type);
       bumperEventServiceOutPut(state);
-      bumper_type_ = current_bumper_type;
+      bumper_type_ = new_bumper_type;
     }
 	}
 	else
