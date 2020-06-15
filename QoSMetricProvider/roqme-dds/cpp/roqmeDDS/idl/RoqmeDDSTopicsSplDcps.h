@@ -1,5 +1,5 @@
-#ifndef RoqmeDDSTopicsSPLDCPS_H
-#define RoqmeDDSTopicsSPLDCPS_H
+#ifndef ROQMEDDSTOPICSSPLDCPS_H
+#define ROQMEDDSTOPICSSPLDCPS_H
 
 #include <c_base.h>
 #include <c_misc.h>

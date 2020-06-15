@@ -10,7 +10,7 @@ public class RoqmeSystemWebotsRetirement {
 		try{
 			pd = new PatternDetector("enums");
 			pd.launch("RoqmeSystemWebotsRetirement.epl");
-			synchronized (pd) {
+			synchronized (exec) {
 				exec.wait();
 			}
 		} catch(Exception e){

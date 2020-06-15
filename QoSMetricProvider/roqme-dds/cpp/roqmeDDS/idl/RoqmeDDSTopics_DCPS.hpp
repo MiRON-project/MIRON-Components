@@ -1,5 +1,5 @@
-#ifndef ISOCPP2_RoqmeDDSTopics_H
-#define ISOCPP2_RoqmeDDSTopics_H
+#ifndef ISOCPP2_ROQMEDDSTOPICS_H
+#define ISOCPP2_ROQMEDDSTOPICS_H
 
 #include "dds/dds.hpp"
 
@@ -692,4 +692,4 @@ struct topic_type_name<RoqmeDDSTopics::RoqmeRanking>
 
 REGISTER_TOPIC_TYPE(RoqmeDDSTopics::RoqmeRanking)
 
-#endif /* ISOCPP2_RoqmeDDSTopics_H */
+#endif /* ISOCPP2_ROQMEDDSTOPICS_H */

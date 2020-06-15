@@ -1,11 +1,11 @@
-#ifndef _RoqmeDDSTopics_H_
-#define _RoqmeDDSTopics_H_
+#ifndef _ROQMEDDSTOPICS_H_
+#define _ROQMEDDSTOPICS_H_
 
 #include <dds/core/ddscore.hpp>
 
 namespace RoqmeDDSTopics
 {
-    typedef std::vector<int64_t>  intseq;
+    typedef std::vector< int64_t > intseq;
 
     class RoqmeIntContext OSPL_DDS_FINAL
     {
@@ -75,7 +75,7 @@ namespace RoqmeDDSTopics
 #endif
     };
 
-    typedef std::vector<uint64_t>  uintseq;
+    typedef std::vector< uint64_t > uintseq;
 
     class RoqmeUIntContext OSPL_DDS_FINAL
     {
@@ -145,7 +145,7 @@ namespace RoqmeDDSTopics
 #endif
     };
 
-    typedef std::vector<double>  doubleseq;
+    typedef std::vector< double > doubleseq;
 
     class RoqmeDoubleContext OSPL_DDS_FINAL
     {
@@ -215,7 +215,7 @@ namespace RoqmeDDSTopics
 #endif
     };
 
-    typedef std::vector<bool>  boolseq;
+    typedef std::vector< bool > boolseq;
 
     class RoqmeBoolContext OSPL_DDS_FINAL
     {
@@ -285,7 +285,7 @@ namespace RoqmeDDSTopics
 #endif
     };
 
-    typedef std::vector<std::string>  eventseq;
+    typedef std::vector< std::string > eventseq;
 
     class RoqmeEventContext OSPL_DDS_FINAL
     {
@@ -355,7 +355,7 @@ namespace RoqmeDDSTopics
 #endif
     };
 
-    typedef std::vector<std::string>  enumseq;
+    typedef std::vector< std::string > enumseq;
 
     class RoqmeEnumContext OSPL_DDS_FINAL
     {
@@ -545,9 +545,9 @@ namespace RoqmeDDSTopics
         void value(double _val_) { this->value_ = _val_; }
     };
 
-    typedef std::vector<std::string>  id_seq;
+    typedef std::vector< std::string > id_seq;
 
-    typedef std::vector<double>  value_seq;
+    typedef std::vector< double > value_seq;
 
     class RoqmeRanking OSPL_DDS_FINAL
     {
@@ -633,4 +633,4 @@ namespace RoqmeDDSTopics
 
 }
 
-#endif /* _RoqmeDDSTopics_H_ */
+#endif /* _ROQMEDDSTOPICS_H_ */

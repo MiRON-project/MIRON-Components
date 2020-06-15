@@ -2,9 +2,8 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="model"/>
-	<classpathentry kind="src" path="/CommBasicObjects"/>
-	<classpathentry kind="src" path="/CommObjectRecognitionObjects"/>
-	<classpathentry kind="src" path="/CommRoqmeEstimate"/>
-	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+		<classpathentry kind="src" path="/CommBasicObjects"/>
+		<classpathentry kind="src" path="/CommObjectRecognitionObjects"/>
+		<classpathentry kind="src" path="/CommRoqmeEstimate"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

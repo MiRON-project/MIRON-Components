@@ -43,8 +43,6 @@ SMART_COMPONENT_AUTOBUILD_DEPENDENCIES()
 #FIND_PACKAGE(<SomePackageName>)
 FIND_PACKAGE(open62541 QUIET PATHS /usr/local/lib/cmake)
 
-INCLUDE(${CMAKE_CURRENT_LIST_DIR}/src-gen/MixedPortIncludes.cmake)
-
 # these are the regular includes (add your own includes, if needed)
 INCLUDE_DIRECTORIES(
   ${CMAKE_CURRENT_LIST_DIR}/src
@@ -53,7 +51,6 @@ INCLUDE_DIRECTORIES(
   $ENV{ROQME_ROOT}/roqmeDDS/include
   $ENV{ROQME_ROOT}/roqmeDDS/idl
   $ENV{OSPL_HOME}/include/dcps/C++/isocpp2
-  $ENV{OSPL_HOME}/include/dcps/C++/isocpp2/dds
   $ENV{OSPL_HOME}/include/sys
   $ENV{OSPL_HOME}/include
   $ENV{OSPL_HOME}/include/dcps/C++/SACPP
@@ -83,8 +80,6 @@ ENDIF(open62541_FOUND)
 
 ## end user-code                                                               ##
 #################################################################################
-
-INCLUDE(${CMAKE_CURRENT_LIST_DIR}/src-gen/MixedPortTargetConfigs.cmake)
 
 # SmartSoftKernel is one of the default dependencies for each component
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} AceSmartSoftKernel dcpssacpp dcpsgapi ddsdatabase ddsos ddskernel dcpsisocpp2 roqmedds)

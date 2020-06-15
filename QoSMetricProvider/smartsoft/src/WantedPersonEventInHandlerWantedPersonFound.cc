@@ -20,7 +20,8 @@ void WantedPersonEventInHandlerWantedPersonFound::on_WantedPersonEventInWantedPe
 		RoqmeDDSTopics::RoqmeEnumContext enumContext;
 		enumContext.name("WantedPersonFound");
 		enumContext.value().push_back(input.event.getState().to_string());
-		std::cout << "Publishing WantedPersonFound data context" << std::endl;
+		std::cout << "Publishing data context WantedPersonFound: " << input.event.getState().to_string() << 
+			" | type: " << typeid(input.event.getState().to_string()).name() << std::endl;
 		enum_dw.write(enumContext);
 	}
 	catch(Roqme::RoqmeDDSException& e)

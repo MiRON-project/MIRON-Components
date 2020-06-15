@@ -195,6 +195,80 @@
     	  "tags": []
     	},
     	{
+    	  "alias": "RobotBumpEventBump",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "In_Context",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "RobotBumpEventBump"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "RobotBumpEventNotBump",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "In_Context",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "RobotBumpEventNotBump"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
     	  "alias": "BatteryCharging",
     	  "groupBy": [
     	    {
@@ -938,7 +1012,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o6",
+    	  "alias": "o13",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -962,7 +1036,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o6"
+    	          "o13"
     	        ],
     	        "type": "field"
     	      },
@@ -975,7 +1049,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o2",
+    	  "alias": "o8",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -999,7 +1073,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o2"
+    	          "o8"
     	        ],
     	        "type": "field"
     	      },
@@ -1012,7 +1086,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o7",
+    	  "alias": "o9",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -1036,7 +1110,81 @@
     	    [
     	      {
     	        "params": [
-    	          "o7"
+    	          "o9"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o4",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o4"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o12",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o12"
     	        ],
     	        "type": "field"
     	      },
@@ -1086,6 +1234,80 @@
     	  "tags": []
     	},
     	{
+    	  "alias": "o11",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o11"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o6",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o6"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
     	  "alias": "o1",
     	  "groupBy": [
     	    {
@@ -1121,37 +1343,119 @@
     	    ]
     	  ],
     	  "tags": []
+    	},
+    	{
+    	  "alias": "o2",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o2"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o10",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o10"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
     	}
       ],
       "aliasColors": {
       "RobotBump.BUMPER_UNKNOWN" : "#7e1e9c",
         "RobotBump.BUMPER_NOT_PRESSED" : "#acc2d9",
         "RobotBump.BUMPER_PRESSED" : "#15b01a",
-        "BatteryCharging" : "#56ae57",
-        "ObjectBump.BUMP" : "#0343df",
-        "ObjectBump.NOT_BUMP" : "#b2996e",
-        "ObjectBumpEventBump" : "#ff81c0",
-        "ObjectBumpEventNotBump" : "#a8ff04",
-        "PersonBump.BUMP" : "#653700",
-        "PersonBump.NOT_BUMP" : "#69d84f",
-        "PersonBumpEventBump" : "#e50000",
-        "PersonBumpEventNotBump" : "#894585",
-        "WantedPersonFound.VISIBLE" : "#95d0fc",
-        "WantedPersonFound.INVISIBLE" : "#70b23f",
-        "WantedPersonFound.FINISHED" : "#029386",
-        "WantedPersonFoundEvent" : "#d4ffff",
-        "WantedPersonFoundEventInvisible" : "#f97306",
-        "PeopleInRoom.VISIBLE" : "#65ab7c",
-        "PeopleInRoom.INVISIBLE" : "#96f97b",
-        "PeopleInRoom.FINISHED" : "#952e8f",
-        "PeopleInRoomEventVisible" : "#c20078",
-        "PeopleInRoomEventInvisible" : "#fcfc81",
-        "o5" : "#ffff14",
-        "o6" : "#a5a391",
-        "o2" : "#75bbfd",
-        "o7" : "#388004",
-        "o3" : "#929591",
-        "o1" : "#4c9085"
+        "RobotBumpEventBump" : "#56ae57",
+        "RobotBumpEventNotBump" : "#0343df",
+        "BatteryCharging" : "#b2996e",
+        "ObjectBump.BUMP" : "#ff81c0",
+        "ObjectBump.NOT_BUMP" : "#a8ff04",
+        "ObjectBumpEventBump" : "#653700",
+        "ObjectBumpEventNotBump" : "#69d84f",
+        "PersonBump.BUMP" : "#e50000",
+        "PersonBump.NOT_BUMP" : "#894585",
+        "PersonBumpEventBump" : "#95d0fc",
+        "PersonBumpEventNotBump" : "#70b23f",
+        "WantedPersonFound.VISIBLE" : "#029386",
+        "WantedPersonFound.INVISIBLE" : "#d4ffff",
+        "WantedPersonFound.FINISHED" : "#f97306",
+        "WantedPersonFoundEvent" : "#65ab7c",
+        "WantedPersonFoundEventInvisible" : "#96f97b",
+        "PeopleInRoom.VISIBLE" : "#952e8f",
+        "PeopleInRoom.INVISIBLE" : "#c20078",
+        "PeopleInRoom.FINISHED" : "#fcfc81",
+        "PeopleInRoomEventVisible" : "#ffff14",
+        "PeopleInRoomEventInvisible" : "#a5a391",
+        "o5" : "#75bbfd",
+        "o13" : "#388004",
+        "o8" : "#929591",
+        "o9" : "#4c9085",
+        "o4" : "#89fe05",
+        "o12" : "#5e9b8a",
+        "o3" : "#bf77f6",
+        "o11" : "#efb435",
+        "o6" : "#9a0eea",
+        "o1" : "#d99b82",
+        "o2" : "#033500",
+        "o10" : "#0a5f38"
       },
       "thresholds": [],
       "timeFrom": null,
@@ -1264,7 +1568,7 @@
     	  ],
     	  "tags": []
     	},{
-    	  "alias": "o4",
+    	  "alias": "o7",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -1288,7 +1592,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o4"
+    	          "o7"
     	        ],
     	        "type": "field"
     	      },
@@ -1302,12 +1606,12 @@
     	}
       ],
       "aliasColors": {
-      "BatteryLevel" : "#89fe05",
-        "o4" : "#5e9b8a"
+      "BatteryLevel" : "#06c2ac",
+        "o7" : "#0c06f7"
       },
       "seriesOverrides": [
       {
-       "alias": "o4",
+       "alias": "o7",
        "nullPointMode": "null"	  	
       }
       ],
@@ -1459,7 +1763,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o7",
+    	  "alias": "o4",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -1483,7 +1787,155 @@
     	    [
     	      {
     	        "params": [
-    	          "o7"
+    	          "o4"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o5",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o5"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o10",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o10"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o12",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o12"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o13",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o13"
     	        ],
     	        "type": "field"
     	      },
@@ -1497,16 +1949,32 @@
     	}
       ],
       "aliasColors": {
-      "safety" : "#bf77f6",
-      "o2" : "#efb435",
-      "o7" : "#9a0eea"
+      "safety" : "#c79fef",
+      "o2" : "#61de2a",
+      "o4" : "#00035b",
+      "o5" : "#3778bf",
+      "o10" : "#d1b26f",
+      "o12" : "#2242c7",
+      "o13" : "#00ffff"
       },
       "seriesOverrides": [
       {
        "alias": "o2",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o7",
+       "alias": "o4",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o5",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o10",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o12",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o13",
        "nullPointMode": "null"	  	
       }
       ],      
@@ -1621,7 +2089,7 @@
     	  ],
     	  "tags": []
     	},{
-    	  "alias": "o6",
+    	  "alias": "o9",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -1645,7 +2113,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o6"
+    	          "o9"
     	        ],
     	        "type": "field"
     	      },
@@ -1659,18 +2127,30 @@
     	}
       ],
       "aliasColors": {
-      "security" : "#d99b82",
-      "o6" : "#033500"
+      "security" : "#533cc6",
+      "o9" : "#13eac9"
       },
       "seriesOverrides": [
       {
        "alias": "o2",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o7",
+       "alias": "o4",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o6",
+       "alias": "o5",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o10",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o12",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o13",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o9",
        "nullPointMode": "null"	  	
       }
       ],      
@@ -1787,17 +2267,29 @@
     	}
       ],
       "aliasColors": {
-      "resource_available" : "#0a5f38"
+      "resource_available" : "#9bb53c"
       },
       "seriesOverrides": [
       {
        "alias": "o2",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o7",
+       "alias": "o4",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o6",
+       "alias": "o5",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o10",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o12",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o13",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o9",
        "nullPointMode": "null"	  	
       }
       ],      
@@ -1911,20 +2403,72 @@
     	    ]
     	  ],
     	  "tags": []
+    	},{
+    	  "alias": "o11",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o11"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
     	}
       ],
       "aliasColors": {
-      "customer_satisfaction" : "#06c2ac"
+      "customer_satisfaction" : "#06470c",
+      "o11" : "#05ffa6"
       },
       "seriesOverrides": [
       {
        "alias": "o2",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o7",
+       "alias": "o4",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o6",
+       "alias": "o5",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o10",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o12",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o13",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o9",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o11",
        "nullPointMode": "null"	  	
       }
       ],      
@@ -2113,7 +2657,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o4",
+    	  "alias": "o6",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2137,7 +2681,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o4"
+    	          "o6"
     	        ],
     	        "type": "field"
     	      },
@@ -2150,7 +2694,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o5",
+    	  "alias": "o7",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2174,7 +2718,44 @@
     	    [
     	      {
     	        "params": [
-    	          "o5"
+    	          "o7"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o8",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o8"
     	        ],
     	        "type": "field"
     	      },
@@ -2188,21 +2769,37 @@
     	}
       ],
       "aliasColors": {
-      "mission_completion" : "#0c06f7",
-      "o1" : "#c79fef",
-      "o3" : "#61de2a",
-      "o4" : "#00035b",
-      "o5" : "#3778bf"
+      "mission_completion" : "#ae7181",
+      "o1" : "#1f6357",
+      "o3" : "#35063e",
+      "o6" : "#017374",
+      "o7" : "#01ff07",
+      "o8" : "#0cb577"
       },
       "seriesOverrides": [
       {
        "alias": "o2",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o7",
+       "alias": "o4",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o6",
+       "alias": "o5",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o10",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o12",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o13",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o9",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o11",
        "nullPointMode": "null"	  	
       },  {
        "alias": "o1",
@@ -2211,10 +2808,13 @@
        "alias": "o3",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o4",
+       "alias": "o6",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o5",
+       "alias": "o7",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o8",
        "nullPointMode": "null"	  	
       }
       ],      
