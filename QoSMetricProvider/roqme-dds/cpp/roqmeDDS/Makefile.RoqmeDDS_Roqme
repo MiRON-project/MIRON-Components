@@ -57,11 +57,11 @@ $(LIB): $(OBJS)
 	$(AR) $(ARFLAGS) $(LIB) $(OBJS)
 
 SPACE           = $(should_be_unset) $(should_be_unset)
-GENERATED_DIRTY = ./idl/RoqmeDDSTopics.cpp ./idl/RoqmeDDSTopicsSplDcps.cpp ./idl/RoqmeDDSTopics.h ./idl/RoqmeDDSTopicsSplDcps.h ./idl/RoqmeDDSTopicsDcps.idl
+GENERATED_DIRTY = ./idl/RoqmeDDSTopics.h ./idl/RoqmeDDSTopicsSplDcps.h ./idl/RoqmeDDSTopics.cpp ./idl/RoqmeDDSTopicsSplDcps.cpp ./idl/RoqmeDDSTopicsDcps.idl
 
 
 .NOTPARALLEL:
-./idl/RoqmeDDSTopics.cpp ./idl/RoqmeDDSTopicsSplDcps.cpp ./idl/RoqmeDDSTopics.h ./idl/RoqmeDDSTopicsSplDcps.h ./idl/RoqmeDDSTopicsDcps.idl: ./idl/RoqmeDDSTopics.idl $(subst $(SPACE),\$(SPACE),$(OSPL_HOME)/bin/idlpp)
+./idl/RoqmeDDSTopics.h ./idl/RoqmeDDSTopicsSplDcps.h ./idl/RoqmeDDSTopics.cpp ./idl/RoqmeDDSTopicsSplDcps.cpp ./idl/RoqmeDDSTopicsDcps.idl: ./idl/RoqmeDDSTopics.idl $(subst $(SPACE),\$(SPACE),$(OSPL_HOME)/bin/idlpp)
 	$(OSPL_HOME)/bin/idlpp -I $(OSPL_HOME)/include/dcps/C++/SACPP -S -l isocpp2 -d ./idl ./idl/RoqmeDDSTopics.idl
 
 .PRECIOUS: $(GENERATED_DIRTY)
