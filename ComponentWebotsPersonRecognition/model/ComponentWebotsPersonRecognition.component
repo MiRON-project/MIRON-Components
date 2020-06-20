@@ -32,4 +32,10 @@ ComponentDefinition ComponentWebotsPersonRecognition logo "/ComponentWebotsPerso
 	OutputPort PeopleEventBumpServiceOut implements CommObjectRecognitionObjects.PeopleEventBump realizedBy RecognitionTask {}
 	OutputPort WantedPersonServiceOut implements CommObjectRecognitionObjects.WantedPersonEvent realizedBy RecognitionTask {}
 	InputPort BaseStateServiceIn implements CommBasicObjects.BaseStateService {}
+OutputPort SimplePeopleBumpPushServiceOut implements CommObjectRecognitionObjects.SimplePeopleBumpPushService realizedBy RecognitionTask {
+	}
+	OutputPort SimpleWantedPeoplePushServiceOut implements CommObjectRecognitionObjects.SimpleWantedPeoplePushService realizedBy RecognitionTask {
+	}
+	OutputPort SimplePeoplePushServiceOut implements CommObjectRecognitionObjects.SimplePeoplePushService realizedBy RecognitionTask {
+	}
 }

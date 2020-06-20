@@ -214,25 +214,32 @@ void RecognitionTask::comparePeopleJson()
 
   CommObjectRecognitionObjects::CommObjectRecognitionEventState state;
   CommObjectRecognitionObjects::CommObjectRecognitionEventState wanted_person_state;
+  CommObjectRecognitionObjects::SimpleRecognitionState simple_wanted_state;
+  CommObjectRecognitionObjects::SimpleRecognitionState simple_people_state;
+
   wanted_person_state.setState(CommObjectRecognitionObjects::
-                                   ObjectRecognitionState::INVISIBLE);
+    ObjectRecognitionState::INVISIBLE);
+  simple_wanted_state.setIs_valid(true);
+  simple_people_state.setIs_valid(true);
   std::vector<unsigned> ids;
   for (size_t i = 0; i < people.size(); ++i)
   {
     if (people[i].getName() == wanted_person_name_)
     {
       wanted_person_state.setState(CommObjectRecognitionObjects::
-                                       ObjectRecognitionState::VISIBLE);
+        ObjectRecognitionState::VISIBLE);
       wanted_person_state.setObject_id({(unsigned int)people[i].getId()});
-      std::cout << "Wanted person Found! Person name: " << wanted_person_name_
-        << "\n";
+      simple_wanted_state.setIds({(unsigned int)people[i].getId()});
+      simple_wanted_state.setIs_visible(true);
     }
     ids.push_back(people[i].getId());
   }
   state.setObject_id(ids);
+  simple_people_state.setIds(ids);
 
   if (people.size() > 0) {
     state.setState(CommObjectRecognitionObjects::ObjectRecognitionState::VISIBLE);
+    simple_people_state.setIs_visible(true);
     std::cout << "Person in Room! Number of people: " << people.size() << "\n";
   }
   else
@@ -240,12 +247,17 @@ void RecognitionTask::comparePeopleJson()
 
   peopleEventServiceOutPut(state);
   wantedPersonServiceOutPut(wanted_person_state);
+  simpleWantedPeoplePushServiceOutPut(simple_wanted_state);
+  simplePeoplePushServiceOutPut(simple_people_state);
 
   CommObjectRecognitionObjects::CommPeople people_out;
   people_out.setIs_valid(true);
   people_out.setPeople(people);
   checkBump(people_out);
   peoplePushServiceOutPut(people_out);
+
+  
+
 }
 
 bool RecognitionTask::checkColors(const Person &person,
@@ -272,9 +284,11 @@ void RecognitionTask::checkBump(const CommObjectRecognitionObjects::CommPeople &
                                     people_out)
 {
   CommObjectRecognitionObjects::CommObjectRecognitionEventBumpState bump_state;
+  CommBasicObjects::SimpleBumpState simple_bump_state;
   CommBasicObjects::CommBaseState pose;
   Smart::StatusCode obj_status = baseStateServiceInGetUpdate(pose);
   bump_state.setState(CommObjectRecognitionObjects::ObjectBumpState::NOT_BUMP);
+  simple_bump_state.setIs_valid(true);
   std::vector<unsigned int> ids;
 
   for (auto &people : people_out.getPeopleCopy())
@@ -287,8 +301,10 @@ void RecognitionTask::checkBump(const CommObjectRecognitionObjects::CommPeople &
       {
         ids.push_back(people.getId());
         bump_state.setState(CommObjectRecognitionObjects::ObjectBumpState::BUMP);
+        simple_bump_state.setIs_bumped(true);
       }
     }
   }
+  simplePeopleBumpPushServiceOutPut(simple_bump_state);
   peopleEventBumpServiceOutPut(bump_state);
 }
