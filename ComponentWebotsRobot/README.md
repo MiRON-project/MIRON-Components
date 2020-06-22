@@ -8,10 +8,14 @@ This Component provides sensors raw data and it updates the robot controller. On
 | Inputs  | outputs |
 | ------- | ------- |
 | **LocalizationUpdateServiceIn**: not implemented yet | **BatteryPushServiceOut**: Battery status (level, power and others) |
-| **NavigationVelocityServiceIn**: velocity commands (linear velocities and turnrate) | **BaseStateServiceOut**: state of the robot base (position and orientation) |
+| **NavigationVelocityServiceIn**: velocity commands (linear velocities and turnrate) | **BaseStateServiceOut**: state of the robot's base (position and orientation) |
 | | **LaserServiceOut**: Lidar values |
 | | **ObjectPushServiceOut**: recognized objects and properties |
 | | **RGBImagePushServiceOut**: Camera image |
+| | **BumperEventServiceOut**: It triggers if robot is too close to something |
+| | **SimpleBumperServiceOut**: It periodically sends info about robot state of "bump" (too close or far from objects/people) |
+| | **BatteryEventServiceOut**: It triggers if battery's level is below threshold |
+| | **BaseStateAnswerer**: It is possible to send Lisp commands to query robot's base info |
 
 
 ## InternalParameter Settings
@@ -32,6 +36,7 @@ This Component provides sensors raw data and it updates the robot controller. On
 | Attribute Name | Attribute Type | Description |
 |----------------|----------------|-------------|
 | **enable** | Boolean | true if one want to use Lidar sensor |
+| **bumper_threshold** | Double | Min Distance to obstacle [m] to trigger event |
 
 
 ### Camera Properties
@@ -40,3 +45,12 @@ This Component provides sensors raw data and it updates the robot controller. On
 |----------------|----------------|-------------|
 | **enable** | Boolean | true if one want to use Camera sensor |
 | **enable_recognition** | Boolean | true if one want to Webots Camera Recognition |
+| **camera_rotation_matrix** | Double[*] (matrix 3x3) | Camera rotation matrix wrt to the robot frame (default is the TiagoIron matrix) |
+| **camera_translation** | Double[*] (vector3D) | Camera translation vector wrt to the robot frame in meters |
+
+### Robot Properties
+
+| Attribute Name | Attribute Type | Description |
+|----------------|----------------|-------------|
+| **kinematics** | String | Robot Kinematics type |
+| **wheel_distance** | Double | Distance between wheels (meters) |
