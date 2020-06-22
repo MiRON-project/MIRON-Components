@@ -25,7 +25,14 @@ C_DEPS :=
 SUBDIRS := \
 opcua-backend/src-gen \
 reasoner/src \
+roqme-dds/cpp/roqmeDDS/idl \
 roqme-dds/cpp/roqmeDDS/src \
+smartsoft/build/CMakeFiles/3.14.0/CompilerIdC \
+smartsoft/build/CMakeFiles/3.14.0/CompilerIdCXX \
+smartsoft/build/CMakeFiles/QoSMetricProvider.dir/src \
+smartsoft/build/CMakeFiles/QoSMetricProvider.dir/src-gen \
+smartsoft/build/CMakeFiles/QoSMetricProvider.dir/src-gen/params \
+smartsoft/build/CMakeFiles \
 smartsoft/src \
 smartsoft/src-gen \
 smartsoft/src-gen/params \

@@ -21,15 +21,9 @@
 
 // include communication objects
 #include <CommBasicObjects/CommBatteryLevel.hh>
-#include <CommBasicObjects/CommBumperEventParameter.hh>
-#include <CommBasicObjects/CommBumperEventResult.hh>
-#include <CommBasicObjects/CommBumperEventState.hh>
-#include <CommObjectRecognitionObjects/CommObjectRecognitionEventBumpResult.hh>
-#include <CommObjectRecognitionObjects/CommObjectRecognitionEventBumpState.hh>
-#include <CommObjectRecognitionObjects/CommObjectRecognitionEventResult.hh>
-#include <CommObjectRecognitionObjects/CommObjectRecognitionEventState.hh>
-#include <CommBasicObjects/CommVoid.hh>
 #include <CommRoqmeEstimate/RoqmeEstimate.hh>
+#include <CommBasicObjects/SimpleBumpState.hh>
+#include <CommObjectRecognitionObjects/SimpleRecognitionState.hh>
 
 
 void CompHandler::onStartup() 

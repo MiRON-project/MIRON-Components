@@ -15,4 +15,7 @@ ComponentDefinition ComponentWebotsObjectRecognition logo "/ComponentWebotsObjec
 		with objectrecognitionbumpevent realizedBy ObjectEventBumpOut
 	}
 	ComponentParameters ComponentWebotsObjectRecognitionParams slave CoordinationPort
+
+	OutputPort SimpleObjectBumpPushServiceOut implements CommObjectRecognitionObjects.SimpleObjectBumpPushService realizedBy ObjectTask {
+	}
 }

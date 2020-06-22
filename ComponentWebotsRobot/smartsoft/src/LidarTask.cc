@@ -118,9 +118,15 @@ int LidarTask::on_execute()
 		// scan.set_sensor_pose(...);
 		scan.set_scan_valid(true);
     
+		CommBasicObjects::SimpleBumpState simple_bumple_state;
+		simple_bumple_state.setIs_valid(true);
+
     CommBasicObjects::BumperEventType new_bumper_type = 
       (min_dist < bumper_threshold_) ? CommBasicObjects::BumperEventType::
       BUMPER_PRESSED : CommBasicObjects::BumperEventType::BUMPER_NOT_PRESSED;
+		bool bumped = (min_dist < bumper_threshold_) ? true : false;
+		simple_bumple_state.setIs_bumped(bumped); 
+
     if (bumper_type_ != new_bumper_type || 
 				new_bumper_type == CommBasicObjects::BumperEventType::BUMPER_PRESSED) {
 			std::cout << "Robot almost in collision! Distance is: " << min_dist << "\n";
@@ -129,6 +135,7 @@ int LidarTask::on_execute()
       bumperEventServiceOutPut(state);
       bumper_type_ = new_bumper_type;
     }
+		simpleBumperServiceOutPut(simple_bumple_state);
 	}
 	else
 		scan.set_scan_valid(false);

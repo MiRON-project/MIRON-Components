@@ -68,6 +68,8 @@ int ObjectTask::on_exit()
 void ObjectTask::checkBump(const ObjectEnvironment& objs, 
 const BaseState& base) {
   BumpState bump;
+  CommBasicObjects::SimpleBumpState simple_bump_state;
+  simple_bump_state.setIs_valid(true);
   bump.setState(CommObjectRecognitionObjects::ObjectBumpState::NOT_BUMP);
   std::vector<unsigned int> ids;
   for(auto& obj : objs.getObjectsCopy()){
@@ -76,12 +78,14 @@ const BaseState& base) {
         pow(obj.getPose().get_x(1) - base.getBasePose().get_x(1), 2) +
         pow(obj.getPose().get_y(1) - base.getBasePose().get_y(1), 2));
       if (dist < object_bump_threshold_) {
+        simple_bump_state.setIs_bumped(true);
         ids.push_back(obj.getObject_id());
         bump.setState(CommObjectRecognitionObjects::ObjectBumpState::BUMP);
         std::cout << "Object bump! Object is: " << obj.getObject_type() << "\n";
       }
     }
   }
+  simpleObjectBumpPushServiceOutPut(simple_bump_state);
   bump.setObject_id(ids);
   objectEventBumpOutPut(bump);
 }
