@@ -78,6 +78,7 @@ const BaseState& base) {
       if (dist < object_bump_threshold_) {
         ids.push_back(obj.getObject_id());
         bump.setState(CommObjectRecognitionObjects::ObjectBumpState::BUMP);
+        std::cout << "Object bump! Object is: " << obj.getObject_type() << "\n";
       }
     }
   }

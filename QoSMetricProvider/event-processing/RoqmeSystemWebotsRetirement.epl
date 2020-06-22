@@ -44,11 +44,11 @@ FROM pattern [ every ( PersonBump(val=PersonBump.NOT_BUMP) ) ];
 
 INSERT INTO WantedPersonFoundEvent
 SELECT current_timestamp as ts
-FROM pattern [ every ( PeopleInRoom(val=PeopleInRoom.VISIBLE) ) ];
+FROM pattern [ every ( WantedPersonFound(val=WantedPersonFound.VISIBLE) ) ];
 
 INSERT INTO WantedPersonFoundEventInvisible
 SELECT current_timestamp as ts
-FROM pattern [ every ( PeopleInRoom(val=PeopleInRoom.INVISIBLE) ) ];
+FROM pattern [ every ( WantedPersonFound(val=WantedPersonFound.INVISIBLE) ) ];
 
 INSERT INTO PeopleInRoomEventVisible
 SELECT current_timestamp as ts
@@ -109,6 +109,10 @@ FROM pattern [ every ( ObjectBumpEventNotBump ) ];
 INSERT INTO Observations
 SELECT 'o13' as val
 FROM pattern [ every ( RobotBumpEventNotBump ) ];
+	
+INSERT INTO Observations
+SELECT 'o14' as val
+FROM pattern [ every ( WantedPersonFoundEventInvisible ) ];
 	
 
 @Name('Observations')

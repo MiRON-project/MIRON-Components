@@ -219,19 +219,22 @@ void RecognitionTask::comparePeopleJson()
   std::vector<unsigned> ids;
   for (size_t i = 0; i < people.size(); ++i)
   {
-
     if (people[i].getName() == wanted_person_name_)
     {
       wanted_person_state.setState(CommObjectRecognitionObjects::
                                        ObjectRecognitionState::VISIBLE);
       wanted_person_state.setObject_id({(unsigned int)people[i].getId()});
+      std::cout << "Wanted person Found! Person name: " << wanted_person_name_
+        << "\n";
     }
     ids.push_back(people[i].getId());
   }
   state.setObject_id(ids);
 
-  if (people.size() > 0)
+  if (people.size() > 0) {
     state.setState(CommObjectRecognitionObjects::ObjectRecognitionState::VISIBLE);
+    std::cout << "Person in Room! Number of people: " << people.size() << "\n";
+  }
   else
     state.setState(CommObjectRecognitionObjects::ObjectRecognitionState::INVISIBLE);
 
