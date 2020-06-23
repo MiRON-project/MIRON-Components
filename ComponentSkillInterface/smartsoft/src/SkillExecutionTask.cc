@@ -118,6 +118,7 @@ int SkillExecutionTask::on_execute()
 	}
 	
 	auto parsed_json = ParsedSkillDefinition(doc);
+	std::cout << "Msg type: " << parsed_json.msg_type << "\n";
 
 	if(parsed_json.msg_type == "push-skill")
 	{
@@ -125,8 +126,8 @@ int SkillExecutionTask::on_execute()
 		CommBasicObjects::CommKBRequest request;
 		CommBasicObjects::CommKBResponse answer;
 
-		message = generateSkillKBMsg(parsed_json.skill_name, parsed_json.in, 
-			parsed_json.out);
+		message = generateSkillKBMsg(parsed_json.skill_name, parsed_json.id,
+			parsed_json.in, parsed_json.out);
 		request.setRequest(message);
 		COMP->kBQueryClient->query(request, answer);
 		std::cout << "[SkillExecutionTask]" << " EXECSKILL - id: " << 
@@ -137,10 +138,11 @@ int SkillExecutionTask::on_execute()
 		while(true)
 		{
 			request.setRequest(SKILL_RESULT);
-			COMP->kBQueryClient->query(request,answer);
+			COMP->kBQueryClient->query(request, answer);
 			std::string answer_skill = parseKBSkillName(answer.getResponse());
-			if (stringCompareInsensitive(answer_skill, parsed_json.skill_name))
-			{
+			int skill_id = parseKBSkillId(answer.getResponse());
+			if (stringCompareInsensitive(answer_skill, parsed_json.skill_name) &&
+				skill_id == parsed_json.id) {
 				auto ports_name = parseKBMsg(answer.getResponse());
 				break;
 			}

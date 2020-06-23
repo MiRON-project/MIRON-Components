@@ -25,10 +25,12 @@ std::map<std::string, std::string> parseJsonInput(const QJsonObject& skill);
 std::vector<std::string> parseJsonOutput(const QJsonObject& skill);
 
 std::string generateSkillKBMsg(const std::string& skill_name,
-    const std::map<std::string, std::string>& in, 
+    int id, const std::map<std::string, std::string>& in, 
     const std::vector<std::string>& out);
 
 std::string stringToupper(const std::string& str);
+
+int parseKBSkillId(const std::string& answer);
 
 struct ParsedSkillDefinition
 {
