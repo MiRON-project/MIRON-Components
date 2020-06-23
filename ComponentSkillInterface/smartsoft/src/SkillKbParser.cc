@@ -52,6 +52,17 @@ std::string parseKBSkillName(const std::string& answer)
 	return name;	
 }
 
+int parseKBSkillId(const std::string& answer)
+{
+	std::size_t found_name = answer.find("(ID", 0, 3);
+    if(found_name == std::string::npos)
+        return -1;
+	std::size_t found_end_parenthesis = answer.find(")", found_name);
+	std::string id = answer.substr(found_name + 4, 
+		found_end_parenthesis - found_name - 4);
+	return std::stoi(id);	
+}
+
 bool stringCompareInsensitive(std::string & str1, std::string &str2)
 {
     return ((str1.size() == str2.size()) && 
@@ -107,7 +118,7 @@ std::vector<std::string> parseJsonOutput(const QJsonObject& skill)
     return output;
 }
 
-std::string generateSkillKBMsg(const std::string& skill_name,
+std::string generateSkillKBMsg(const std::string& skill_name, int id,
     const std::map<std::string, std::string>& in, 
     const std::vector<std::string>& out)
 {
@@ -115,6 +126,7 @@ std::string generateSkillKBMsg(const std::string& skill_name,
     std::string message = "";
     message += "(KB-UPDATE :KEY '(IS-A) :VALUE '((IS-A SKILL)(NAME ";
     message += t_skill_name + ")";
+    message += "(ID " + std::to_string(id) + ")";
     
     for (auto it = in.begin(); it != in.end(); ++it)
     {
