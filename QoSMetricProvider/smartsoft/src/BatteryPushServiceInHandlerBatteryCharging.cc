@@ -1,6 +1,7 @@
  
 #include "BatteryPushServiceInHandlerBatteryCharging.hh"
 #include <iostream>
+#include <chrono>
 
 BatteryPushServiceInHandlerBatteryCharging::BatteryPushServiceInHandlerBatteryCharging(Smart::InputSubject<CommBasicObjects::CommBatteryLevel> *subject, const int &prescaleFactor)
 :	BatteryPushServiceInHandlerBatteryChargingCore(subject, prescaleFactor)
@@ -20,7 +21,8 @@ void BatteryPushServiceInHandlerBatteryCharging::on_BatteryPushServiceInBatteryC
 		RoqmeDDSTopics::RoqmeBoolContext booleanContext;
 		booleanContext.name("BatteryCharging");
 		booleanContext.value().push_back(input.getExternalPower());
-		std::cout << "Publishing data context" << std::endl;
+		unsigned long long now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+		std::cout << now << " - BatteryCharging - " << input.getExternalPower() << std::endl;
 		boolean_dw.write(booleanContext);
 	}
 	catch(Roqme::RoqmeDDSException& e)

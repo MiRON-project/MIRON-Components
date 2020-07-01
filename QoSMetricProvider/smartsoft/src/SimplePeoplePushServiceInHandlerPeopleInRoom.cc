@@ -1,6 +1,7 @@
  
 #include "SimplePeoplePushServiceInHandlerPeopleInRoom.hh"
 #include <iostream>
+#include <chrono>
 
 SimplePeoplePushServiceInHandlerPeopleInRoom::SimplePeoplePushServiceInHandlerPeopleInRoom(Smart::InputSubject<CommObjectRecognitionObjects::SimpleRecognitionState> *subject, const int &prescaleFactor)
 :	SimplePeoplePushServiceInHandlerPeopleInRoomCore(subject, prescaleFactor)
@@ -20,7 +21,8 @@ void SimplePeoplePushServiceInHandlerPeopleInRoom::on_SimplePeoplePushServiceInP
 		RoqmeDDSTopics::RoqmeBoolContext booleanContext;
 		booleanContext.name("PeopleInRoom");
 		booleanContext.value().push_back(input.getIs_visible());
-		std::cout << "Publishing data context" << std::endl;
+		unsigned long long now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+		std::cout << now << " - PeopleInRoom - " << input.getIs_visible() << std::endl;
 		boolean_dw.write(booleanContext);
 	}
 	catch(Roqme::RoqmeDDSException& e)
