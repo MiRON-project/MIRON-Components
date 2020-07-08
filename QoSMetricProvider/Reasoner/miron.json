@@ -6,7 +6,12 @@
 	"properties" : [
 		{
 			"name" : "safety",
-			"reference" : 0.5
+			"reference" : 1,
+			"survival" : {
+				"value" : 5,
+				"unit" : "seconds"
+			}
+
 		},
 				{
 			"name" : "customer_satisfaction",
@@ -50,8 +55,8 @@
 		},	
 		{
 			"name" : "o4",
-			"influence" : "undermines",
-			"strength" : "medium",
+			"influence" : "reinforces",
+			"strength" : "low",
 			"property" : "mission_completion",
 			"survival" : {
 				"value" : 10000,
@@ -61,7 +66,7 @@
 		{
 			"name" : "o5",
 			"influence" : "undermines",
-			"strength" : "medium",
+			"strength" : "very_high",
 			"property" : "mission_completion",
 			"survival" : {
 				"value" : 10000,
@@ -71,7 +76,7 @@
 		{
 			"name" : "o6",
 			"influence" : "undermines",
-			"strength" : "very_high",
+			"strength" : "medium",
 			"property" : "mission_completion",
 			"survival" : {
 				"value" : 10000,
@@ -92,64 +97,34 @@
 			"name" : "o8",
 			"influence" : "reinforces",
 			"strength" : "high",
-			"property" : "safety",
-			"survival" : {
-				"value" : 10000,
-				"unit" : "seconds"
-			}
+			"property" : "medium"
 		},	
 		{
 			"name" : "o9",
 			"influence" : "reinforces",
 			"strength" : "medium",
-			"property" : "safety",
-			"survival" : {
-				"value" : 10000,
-				"unit" : "seconds"
-			}
-		},	
+			"property" : "safety"
+		},
 		{
 			"name" : "o10",
 			"influence" : "reinforces",
 			"strength" : "medium",
-			"property" : "safety",
-			"survival" : {
-				"value" : 10000,
-				"unit" : "seconds"
-			}
+			"property" : "safety"
 		},	
 		{
 			"name" : "o11",
 			"influence" : "undermines",
-			"strength" : "very_high",
-			"property" : "safety",
-			"survival" : {
-				"value" : 10000,
-				"unit" : "seconds"
-			}
+			"strength" : "low",
+			"property" : "safety"
 		},	
 		{
 			"name" : "o12",
 			"influence" : "undermines",
-			"strength" : "low",
-			"property" : "safety",
-			"survival" : {
-				"value" : 10000,
-				"unit" : "seconds"
-			}
+			"strength" : "high",
+			"property" : "safety"
 		},	
 		{
 			"name" : "o13",
-			"influence" : "undermines",
-			"strength" : "high",
-			"property" : "safety",
-			"survival" : {
-				"value" : 10000,
-				"unit" : "seconds"
-			}
-		},	
-		{
-			"name" : "o14",
 			"influence" : "reinforces",
 			"strength" : "very_high",
 			"property" : "customer_satisfaction",
@@ -159,8 +134,18 @@
 			}
 		},	
 		{
-			"name" : "o15",
+			"name" : "o14",
 			"influence" : "reinforces",
+			"strength" : "medium",
+			"property" : "customer_satisfaction",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},	
+		{
+			"name" : "o15",
+			"influence" : "undermines",
 			"strength" : "medium",
 			"property" : "customer_satisfaction",
 			"survival" : {
@@ -170,16 +155,6 @@
 		},	
 		{
 			"name" : "o16",
-			"influence" : "undermines",
-			"strength" : "medium",
-			"property" : "customer_satisfaction",
-			"survival" : {
-				"value" : 10000,
-				"unit" : "seconds"
-			}
-		},	
-		{
-			"name" : "o17",
 			"influence" : "undermines",
 			"strength" : "medium",
 			"property" : "customer_satisfaction",
