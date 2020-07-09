@@ -36,7 +36,7 @@ private:
   webots::Camera *_camera;
   DomainVision::CommRGBDImage rgbd_image;
   DomainVision::CommVideoImage comm_video_image;
-  int image_counter;
+  unsigned long image_counter;
   Eigen::Affine3d _camera_pose; // Transform (sensor to robot)
   std::string object_bump_type_;
   double object_bump_threshold_;

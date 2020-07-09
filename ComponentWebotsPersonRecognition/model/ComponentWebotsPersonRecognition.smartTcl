@@ -14,7 +14,7 @@
       )
       (cond 
         ((string-equal "NIL" (second personpose))  
-  			(setf result '(FAILURE (0))))
+  			(setf result '(ERROR (0))))
       )
     )
     result
