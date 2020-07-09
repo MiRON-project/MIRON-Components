@@ -48,6 +48,8 @@
 #include "SkillKbParser.hh"
 
 #include <iostream>
+#include <thread>
+#include <chrono>
 
 #include <QtCore>
 
@@ -146,6 +148,7 @@ int SkillExecutionTask::on_execute()
 				auto ports_name = parseKBMsg(answer.getResponse());
 				break;
 			}
+			std::this_thread::sleep_for(std::chrono::seconds(1));
 		}
 		request.setRequest(SKILL_RESULT_NIL);
 		COMP->kBQueryClient->query(request,answer);
