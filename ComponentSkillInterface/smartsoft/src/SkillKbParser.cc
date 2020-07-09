@@ -43,12 +43,23 @@ std::vector<std::string> parseKBOutputs(const std::string& answer)
 
 std::string parseKBSkillName(const std::string& answer)
 {
-	std::size_t found_name = answer.find("NAME", 0, 4);
+	std::size_t found_name = answer.find("(NAME", 0, 5);
     if(found_name == std::string::npos)
         return "NIL";
 	std::size_t found_end_parenthesis = answer.find(")", found_name);
-	std::string name = answer.substr(found_name + 5, 
-		found_end_parenthesis - found_name - 5);
+	std::string name = answer.substr(found_name + 6, 
+		found_end_parenthesis - found_name - 6);
+	return name;	
+}
+
+std::string parseKBSkillResult(const std::string& answer)
+{
+	std::size_t found_name = answer.find("(RESULT", 0, 7);
+    if(found_name == std::string::npos)
+        return "SUCCESS";
+	std::size_t found_end_parenthesis = answer.find(")", found_name);
+	std::string name = answer.substr(found_name + 8, 
+		found_end_parenthesis - found_name - 8);
 	return name;	
 }
 

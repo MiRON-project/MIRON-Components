@@ -18,6 +18,8 @@ std::vector<std::string> parseKBOutputs(const std::string& answer);
 
 std::string parseKBSkillName(const std::string& answer);
 
+std::string parseKBSkillResult(const std::string& answer);
+
 bool stringCompareInsensitive(std::string & str1, std::string &str2);
 
 std::map<std::string, std::string> parseJsonInput(const QJsonObject& skill);

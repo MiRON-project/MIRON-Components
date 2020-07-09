@@ -1,24 +1,23 @@
-(realize-tcb (getPersonPose name => ?x ?y ?z)
+(realize-tcb (getPersonPose ?personname => ?x ?y ?z ?result)
 	(module "objRecognitionModule")
 	(action (	
-    (setf result '(SUCCESS (OK)))
     (format t "===== getPersonPose~%")	
-    (let* ( 
-      (personpose (tcl-query :server 'objrecog 
+    (format t "getPersonPose: name Query ~A~%" '?personname)
+    (let  
+      ((personpose (tcl-query :server 'personrecog  
                              :service 'personquery
-                             :request name))
-      (format t "got person pose Query ~a~%" personpose)
+                             :request '?personname)))
       (tcl-bind-var :name '?x :value (third personpose))
       (tcl-bind-var :name '?y :value (fourth personpose))
       (tcl-bind-var :name '?z :value (fifth personpose))
-      )
       (cond 
         ((string-equal "NIL" (second personpose))  
-  			(setf result '(ERROR (0))))
+          (tcl-bind-var :name '?result :value 'ERROR))
+        (T
+          (tcl-bind-var :name '?result :value 'SUCCESS))
       )
     )
-    result
-    )
+    '(SUCCESS (OK)))
   )
 )
 
