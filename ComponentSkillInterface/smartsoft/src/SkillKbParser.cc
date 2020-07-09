@@ -84,8 +84,8 @@ std::map<std::string, std::string> parseJsonInput(const QJsonObject& skill)
         const auto key = att.key();
         QJsonValue value = att.value();
         if (value.isString())
-        input.insert(std::make_pair(key.toStdString(), 
-            value.toString().toStdString()));
+            input.insert(std::make_pair(key.toStdString(), 
+                value.toString().toStdString()));
         else if (value.isDouble())
             input.insert(std::make_pair(key.toStdString(), 
                 std::to_string(value.toDouble())));
