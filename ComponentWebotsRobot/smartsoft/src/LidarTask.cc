@@ -23,7 +23,7 @@ LidarTask::LidarTask(SmartACE::SmartComponent *comp)
 :	LidarTaskCore(comp),
 	scanCount(0),
 	_lidar(NULL),
-  bumper_type_(CommBasicObjects::BumperEventType::BUMPER_UNKNOWN)
+  bumper_type_(CommBasicObjects::BumperEventType::BUMPER_NOT_PRESSED)
 {
 	std::cout << "constructor LidarTask\n";
 }
@@ -63,7 +63,6 @@ int LidarTask::on_entry()
 	horizontalResolution = _lidar->getHorizontalResolution();
 	field_of_view = _lidar->getFov();
 	numberValidPoints = _lidar->getNumberOfPoints();
-
 	scan.set_scan_size(numberValidPoints);
 	scan.set_scan_update_count(scanCount);
 	scan.set_scan_double_field_of_view(- 180 * field_of_view / (2 * M_PI), 
@@ -90,6 +89,7 @@ int LidarTask::on_execute()
 	// From left to right
 	double min_dist = bumper_threshold_ + .1;
 	auto rangeImageVector = _lidar->getRangeImage();
+	
 	if (rangeImageVector)
 	{
 		++scanCount;
@@ -126,6 +126,7 @@ int LidarTask::on_execute()
       BUMPER_PRESSED : CommBasicObjects::BumperEventType::BUMPER_NOT_PRESSED;
 		bool bumped = (min_dist < bumper_threshold_) ? true : false;
 		simple_bumple_state.setIs_bumped(bumped); 
+		simpleBumperServiceOutPut(simple_bumple_state);
 
     if (bumper_type_ != new_bumper_type || 
 				new_bumper_type == CommBasicObjects::BumperEventType::BUMPER_PRESSED) {
@@ -135,7 +136,6 @@ int LidarTask::on_execute()
       bumperEventServiceOutPut(state);
       bumper_type_ = new_bumper_type;
     }
-		simpleBumperServiceOutPut(simple_bumple_state);
 	}
 	else
 		scan.set_scan_valid(false);
