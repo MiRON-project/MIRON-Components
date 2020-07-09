@@ -109,13 +109,15 @@ std::map<std::string, std::string> parseJsonInput(const QJsonObject& skill)
     return input;
 }
 
-std::vector<std::string> parseJsonOutput(const QJsonObject& skill)
+std::pair<std::vector<std::string>, std::vector<std::string>> parseJsonOutput(const QJsonObject& skill)
 {
     std::vector<std::string> output;
+    std::vector<std::string> output_keys;
     QJsonObject skill_in_attribute = skill["out-attribute"].toObject();
 	QJsonObject::iterator att = skill_in_attribute.begin();
     for (; att != skill_in_attribute.end(); ++att)
     {
+        output_keys.push_back(att.key().toStdString());
         QJsonValue value = att.value();
         if (value.isString())
             output.push_back(value.toString().toStdString());   
@@ -126,7 +128,7 @@ std::vector<std::string> parseJsonOutput(const QJsonObject& skill)
         else
             output.push_back(std::to_string(value.toInt()));
     }
-    return output;
+    return std::make_pair(output, output_keys);
 }
 
 std::string generateSkillKBMsg(const std::string& skill_name, int id,

@@ -146,6 +146,7 @@ int SkillExecutionTask::on_execute()
 			if (stringCompareInsensitive(answer_skill, parsed_json.skill_name) &&
 				skill_id == parsed_json.id) {
 				auto ports_name = parseKBMsg(answer.getResponse());
+				parsed_json.parseOutputs(ports_name.first);
 				parsed_json.result = parseKBSkillResult(answer.getResponse());
 				break;
 			}

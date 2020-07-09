@@ -24,7 +24,7 @@ bool stringCompareInsensitive(std::string & str1, std::string &str2);
 
 std::map<std::string, std::string> parseJsonInput(const QJsonObject& skill);
 
-std::vector<std::string> parseJsonOutput(const QJsonObject& skill);
+std::pair<std::vector<std::string>, std::vector<std::string>> parseJsonOutput(const QJsonObject& skill);
 
 std::string generateSkillKBMsg(const std::string& skill_name,
     int id, const std::map<std::string, std::string>& in, 
@@ -42,38 +42,57 @@ struct ParsedSkillDefinition
     std::string msg_type;
     std::map<std::string, std::string> in;
     std::vector<std::string> out;
+    std::vector<std::string> out_keys;
     std::string result;
     std::string result_value;
+    QJsonObject root_;
 
     ParsedSkillDefinition(const QJsonDocument& doc)
     {
-        QJsonObject root = doc.object();
-        QJsonObject json_skill = root["skill"].toObject();
+      QJsonObject root = doc.object();
+      QJsonObject json_skill = root["skill"].toObject();
 
-        msg_type = root["msg-type"].toString().toStdString();
-        id = root["id"].toInt();
-		skill_name = json_skill["name"].toString().toStdString();
-		skill_definition = json_skill["skill-definition-fqn"].toString().
-            toStdString();
-		in = parseJsonInput(json_skill);
-		out = parseJsonOutput(json_skill);
-        result = "SUCCESS";
-        result_value = "OK";
+      msg_type = root["msg-type"].toString().toStdString();
+      id = root["id"].toInt();
+      skill_name = json_skill["name"].toString().toStdString();
+      skill_definition = json_skill["skill-definition-fqn"].toString().
+          toStdString();
+      in = parseJsonInput(json_skill);
+      auto outs = parseJsonOutput(json_skill);
+      out = outs.first;
+      out_keys = outs.second;
+      result = "SUCCESS";
+      result_value = "OK";
     }
 
     std::string parseResult()
     {
-        QJsonObject root;
-        QJsonObject result_json;
-        
-        root["msg-type"] = "skill-result";
-		root["id"] = id;
-		result_json["result"] = QString::fromUtf8(result.c_str());
-		result_json["result-value"] = QString::fromUtf8(result_value.c_str());
-		root["result"] = result_json;
-		QJsonDocument answer(root);
-        QString json_answer = answer.toJson(QJsonDocument::Compact);
-        return json_answer.toStdString();
+      QJsonObject result_json;
+      
+      root_["msg-type"] = "skill-result";
+      root_["id"] = id;
+      result_json["result"] = QString::fromUtf8(result.c_str());
+      result_json["result-value"] = QString::fromUtf8(result_value.c_str());
+      root_["result"] = result_json;
+      QJsonDocument answer(root_);
+      QString json_answer = answer.toJson(QJsonDocument::Compact);
+      return json_answer.toStdString();
+    }
+
+    void parseOutputs(const std::vector<std::string> ordered_outputs) {
+      QJsonObject outputs;
+      for (size_t i = 0; i < out_keys.size(); ++i) {
+        double value = 0;
+        try {
+          value = std::stod(ordered_outputs[i]);
+          outputs[QString::fromUtf8(out_keys[i].c_str())] = value;
+        }
+        catch(...) {
+          outputs[QString::fromUtf8(out_keys[i].c_str())] = 
+            QString::fromUtf8(ordered_outputs[i].c_str());
+        }
+      }
+      root_["outputs"] = outputs;
     }
 };
 
