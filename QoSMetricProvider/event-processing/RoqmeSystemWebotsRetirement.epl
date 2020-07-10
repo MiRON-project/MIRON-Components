@@ -176,55 +176,60 @@ FROM pattern [ every ( o12EW OR o12EW1 ) ];
 	
 INSERT INTO o13EW
 SELECT current_timestamp as ts
-FROM WantedPersonFound#firstevent as a
-WHERE a.val = true;
+FROM BatteryLevel#firstevent as a
+WHERE a.val >= 20.0;
 
 INSERT INTO o13EW
 SELECT current_timestamp as ts
-FROM pattern [ every ( (WantedPersonFound(val=false))->(WantedPersonFound(val=true)) ) ];
+FROM pattern [ every ( (BatteryLevel(val < 20.0))->(BatteryLevel(val >= 20.0)) ) ];
+
+INSERT INTO o13EW1
+SELECT current_timestamp as ts
+FROM BatteryLevel#firstevent as a
+WHERE a.val < 50.0;
+
+INSERT INTO o13EW1
+SELECT current_timestamp as ts
+FROM pattern [ every ( (BatteryLevel(val >= 50.0))->(BatteryLevel(val < 50.0)) ) ];
 
 INSERT INTO Observations
 SELECT 'o13' as val
-FROM pattern [ every ( o13EW ) ];
+FROM pattern [ every ( o13EW AND o13EW1 ) ];
 	
+INSERT INTO o14EW
+SELECT current_timestamp as ts
+FROM BatteryLevel#firstevent as a
+WHERE a.val < 20.0;
+
+INSERT INTO o14EW
+SELECT current_timestamp as ts
+FROM pattern [ every ( (BatteryLevel(val >= 20.0))->(BatteryLevel(val < 20.0)) ) ];
+
+INSERT INTO o14EW1
+SELECT current_timestamp as ts
+FROM BatteryLevel#firstevent as a
+WHERE a.val >= 10.0;
+
+INSERT INTO o14EW1
+SELECT current_timestamp as ts
+FROM pattern [ every ( (BatteryLevel(val < 10.0))->(BatteryLevel(val >= 10.0)) ) ];
+
 INSERT INTO Observations
 SELECT 'o14' as val
-FROM pattern [ every ( [200] (RobotBump(val=false)) OR [500] (PersonBump(val=false)) ) ];
+FROM pattern [ every ( o14EW AND o14EW1 ) ];
 	
 INSERT INTO o15EW
 SELECT current_timestamp as ts
-FROM BatteryCharging#firstevent as a
-WHERE a.val = true;
+FROM BatteryLevel#firstevent as a
+WHERE a.val < 10.0;
 
 INSERT INTO o15EW
 SELECT current_timestamp as ts
-FROM pattern [ every ( (BatteryCharging(val=false))->(BatteryCharging(val=true)) ) ];
+FROM pattern [ every ( (BatteryLevel(val >= 10.0))->(BatteryLevel(val < 10.0)) ) ];
 
 INSERT INTO Observations
 SELECT 'o15' as val
 FROM pattern [ every ( o15EW ) ];
-	
-INSERT INTO o16EW
-SELECT current_timestamp as ts
-FROM PersonBump#firstevent as a
-WHERE a.val = true;
-
-INSERT INTO o16EW
-SELECT current_timestamp as ts
-FROM pattern [ every ( (PersonBump(val=false))->(PersonBump(val=true)) ) ];
-
-INSERT INTO o16EW1
-SELECT current_timestamp as ts
-FROM RobotBump#firstevent as a
-WHERE a.val = true;
-
-INSERT INTO o16EW1
-SELECT current_timestamp as ts
-FROM pattern [ every ( (RobotBump(val=false))->(RobotBump(val=true)) ) ];
-
-INSERT INTO Observations
-SELECT 'o16' as val
-FROM pattern [ every ( o16EW OR o16EW1 ) ];
 	
 
 @Name('Observations')

@@ -974,3 +974,189 @@ Node        : rsf
 Process     : java <17894>
 Thread      : OSPL Garbage Collector 7f0b6b88d700
 Internals   : 6.9.190403OSS/bb590263/bb590263/v_spliced/v_spliced.c/2062/769/1594132848.697291525/0
+========================================================================================
+Report      : INFO
+Date        : 2020-07-10T08:20:26-0300
+Description : ---------------------------------------------------------------
+              -- The service is using the following configuration settings --
+              ---------------------------------------------------------------
+              Domain (id)          : ospl_sp_ddsi (0)
+              Storage              : 0 Kbytes
+              Storage threshold    : 1024 Kbytes
+              Storage address      : Not available
+              Locking              : default
+              Memory mode          : Heap memory
+              Builtin topics       : true
+              Priority inheritance : false
+              SystemId             : 266223082 from [1,2147483647]
+Node        : rsf
+Process     : java <16733>
+Thread      : spliced 7f962c021700
+Internals   : 6.9.190403OSS/bb590263/bb590263/The OpenSplice domain service/u_domain.c/785/0/1594380026.596605206/0
+========================================================================================
+Report      : INFO
+Date        : 2020-07-10T08:20:26-0300
+Description : Service cmsoap disabled
+Node        : rsf
+Process     : java <16733>
+Thread      : spliced 7f962c021700
+Internals   : 6.9.190403OSS/bb590263/bb590263/OpenSplice domain service/sr_componentInfo.c/446/0/1594380026.597040772/0
+========================================================================================
+Report      : INFO
+Date        : 2020-07-10T08:20:26-0300
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'splicedaemon' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : rsf
+Process     : java <16733>
+Thread      : spliced 7f962c021700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_serviceChangeState/v_service.c/266/0/1594380026.597418889/0
+========================================================================================
+Report      : INFO
+Date        : 2020-07-10T08:20:26-0300
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'ddsi2' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : rsf
+Process     : java <16733>
+Thread      : ddsi2 7f962565b700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_serviceChangeState/v_service.c/266/0/1594380026.607949382/0
+========================================================================================
+Report      : INFO
+Date        : 2020-07-10T08:20:26-0300
+Description : The durability service can be identified by ID: 266223082
+Node        : rsf
+Process     : java <16733>
+Thread      : durability 7f9625a21700
+Internals   : 6.9.190403OSS/bb590263/bb590263/DurabilityService/d_durability.c/554/0/1594380026.917122582/0
+========================================================================================
+Report      : INFO
+Date        : 2020-07-10T08:20:34-0300
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'durability' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : rsf
+Process     : java <16733>
+Thread      : conflictResolver 7f96252e6700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_serviceChangeState/v_service.c/266/0/1594380034.194480700/0
+========================================================================================
+Report      : INFO
+Date        : 2020-07-10T08:21:58-0300
+Description : Missed heartbeat for node 351924793. (DCPSPublication is complete)
+Node        : rsf
+Process     : java <16733>
+Thread      : OSPL Garbage Collector 7f96262d1700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_spliced/v_spliced.c/2062/769/1594380118.786702787/0
+========================================================================================
+Report      : INFO
+Date        : 2020-07-10T08:28:27-0300
+Description : Missed heartbeat for node 1889286927. (DCPSPublication is complete)
+Node        : rsf
+Process     : java <16733>
+Thread      : OSPL Garbage Collector 7f96262d1700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_spliced/v_spliced.c/2062/769/1594380507.944318074/0
+========================================================================================
+Report      : INFO
+Date        : 2020-07-10T08:36:25-0300
+Description : Missed heartbeat for node 604802130. (DCPSPublication is complete)
+Node        : rsf
+Process     : java <16733>
+Thread      : OSPL Garbage Collector 7f96262d1700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_spliced/v_spliced.c/2062/769/1594380985.848564743/0
+========================================================================================
+Report      : INFO
+Date        : 2020-07-10T08:36:26-0300
+Description : Missed heartbeat for node 1479032874. (DCPSPublication is complete)
+Node        : rsf
+Process     : java <16733>
+Thread      : OSPL Garbage Collector 7f96262d1700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_spliced/v_spliced.c/2062/769/1594380986.250879833/0
+========================================================================================
+Report      : INFO
+Date        : 2020-07-10T08:36:59-0300
+Description : ---------------------------------------------------------------
+              -- The service is using the following configuration settings --
+              ---------------------------------------------------------------
+              Domain (id)          : ospl_sp_ddsi (0)
+              Storage              : 0 Kbytes
+              Storage threshold    : 1024 Kbytes
+              Storage address      : Not available
+              Locking              : default
+              Memory mode          : Heap memory
+              Builtin topics       : true
+              Priority inheritance : false
+              SystemId             : 1606908308 from [1,2147483647]
+Node        : rsf
+Process     : java <22401>
+Thread      : spliced 7f67e8037700
+Internals   : 6.9.190403OSS/bb590263/bb590263/The OpenSplice domain service/u_domain.c/785/0/1594381019.817572396/0
+========================================================================================
+Report      : INFO
+Date        : 2020-07-10T08:36:59-0300
+Description : Service cmsoap disabled
+Node        : rsf
+Process     : java <22401>
+Thread      : spliced 7f67e8037700
+Internals   : 6.9.190403OSS/bb590263/bb590263/OpenSplice domain service/sr_componentInfo.c/446/0/1594381019.817795571/0
+========================================================================================
+Report      : INFO
+Date        : 2020-07-10T08:36:59-0300
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'splicedaemon' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : rsf
+Process     : java <22401>
+Thread      : spliced 7f67e8037700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_serviceChangeState/v_service.c/266/0/1594381019.818069616/0
+========================================================================================
+Report      : INFO
+Date        : 2020-07-10T08:36:59-0300
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'ddsi2' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : rsf
+Process     : java <22401>
+Thread      : ddsi2 7f67d8d35700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_serviceChangeState/v_service.c/266/0/1594381019.822237958/0
+========================================================================================
+Report      : INFO
+Date        : 2020-07-10T08:37:00-0300
+Description : The durability service can be identified by ID: 1606908308
+Node        : rsf
+Process     : java <22401>
+Thread      : durability 7f67d90d9700
+Internals   : 6.9.190403OSS/bb590263/bb590263/DurabilityService/d_durability.c/554/0/1594381020.134367105/0
+========================================================================================
+Report      : INFO
+Date        : 2020-07-10T08:37:10-0300
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'durability' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : rsf
+Process     : java <22401>
+Thread      : conflictResolver 7f67d899e700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_serviceChangeState/v_service.c/266/0/1594381030.220327679/0
+========================================================================================
+Report      : INFO
+Date        : 2020-07-10T08:58:33-0300
+Description : Missed heartbeat for node 1020797888. (DCPSPublication is complete)
+Node        : rsf
+Process     : java <22401>
+Thread      : OSPL Garbage Collector 7f67d9989700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_spliced/v_spliced.c/2062/769/1594382313.857208346/0
+========================================================================================
+Report      : INFO
+Date        : 2020-07-10T08:58:33-0300
+Description : Missed heartbeat for node 1178765586. (DCPSPublication is complete)
+Node        : rsf
+Process     : java <22401>
+Thread      : OSPL Garbage Collector 7f67d9989700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_spliced/v_spliced.c/2062/769/1594382313.958078475/0
+========================================================================================
+Report      : INFO
+Date        : 2020-07-10T08:58:44-0300
+Description : Missed heartbeat for node 939314884. (DCPSPublication is complete)
+Node        : rsf
+Process     : java <22401>
+Thread      : OSPL Garbage Collector 7f67d9989700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_spliced/v_spliced.c/2062/769/1594382324.375749233/0
