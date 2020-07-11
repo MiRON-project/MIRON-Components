@@ -18,7 +18,7 @@ void BatteryPushServiceInHandlerBatteryLevel::on_BatteryPushServiceInBatteryLeve
 	
 	try
 	{
-		RoqmeDDSTopics::RoqmeIntContext int32Context;
+		RoqmeDDSTopics::RoqmeDoubleContext int32Context;
 		int32Context.name("BatteryLevel");
 		int32Context.value().push_back(input.getChargeLevel());
 		unsigned long long now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();

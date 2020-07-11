@@ -15,7 +15,7 @@ public:
 	virtual void on_BatteryPushServiceInBatteryLevel(const CommBasicObjects::CommBatteryLevel &input);
 	
 private:
-	Roqme::RoqmeIntWriter int32_dw;
+	Roqme::RoqmeDoubleWriter int32_dw;
 };
 
 #endif
