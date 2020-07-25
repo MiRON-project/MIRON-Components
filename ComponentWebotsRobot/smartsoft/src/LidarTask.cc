@@ -81,10 +81,12 @@ int LidarTask::on_entry()
 }
 int LidarTask::on_execute()
 {
-	if (!COMP->_supervisor || !_lidar)
-		return -1;
-
 	COMP->mRobotMutex.acquire();
+
+	if (!COMP->_supervisor || !_lidar) {
+		COMP->mRobotMutex.release();
+		return -1;
+	}
 
 	// From left to right
 	double min_dist = bumper_threshold_ + .1;

@@ -13,11 +13,8 @@
 // limitations under the License.
 
 #include "RobotTask.hh"
-
 #include "ComponentWebotsRobot.hh"
-
 #include <iostream>
-
 #include "Utils.hh"
 
 void differentialWheelVelocityController(webots::Motor *left_wheel, 
@@ -82,10 +79,13 @@ RobotTask::~RobotTask()
 
 int RobotTask::on_entry()
 {
-  if (!COMP->_supervisor)
-    return -1;
 
   COMP->mRobotMutex.acquire();
+
+  if (!COMP->_supervisor) {
+    COMP->mRobotMutex.release();
+    return -1;
+  }
 
   if (COMP->_gps)
     COMP->_gps->enable(robot_duration);
@@ -109,7 +109,6 @@ int RobotTask::on_entry()
       break;
     }
   }
-
 
   COMP->mRobotMutex.release();
 
