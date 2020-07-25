@@ -1,0 +1,10 @@
+SkillRealizationModel { 
+	CoordinationModuleRealization hriModule coordModuleDef DomainSpeech.domainSpeechModule	
+	uses {
+		DomainSpeech.SpeechCoordinationService intsName hri
+	} 
+	
+	{
+		SkillRealization objectplacement {action ()}
+	}
+}
