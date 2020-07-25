@@ -52,6 +52,14 @@ ComponentParameter ComponentWebotsRobotParams component ComponentWebotsRobot
 		//@doc"Distance between wheels (meters)"
 		wheel_distance: Double = 1
 	}
+	
+	InternalParameter hri{
+		//@doc"Object Placement Max Size (meters)"
+		max_size: Double=0.3
+		
+		//@doc"Height where to place the object (meters)"
+		height: Double=1.05
+	}
 }
 
 

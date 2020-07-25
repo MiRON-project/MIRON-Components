@@ -45,4 +45,11 @@ ComponentDefinition ComponentWebotsRobot logo "/ComponentWebotsRobot/model/logo.
 
 	OutputPort SimpleBumperServiceOut implements CommBasicObjects.SimpleBumperService realizedBy LidarTask {
 	}
+Activity SupervisorTask
+	{
+		InputPortLink ObjectPlacementPushServiceIn { oversamplingOk undersamplingOk }
+		DefaultTrigger PeriodicTimer 1.0 Hz
+	}
+	InputPort ObjectPlacementPushServiceIn implements DomainSpeech.ObjectPlacementPushService {
+	}
 }
