@@ -26,13 +26,9 @@ std::unordered_map<std::string, std::string> SupervisorTask::objects_names = {
 SupervisorTask::SupervisorTask(SmartACE::SmartComponent *comp) 
 :	SupervisorTaskCore(comp),
 	object_placement_height(1.0)
-{
-	std::cout << "constructor SupervisorTask\n";
-}
+{}
 SupervisorTask::~SupervisorTask() 
-{
-	std::cout << "destructor SupervisorTask\n";
-}
+{}
 
 
 void SupervisorTask::on_ObjectPlacementPushServiceIn(const DomainSpeech::CommObjectPlacementOutputMessage &input)

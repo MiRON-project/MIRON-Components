@@ -19,12 +19,16 @@
 	
 #include "aceSmartSoft.hh"
 #include <iostream>
+#include <DomainSpeech/CommObjectPlacementOutputMessage.hh>
 
 class ComponentWebotsHRICore
 {
 private:
 
 public:
+	SmartACE::SmartMutex mutex;
+	DomainSpeech::CommObjectPlacementOutputMessage obj_place_msg;
+
 	ComponentWebotsHRICore();
 };
 	

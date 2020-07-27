@@ -24,16 +24,12 @@ ObjectPlacementQueryServiceAnswHandler::ObjectPlacementQueryServiceAnswHandler(I
 }
 
 void ObjectPlacementQueryServiceAnswHandler::on_update_from(const SpeechTask* speechTask)
-{
-	// update triggered from SpeechTask
-	// (use a local mutex here, because this method is called from within the thread of SpeechTask)
-}
+{}
 
 void ObjectPlacementQueryServiceAnswHandler::handleQuery(const Smart::QueryIdPtr &id, const DomainSpeech::CommObjectPlacementOutputMessage& request) 
 {
+	COMP->obj_place_msg = request;
 	CommBasicObjects::CommBool answer;
-	
-	// implement your query handling logic here and fill in the answer object
-	
+	answer.setBoolValue(true);
 	this->server->answer(id, answer);
 }

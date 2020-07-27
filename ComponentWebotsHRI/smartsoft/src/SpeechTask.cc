@@ -39,16 +39,14 @@ int SpeechTask::on_entry()
 }
 int SpeechTask::on_execute()
 {
-	// this method is called from an outside loop,
-	// hence, NEVER use an infinite loop (like "while(1)") here inside!!!
-	// also do not use blocking calls which do not result from smartsoft kernel
+	COMP->mutex.acquire();
+
+	if (COMP->obj_place_msg.getObjectType() != "") {
+		objectPlacementPushServiceOutPut(COMP->obj_place_msg);
+		COMP->obj_place_msg.setObjectType("");
+	}
 	
-	// to get the incoming data, use this methods:
-	Smart::StatusCode status;
-
-	std::cout << "Hello from SpeechTask " << std::endl;
-
-	// it is possible to return != 0 (e.g. when the task detects errors), then the outer loop breaks and the task stops
+	COMP->mutex.release();
 	return 0;
 }
 int SpeechTask::on_exit()
