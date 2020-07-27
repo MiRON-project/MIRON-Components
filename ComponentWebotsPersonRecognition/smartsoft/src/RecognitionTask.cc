@@ -45,12 +45,12 @@ int RecognitionTask::on_entry()
 }
 int RecognitionTask::on_execute()
 {
-  mutex.acquire();
+  COMP->mutex.acquire();
 
   if (COMP->getParameters().getRecognition_properties().getColor_base())
     comparePeopleJson();
 
-  mutex.release();
+  COMP->mutex.release();
   return 0;
 }
 int RecognitionTask::on_exit()

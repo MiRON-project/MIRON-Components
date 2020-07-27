@@ -25,6 +25,7 @@ class ComponentWebotsPersonRecognitionCore
 private:
 
 public:
+  SmartACE::SmartMutex mutex;
 	ComponentWebotsPersonRecognitionCore();
 };
 	
