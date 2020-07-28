@@ -25,7 +25,7 @@ std::unordered_map<std::string, std::string> SupervisorTask::objects_names = {
 
 SupervisorTask::SupervisorTask(SmartACE::SmartComponent *comp) 
 :	SupervisorTaskCore(comp),
-	object_placement_height(1.0)
+	object_offset({0,0,0})
 {}
 SupervisorTask::~SupervisorTask() 
 {}
@@ -35,24 +35,30 @@ void SupervisorTask::on_ObjectPlacementPushServiceIn(const DomainSpeech::CommObj
 {
   COMP->mRobotMutex.acquire();
 	
+	std::string name = objects_names[input.getObjectType()];
+	if (name == "") {
+		COMP->mRobotMutex.release();
+		return;
+	}
+
 	std::vector<std::string> sizes;
 	for (size_t i = 0; i < input.getObjectSizeSize(); ++i) {
 		if (input.getObjectSizeElemAtPos(i) > object_max_size)	
 			return;
 		sizes.push_back(std::to_string(input.getObjectSizeElemAtPos(i)));
 	}
-	std::string name = objects_names[input.getObjectType()];
 	std::array<std::string, 3> robot_position = {
-      std::to_string(COMP->_pose->get_base_position().get_x(1)),
-      std::to_string(object_placement_height),
-      std::to_string(COMP->_pose->get_base_position().get_y(1))};
+      std::to_string(COMP->_pose->get_base_position().get_x(1) + object_offset[0]),
+      std::to_string(object_offset[1]),
+      std::to_string(-COMP->_pose->get_base_position().get_y(1) + object_offset[2])
+			};
 
 	std::string obj = name + " {" + "translation " + robot_position[0] + " " +
 		robot_position[1] + " " + robot_position[2] + " size ";
 	
 	for (auto& s : sizes)
 		obj += s + " "; 
-	obj += "mass " + std::to_string(input.getObjectMass());
+	obj += "mass " + std::to_string(input.getObjectMass()) + "}";
   webots::Node *root = COMP->_supervisor->getRoot();
   auto children = root->getField("children");
   children->importMFNodeFromString(-1, obj);
@@ -65,8 +71,10 @@ int SupervisorTask::on_entry()
   COMP->mRobotMutex.acquire();
 	object_max_size = COMP->getGlobalState().getHri().
     getMax_size();
-	object_placement_height = COMP->getGlobalState().getHri().
-    getHeight();
+	auto offset = COMP->getGlobalState().getHri().getOffset();
+	object_offset.clear();
+	for (auto o : offset)
+		object_offset.push_back(o);
   COMP->mRobotMutex.release();
 	return 0;
 }

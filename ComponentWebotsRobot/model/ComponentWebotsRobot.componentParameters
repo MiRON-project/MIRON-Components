@@ -57,8 +57,8 @@ ComponentParameter ComponentWebotsRobotParams component ComponentWebotsRobot
 		//@doc"Object Placement Max Size (meters)"
 		max_size: Double=0.3
 		
-		//@doc"Height where to place the object (meters)"
-		height: Double=1.05
+		//@doc"Offset where to place the object (meters)"
+		offset: Double[*] = [-0.1, 1.1, 0]
 	}
 }
 

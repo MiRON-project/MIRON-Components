@@ -24,7 +24,7 @@ class SupervisorTask  : public SupervisorTaskCore
 {
 	private:
 		double object_max_size;
-		double object_placement_height;
+		std::vector<double> object_offset;
 		static std::unordered_map<std::string, std::string> objects_names;
 		virtual void on_ObjectPlacementPushServiceIn(const DomainSpeech::CommObjectPlacementOutputMessage &input);
 	public:
