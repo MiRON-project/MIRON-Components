@@ -17,3 +17,23 @@
     '(SUCCESS (OK)))
   )
 )
+
+(realize-tcb (objectdrop ?obj_index => ?result)
+	(module "domainSpeechModule")
+	(action (	
+    (format t "===== objectDrop~%")	
+    (format t "objectDrop: index ~A~%" '?obj_index)
+    (let  
+      ((answer (tcl-query :server 'hri  
+                          :service 'objectdrop
+                          :request '?obj_index)))
+      (cond 
+        ((string-equal "ERROR" answer)  
+          (tcl-bind-var :name '?result :value 'ERROR))
+        (T
+          (tcl-bind-var :name '?result :value 'SUCCESS))
+      )
+    )
+    '(SUCCESS (OK)))
+  )
+)
