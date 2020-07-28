@@ -43,6 +43,11 @@ int SpeechTask::on_execute()
 		objectPlacementPushServiceOutPut(COMP->obj_place_msg);
 		COMP->obj_place_msg.setObjectType("");
 	}
+
+	if (COMP->obj_drop_msg.getObj_carried_index() > -2){
+		objectDropPushServiceOutPut(COMP->obj_drop_msg);
+		COMP->obj_drop_msg.setObj_carried_index(-2);
+	}
 	
 	COMP->mutex.release();
 	return 0;

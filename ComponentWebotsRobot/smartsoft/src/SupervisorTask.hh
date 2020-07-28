@@ -25,8 +25,10 @@ class SupervisorTask  : public SupervisorTaskCore
 	private:
 		double object_max_size;
 		std::vector<double> object_offset;
+		std::vector<int> carried_obj_index;
 		static std::unordered_map<std::string, std::string> objects_names;
 		virtual void on_ObjectPlacementPushServiceIn(const DomainSpeech::CommObjectPlacementOutputMessage &input);
+		virtual void on_ObjectDropPushServiceIn(const DomainSpeech::CommObjectDropOutputMessage &input);
 	public:
 		SupervisorTask(SmartACE::SmartComponent *comp);
 		virtual ~SupervisorTask();
