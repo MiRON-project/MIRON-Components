@@ -10,7 +10,7 @@ This Component provides sensors raw data and it updates the robot controller. On
 | **LocalizationUpdateServiceIn**: not implemented yet | **BatteryPushServiceOut**: Battery status (level, power and others) |
 | **NavigationVelocityServiceIn**: velocity commands (linear velocities and turnrate) | **BaseStateServiceOut**: state of the robot's base (position and orientation) |
 | **ObjectPlacementPushServiceIn**: HRI to query an object placement on it | **LaserServiceOut**: Lidar values |
-| | **ObjectPushServiceOut**: recognized objects and properties |
+| **ObjectDropPushServiceIn**: HRI to query an object drop | **ObjectPushServiceOut**: recognized objects and properties |
 | | **RGBImagePushServiceOut**: Camera image |
 | | **BumperEventServiceOut**: It triggers if robot is too close to something |
 | | **SimpleBumperServiceOut**: It periodically sends info about robot state of "bump" (too close or far from objects/people) |
