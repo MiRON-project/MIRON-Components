@@ -1,0 +1,19 @@
+(realize-tcb (objectplacement ?query => ?result)
+	(module "domainSpeechModule")
+	(action (	
+    (format t "===== objectPlacement~%")	
+    (format t "objectPlacement: name Query ~A~%" '?query)
+    (let  
+      ((answer (tcl-query :server 'hri  
+                          :service 'objectplacement
+                          :request '?query)))
+      (cond 
+        ((string-equal "ERROR" answer)  
+          (tcl-bind-var :name '?result :value 'ERROR))
+        (T
+          (tcl-bind-var :name '?result :value 'SUCCESS))
+      )
+    )
+    '(SUCCESS (OK)))
+  )
+)

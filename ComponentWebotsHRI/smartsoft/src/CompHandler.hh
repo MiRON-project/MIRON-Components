@@ -14,19 +14,14 @@
 // If you want the toolchain to re-generate this file, please 
 // delete it before running the code generator.
 //--------------------------------------------------------------------------
-#ifndef _COMPONENTWEBOTSPERSONRECOGNITIONCORE_HH
-#define _COMPONENTWEBOTSPERSONRECOGNITIONCORE_HH
+#ifndef _COMPHANDLER_HH
+#define _COMPHANDLER_HH
 	
-#include "aceSmartSoft.hh"
-#include <iostream>
-
-class ComponentWebotsPersonRecognitionCore
+class CompHandler
 {
-private:
-
 public:
-  SmartACE::SmartMutex mutex;
-	ComponentWebotsPersonRecognitionCore();
+	void onStartup();
+	void onShutdown();
 };
 	
 #endif

@@ -14,19 +14,22 @@
 // If you want the toolchain to re-generate this file, please 
 // delete it before running the code generator.
 //--------------------------------------------------------------------------
-#ifndef _COMPONENTWEBOTSPERSONRECOGNITIONCORE_HH
-#define _COMPONENTWEBOTSPERSONRECOGNITIONCORE_HH
+#ifndef _COMPONENTWEBOTSHRICORE_HH
+#define _COMPONENTWEBOTSHRICORE_HH
 	
 #include "aceSmartSoft.hh"
 #include <iostream>
+#include <DomainSpeech/CommObjectPlacementOutputMessage.hh>
 
-class ComponentWebotsPersonRecognitionCore
+class ComponentWebotsHRICore
 {
 private:
 
 public:
-  SmartACE::SmartMutex mutex;
-	ComponentWebotsPersonRecognitionCore();
+	SmartACE::SmartMutex mutex;
+	DomainSpeech::CommObjectPlacementOutputMessage obj_place_msg;
+
+	ComponentWebotsHRICore();
 };
 	
 #endif

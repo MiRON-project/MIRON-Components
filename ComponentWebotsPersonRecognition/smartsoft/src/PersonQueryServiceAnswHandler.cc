@@ -24,11 +24,9 @@ PersonQueryServiceAnswHandler::PersonQueryServiceAnswHandler(IQueryServer *serve
 
 void PersonQueryServiceAnswHandler::on_update_from(const RecognitionTask* recognitionTask)
 {
-	mutex.acquire();
-
+	COMP->mutex.acquire();
 	_people = recognitionTask->getPeople();
-  
-	mutex.release();
+	COMP->mutex.release();
 }
 
 void PersonQueryServiceAnswHandler::handleQuery(const Smart::QueryIdPtr &id, const CommObjectRecognitionObjects::CommPersonRecognitionId& request) 

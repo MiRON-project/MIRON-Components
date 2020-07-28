@@ -14,19 +14,21 @@
 // If you want the toolchain to re-generate this file, please 
 // delete it before running the code generator.
 //--------------------------------------------------------------------------
-#ifndef _COMPONENTWEBOTSPERSONRECOGNITIONCORE_HH
-#define _COMPONENTWEBOTSPERSONRECOGNITIONCORE_HH
-	
-#include "aceSmartSoft.hh"
-#include <iostream>
+#ifndef _SPEECHTASK_HH
+#define _SPEECHTASK_HH
 
-class ComponentWebotsPersonRecognitionCore
+#include "SpeechTaskCore.hh"
+
+class SpeechTask  : public SpeechTaskCore
 {
 private:
-
 public:
-  SmartACE::SmartMutex mutex;
-	ComponentWebotsPersonRecognitionCore();
-};
+	SpeechTask(SmartACE::SmartComponent *comp);
+	virtual ~SpeechTask();
 	
+	virtual int on_entry();
+	virtual int on_execute();
+	virtual int on_exit();
+};
+
 #endif

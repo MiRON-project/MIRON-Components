@@ -14,19 +14,26 @@
 // If you want the toolchain to re-generate this file, please 
 // delete it before running the code generator.
 //--------------------------------------------------------------------------
-#ifndef _COMPONENTWEBOTSPERSONRECOGNITIONCORE_HH
-#define _COMPONENTWEBOTSPERSONRECOGNITIONCORE_HH
-	
-#include "aceSmartSoft.hh"
-#include <iostream>
+#ifndef _SUPERVISORTASK_HH
+#define _SUPERVISORTASK_HH
 
-class ComponentWebotsPersonRecognitionCore
+#include "SupervisorTaskCore.hh"
+#include <unordered_map>
+
+class SupervisorTask  : public SupervisorTaskCore
 {
-private:
-
-public:
-  SmartACE::SmartMutex mutex;
-	ComponentWebotsPersonRecognitionCore();
+	private:
+		double object_max_size;
+		std::vector<double> object_offset;
+		static std::unordered_map<std::string, std::string> objects_names;
+		virtual void on_ObjectPlacementPushServiceIn(const DomainSpeech::CommObjectPlacementOutputMessage &input);
+	public:
+		SupervisorTask(SmartACE::SmartComponent *comp);
+		virtual ~SupervisorTask();
+		
+		virtual int on_entry();
+		virtual int on_execute();
+		virtual int on_exit();
 };
-	
+
 #endif

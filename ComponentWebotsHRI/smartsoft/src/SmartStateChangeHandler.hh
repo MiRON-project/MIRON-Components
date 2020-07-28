@@ -14,19 +14,17 @@
 // If you want the toolchain to re-generate this file, please 
 // delete it before running the code generator.
 //--------------------------------------------------------------------------
-#ifndef _COMPONENTWEBOTSPERSONRECOGNITIONCORE_HH
-#define _COMPONENTWEBOTSPERSONRECOGNITIONCORE_HH
+#ifndef _SMARTSTATECHANGEHANDLER_USER_HH
+#define _SMARTSTATECHANGEHANDLER_USER_HH
 	
 #include "aceSmartSoft.hh"
-#include <iostream>
-
-class ComponentWebotsPersonRecognitionCore
+	
+#include "SmartStateChangeHandlerCore.hh"
+	
+class SmartStateChangeHandler : public SmartStateChangeHandlerCore
 {
-private:
-
-public:
-  SmartACE::SmartMutex mutex;
-	ComponentWebotsPersonRecognitionCore();
+	void handleEnterState(const std::string & substate) throw();
+	void handleQuitState(const std::string & substate) throw();
 };
 	
 #endif

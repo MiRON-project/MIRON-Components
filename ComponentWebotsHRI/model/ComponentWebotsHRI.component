@@ -1,0 +1,14 @@
+ComponentDefinition ComponentWebotsHRI logo "/ComponentWebotsHRI/model/logo.png"
+{
+  Activity SpeechTask {
+	DefaultTrigger PeriodicTimer 1.0 Hz
+  }
+  AnswerPort ObjectPlacementQueryServiceAnsw implements DomainSpeech.ObjectPlacementQueryService {}
+  RequestHandler ObjectPlacementQueryServiceAnswHandler triggeredFrom ObjectPlacementQueryServiceAnsw {	Observe SpeechTask }
+  CoordinationSlavePort CoordinationPort implements DomainSpeech.SpeechCoordinationService {
+  	with objectplacement realizedBy ObjectPlacementQueryServiceAnsw
+  	SkillRealizationsRef hriModule
+  }
+  OutputPort ObjectPlacementPushServiceOut implements DomainSpeech.ObjectPlacementPushService realizedBy SpeechTask {}
+  ComponentParameters ComponentWebotsHRIParams slave CoordinationPort
+}

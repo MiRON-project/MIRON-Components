@@ -35,11 +35,13 @@ CameraTask::~CameraTask()
 
 int CameraTask::on_entry()
 {
-  if (!COMP->_supervisor ||
-      !COMP->getParameters().getCamera_properties().getEnable())
-    return -1;
-
   COMP->mRobotMutex.acquire();
+
+  if (!COMP->_supervisor ||
+      !COMP->getParameters().getCamera_properties().getEnable()) {
+    return -1;
+    COMP->mRobotMutex.release();
+  }
 
   for (int i = 0; i < COMP->_supervisor->getNumberOfDevices(); i++)
   {
@@ -61,7 +63,6 @@ int CameraTask::on_entry()
     COMP->mRobotMutex.release();
     return -1;
   }
-
   getCameraPoseRobotFrame();
 
   COMP->mRobotMutex.release();
@@ -70,10 +71,12 @@ int CameraTask::on_entry()
 }
 int CameraTask::on_execute()
 {
-  if (!_camera || !COMP->_supervisor)
-    return -1;
-
   COMP->mRobotMutex.acquire();
+
+  if (!_camera || !COMP->_supervisor){
+    COMP->mRobotMutex.release();
+    return -1;
+  }
 
   auto image = _camera->getImage();
   if (image)

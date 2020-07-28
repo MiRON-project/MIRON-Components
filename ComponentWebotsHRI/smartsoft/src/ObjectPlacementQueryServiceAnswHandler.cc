@@ -14,19 +14,22 @@
 // If you want the toolchain to re-generate this file, please 
 // delete it before running the code generator.
 //--------------------------------------------------------------------------
-#ifndef _COMPONENTWEBOTSPERSONRECOGNITIONCORE_HH
-#define _COMPONENTWEBOTSPERSONRECOGNITIONCORE_HH
-	
-#include "aceSmartSoft.hh"
-#include <iostream>
+#include "ObjectPlacementQueryServiceAnswHandler.hh"
+#include "ComponentWebotsHRI.hh"
 
-class ComponentWebotsPersonRecognitionCore
+ObjectPlacementQueryServiceAnswHandler::ObjectPlacementQueryServiceAnswHandler(IQueryServer *server)
+:	ObjectPlacementQueryServiceAnswHandlerCore(server)
 {
-private:
-
-public:
-  SmartACE::SmartMutex mutex;
-	ComponentWebotsPersonRecognitionCore();
-};
 	
-#endif
+}
+
+void ObjectPlacementQueryServiceAnswHandler::on_update_from(const SpeechTask* speechTask)
+{}
+
+void ObjectPlacementQueryServiceAnswHandler::handleQuery(const Smart::QueryIdPtr &id, const DomainSpeech::CommObjectPlacementOutputMessage& request) 
+{
+	COMP->obj_place_msg = request;
+	CommBasicObjects::CommBool answer;
+	answer.setBoolValue(true);
+	this->server->answer(id, answer);
+}

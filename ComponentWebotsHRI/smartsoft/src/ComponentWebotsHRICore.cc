@@ -14,19 +14,10 @@
 // If you want the toolchain to re-generate this file, please 
 // delete it before running the code generator.
 //--------------------------------------------------------------------------
-#ifndef _COMPONENTWEBOTSPERSONRECOGNITIONCORE_HH
-#define _COMPONENTWEBOTSPERSONRECOGNITIONCORE_HH
-	
-#include "aceSmartSoft.hh"
-#include <iostream>
+#include "ComponentWebotsHRICore.hh"
 
-class ComponentWebotsPersonRecognitionCore
+// constructor
+ComponentWebotsHRICore::ComponentWebotsHRICore()
 {
-private:
-
-public:
-  SmartACE::SmartMutex mutex;
-	ComponentWebotsPersonRecognitionCore();
-};
-	
-#endif
+	std::cout << "constructor ComponentWebotsHRICore\n";
+}

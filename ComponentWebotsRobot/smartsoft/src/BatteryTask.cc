@@ -34,10 +34,12 @@ BatteryTask::~BatteryTask()
 
 int BatteryTask::on_entry()
 {
-  if (!COMP->_supervisor)
-    return -1;
-
   COMP->mRobotMutex.acquire();
+ 
+  if (!COMP->_supervisor) {
+    COMP->mRobotMutex.release();
+    return -1;
+  }
 
   computeWebotsTimestep();
 

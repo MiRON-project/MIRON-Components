@@ -52,7 +52,6 @@ private:
   double people_bump_threshold_;
   std::string wanted_person_name_;
 
-  SmartACE::SmartMutex mutex;
 
   bool extractPeopleFromJson();
   void comparePeopleJson();

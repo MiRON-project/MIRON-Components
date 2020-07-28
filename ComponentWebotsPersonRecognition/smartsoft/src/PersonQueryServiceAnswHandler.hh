@@ -25,7 +25,6 @@ class PersonQueryServiceAnswHandler : public PersonQueryServiceAnswHandlerCore
 
 private:
 	CommObjectRecognitionObjects::CommPeople _people;
-	SmartACE::SmartMutex mutex;
 
 protected:
 	virtual void on_update_from(const RecognitionTask* recognitionTask);
