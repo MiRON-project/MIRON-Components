@@ -5,10 +5,14 @@ ComponentDefinition ComponentWebotsHRI logo "/ComponentWebotsHRI/model/logo.png"
   }
   AnswerPort ObjectPlacementQueryServiceAnsw implements DomainSpeech.ObjectPlacementQueryService {}
   RequestHandler ObjectPlacementQueryServiceAnswHandler triggeredFrom ObjectPlacementQueryServiceAnsw {	Observe SpeechTask }
+  AnswerPort ObjectDropQueryServiceAnsw implements DomainSpeech.ObjectDropQueryService {}
+  RequestHandler ObjectDropQueryServiceAnswHandler triggeredFrom ObjectDropQueryServiceAnsw { Observe SpeechTask }
   CoordinationSlavePort CoordinationPort implements DomainSpeech.SpeechCoordinationService {
   	with objectplacement realizedBy ObjectPlacementQueryServiceAnsw
+  	with objectdrop realizedBy ObjectDropQueryServiceAnsw
   	SkillRealizationsRef hriModule
   }
   OutputPort ObjectPlacementPushServiceOut implements DomainSpeech.ObjectPlacementPushService realizedBy SpeechTask {}
+  OutputPort ObjectDropPushServiceOut implements DomainSpeech.ObjectDropPushService realizedBy SpeechTask {}
   ComponentParameters ComponentWebotsHRIParams slave CoordinationPort
 }

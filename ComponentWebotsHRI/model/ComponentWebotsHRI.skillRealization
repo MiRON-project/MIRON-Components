@@ -6,5 +6,6 @@ SkillRealizationModel {
 	
 	{
 		SkillRealization objectplacement {action ()}
+		SkillRealization objectdrop {action ()}
 	}
 }

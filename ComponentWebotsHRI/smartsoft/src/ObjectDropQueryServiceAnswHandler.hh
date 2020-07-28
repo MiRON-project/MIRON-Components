@@ -14,24 +14,18 @@
 // If you want the toolchain to re-generate this file, please 
 // delete it before running the code generator.
 //--------------------------------------------------------------------------
-#ifndef _COMPONENTWEBOTSHRICORE_HH
-#define _COMPONENTWEBOTSHRICORE_HH
-	
-#include "aceSmartSoft.hh"
-#include <iostream>
-#include <DomainSpeech/CommObjectPlacementOutputMessage.hh>
-#include <DomainSpeech/CommObjectDropOutputMessage.hh>
+#ifndef _OBJECTDROPQUERYSERVICEANSWHANDLER_USER_HH
+#define _OBJECTDROPQUERYSERVICEANSWHANDLER_USER_HH
+		
+#include "ObjectDropQueryServiceAnswHandlerCore.hh"
 
-class ComponentWebotsHRICore
+class ObjectDropQueryServiceAnswHandler : public ObjectDropQueryServiceAnswHandlerCore
 {
-private:
-
+protected:
+	virtual void on_update_from(const SpeechTask* speechTask);
 public:
-	SmartACE::SmartMutex mutex;
-	DomainSpeech::CommObjectPlacementOutputMessage obj_place_msg;
-	DomainSpeech::CommObjectDropOutputMessage obj_drop_msg;
-
-	ComponentWebotsHRICore();
+	ObjectDropQueryServiceAnswHandler(IQueryServer *server);
+	virtual ~ObjectDropQueryServiceAnswHandler() = default;
+	virtual void handleQuery(const QueryId &id, const DomainSpeech::CommObjectDropOutputMessage& request);
 };
-	
 #endif

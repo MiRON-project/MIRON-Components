@@ -30,13 +30,57 @@ SupervisorTask::SupervisorTask(SmartACE::SmartComponent *comp)
 SupervisorTask::~SupervisorTask() 
 {}
 
+void SupervisorTask::on_ObjectDropPushServiceIn(
+		const DomainSpeech::CommObjectDropOutputMessage &input){
+  COMP->mRobotMutex.acquire();
+  
+	int index = input.getObj_carried_index();
+	if (index < -1) {
+		COMP->mRobotMutex.release();
+		return;
+	}
+	else if (index == -1) {
+		for (auto& obj : carried_obj_index) {
+			if (obj > index)
+				index = obj;
+		}
+	}
+	else {
+		bool found = false;
+		for (auto& obj : carried_obj_index) {
+			if (obj == index)
+				found = true;
+				break;
+		}
+		if (!found) {
+			COMP->mRobotMutex.release();
+			return;
+		}
+	}
 
-void SupervisorTask::on_ObjectPlacementPushServiceIn(const DomainSpeech::CommObjectPlacementOutputMessage &input)
+	webots::Node *root = COMP->_supervisor->getRoot();
+  auto children = root->getField("children");
+	children->removeMF(index);
+	int index_to_remove = -2;
+	for (size_t i = 0; i < carried_obj_index.size(); ++i) {
+		if (carried_obj_index[i] > index)
+			carried_obj_index[i]-=1;
+		else if (carried_obj_index[i] == index)
+			index_to_remove = i;
+	}
+	if (index_to_remove != -2)
+		carried_obj_index.erase(carried_obj_index.begin()+index_to_remove);
+	
+	COMP->mRobotMutex.release();
+}
+
+void SupervisorTask::on_ObjectPlacementPushServiceIn(
+		const DomainSpeech::CommObjectPlacementOutputMessage &input)
 {
   COMP->mRobotMutex.acquire();
 	
-	std::string name = objects_names[input.getObjectType()];
-	if (name == "") {
+	std::string type = objects_names[input.getObjectType()];
+	if (type == "") {
 		COMP->mRobotMutex.release();
 		return;
 	}
@@ -53,15 +97,17 @@ void SupervisorTask::on_ObjectPlacementPushServiceIn(const DomainSpeech::CommObj
       std::to_string(-COMP->_pose->get_base_position().get_y(1) + object_offset[2])
 			};
 
-	std::string obj = name + " {" + "translation " + robot_position[0] + " " +
+	std::string obj = type + " {" + "translation " + robot_position[0] + " " +
 		robot_position[1] + " " + robot_position[2] + " size ";
 	
 	for (auto& s : sizes)
 		obj += s + " "; 
 	obj += "mass " + std::to_string(input.getObjectMass()) + "}";
-  webots::Node *root = COMP->_supervisor->getRoot();
+	
+	webots::Node *root = COMP->_supervisor->getRoot();
   auto children = root->getField("children");
   children->importMFNodeFromString(-1, obj);
+  carried_obj_index.push_back(children->getCount() - 1);
 
   COMP->mRobotMutex.release();
 }
