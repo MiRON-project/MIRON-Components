@@ -30,7 +30,7 @@ SMART_SETUP_INSTALL_PREFIX()
 #FIXME: generalize this
 FIND_PACKAGE(AceSmartSoft PATHS $ENV{SMART_ROOT_ACE}/modules)
 FIND_PACKAGE(AceSmartSoft PATHS $ENV{SMART_ROOT_ACE}/build)
-FIND_PACKAGE(Eigen3 3.2.92 REQUIRED NO_MODULE)
+FIND_PACKAGE(Eigen3 REQUIRED NO_MODULE)
 
 # generte doxygen documentation
 SMART_COMPONENT_GENERATE_DOC()
@@ -47,7 +47,6 @@ SMART_COMPONENT_AUTOBUILD_DEPENDENCIES()
 #set(SOURCES ${CPP_SOURCES})
 
 link_directories($ENV{WEBOTS_HOME}/lib)
-set(WEBOTS ${CMAKE_SHARED_LIBRARY_PREFIX}Controller${CMAKE_SHARED_LIBRARY_SUFFIX} ${CMAKE_SHARED_LIBRARY_PREFIX}CppController${CMAKE_SHARED_LIBRARY_SUFFIX})
 
 INCLUDE(${CMAKE_CURRENT_LIST_DIR}/src-gen/MixedPortIncludes.cmake)
 # these are the regular includes (add your own includes, if needed)
@@ -63,15 +62,12 @@ INCLUDE_DIRECTORIES(
 FILE(GLOB_RECURSE SRC ${CMAKE_CURRENT_LIST_DIR}/src/*.cc)
 FILE(GLOB_RECURSE SRC_GEN ${CMAKE_CURRENT_LIST_DIR}/src-gen/*.cc)
 FILE(GLOB_RECURSE SRC_GEN_PARAMS ${CMAKE_CURRENT_LIST_DIR}/src-gen/params/*.cc)
-FILE(GLOB CPP_SOURCES *.cc)
 
 # collect your own (local) source-files here (if needed)
 #FILE(GLOB_RECURSE USER_SRC ${CMAKE_CURRENT_LIST_DIR}/src/<your-sources>)
 
 # create the executable using collected source-files
-set(SOURCES ${CPP_SOURCES})
 ADD_EXECUTABLE(${PROJECT_NAME} ${SRC} ${SRC_GEN} ${SRC_GEN_PARAMS} ${FURTHER_SRCS}) # add ${USER_SRC} (if needed)
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${WEBOTS})
 
 # link your external libraries here (if there are any)
 #TARGET_LINK_LIBRARIES(${PROJECT_NAME} <your-libs>)
