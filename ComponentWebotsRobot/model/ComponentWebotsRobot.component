@@ -53,4 +53,7 @@ ComponentDefinition ComponentWebotsRobot logo "/ComponentWebotsRobot/model/logo.
   }
   InputPort ObjectPlacementPushServiceIn implements DomainSpeech.ObjectPlacementPushService {}
   InputPort ObjectDropPushServiceIn implements DomainSpeech.ObjectDropPushService {}
+
+	OutputPort ObstaclesServiceOut implements CommNavigationObjects.ObstaclesService realizedBy SupervisorTask {
+	}
 }
