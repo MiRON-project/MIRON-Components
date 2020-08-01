@@ -1,0 +1,10 @@
+ComponentDefinition ComponentWebotsPlanner logo "/ComponentWebotsPlanner/model/logo.png"
+{
+	Activity StaticGlobalPlanner
+	{
+		InputPortLink BaseStateServiceIn { oversamplingOk undersamplingOk }
+		DefaultTrigger PeriodicTimer 1.0 Hz
+	}
+	InputPort BaseStateServiceIn implements CommBasicObjects.BaseStateService {}
+	OutputPort PlannerGoalServiceOut implements CommNavigationObjects.PlannerGoalsService realizedBy StaticGlobalPlanner {}
+}
