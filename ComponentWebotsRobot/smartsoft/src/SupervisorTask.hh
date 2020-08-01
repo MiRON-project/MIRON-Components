@@ -19,6 +19,8 @@
 
 #include "SupervisorTaskCore.hh"
 #include <unordered_map>
+#include <Eigen/Geometry>
+#include <CommNavigationObjects/BoundingBoxes.hh>
 
 class SupervisorTask  : public SupervisorTaskCore
 {
@@ -26,9 +28,12 @@ class SupervisorTask  : public SupervisorTaskCore
 		double object_max_size;
 		std::vector<double> object_offset;
 		std::vector<int> carried_obj_index;
+		
 		static std::unordered_map<std::string, std::string> objects_names;
 		virtual void on_ObjectPlacementPushServiceIn(const DomainSpeech::CommObjectPlacementOutputMessage &input);
 		virtual void on_ObjectDropPushServiceIn(const DomainSpeech::CommObjectDropOutputMessage &input);
+
+		CommNavigationObjects::BoundingBoxes extractStaticObstacles();
 	public:
 		SupervisorTask(SmartACE::SmartComponent *comp);
 		virtual ~SupervisorTask();
