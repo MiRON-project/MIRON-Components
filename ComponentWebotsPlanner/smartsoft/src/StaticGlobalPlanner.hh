@@ -47,8 +47,6 @@ class BoundingBoxValidityChecker : public ompl::base::StateValidityChecker
 			Eigen::AlignedBox2d translated_robot(robot);
 			translated_robot.translate(point);
       for (auto& obstacle : obstacles) {
-				obstacle.min()[1] << ", " << obstacle.max()[0] << ", " << 
-				obstacle.max()[1] << "\n";
 				if (obstacle.intersects(translated_robot)) {
 					return false;
 				}
