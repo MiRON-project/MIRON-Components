@@ -32,11 +32,11 @@ class BoundingBoxValidityChecker : public ompl::base::StateValidityChecker
 
 public:
 	BoundingBoxValidityChecker(const ompl::base::SpaceInformationPtr &si,
-														 const std::vector<Eigen::AlignedBox2d> &_obstacles,
-														 const Eigen::AlignedBox2d &_robot) : 
-			ompl::base::StateValidityChecker(si),
-			obstacles(_obstacles),
-			robot(_robot) {}
+      const std::vector<Eigen::AlignedBox2d> &_obstacles,
+      const Eigen::AlignedBox2d &_robot) : 
+    ompl::base::StateValidityChecker(si),
+    obstacles(_obstacles),
+    robot(_robot) {}
 
 	virtual bool isValid(const ompl::base::State *state) const
 	{
