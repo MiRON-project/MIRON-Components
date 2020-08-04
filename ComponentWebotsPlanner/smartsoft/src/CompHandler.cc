@@ -21,7 +21,7 @@
 
 // include communication objects
 #include <CommBasicObjects/CommBaseState.hh>
-#include <CommNavigationObjects/CommPlannerGoals.hh>
+#include <CommNavigationObjects/CommWaypoints.hh>
 
 
 void CompHandler::onStartup() 
