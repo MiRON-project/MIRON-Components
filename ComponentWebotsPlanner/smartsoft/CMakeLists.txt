@@ -29,6 +29,8 @@ SMART_SETUP_INSTALL_PREFIX()
 #FIND_SMARTSOFT(3.0)
 #FIXME: generalize this
 FIND_PACKAGE(AceSmartSoft PATHS $ENV{SMART_ROOT_ACE}/modules)
+FIND_PACKAGE(Eigen3 REQUIRED)
+find_package(ompl REQUIRED)
 
 # generte doxygen documentation
 SMART_COMPONENT_GENERATE_DOC()
@@ -51,7 +53,7 @@ INCLUDE_DIRECTORIES(
   ${CMAKE_CURRENT_LIST_DIR}/src
   ${CMAKE_CURRENT_LIST_DIR}/src-gen
   ${CMAKE_CURRENT_LIST_DIR}/src-gen/params
-  $ENV{OMPL_ROOT}/src
+  ${OMPL_INCLUDE_DIRS}
 )
 
 # collect the toolchain-generated source-files
@@ -64,7 +66,7 @@ FILE(GLOB_RECURSE SRC_GEN_PARAMS ${CMAKE_CURRENT_LIST_DIR}/src-gen/params/*.cc)
 
 # create the executable using collected source-files
 ADD_EXECUTABLE(${PROJECT_NAME} ${SRC} ${SRC_GEN} ${SRC_GEN_PARAMS} ${FURTHER_SRCS}) # add ${USER_SRC} (if needed)
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} $ENV{OMPL_BUILD}/lib/libompl.so)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${OMPL_LIBRARIES} Eigen3::Eigen)
 
 # link your external libraries here (if there are any)
 #TARGET_LINK_LIBRARIES(${PROJECT_NAME} <your-libs>)
