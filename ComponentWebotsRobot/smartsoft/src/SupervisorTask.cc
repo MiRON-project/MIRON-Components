@@ -115,7 +115,7 @@ void SupervisorTask::on_ObjectPlacementPushServiceIn(
 int SupervisorTask::on_entry()
 {
   COMP->mRobotMutex.acquire();
-	auto obstacles = extractStaticObstacles();
+	obstacles = extractStaticObstacles();
 	object_max_size = COMP->getGlobalState().getHri().
     getMax_size();
 	auto offset = COMP->getGlobalState().getHri().getOffset();
@@ -127,6 +127,9 @@ int SupervisorTask::on_entry()
 }
 int SupervisorTask::on_execute()
 {
+  COMP->mRobotMutex.acquire();
+	obstaclesServiceOutPut(obstacles);
+  COMP->mRobotMutex.release();
 	return 0;
 }
 int SupervisorTask::on_exit()

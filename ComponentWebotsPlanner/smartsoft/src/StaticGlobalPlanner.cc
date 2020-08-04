@@ -19,52 +19,110 @@
 
 #include <iostream>
 
-StaticGlobalPlanner::StaticGlobalPlanner(SmartACE::SmartComponent *comp) 
-:	StaticGlobalPlannerCore(comp)
+StaticGlobalPlanner::StaticGlobalPlanner(SmartACE::SmartComponent *comp) :	
+StaticGlobalPlannerCore(comp), 
+replan(false)
 {
-	std::cout << "constructor StaticGlobalPlanner\n";
+	auto box = COMP->getGlobalState().getRobot().getFootprint();
+	std::vector<double> v_box;
+	for (auto& b : box)
+		v_box.push_back(b);
+	robot_footprint = Eigen::AlignedBox2d(
+		Eigen::Vector2d(v_box[0], v_box[1]), Eigen::Vector2d(v_box[2], v_box[3]));
+	space = std::make_shared<ompl::base::SE2StateSpace>();
+	simple_setup_ = std::make_shared<ompl::geometric::SimpleSetup>(space);
 }
+
 StaticGlobalPlanner::~StaticGlobalPlanner() 
 {
-	std::cout << "destructor StaticGlobalPlanner\n";
 }
 
-
-void StaticGlobalPlanner::on_BaseStateServiceIn(const CommBasicObjects::CommBaseState &input)
+void StaticGlobalPlanner::BaseStateServiceIn(const CommBasicObjects::CommBaseState &input)
 {
-	// upcall triggered from InputPort BaseStateServiceIn
-	// - use a local mutex here, because this upcal is called asynchroneously from outside of this task
-	// - do not use longer blocking calls here since this upcall blocks the InputPort BaseStateServiceIn
-	// - if you need to implement a long-running procedure, do so within the on_execute() method and in
-	//   there, use the method baseStateServiceInGetUpdate(input) to get a copy of the input object
+	robot_pose = input;
+}
+
+void StaticGlobalPlanner::ObstaclesServiceIn(
+		const CommNavigationObjects::BoundingBoxes &input) {
+	sample_space = input.getFloor();
+	
+	ompl::base::RealVectorBounds bounds(2);
+	bounds.setLow(0, std::min(sample_space.getXmin(), sample_space.getXmax()));
+	bounds.setLow(1, std::min(sample_space.getZmin(), sample_space.getZmax()));
+	bounds.setHigh(0, std::max(sample_space.getXmax(), sample_space.getXmin()));
+	bounds.setHigh(1, std::max(sample_space.getZmin(), sample_space.getZmax()));
+	space->setBounds(bounds);
+
+	auto boxes = input.getBoxesCopy();
+	for (auto& box : boxes) {
+		Eigen::Vector2d _min(
+			std::min(box.getXmin(), box.getXmax()),
+			std::min(box.getZmin(), box.getZmax()));
+		Eigen::Vector2d _max(
+			std::max(box.getXmin(), box.getXmax()),
+			std::max(box.getZmin(), box.getZmax()));	 
+		obstacles.push_back(Eigen::AlignedBox2d(_min, _max));
+	}
+
+	validity_checker = std::make_shared<BoundingBoxValidityChecker>(
+		simple_setup_->getSpaceInformation(), obstacles, robot_footprint);
+	simple_setup_->setStateValidityChecker(validity_checker);
+	obstacles_init = true;
+}
+
+void StaticGlobalPlanner::PlannerGoalServiceIn(
+		const CommNavigationObjects::CommPlannerGoal &input) {
+	if (input.getXGoalPoint() == goal.getXGoalPoint() && 
+			input.getYGoalPoint() == goal.getYGoalPoint() && !replan)
+		return;
+	if (validity_checker) {
+		goal = input;
+		ompl::base::ScopedState<ompl::base::SE2StateSpace> start(space);
+		ompl::base::ScopedState<ompl::base::SE2StateSpace> end(space);
+		start->setXY(robot_pose.get_base_position().get_x(1), 
+			- robot_pose.get_base_position().get_y(1));
+		end->setXY(input.getXGoalPoint(), input.getYGoalPoint());
+		simple_setup_->setStartAndGoalStates(start, end);
+		ompl::base::PlannerStatus solved = simple_setup_->solve(1.0);
+		if (solved) {
+        simple_setup_->simplifySolution();
+        simple_setup_->getSolutionPath().print(std::cout);
+		}
+	}
 }
 
 int StaticGlobalPlanner::on_entry()
 {
-	// do initialization procedures here, which are called once, each time the task is started
-	// it is possible to return != 0 (e.g. when initialization fails) then the task is not executed further
 	return 0;
 }
+
 int StaticGlobalPlanner::on_execute()
 {
-	// this method is called from an outside loop,
-	// hence, NEVER use an infinite loop (like "while(1)") here inside!!!
-	// also do not use blocking calls which do not result from smartsoft kernel
-	
-	// to get the incoming data, use this methods:
-	Smart::StatusCode status;
-	CommBasicObjects::CommBaseState baseStateServiceInObject;
-	status = this->baseStateServiceInGetUpdate(baseStateServiceInObject);
-	if(status != Smart::SMART_OK) {
-		std::cerr << status << std::endl;
-		// return 0;
-	} else {
-		std::cout << "received: " << baseStateServiceInObject << std::endl;
+  COMP->mRobotMutex.acquire();
+	CommNavigationObjects::BoundingBoxes objs;
+  Smart::StatusCode obj_status = obstaclesServiceInGetUpdate(objs);
+  if (obj_status == Smart::SMART_OK) {
+		obstacles_init = false;
+		ObstaclesServiceIn(objs);
 	}
+	if (!obstacles_init) {
+		COMP->mRobotMutex.release();
+		return 0;
+	}
+	
+	CommBasicObjects::CommBaseState base;
+	Smart::StatusCode base_status = baseStateServiceInGetUpdate(base);
+	if (base_status != Smart::SMART_OK) {
+		COMP->mRobotMutex.release();
+		return 0;
+	}
+	BaseStateServiceIn(base);
 
-	std::cout << "Hello from StaticGlobalPlanner " << std::endl;
-
-	// it is possible to return != 0 (e.g. when the task detects errors), then the outer loop breaks and the task stops
+	CommNavigationObjects::CommPlannerGoal goal_;
+	goal_.setXGoalPoint(1.6);
+	goal_.setYGoalPoint(7.76);
+	PlannerGoalServiceIn(goal_);
+  COMP->mRobotMutex.release();
 	return 0;
 }
 int StaticGlobalPlanner::on_exit()

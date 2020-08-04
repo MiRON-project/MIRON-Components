@@ -25,6 +25,7 @@ class ComponentWebotsPlannerCore
 private:
 
 public:
+  SmartACE::SmartMutex mRobotMutex;
 	ComponentWebotsPlannerCore();
 };
 	
