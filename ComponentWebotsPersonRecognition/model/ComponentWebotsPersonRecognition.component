@@ -6,16 +6,13 @@ ComponentDefinition ComponentWebotsPersonRecognition logo "/ComponentWebotsPerso
 	Activity RecognitionTask
 	{
 		InputPortLink  RGBImagePushServiceIn { optional oversamplingOk undersamplingOk }
-
 		InputPortLink  ObjectsPushServiceIn { oversamplingOk undersamplingOk }
 		InputPortLink BaseStateServiceIn { oversamplingOk undersamplingOk }
 		DefaultTrigger PeriodicTimer 1.0 Hz
 	}
 
 	AnswerPort PersonQueryServiceAnsw implements CommObjectRecognitionObjects.PersonQueryService {}
-	RequestHandler PersonQueryServiceAnswHandler triggeredFrom PersonQueryServiceAnsw {
-		Observe RecognitionTask
-	}
+	RequestHandler PersonQueryServiceAnswHandler triggeredFrom PersonQueryServiceAnsw {	Observe RecognitionTask	}
 	
 	CoordinationSlavePort CoordinationPort implements CommObjectRecognitionObjects.PersonRecognitionCoordinationService
 	{
@@ -32,10 +29,7 @@ ComponentDefinition ComponentWebotsPersonRecognition logo "/ComponentWebotsPerso
 	OutputPort PeopleEventBumpServiceOut implements CommObjectRecognitionObjects.PeopleEventBump realizedBy RecognitionTask {}
 	OutputPort WantedPersonServiceOut implements CommObjectRecognitionObjects.WantedPersonEvent realizedBy RecognitionTask {}
 	InputPort BaseStateServiceIn implements CommBasicObjects.BaseStateService {}
-OutputPort SimplePeopleBumpPushServiceOut implements CommObjectRecognitionObjects.SimplePeopleBumpPushService realizedBy RecognitionTask {
-	}
-	OutputPort SimpleWantedPeoplePushServiceOut implements CommObjectRecognitionObjects.SimpleWantedPeoplePushService realizedBy RecognitionTask {
-	}
-	OutputPort SimplePeoplePushServiceOut implements CommObjectRecognitionObjects.SimplePeoplePushService realizedBy RecognitionTask {
-	}
+	OutputPort SimplePeopleBumpPushServiceOut implements CommObjectRecognitionObjects.SimplePeopleBumpPushService realizedBy RecognitionTask {}
+	OutputPort SimpleWantedPeoplePushServiceOut implements CommObjectRecognitionObjects.SimpleWantedPeoplePushService realizedBy RecognitionTask {}
+	OutputPort SimplePeoplePushServiceOut implements CommObjectRecognitionObjects.SimplePeoplePushService realizedBy RecognitionTask {}
 }

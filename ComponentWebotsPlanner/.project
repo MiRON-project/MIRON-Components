@@ -6,6 +6,7 @@
 		<project>CommBasicObjects</project>
 		<project>CommLocalizationObjects</project>
 		<project>CommNavigationObjects</project>
+		<project>CommRobotinoObjects</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

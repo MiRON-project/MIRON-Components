@@ -4,16 +4,19 @@ ComponentDefinition ComponentWebotsPlanner logo "/ComponentWebotsPlanner/model/l
 	{
 		InputPortLink BaseStateServiceIn { oversamplingOk undersamplingOk }
 		InputPortLink ObstaclesServiceIn { oversamplingOk undersamplingOk }
-
 		InputPortLink  PlannerGoalServiceIn { optional oversamplingOk undersamplingOk }
-		DefaultTrigger PeriodicTimer 0.2 Hz
+		DefaultTrigger PeriodicTimer 1.0 Hz
 	}
 	InputPort BaseStateServiceIn implements CommBasicObjects.BaseStateService {}
 	InputPort ObstaclesServiceIn implements CommNavigationObjects.ObstaclesService {}
 	InputPort PlannerGoalServiceIn implements CommNavigationObjects.PlannerGoalService {}
+	AnswerPort PlannerWaypointsQueryServiceAnsw implements CommNavigationObjects.PlannerWaypointsQueryService {}
+	RequestHandler PlannerWaypointsQueryServiceAnswHandler triggeredFrom PlannerWaypointsQueryServiceAnsw {	Observe StaticGlobalPlanner	}
 
 	ComponentParameters ComponentWebotsPlanner slave CoordinationPort
-	CoordinationSlavePort CoordinationPort implements CommNavigationObjects.PlannerCoordinationService
-	{
+	CoordinationSlavePort CoordinationPort implements CommNavigationObjects.PlannerCoordinationService	{
+		with plannerquery realizedBy PlannerWaypointsQueryServiceAnsw
+		SkillRealizationsRef Planner
 	}
+	OutputPort PathNavigationGoalServiceOut implements CommRobotinoObjects.PathNavigationGoalService realizedBy StaticGlobalPlanner {}
 }
