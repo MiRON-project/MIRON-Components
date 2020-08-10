@@ -30,11 +30,8 @@ void PlannerWaypointsQueryServiceAnswHandler::on_update_from(const StaticGlobalP
 
 void PlannerWaypointsQueryServiceAnswHandler::handleQuery(const Smart::QueryIdPtr &id, const CommNavigationObjects::CommPlannerGoal& request)
 {
-  //COMP->mRobotMutex.acquire();
-  /*
-  std::cout << "\n===\n===\nhandleQUERYPLANNER\n====\n==\n";
+  COMP->mRobotMutex.acquire();
   auto path = COMP->staticGlobalPlanner->PlannerGoalServiceIn(request).getPaths();
-  
   std::vector<CommNavigationObjects::CommPlannerGoal> goals;
   for (auto& node : path.getNodesCopy()) {
     CommNavigationObjects::CommPlannerGoal goal;
@@ -43,9 +40,8 @@ void PlannerWaypointsQueryServiceAnswHandler::handleQuery(const Smart::QueryIdPt
     goal.setId(node.getId());
     goals.push_back(goal);
   }
-  */
   CommNavigationObjects::CommWaypoints answer;
-  //answer.setGoals(goals);
+  answer.setGoals(goals);
   this->server->answer(id, answer);
-  //COMP->mRobotMutex.release();
+  COMP->mRobotMutex.release();
 }

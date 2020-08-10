@@ -2,7 +2,7 @@
 	(module "NavigationModule2")
 	(action (	
     (format t "===== pathPlanner~%")	
-    (format t "pathPlanner: name Goal ~s ~s ~%" '?x '?y)
+    (format t "pathPlanner: Goal ~s ~s ~%" '?x '?y)
     (let 
       ((answer (tcl-query :server 'plannercoord  
                           :service 'plannerquery

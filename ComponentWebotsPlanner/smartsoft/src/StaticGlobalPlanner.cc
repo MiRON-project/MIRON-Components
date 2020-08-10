@@ -77,11 +77,11 @@ CommRobotinoObjects::CommPathNavigationGoal StaticGlobalPlanner::PlannerGoalServ
 {
   CommRobotinoObjects::CommPathNavigationGoal path_navigation_goal;
   if (input.getXGoalPoint() == goal.getXGoalPoint() &&
-      input.getYGoalPoint() == goal.getYGoalPoint() && !replan)
-      return path_navigation_goal;
+      input.getYGoalPoint() == goal.getYGoalPoint() && !replan) {
+    return path_navigation_goal;
+  }
   if (validity_checker)
   {
-    std::cout << "got planner query: " << input.getXGoalPoint() << ", " << input.getYGoalPoint() << "\n";
     goal = input;
     ompl::base::ScopedState<ompl::base::SE2StateSpace> start(space);
     ompl::base::ScopedState<ompl::base::SE2StateSpace> end(space);

@@ -14,7 +14,7 @@ ComponentDefinition ComponentWebotsPlanner logo "/ComponentWebotsPlanner/model/l
 	RequestHandler PlannerWaypointsQueryServiceAnswHandler triggeredFrom PlannerWaypointsQueryServiceAnsw {	Observe StaticGlobalPlanner	}
 
 	ComponentParameters ComponentWebotsPlanner slave CoordinationPort
-	CoordinationSlavePort CoordinationPort implements CommNavigationObjects.PlannerCoordinationService	{
+	CoordinationSlavePort CoordinationPort implements CommNavigationObjects.GlobalPlannerCoordinationService	{
 		with plannerquery realizedBy PlannerWaypointsQueryServiceAnsw
 		SkillRealizationsRef Planner
 	}
