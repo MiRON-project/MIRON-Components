@@ -115,6 +115,7 @@ void SupervisorTask::on_ObjectPlacementPushServiceIn(
 int SupervisorTask::on_entry()
 {
   COMP->mRobotMutex.acquire();
+	obstacles = extractStaticObstacles();
 	object_max_size = COMP->getGlobalState().getHri().
     getMax_size();
 	auto offset = COMP->getGlobalState().getHri().getOffset();
@@ -126,10 +127,49 @@ int SupervisorTask::on_entry()
 }
 int SupervisorTask::on_execute()
 {
+  COMP->mRobotMutex.acquire();
+	obstaclesServiceOutPut(obstacles);
+  COMP->mRobotMutex.release();
 	return 0;
 }
 int SupervisorTask::on_exit()
 {
 	// use this method to clean-up resources which are initialized in on_entry() and needs to be freed before the on_execute() can be called again
 	return 0;
+}
+
+CommNavigationObjects::BoundingBoxes SupervisorTask::extractStaticObstacles() {
+	CommNavigationObjects::BoundingBoxes bounding_boxes;
+	std::vector<CommNavigationObjects::BoundingBox> boxes;
+
+	webots::Node *root = COMP->_supervisor->getRoot();
+  auto children = root->getField("children");
+	size_t number_of_nodes = children->getCount();
+	for (size_t i = 0; i < number_of_nodes; ++i)
+	{
+		auto node = children->getMFNode(i);
+		if (node->getTypeName() == "Floor" && 
+			node->getField("name")->getSFString() == "floor") {
+			bounding_boxes.setFloor(webotsNodeSize2DToBoundingBox(node));
+		}
+		else if (node->getTypeName() == "OilBarrel") {
+			boxes.push_back(webotsNodeCylinderToBoundingBox(node));
+		}
+		else if (node->getTypeName() == "Door" ||
+						 node->getTypeName() == "WoodenPallet" ||
+						 node->getTypeName() == "Table" ||
+						 node->getTypeName() == "CardboardBox" ||
+						 node->getTypeName() == "Wall" || 
+						 node->getTypeName() == "WoodenBox") {
+			boxes.push_back(webotsNodeSize3DToBoundingBox(node));
+		}
+		else if (node->getTypeName() == "WoodenPalletStack") {
+			boxes.push_back(webotsPalletToBoundingBox(node));
+		}
+		else if (node->getTypeName() == "Cabinet") {
+			boxes.push_back(webotsCabinetToBoundingBox(node));
+		}
+	}
+	bounding_boxes.setBoxes(boxes);
+	return bounding_boxes;
 }

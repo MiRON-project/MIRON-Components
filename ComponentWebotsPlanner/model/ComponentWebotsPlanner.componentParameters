@@ -1,0 +1,7 @@
+ComponentParameter ComponentWebotsPlanner component ComponentWebotsPlanner
+{
+	InternalParameter robot {
+		//@doc"Robot bounding box Xmin, Ymin, Xmax, Ymax"
+		footprint : Double[*] = [-0.3, -0.3, 0.3, 0.3]
+	}
+}

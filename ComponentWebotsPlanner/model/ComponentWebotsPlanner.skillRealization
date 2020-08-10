@@ -1,0 +1,10 @@
+SkillRealizationModel { 
+	CoordinationModuleRealization Planner coordModuleDef CommNavigationObjects.NavigationModule2	
+	uses { 
+		CommNavigationObjects.GlobalPlannerCoordinationService intsName plannercoord
+	} 
+	
+	{ 
+		SkillRealization pathPlanner {action ()}
+	}
+}

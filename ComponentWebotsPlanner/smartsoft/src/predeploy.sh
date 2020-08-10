@@ -15,14 +15,9 @@
 # $SMART_ROOT_ACE/myFILE
 # $SMART_ROOT_ACE/myFILE2
 # "
-
-######################################
-##  Please do not modify this file  ##
-######################################
-
-### Webot's controller libraries importation into SmartMDSD
-export WEBOTS_LIBRARY=$(realpath --relative-to=$SMART_ROOT_ACE/lib $WEBOTS_HOME/lib/controller)
+export OMPL_LIBRARY=$(realpath --relative-to=$SMART_ROOT_ACE/lib $OMPL_BUILD/lib)
 DEPLOY_LIBRARIES="
-$WEBOTS_LIBRARY/libController.so
-$WEBOTS_LIBRARY/libCppController.so
-"
+$OMPL_LIBRARY/libompl.so
+$OMPL_LIBRARY/libompl.so.1.5.0
+$OMPL_LIBRARY/libompl.so.16"
+DEPLOY_COMPONENT_FILES=""
