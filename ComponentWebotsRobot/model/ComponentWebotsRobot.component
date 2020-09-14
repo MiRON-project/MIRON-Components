@@ -45,14 +45,12 @@ ComponentDefinition ComponentWebotsRobot logo "/ComponentWebotsRobot/model/logo.
 	}
 	
   Activity SupervisorTask{
-		InputPortLink  ObjectPlacementPushServiceIn { optional oversamplingOk undersamplingOk }
-
-		InputPortLink  ObjectDropPushServiceIn { optional oversamplingOk undersamplingOk }
+	InputPortLink  ObjectPlacementPushServiceIn { optional oversamplingOk undersamplingOk }
+	InputPortLink  ObjectDropPushServiceIn { optional oversamplingOk undersamplingOk }
 	DefaultTrigger PeriodicTimer 1.0 Hz
   }
   InputPort ObjectPlacementPushServiceIn implements DomainSpeech.ObjectPlacementPushService {}
   InputPort ObjectDropPushServiceIn implements DomainSpeech.ObjectDropPushService {}
-
-	OutputPort ObstaclesServiceOut implements CommNavigationObjects.ObstaclesService realizedBy SupervisorTask {
-	}
+  OutputPort ObstaclesServiceOut implements CommNavigationObjects.ObstaclesService realizedBy SupervisorTask {}
+  OutputPort PayloadServiceOut implements CommBasicObjects.PayloadService realizedBy SupervisorTask {}
 }
