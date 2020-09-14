@@ -16,6 +16,7 @@ This Component provides sensors raw data and it updates the robot controller. On
 | | **SimpleBumperServiceOut**: It periodically sends info about robot state of "bump" (too close or far from objects/people) |
 | | **BatteryEventServiceOut**: It triggers if battery's level is below threshold |
 | | **BaseStateAnswerer**: It is possible to send Lisp commands to query robot's base info |
+| | **PayloadServiceOut**: It periodically outputs the robot's payload (currently only the mass property) |
 
 ## InternalParameter Settings
 

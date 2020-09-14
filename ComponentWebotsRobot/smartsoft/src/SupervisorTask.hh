@@ -27,8 +27,9 @@ class SupervisorTask  : public SupervisorTaskCore
 	private:
 		double object_max_size;
 		std::vector<double> object_offset;
-		std::vector<int> carried_obj_index;
+		std::vector<std::pair<int, double>> carried_obj_index_mass;
 		CommNavigationObjects::BoundingBoxes obstacles;
+		double payload;
 		
 		static std::unordered_map<std::string, std::string> objects_names;
 		virtual void on_ObjectPlacementPushServiceIn(const DomainSpeech::CommObjectPlacementOutputMessage &input);
