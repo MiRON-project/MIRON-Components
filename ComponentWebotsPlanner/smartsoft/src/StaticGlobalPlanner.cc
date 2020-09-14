@@ -89,7 +89,7 @@ CommRobotinoObjects::CommPathNavigationGoal StaticGlobalPlanner::PlannerGoalServ
         -robot_pose.get_base_position().get_y(1));
     end->setXY(input.getXGoalPoint(), input.getYGoalPoint());
     simple_setup_->setStartAndGoalStates(start, end);
-    ompl::base::PlannerStatus solved = simple_setup_->solve(1.0);
+    ompl::base::PlannerStatus solved = simple_setup_->solve(5.0);
     if (solved)
     {
       simple_setup_->simplifySolution();
