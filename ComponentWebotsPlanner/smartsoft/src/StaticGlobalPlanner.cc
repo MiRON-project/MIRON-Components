@@ -80,6 +80,7 @@ CommRobotinoObjects::CommPathNavigationGoal StaticGlobalPlanner::PlannerGoalServ
       input.getYGoalPoint() == goal.getYGoalPoint() && !replan) {
     return path_navigation_goal;
   }
+  
   if (validity_checker)
   {
     goal = input;
@@ -89,7 +90,16 @@ CommRobotinoObjects::CommPathNavigationGoal StaticGlobalPlanner::PlannerGoalServ
         -robot_pose.get_base_position().get_y(1));
     end->setXY(input.getXGoalPoint(), input.getYGoalPoint());
     simple_setup_->setStartAndGoalStates(start, end);
-    ompl::base::PlannerStatus solved = simple_setup_->solve(5.0);
+    
+    int attempts_to_solve = 0;
+    ompl::base::PlannerStatus solved;
+    while (attempts_to_solve < 10) {
+      solved = simple_setup_->solve(5.0);
+      if (solved)
+        break;
+      attempts_to_solve++;
+    }
+    
     if (solved)
     {
       simple_setup_->simplifySolution();
