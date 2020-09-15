@@ -1,4 +1,4 @@
-(realize-tcb (pathPlanner ?x ?y => ?waypoints ?number_of_waypoints)
+(realize-tcb (pathPlanner ?x ?y => ?number_of_waypoints ?waypoints)
 	(module "NavigationModule2")
 	(action (	
     (format t "===== pathPlanner~%")	
@@ -7,8 +7,8 @@
       ((answer (tcl-query :server 'plannercoord  
                           :service 'plannerquery
                           :request '(?x ?y))))
-      (tcl-bind-var :name '?waypoints :value (first answer))
-      (tcl-bind-var :name '?number_of_waypoints :value (second answer))
+      (tcl-bind-var :name '?number_of_waypoints :value (first answer))
+      (tcl-bind-var :name '?waypoints :value (second answer))
     )
     '(SUCCESS (OK)))
   )
