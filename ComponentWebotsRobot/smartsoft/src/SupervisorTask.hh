@@ -22,6 +22,13 @@
 #include <Eigen/Geometry>
 #include <CommNavigationObjects/BoundingBoxes.hh>
 
+struct RobotPayload {
+	int number_of_items_;
+	double mass_;
+	RobotPayload() :
+		number_of_items_(0), mass_(0){};
+};
+
 class SupervisorTask  : public SupervisorTaskCore
 {
 	private:
@@ -29,7 +36,7 @@ class SupervisorTask  : public SupervisorTaskCore
 		std::vector<double> object_offset;
 		std::vector<std::pair<int, double>> carried_obj_index_mass;
 		CommNavigationObjects::BoundingBoxes obstacles;
-		double payload;
+		RobotPayload robot_payload_;
 		
 		static std::unordered_map<std::string, std::string> objects_names;
 		virtual void on_ObjectPlacementPushServiceIn(const DomainSpeech::CommObjectPlacementOutputMessage &input);

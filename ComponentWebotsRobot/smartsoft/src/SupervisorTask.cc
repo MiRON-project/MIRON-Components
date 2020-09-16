@@ -25,7 +25,7 @@ std::unordered_map<std::string, std::string> SupervisorTask::objects_names = {
 SupervisorTask::SupervisorTask(SmartACE::SmartComponent *comp)
 		: SupervisorTaskCore(comp),
 			object_offset({0, 0, 0}),
-			payload(0)
+			robot_payload_(RobotPayload())
 {
 }
 SupervisorTask::~SupervisorTask()
@@ -80,7 +80,8 @@ void SupervisorTask::on_ObjectDropPushServiceIn(
 	}
 	if (index_to_remove != -2)
 	{
-		payload -= carried_obj_index_mass[index_to_remove].second;
+		robot_payload_.mass_ -= carried_obj_index_mass[index_to_remove].second;
+		robot_payload_.number_of_items_ -= 1;
 		carried_obj_index_mass.erase(carried_obj_index_mass.begin() +
 																 index_to_remove);
 	}
@@ -125,7 +126,8 @@ void SupervisorTask::on_ObjectPlacementPushServiceIn(
 	children->importMFNodeFromString(-1, obj);
 	carried_obj_index_mass.push_back(std::make_pair(children->getCount() - 1,
 																									input.getObjectMass()));
-	payload += input.getObjectMass();
+	robot_payload_.mass_ += input.getObjectMass();
+	robot_payload_.number_of_items_ += 1;
 
 	COMP->mRobotMutex.release();
 }
@@ -149,7 +151,8 @@ int SupervisorTask::on_execute()
 	obstaclesServiceOutPut(obstacles);
 
 	CommBasicObjects::RobotPayload robot_payload;
-	robot_payload.setMass(payload);
+	robot_payload.setMass(robot_payload_.mass_);
+	robot_payload.setNumber_of_items(robot_payload_.number_of_items_);
 	payloadServiceOutPut(robot_payload);
 	COMP->mRobotMutex.release();
 	return 0;
