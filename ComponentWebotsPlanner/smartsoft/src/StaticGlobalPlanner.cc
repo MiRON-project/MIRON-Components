@@ -21,7 +21,8 @@
 
 StaticGlobalPlanner::StaticGlobalPlanner(SmartACE::SmartComponent *comp) :
     StaticGlobalPlannerCore(comp),
-    replan(false)
+    replan(false),
+    planned(false)
 {
   auto box = COMP->getGlobalState().getRobot().getFootprint();
   std::vector<double> v_box;
@@ -119,6 +120,7 @@ CommRobotinoObjects::CommPathNavigationGoal StaticGlobalPlanner::PlannerGoalServ
       path_navigation_goal.setGoal(robot_pose.get_base_position().get_x(1),
           -robot_pose.get_base_position().get_y(1), 0, input.getXGoalPoint(),
           input.getYGoalPoint(), states.size());
+      planned = true;
       pathNavigationGoalServiceOutPut(path_navigation_goal);
     }
   }
@@ -154,6 +156,21 @@ int StaticGlobalPlanner::on_execute()
     return 0;
   }
   BaseStateServiceIn(base);
+
+  CommNavigationObjects::DistanceToGoal dtg;
+  if (planned) {
+    dtg.setL1(std::abs(goal.getXGoalPoint() - 
+      robot_pose.get_base_position().get_x(1)) + std::abs(goal.getYGoalPoint() -
+      robot_pose.get_base_position().get_y(1)));
+    dtg.setL2(std::sqrt(
+      std::pow(goal.getXGoalPoint() - robot_pose.get_base_position().get_x(1), 2) + 
+      std::pow(goal.getYGoalPoint() - robot_pose.get_base_position().get_y(1), 2))); 
+  }
+  else {
+    dtg.setL1(-1);
+    dtg.setL2(-1);
+  }
+  distanceToGoalServiceOutPut(dtg);
   COMP->mRobotMutex.release();
   return 0;
 }
