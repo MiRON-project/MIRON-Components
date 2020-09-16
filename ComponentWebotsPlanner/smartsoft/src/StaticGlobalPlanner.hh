@@ -64,6 +64,7 @@ private:
   std::vector<Eigen::AlignedBox2d> obstacles;
   bool obstacles_init;
   bool replan;
+  bool planned;
   CommNavigationObjects::CommPlannerGoal goal;
   Eigen::AlignedBox2d robot_footprint;
   CommNavigationObjects::BoundingBox sample_space;
