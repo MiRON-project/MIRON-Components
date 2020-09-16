@@ -9,7 +9,7 @@ This Component provides Path Planning strategies in Webots. Currently, it solves
 | ------- | ------- |
 | **BaseStateServiceIn**: robot's pose | **PathNavigationGoalServiceOut**: The feasible waypoints (no static obstacles in the path) |
 | **ObstaclesServiceIn**: static obstacles in the map | **PlannerWaypointsQueryServiceAnsw**: Skill answer (Lisp) for a GoTo query in the static map (waypoints) |
-| **PlannerGoalServiceIn**: Not used (yet) | |
+| **PlannerGoalServiceIn**: Not used (yet) | **DistanceToGoalServiceOut**: It provides the manhattan and euclidean distance to goal (L1 and L2) |
 
 
 ## InternalParameter Settings
