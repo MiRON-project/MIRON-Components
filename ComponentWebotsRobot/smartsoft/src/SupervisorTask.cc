@@ -26,11 +26,10 @@ SupervisorTask::SupervisorTask(SmartACE::SmartComponent *comp)
 		: SupervisorTaskCore(comp),
 			object_offset({0, 0, 0}),
 			robot_payload_(RobotPayload())
-{
-}
+{}
+
 SupervisorTask::~SupervisorTask()
-{
-}
+{}
 
 void SupervisorTask::on_ObjectDropPushServiceIn(
 		const DomainSpeech::CommObjectDropOutputMessage &input)
@@ -80,8 +79,7 @@ void SupervisorTask::on_ObjectDropPushServiceIn(
 	}
 	if (index_to_remove != -2)
 	{
-		robot_payload_.mass_ -= carried_obj_index_mass[index_to_remove].second;
-		robot_payload_.number_of_items_ -= 1;
+		robot_payload_.AddItem(-carried_obj_index_mass[index_to_remove].second);
 		carried_obj_index_mass.erase(carried_obj_index_mass.begin() +
 																 index_to_remove);
 	}
@@ -126,8 +124,7 @@ void SupervisorTask::on_ObjectPlacementPushServiceIn(
 	children->importMFNodeFromString(-1, obj);
 	carried_obj_index_mass.push_back(std::make_pair(children->getCount() - 1,
 																									input.getObjectMass()));
-	robot_payload_.mass_ += input.getObjectMass();
-	robot_payload_.number_of_items_ += 1;
+	robot_payload_.AddItem(input.getObjectMass());
 
 	COMP->mRobotMutex.release();
 }
@@ -135,9 +132,18 @@ void SupervisorTask::on_ObjectPlacementPushServiceIn(
 int SupervisorTask::on_entry()
 {
 	COMP->mRobotMutex.acquire();
+  if (!COMP->_supervisor) {
+    COMP->mRobotMutex.release();
+    return -1;
+  }
+
+  robot_payload_.max_number_items_ = COMP->getParameters().
+		getRobot_properties().getPayload_max_items();
+	robot_payload_.max_mass_ = COMP->getParameters().
+		getRobot_properties().getPayload_max_mass();
 	obstacles = extractStaticObstacles();
-	object_max_size = COMP->getGlobalState().getHri().getMax_size();
-	auto offset = COMP->getGlobalState().getHri().getOffset();
+	object_max_size = COMP->getParameters().getHri().getMax_size();
+	auto offset = COMP->getParameters().getHri().getOffset();
 	object_offset.clear();
 	for (auto o : offset)
 		object_offset.push_back(o);
@@ -153,6 +159,7 @@ int SupervisorTask::on_execute()
 	CommBasicObjects::RobotPayload robot_payload;
 	robot_payload.setMass(robot_payload_.mass_);
 	robot_payload.setNumber_of_items(robot_payload_.number_of_items_);
+	robot_payload.setFull(robot_payload_.full_);
 	payloadServiceOutPut(robot_payload);
 	COMP->mRobotMutex.release();
 	return 0;
