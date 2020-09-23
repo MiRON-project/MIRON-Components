@@ -51,6 +51,12 @@ ComponentParameter ComponentWebotsRobotParams component ComponentWebotsRobot
 		
 		//@doc"Distance between wheels (meters)"
 		wheel_distance: Double = 1
+		
+		//@doc"Robot's max payload mass (kg)"
+		payload_max_mass: Double = 5
+		
+		//@doc"Robot's max payload items (int)"
+		payload_max_items: Int32 = 3
 	}
 	
 	InternalParameter hri{
