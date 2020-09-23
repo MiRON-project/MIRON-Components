@@ -25,8 +25,26 @@
 struct RobotPayload {
 	int number_of_items_;
 	double mass_;
+	int max_number_items_;
+	int max_mass_;
+	bool full_;
 	RobotPayload() :
-		number_of_items_(0), mass_(0){};
+		number_of_items_(0), mass_(0), max_number_items_(0), max_mass_(0), 
+		full_(false) {};
+	
+	void IsFull() {
+		if (max_number_items_ <= number_of_items_ || max_mass_ <= mass_) {
+			full_ = true;
+			return;
+		}
+		full_ = false;
+	}
+
+	void AddItem(double new_mass) {
+		mass_ += new_mass;
+		number_of_items_ += (new_mass < 0) ? -1 : 1;
+		IsFull();
+	}
 };
 
 class SupervisorTask  : public SupervisorTaskCore
