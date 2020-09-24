@@ -46,6 +46,11 @@ void StaticGlobalPlanner::BaseStateServiceIn(const CommBasicObjects::CommBaseSta
 void StaticGlobalPlanner::ObstaclesServiceIn(
     const CommNavigationObjects::BoundingBoxes &input)
 {
+  COMP->validity_checker_Mutex.acquire();
+  if (COMP->validity_checker) {
+      COMP->validity_checker_Mutex.release();
+      return;
+  }
   sample_space = input.getFloor();
 
   ompl::base::RealVectorBounds bounds(2);
@@ -67,10 +72,12 @@ void StaticGlobalPlanner::ObstaclesServiceIn(
     obstacles.push_back(Eigen::AlignedBox2d(_min, _max));
   }
 
-  validity_checker = std::make_shared<BoundingBoxValidityChecker>(
-      simple_setup_->getSpaceInformation(), obstacles, robot_footprint);
-  simple_setup_->setStateValidityChecker(validity_checker);
+  COMP->validity_checker = std::make_shared<BoundingBoxValidityChecker>(
+    simple_setup_->getSpaceInformation(), obstacles, robot_footprint);
+  simple_setup_->setStateValidityChecker(COMP->validity_checker);
   obstacles_init = true;
+  
+  COMP->validity_checker_Mutex.release();
 }
 
 CommRobotinoObjects::CommPathNavigationGoal StaticGlobalPlanner::PlannerGoalServiceIn(
@@ -82,7 +89,8 @@ CommRobotinoObjects::CommPathNavigationGoal StaticGlobalPlanner::PlannerGoalServ
     return path_navigation_goal;
   }
   
-  if (validity_checker)
+  COMP->validity_checker_Mutex.acquire();
+  if (COMP->validity_checker)
   {
     goal = input;
     ompl::base::ScopedState<ompl::base::SE2StateSpace> start(space);
@@ -124,6 +132,7 @@ CommRobotinoObjects::CommPathNavigationGoal StaticGlobalPlanner::PlannerGoalServ
       pathNavigationGoalServiceOutPut(path_navigation_goal);
     }
   }
+  COMP->validity_checker_Mutex.release();
   return path_navigation_goal;
 }
 

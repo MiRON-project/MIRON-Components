@@ -19,13 +19,21 @@
 	
 #include "aceSmartSoft.hh"
 #include <iostream>
+#include <BoundingBoxValidityChecker.hh>
+#include <mutex>
+
+// std
+#include <memory>
 
 class ComponentWebotsPlannerCore
 {
 private:
 
 public:
+  
+  std::shared_ptr<BoundingBoxValidityChecker> validity_checker;
   SmartACE::SmartMutex mRobotMutex;
+  SmartACE::SmartMutex validity_checker_Mutex;
 	ComponentWebotsPlannerCore();
 };
 	

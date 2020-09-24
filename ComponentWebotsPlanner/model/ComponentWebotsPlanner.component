@@ -20,4 +20,11 @@ ComponentDefinition ComponentWebotsPlanner logo "/ComponentWebotsPlanner/model/l
 	}
     OutputPort PathNavigationGoalServiceOut implements CommRobotinoObjects.PathNavigationGoalService realizedBy StaticGlobalPlanner {}
     OutputPort DistanceToGoalServiceOut implements CommNavigationObjects.DistanceToGoalService realizedBy StaticGlobalPlanner {}
+InputPort ObjectsPushServiceIn implements CommObjectRecognitionObjects.ObjectsPushService {
+	}
+	Activity MapObstacleUpdate
+	{
+		InputPortLink ObjectsPushServiceIn { oversamplingOk undersamplingOk }
+		DefaultTrigger PeriodicTimer 1.0 Hz
+	}
 }
