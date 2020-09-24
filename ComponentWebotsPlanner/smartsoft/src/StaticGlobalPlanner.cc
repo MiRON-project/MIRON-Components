@@ -46,6 +46,11 @@ void StaticGlobalPlanner::BaseStateServiceIn(const CommBasicObjects::CommBaseSta
 void StaticGlobalPlanner::ObstaclesServiceIn(
     const CommNavigationObjects::BoundingBoxes &input)
 {
+  COMP->validity_checker_Mutex.acquire();
+  if (COMP->validity_checker) {
+      COMP->validity_checker_Mutex.release();
+      return;
+  }
   sample_space = input.getFloor();
 
   ompl::base::RealVectorBounds bounds(2);
