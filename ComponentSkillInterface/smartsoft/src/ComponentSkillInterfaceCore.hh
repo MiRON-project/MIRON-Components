@@ -56,6 +56,7 @@ class ComponentSkillInterfaceCore
 private:
 
 public:
+	bool skill_aborted;
 	ComponentSkillInterfaceCore();
 	Communication* com;
 

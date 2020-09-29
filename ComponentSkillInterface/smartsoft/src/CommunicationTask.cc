@@ -272,6 +272,7 @@ int CommunicationTask::separateQuery(std::deque <std::string> &in, std::deque <s
 				status = COMP->paramMaster->sendParameterWait(
 					parsed_parameter.commitRequest(), response, 
 					parsed_parameter.component, "param");
+				COMP->skill_aborted = true;
 				it = in.erase(it);
 			}
 

@@ -147,7 +147,12 @@ int SkillExecutionTask::on_execute()
 				skill_id == parsed_json.id) {
 				auto ports_name = parseKBMsg(answer.getResponse());
 				parsed_json.parseOutputs(ports_name.first);
-				parsed_json.result = parseKBSkillResult(answer.getResponse());
+				if (COMP->skill_aborted) {
+					parsed_json.result = "ERROR";	
+					COMP->skill_aborted = false;
+				}
+				else
+					parsed_json.result = parseKBSkillResult(answer.getResponse());
 				break;
 			}
 			std::this_thread::sleep_for(std::chrono::seconds(1));
