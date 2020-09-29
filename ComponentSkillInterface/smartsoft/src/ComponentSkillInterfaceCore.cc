@@ -45,7 +45,7 @@
 #include "ComponentSkillInterfaceCore.hh"
 
 // constructor
-ComponentSkillInterfaceCore::ComponentSkillInterfaceCore()
+ComponentSkillInterfaceCore::ComponentSkillInterfaceCore() : skill_aborted(false)
 {
 	std::cout << "constructor ComponentSkillInterfaceCore\n";
 	this->com=NULL;
