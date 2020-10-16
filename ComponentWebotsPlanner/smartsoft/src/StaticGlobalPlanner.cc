@@ -38,11 +38,6 @@ StaticGlobalPlanner::~StaticGlobalPlanner()
 {
 }
 
-void StaticGlobalPlanner::BaseStateServiceIn(const CommBasicObjects::CommBaseState &input)
-{
-    robot_pose = input;
-}
-
 void StaticGlobalPlanner::ObstaclesServiceIn(
     const CommNavigationObjects::BoundingBoxes &input)
 {
@@ -98,6 +93,7 @@ CommRobotinoObjects::CommPathNavigationGoal StaticGlobalPlanner::PlannerGoalServ
     start->setXY(robot_pose.get_base_position().get_x(1),
         -robot_pose.get_base_position().get_y(1));
     end->setXY(input.getXGoalPoint(), input.getYGoalPoint());
+    simple_setup_->clear();
     simple_setup_->setStartAndGoalStates(start, end);
     
     int attempts_to_solve = 0;
@@ -146,25 +142,18 @@ int StaticGlobalPlanner::on_execute()
   COMP->mRobotMutex.acquire();
   CommNavigationObjects::BoundingBoxes objs;
   Smart::StatusCode obj_status = obstaclesServiceInGetUpdate(objs);
-  if (obj_status == Smart::SMART_OK)
+  if (obj_status == Smart::SMART_OK && obstacles_init)
   {
     obstacles_init = false;
     ObstaclesServiceIn(objs);
   }
-  if (!obstacles_init)
-  {
-    COMP->mRobotMutex.release();
-    return 0;
-  }
-
-  CommBasicObjects::CommBaseState base;
-  Smart::StatusCode base_status = baseStateServiceInGetUpdate(base);
+  
+  Smart::StatusCode base_status = baseStateServiceInGetUpdate(robot_pose);
   if (base_status != Smart::SMART_OK)
   {
     COMP->mRobotMutex.release();
     return 0;
   }
-  BaseStateServiceIn(base);
 
   CommNavigationObjects::DistanceToGoal dtg;
   if (planned) {
