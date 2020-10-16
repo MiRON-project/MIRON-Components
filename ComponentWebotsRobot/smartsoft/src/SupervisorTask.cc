@@ -20,7 +20,8 @@
 #include <iostream>
 
 std::unordered_map<std::string, std::string> SupervisorTask::objects_names = {
-		{"WOODENBOX", "WoodenBox"}};
+		{"WOODENBOX", "WoodenBox"},
+		{"MOCK", "mock"}};
 
 SupervisorTask::SupervisorTask(SmartACE::SmartComponent *comp)
 		: SupervisorTaskCore(comp),
@@ -94,6 +95,14 @@ void SupervisorTask::on_ObjectPlacementPushServiceIn(
 	std::string type = objects_names[input.getObjectType()];
 	if (type == "")
 	{
+		COMP->mRobotMutex.release();
+		return;
+	}
+
+	if (type == "mock") 
+	{
+		carried_obj_index_mass.push_back(std::make_pair(-10, input.getObjectMass()));
+		robot_payload_.AddItem(input.getObjectMass());
 		COMP->mRobotMutex.release();
 		return;
 	}
