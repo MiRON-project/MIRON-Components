@@ -40,8 +40,6 @@ private:
   std::shared_ptr<ompl::base::SE2StateSpace> space;
   ompl::geometric::SimpleSetupPtr simple_setup_;
   ompl::base::MotionValidatorPtr motion_checker;
-
-  void BaseStateServiceIn(const CommBasicObjects::CommBaseState &input);
   void ObstaclesServiceIn(const CommNavigationObjects::BoundingBoxes &input);
 
 public:
