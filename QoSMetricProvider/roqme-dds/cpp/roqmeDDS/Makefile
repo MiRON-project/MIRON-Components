@@ -7,7 +7,7 @@
 # this file will be lost the next time it is generated.
 #
 # MPC Command:
-# /home/renan/SOFTWARE/smartsoft/MPC/mwc.pl -type make -include ./mpc/ -value_template cxx=g++ -value_template GENFLAGS=-std=c++11
+# /home/zotac/SOFTWARE/smartsoft/MPC/mwc.pl -type make -include ./mpc/ -value_template cxx=g++ -value_template GENFLAGS=-std=c++11
 #
 #----------------------------------------------------------------------------
 

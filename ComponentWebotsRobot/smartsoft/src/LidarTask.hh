@@ -37,6 +37,8 @@ private:
 	CommBasicObjects::BumperEventType bumper_type_;
 	int computeLidarUpdate() const;
 public:
+	bool firstExecution;
+
 	LidarTask(SmartACE::SmartComponent *comp);
 	virtual ~LidarTask();
 	

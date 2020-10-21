@@ -22,7 +22,8 @@
 StaticGlobalPlanner::StaticGlobalPlanner(SmartACE::SmartComponent *comp) :
     StaticGlobalPlannerCore(comp),
     replan(false),
-    planned(false)
+    planned(false),
+    obstacles_init(false)
 {
   auto box = COMP->getGlobalState().getRobot().getFootprint();
   std::vector<double> v_box;
@@ -70,7 +71,6 @@ void StaticGlobalPlanner::ObstaclesServiceIn(
   COMP->validity_checker = std::make_shared<BoundingBoxValidityChecker>(
     simple_setup_->getSpaceInformation(), obstacles, robot_footprint);
   simple_setup_->setStateValidityChecker(COMP->validity_checker);
-  obstacles_init = true;
   
   COMP->validity_checker_Mutex.release();
 }
@@ -142,9 +142,10 @@ int StaticGlobalPlanner::on_execute()
   COMP->mRobotMutex.acquire();
   CommNavigationObjects::BoundingBoxes objs;
   Smart::StatusCode obj_status = obstaclesServiceInGetUpdate(objs);
-  if (obj_status == Smart::SMART_OK && obstacles_init)
+  if (obj_status == Smart::SMART_OK && !obstacles_init)
   {
-    obstacles_init = false;
+    std::cout << "Obstacles Init\n";
+    obstacles_init = true;
     ObstaclesServiceIn(objs);
   }
   
