@@ -23,7 +23,8 @@ LidarTask::LidarTask(SmartACE::SmartComponent *comp)
 :	LidarTaskCore(comp),
 	scanCount(0),
 	_lidar(NULL),
-  bumper_type_(CommBasicObjects::BumperEventType::BUMPER_NOT_PRESSED)
+	bumper_type_(CommBasicObjects::BumperEventType::BUMPER_NOT_PRESSED),
+	firstExecution(true)
 {
 	std::cout << "constructor LidarTask\n";
 }
@@ -35,7 +36,7 @@ LidarTask::~LidarTask()
 
 int LidarTask::on_entry()
 {
-	if (!COMP->_supervisor || 
+	if (!COMP->_supervisor ||
 		!COMP->getGlobalState().getLidar_properties().getEnable())
     	return -1;
 	
@@ -65,7 +66,7 @@ int LidarTask::on_entry()
 	numberValidPoints = _lidar->getNumberOfPoints();
 	scan.set_scan_size(numberValidPoints);
 	scan.set_scan_update_count(scanCount);
-	scan.set_scan_double_field_of_view(- 180 * field_of_view / (2 * M_PI), 
+	scan.set_scan_double_field_of_view(- 180 * field_of_view / (2 * M_PI),
 		field_of_view * 180 / (horizontalResolution * M_PI));
 	scan.set_max_distance((int)
 		std::min(65535.0, _lidar->getMaxRange() * 1000.0));
@@ -91,6 +92,7 @@ int LidarTask::on_execute()
 	// From left to right
 	double min_dist = bumper_threshold_ + .1;
 	auto rangeImageVector = _lidar->getRangeImage();
+	std::cout << "min_dist: " << min_dist  << std::endl;
 	
 	if (rangeImageVector)
 	{
@@ -102,9 +104,11 @@ int LidarTask::on_execute()
 		for (unsigned int i = 0; i < numberValidPoints; ++i)
 		{
 			// From right to left
-      double ddist = rangeImageVector[numberValidPoints - 1 - i];
-			min_dist = (ddist < min_dist) ? ddist : min_dist; 
+			double ddist = rangeImageVector[numberValidPoints - 1 - i];
+			if (!firstExecution) {
+				min_dist = (ddist < min_dist) ? ddist : min_dist;
 
+			}
 			unsigned int dist = (unsigned int) (ddist * 1000.0);
 			scan.set_scan_index(i, i);
 			scan.set_scan_integer_distance(i, dist);
@@ -123,14 +127,16 @@ int LidarTask::on_execute()
 		CommBasicObjects::SimpleBumpState simple_bumple_state;
 		simple_bumple_state.setIs_valid(true);
 
-    CommBasicObjects::BumperEventType new_bumper_type = 
+    CommBasicObjects::BumperEventType new_bumper_type =
       (min_dist < bumper_threshold_) ? CommBasicObjects::BumperEventType::
       BUMPER_PRESSED : CommBasicObjects::BumperEventType::BUMPER_NOT_PRESSED;
 		bool bumped = (min_dist < bumper_threshold_) ? true : false;
 		simple_bumple_state.setIs_bumped(bumped); 
+		if(bumped)	std::cout << bumper_threshold_ << " " << min_dist << ": bumped!!!!!!!!!" << std::endl;
+		//else std::cout << bumper_threshold_ << " " << min_dist << ": no bumbed" << std::endl;
 		simpleBumperServiceOutPut(simple_bumple_state);
 
-    if (bumper_type_ != new_bumper_type || 
+    if (bumper_type_ != new_bumper_type ||
 				new_bumper_type == CommBasicObjects::BumperEventType::BUMPER_PRESSED) {
 			std::cout << "Robot almost in collision! Distance is: " << min_dist << "\n";
       CommBasicObjects::CommBumperEventState state;
@@ -144,6 +150,7 @@ int LidarTask::on_execute()
 
 	laserServiceOutPut(scan);
 	
+	firstExecution = false;
 	COMP->mRobotMutex.release();
 	
 	return 0;

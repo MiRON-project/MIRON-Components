@@ -1,0 +1,175 @@
+{
+	"period" : {
+		"value" : 5,
+		"unit" : "seconds"
+	},
+	"properties" : [
+		{
+			"name" : "Performance",
+			"reference" : 0.5,
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "Interaction",
+			"reference" : 0.5,
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "VoiceInteractionQuality",
+			"reference" : 0.5,
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		}
+	],
+	"observations" : [
+		{
+			"name" : "O1",
+			"influence" : "reinforces",
+			"strength" : "high",
+			"property" : "Performance",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "O2",
+			"influence" : "reinforces",
+			"strength" : "low",
+			"property" : "Performance",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "O3",
+			"influence" : "reinforces",
+			"strength" : "very_low",
+			"property" : "Performance",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "O4",
+			"influence" : "undermines",
+			"strength" : "very_high",
+			"property" : "Performance",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "O5",
+			"influence" : "undermines",
+			"strength" : "high",
+			"property" : "Performance",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "O6",
+			"influence" : "undermines",
+			"strength" : "low",
+			"property" : "Performance",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "O7",
+			"influence" : "reinforces",
+			"strength" : "high",
+			"property" : "Interaction",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "O8",
+			"influence" : "reinforces",
+			"strength" : "low",
+			"property" : "Interaction",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "O9",
+			"influence" : "undermines",
+			"strength" : "very_high",
+			"property" : "Interaction",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "O10",
+			"influence" : "undermines",
+			"strength" : "high",
+			"property" : "Interaction",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "O11",
+			"influence" : "undermines",
+			"strength" : "low",
+			"property" : "Interaction",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "O12",
+			"influence" : "reinforces",
+			"strength" : "very_low",
+			"property" : "Interaction",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+
+		{
+			"name" : "O13",
+			"influence" : "reinforces",
+			"strength" : "high",
+			"property" : "VoiceInteractionQuality",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "O14",
+			"influence" : "undermines",
+			"strength" : "high",
+			"property" : "VoiceInteractionQuality",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		}
+	]
+}
