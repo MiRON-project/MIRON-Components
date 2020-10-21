@@ -1,0 +1,344 @@
+module RoqmeSystemWebotsIntralogistics;
+import enums.*;
+create objectarray schema RobotBump(val bool,ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema PersonBump(val bool,ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema ObjectBump(val bool,ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema PeopleInRoom(val bool,ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema WantedPersonFound(val bool,ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema AvailableSpace(val AvailableSpace,ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema PayLoadWeight(val PayLoadWeight,ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema BatteryLevel(val double,ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema BatteryCharging(val bool,ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema ObjectIdentified(val bool,ts long) starttimestamp ts endtimestamp ts;
+create objectarray schema SearchingPerson(val bool,ts long) starttimestamp ts endtimestamp ts;
+
+INSERT INTO o1EW
+SELECT current_timestamp as ts
+FROM WantedPersonFound#firstevent as a
+WHERE a.val = true;
+
+INSERT INTO o1EW
+SELECT current_timestamp as ts
+FROM pattern [ every ( (WantedPersonFound(val=false))->(WantedPersonFound(val=true)) ) ];
+
+INSERT INTO Observations
+SELECT 'o1' as val
+FROM pattern [ every ( o1EW ) ];
+	
+INSERT INTO o2EW
+SELECT current_timestamp as ts
+FROM PeopleInRoom#firstevent as a
+WHERE a.val = true;
+
+INSERT INTO o2EW
+SELECT current_timestamp as ts
+FROM pattern [ every ( (PeopleInRoom(val=false))->(PeopleInRoom(val=true)) ) ];
+
+INSERT INTO Observations
+SELECT 'o2' as val
+FROM pattern [ every ( o2EW ) ];
+	
+INSERT INTO o3EW
+SELECT current_timestamp as ts
+FROM ObjectIdentified#firstevent as a
+WHERE a.val = true;
+
+INSERT INTO o3EW
+SELECT current_timestamp as ts
+FROM pattern [ every ( (ObjectIdentified(val=false))->(ObjectIdentified(val=true)) ) ];
+
+INSERT INTO Observations
+SELECT 'o3' as val
+FROM pattern [ every ( o3EW ) ];
+	
+INSERT INTO o4EW
+SELECT current_timestamp as ts
+FROM BatteryLevel#firstevent as a
+WHERE a.val >= 20.0;
+
+INSERT INTO o4EW
+SELECT current_timestamp as ts
+FROM pattern [ every ( (BatteryLevel(val < 20.0))->(BatteryLevel(val >= 20.0)) ) ];
+
+INSERT INTO Observations
+SELECT 'o4' as val
+FROM pattern [ every ( o4EW ) ];
+	
+INSERT INTO o5EW
+SELECT current_timestamp as ts
+FROM BatteryCharging#firstevent as a
+WHERE a.val = true;
+
+INSERT INTO o5EW
+SELECT current_timestamp as ts
+FROM pattern [ every ( (BatteryCharging(val=false))->(BatteryCharging(val=true)) ) ];
+
+INSERT INTO Observations
+SELECT 'o5' as val
+FROM pattern [ every ( o5EW ) ];
+	
+INSERT INTO o6EW
+SELECT current_timestamp as ts
+FROM WantedPersonFound#firstevent as a
+WHERE a.val = false;
+
+INSERT INTO o6EW
+SELECT current_timestamp as ts
+FROM pattern [ every ( (WantedPersonFound(val=true))->(WantedPersonFound(val=false)) ) ];
+
+INSERT INTO o6EW1
+SELECT current_timestamp as ts
+FROM PeopleInRoom#firstevent as a
+WHERE a.val = false;
+
+INSERT INTO o6EW1
+SELECT current_timestamp as ts
+FROM pattern [ every ( (PeopleInRoom(val=true))->(PeopleInRoom(val=false)) ) ];
+
+INSERT INTO Observations
+SELECT 'o6' as val
+FROM pattern [ every ( o6EW OR o6EW1 ) ];
+	
+INSERT INTO o7EW
+SELECT current_timestamp as ts
+FROM BatteryLevel#firstevent as a
+WHERE a.val < 20.0;
+
+INSERT INTO o7EW
+SELECT current_timestamp as ts
+FROM pattern [ every ( (BatteryLevel(val >= 20.0))->(BatteryLevel(val < 20.0)) ) ];
+
+INSERT INTO Observations
+SELECT 'o7' as val
+FROM pattern [ every ( o7EW ) ];
+	
+INSERT INTO o8EW
+SELECT current_timestamp as ts
+FROM RobotBump#firstevent as a
+WHERE a.val = true;
+
+INSERT INTO o8EW
+SELECT current_timestamp as ts
+FROM pattern [ every ( (RobotBump(val=false))->(RobotBump(val=true)) ) ];
+
+INSERT INTO o8EW1
+SELECT current_timestamp as ts
+FROM PersonBump#firstevent as a
+WHERE a.val = true;
+
+INSERT INTO o8EW1
+SELECT current_timestamp as ts
+FROM pattern [ every ( (PersonBump(val=false))->(PersonBump(val=true)) ) ];
+
+INSERT INTO Observations
+SELECT 'o8' as val
+FROM pattern [ every ( o8EW OR o8EW1 ) ];
+	
+INSERT INTO o9EW
+SELECT current_timestamp as ts
+FROM ObjectIdentified#firstevent as a
+WHERE a.val = true;
+
+INSERT INTO o9EW
+SELECT current_timestamp as ts
+FROM pattern [ every ( (ObjectIdentified(val=false))->(ObjectIdentified(val=true)) ) ];
+
+INSERT INTO Observations
+SELECT 'o9' as val
+FROM pattern [ every ( o9EW ) ];
+	
+INSERT INTO o10EW
+SELECT current_timestamp as ts
+FROM PeopleInRoom#firstevent as a
+WHERE a.val = false;
+
+INSERT INTO o10EW
+SELECT current_timestamp as ts
+FROM pattern [ every ( (PeopleInRoom(val=true))->(PeopleInRoom(val=false)) ) ];
+
+INSERT INTO Observations
+SELECT 'o10' as val
+FROM pattern [ every ( o10EW ) ];
+	
+INSERT INTO Observations
+SELECT 'o11' as val
+FROM pattern [ every ( (PayLoadWeight(val=PayLoadWeight.HIGH) -> PayLoadWeight(val=PayLoadWeight.HALF)) OR (PayLoadWeight(val=PayLoadWeight.HALF) -> PayLoadWeight(val=PayLoadWeight.LOW)) OR (PayLoadWeight(val=PayLoadWeight.HIGH) -> PayLoadWeight(val=PayLoadWeight.LOW)) ) ];
+	
+INSERT INTO Observations
+SELECT 'o12' as val
+FROM pattern [ every ( (AvailableSpace(val=AvailableSpace.LOW) -> AvailableSpace(val=AvailableSpace.HALF)) OR (AvailableSpace(val=AvailableSpace.HALF) -> AvailableSpace(val=AvailableSpace.HIGH)) OR (AvailableSpace(val=AvailableSpace.LOW) -> AvailableSpace(val=AvailableSpace.HIGH)) ) ];
+	
+INSERT INTO Observations
+SELECT 'o13' as val
+FROM pattern [ every ( (RobotBump(val=true) -> RobotBump(val=false)) OR (PersonBump(val=true) -> PersonBump(val=false)) ) ];
+	
+INSERT INTO o14EW
+SELECT current_timestamp as ts
+FROM PeopleInRoom#firstevent as a
+WHERE a.val = true;
+
+INSERT INTO o14EW
+SELECT current_timestamp as ts
+FROM pattern [ every ( (PeopleInRoom(val=false))->(PeopleInRoom(val=true)) ) ];
+
+INSERT INTO Observations
+SELECT 'o14' as val
+FROM pattern [ every ( o14EW ) ];
+	
+INSERT INTO Observations
+SELECT 'o15' as val
+FROM pattern [ every ( (PayLoadWeight(val=PayLoadWeight.LOW) -> PayLoadWeight(val=PayLoadWeight.HALF)) OR (PayLoadWeight(val=PayLoadWeight.HALF) -> PayLoadWeight(val=PayLoadWeight.HIGH)) OR (PayLoadWeight(val=PayLoadWeight.LOW) -> PayLoadWeight(val=PayLoadWeight.HIGH)) ) ];
+	
+INSERT INTO Observations
+SELECT 'o16' as val
+FROM pattern [ every ( (AvailableSpace(val=AvailableSpace.HIGH) -> AvailableSpace(val=AvailableSpace.HALF)) OR (AvailableSpace(val=AvailableSpace.HALF) -> AvailableSpace(val=AvailableSpace.LOW)) OR (AvailableSpace(val=AvailableSpace.HIGH) -> AvailableSpace(val=AvailableSpace.LOW) )) ];
+	
+INSERT INTO o17EW
+SELECT current_timestamp as ts
+FROM PersonBump#firstevent as a
+WHERE a.val = true;
+
+INSERT INTO o17EW
+SELECT current_timestamp as ts
+FROM pattern [ every ( (PersonBump(val=false))->(PersonBump(val=true)) ) ];
+
+INSERT INTO o17EW1
+SELECT current_timestamp as ts
+FROM RobotBump#firstevent as a
+WHERE a.val = true;
+
+INSERT INTO o17EW1
+SELECT current_timestamp as ts
+FROM pattern [ every ( (RobotBump(val=false))->(RobotBump(val=true)) ) ];
+
+INSERT INTO Observations
+SELECT 'o17' as val
+FROM pattern [ every ( o17EW OR o17EW1 ) ];
+	
+INSERT INTO o18EW
+SELECT current_timestamp as ts
+FROM BatteryLevel#firstevent as a
+WHERE a.val = 25.0;
+
+INSERT INTO o18EW
+SELECT current_timestamp as ts
+FROM pattern [ every ( (BatteryLevel(val != 25.0))->(BatteryLevel(val = 25.0)) ) ];
+
+INSERT INTO o18EW1
+SELECT current_timestamp as ts
+FROM BatteryLevel#firstevent as a
+WHERE a.val = 50.0;
+
+INSERT INTO o18EW1
+SELECT current_timestamp as ts
+FROM pattern [ every ( (BatteryLevel(val != 50.0))->(BatteryLevel(val = 50.0)) ) ];
+
+INSERT INTO o18EW2
+SELECT current_timestamp as ts
+FROM BatteryLevel#firstevent as a
+WHERE a.val = 75.0;
+
+INSERT INTO o18EW2
+SELECT current_timestamp as ts
+FROM pattern [ every ( (BatteryLevel(val != 75.0))->(BatteryLevel(val = 75.0)) ) ];
+
+INSERT INTO o18EW3
+SELECT current_timestamp as ts
+FROM BatteryLevel#firstevent as a
+WHERE a.val = 100.0;
+
+INSERT INTO o18EW3
+SELECT current_timestamp as ts
+FROM pattern [ every ( (BatteryLevel(val != 100.0))->(BatteryLevel(val = 100.0)) ) ];
+
+INSERT INTO Observations
+SELECT 'o18' as val
+FROM pattern [ every ( BatteryCharging(val=true) AND (o18EW OR o18EW1 OR o18EW2 OR o18EW3) ) ];
+	
+INSERT INTO Observations
+SELECT 'o19' as val
+FROM pattern [ every ( (PayLoadWeight(val=PayLoadWeight.HALF) -> PayLoadWeight(val=PayLoadWeight.LOW)) OR (PayLoadWeight(val=PayLoadWeight.HIGH) -> PayLoadWeight(val=PayLoadWeight.HALF)) ) ];
+	
+INSERT INTO o20EW
+SELECT current_timestamp as ts
+FROM BatteryLevel#firstevent as a
+WHERE a.val >= 50.0;
+
+INSERT INTO o20EW
+SELECT current_timestamp as ts
+FROM pattern [ every ( (BatteryLevel(val < 50.0))->(BatteryLevel(val >= 50.0)) ) ];
+
+INSERT INTO o20EW1
+SELECT current_timestamp as ts
+FROM BatteryLevel#firstevent as a
+WHERE a.val < 75.0;
+
+INSERT INTO o20EW1
+SELECT current_timestamp as ts
+FROM pattern [ every ( (BatteryLevel(val >= 75.0))->(BatteryLevel(val < 75.0)) ) ];
+
+INSERT INTO Observations
+SELECT 'o20' as val
+FROM pattern [ every ( o20EW AND o20EW1 ) ];
+	
+INSERT INTO o21EW
+SELECT current_timestamp as ts
+FROM BatteryLevel#firstevent as a
+WHERE a.val >= 20.0;
+
+INSERT INTO o21EW
+SELECT current_timestamp as ts
+FROM pattern [ every ( (BatteryLevel(val < 20.0))->(BatteryLevel(val >= 20.0)) ) ];
+
+INSERT INTO o21EW1
+SELECT current_timestamp as ts
+FROM BatteryLevel#firstevent as a
+WHERE a.val < 50.0;
+
+INSERT INTO o21EW1
+SELECT current_timestamp as ts
+FROM pattern [ every ( (BatteryLevel(val >= 50.0))->(BatteryLevel(val < 50.0)) ) ];
+
+INSERT INTO Observations
+SELECT 'o21' as val
+FROM pattern [ every ( o21EW AND o21EW1 OR (PayLoadWeight(val=PayLoadWeight.LOW) -> PayLoadWeight(val=PayLoadWeight.HALF)) OR (PayLoadWeight(val=PayLoadWeight.HALF) -> PayLoadWeight(val=PayLoadWeight.HIGH)) ) ];
+	
+INSERT INTO o22EW
+SELECT current_timestamp as ts
+FROM BatteryLevel#firstevent as a
+WHERE a.val < 20.0;
+
+INSERT INTO o22EW
+SELECT current_timestamp as ts
+FROM pattern [ every ( (BatteryLevel(val >= 20.0))->(BatteryLevel(val < 20.0)) ) ];
+
+INSERT INTO o22EW1
+SELECT current_timestamp as ts
+FROM BatteryLevel#firstevent as a
+WHERE a.val >= 10.0;
+
+INSERT INTO o22EW1
+SELECT current_timestamp as ts
+FROM pattern [ every ( (BatteryLevel(val < 10.0))->(BatteryLevel(val >= 10.0)) ) ];
+
+INSERT INTO Observations
+SELECT 'o22' as val
+FROM pattern [ every ( o22EW AND o22EW1 ) ];
+	
+INSERT INTO o23EW
+SELECT current_timestamp as ts
+FROM BatteryLevel#firstevent as a
+WHERE a.val < 10.0;
+
+INSERT INTO o23EW
+SELECT current_timestamp as ts
+FROM pattern [ every ( (BatteryLevel(val >= 10.0))->(BatteryLevel(val < 10.0)) ) ];
+
+INSERT INTO Observations
+SELECT 'o23' as val
+FROM pattern [ every ( o23EW ) ];
+	
+
+@Name('Observations')
+SELECT val
+FROM Observations;

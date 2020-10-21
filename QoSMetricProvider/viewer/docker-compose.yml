@@ -1,0 +1,22 @@
+influxdb:
+  image: influxdb:1.6.1
+  container_name: influxdb
+  ports:
+    - "8083:8083"
+    - "8086:8086"
+    - "8090:8090"
+  volumes:
+    # Data persistency
+    - ./var-lib-influxdb:/var/lib/influxdb
+grafana:
+  image: grafana/grafana:5.0.0
+  container_name: grafana
+  ports:
+    - "3000:3000"
+  links:
+    - influxdb
+  volumes:
+    # Data persistency
+    # sudo mkdir -p ./var-lib-grafana; chown smartsoft:smartsoft ./var-lib-grafana
+    - ./var-lib-grafana:/var/lib/grafana
+
