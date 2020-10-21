@@ -92,7 +92,6 @@ int LidarTask::on_execute()
 	// From left to right
 	double min_dist = bumper_threshold_ + .1;
 	auto rangeImageVector = _lidar->getRangeImage();
-	std::cout << "min_dist: " << min_dist  << std::endl;
 	
 	if (rangeImageVector)
 	{
@@ -132,8 +131,6 @@ int LidarTask::on_execute()
       BUMPER_PRESSED : CommBasicObjects::BumperEventType::BUMPER_NOT_PRESSED;
 		bool bumped = (min_dist < bumper_threshold_) ? true : false;
 		simple_bumple_state.setIs_bumped(bumped); 
-		if(bumped)	std::cout << bumper_threshold_ << " " << min_dist << ": bumped!!!!!!!!!" << std::endl;
-		//else std::cout << bumper_threshold_ << " " << min_dist << ": no bumbed" << std::endl;
 		simpleBumperServiceOutPut(simple_bumple_state);
 
     if (bumper_type_ != new_bumper_type ||

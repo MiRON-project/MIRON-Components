@@ -39,7 +39,6 @@ int ObjectTask::on_entry()
     return -1;
 
   object_bump_threshold_ = COMP->getParameters().getObject_properties().getObject_bump_threshold();
-  std::cout << "bump threshold: " << object_bump_threshold_ << std::endl;
   object_bump_type_ = COMP->getParameters().getObject_properties().getObject_bump_type();
 
   return 0;
@@ -73,8 +72,6 @@ const BaseState& base) {
   simple_bump_state.setIs_valid(true);
   bump.setState(CommObjectRecognitionObjects::ObjectBumpState::NOT_BUMP);
   std::vector<unsigned int> ids;
-  //std::cout << __LINE__ << " : " << __FILE__ << " " << object_bump_threshold_ << std::endl;
-  //if(objs.get_size()==0) std::cout << "No hay objetos!!!" << std::endl;
   for(auto& obj : objs.getObjectsCopy()){
     if (object_bump_type_.empty() || object_bump_type_ == obj.getObject_type()){
       auto dist = sqrt(
