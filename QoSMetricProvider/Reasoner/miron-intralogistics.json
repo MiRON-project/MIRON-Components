@@ -1,0 +1,255 @@
+{
+	"period" : {
+		"value" : 5,
+		"unit" : "seconds"
+	},
+	"properties" : [
+		{
+			"name" : "safety",
+			"reference" : 1
+		},
+		{
+			"name" : "mission_completion",
+			"reference" : 0.5
+		},
+		{
+			"name" : "power_autonomy",
+			"reference" : 1
+		}
+	],
+	"observations" : [
+		{
+			"name" : "o1",
+			"influence" : "reinforces",
+			"strength" : "very_high",
+			"property" : "mission_completion",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o2",
+			"influence" : "reinforces",
+			"strength" : "medium",
+			"property" : "mission_completion",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o3",
+			"influence" : "reinforces",
+			"strength" : "low",
+			"property" : "mission_completion",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},	
+		{
+			"name" : "o4",
+			"influence" : "reinforces",
+			"strength" : "low",
+			"property" : "mission_completion",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o5",
+			"influence" : "undermines",
+			"strength" : "very_high",
+			"property" : "mission_completion",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},		
+		{
+			"name" : "o6",
+			"influence" : "undermines",
+			"strength" : "medium",
+			"property" : "mission_completion",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},	
+		{
+			"name" : "o7",
+			"influence" : "undermines",
+			"strength" : "low",
+			"property" : "mission_completion",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o8",
+			"influence" : "undermines",
+			"strength" : "low",
+			"property" : "mission_completion",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o9",
+			"influence" : "reinforces",
+			"strength" : "very_low",
+			"property" : "safety",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},		
+				{
+			"name" : "o10",
+			"influence" : "reinforces",
+			"strength" : "medium",
+			"property" : "safety",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o11",
+			"influence" : "reinforces",
+			"strength" : "medium",
+			"property" : "safety",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o12",
+			"influence" : "reinforces",
+			"strength" : "medium",
+			"property" : "safety",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+
+		{
+			"name" : "o13",
+			"influence" : "reinforces",
+			"strength" : "low",
+			"property" : "safety",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o14",
+			"influence" : "undermines",
+			"strength" : "medium",
+			"property" : "safety",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o15",
+			"influence" : "undermines",
+			"strength" : "medium",
+			"property" : "safety",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o16",
+			"influence" : "undermines",
+			"strength" : "medium",
+			"property" : "safety",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o17",
+			"influence" : "undermines",
+			"strength" : "high",
+			"property" : "safety",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o18",
+			"influence" : "reinforces",
+			"strength" : "medium",
+			"property" : "power_autonomy",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o19",
+			"influence" : "reinforces",
+			"strength" : "low",
+			"property" : "power_autonomy",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o20",
+			"influence" : "undermines",
+			"strength" : "low",
+			"property" : "power_autonomy",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o21",
+			"influence" : "undermines",
+			"strength" : "medium",
+			"property" : "power_autonomy",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o22",
+			"influence" : "undermines",
+			"strength" : "high",
+			"property" : "power_autonomy",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o23",
+			"influence" : "undermines",
+			"strength" : "very_high",
+			"property" : "power_autonomy",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		}						
+						
+
+]
+}

@@ -287,12 +287,12 @@ void RecognitionTask::checkBump(const CommObjectRecognitionObjects::CommPeople &
   bump_state.setState(CommObjectRecognitionObjects::ObjectBumpState::NOT_BUMP);
   simple_bump_state.setIs_valid(true);
   simple_bump_state.setIs_bumped(false);
-  
   std::vector<unsigned int> ids;
   for (auto &people : people_out.getPeopleCopy())
   {
     if (person_bump_name_.empty() || person_bump_name_ == people.getName())
     {
+
       if (sqrt(pow(people.getPose().get_x(1) - pose.getBasePose().get_x(1), 2) +
                pow(people.getPose().get_y(1) - pose.getBasePose().get_y(1), 2)) <
           people_bump_threshold_)

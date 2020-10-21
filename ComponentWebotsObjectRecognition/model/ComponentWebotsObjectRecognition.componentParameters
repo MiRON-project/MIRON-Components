@@ -2,7 +2,7 @@ ComponentParameter ComponentWebotsObjectRecognitionParams component ComponentWeb
 {
 	InternalParameter object_properties{
 	//@doc"Threshold for object bump event in meters [m]: it is useful if one wants to get close to a object, or one does not"
-	object_bump_threshold: Double = 0
+	object_bump_threshold: Double = 2
 	//@doc"If string has a specific type, the event occurs only for that type"
 	object_bump_type: String = ""
 	}

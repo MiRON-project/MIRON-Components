@@ -19,4 +19,10 @@ InputHandler SimpleObjectBumpPushServiceInHandlerObjectBump triggeredFrom Simple
 		DefaultTrigger PeriodicTimer 10.0 Hz
 	} 
 	OutputPort EstimateServiceOut implements CommRoqmeEstimate.EstimateService realizedBy EstimateActivity {}
+InputPort PayloadServiceIn implements CommBasicObjects.PayloadService {
+	}
+	InputHandler PayloadServiceInHandler triggeredFrom PayloadServiceIn { }
+InputPort PeoplePushServiceIn implements CommObjectRecognitionObjects.PeoplePushService {
+	}
+	InputHandler PeoplePushServiceInHandler triggeredFrom PeoplePushServiceIn { }
 }
