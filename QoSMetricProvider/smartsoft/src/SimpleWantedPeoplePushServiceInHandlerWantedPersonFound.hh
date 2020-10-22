@@ -5,6 +5,9 @@
 
 #include "SimpleWantedPeoplePushServiceInHandlerWantedPersonFoundCore.hh"
 #include <RoqmeWriterImpl.h>
+#ifdef ROQME_DEBUG
+#include <RoqmeDebug.h>
+#endif
 	
 class SimpleWantedPeoplePushServiceInHandlerWantedPersonFound : public SimpleWantedPeoplePushServiceInHandlerWantedPersonFoundCore
 {		
@@ -16,6 +19,10 @@ public:
 	
 private:
 	Roqme::RoqmeBoolWriter boolean_dw;
+	bool previous_value;
+#ifdef ROQME_DEBUG
+	Roqme::RoqmeDebug roqmeOut;
+#endif
 };
 
 #endif

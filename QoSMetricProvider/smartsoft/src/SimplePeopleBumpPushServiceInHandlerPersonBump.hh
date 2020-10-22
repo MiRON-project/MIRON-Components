@@ -5,6 +5,7 @@
 
 #include "SimplePeopleBumpPushServiceInHandlerPersonBumpCore.hh"
 #include <RoqmeWriterImpl.h>
+#include <RoqmeDebug.h>
 	
 class SimplePeopleBumpPushServiceInHandlerPersonBump : public SimplePeopleBumpPushServiceInHandlerPersonBumpCore
 {		
@@ -16,6 +17,8 @@ public:
 	
 private:
 	Roqme::RoqmeBoolWriter boolean_dw;
+	bool previous_value;
+	Roqme::RoqmeDebug roqmeOut;
 };
 
 #endif

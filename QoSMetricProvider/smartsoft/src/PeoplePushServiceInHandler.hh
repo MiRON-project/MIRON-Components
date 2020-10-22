@@ -19,6 +19,9 @@
 
 #include "PeoplePushServiceInHandlerCore.hh"
 #include <RoqmeWriterImpl.h>
+#ifdef ROQME_DEBUG
+#include <RoqmeDebug.h>
+#endif
 	
 class PeoplePushServiceInHandler  : public PeoplePushServiceInHandlerCore
 {		
@@ -28,7 +31,11 @@ public:
 	
 	virtual void on_PeoplePushServiceIn(const CommObjectRecognitionObjects::CommPeople &input);
 private:
-	Roqme::RoqmeUIntWriter writer;
+	Roqme::RoqmeEnumWriter peopleWriter;
+#ifdef ROQME_DEBUG
+	Roqme::RoqmeDebug roqmeOut;
+#endif
+	std::string prev_value;
 };
 
 #endif

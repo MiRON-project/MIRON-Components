@@ -15,20 +15,20 @@ SimplePeoplePushServiceInHandlerPeopleInRoom::~SimplePeoplePushServiceInHandlerP
 
 void SimplePeoplePushServiceInHandlerPeopleInRoom::on_SimplePeoplePushServiceInPeopleInRoom(const CommObjectRecognitionObjects::SimpleRecognitionState &input)
 {
-	
+	/*
 	try
 	{
 		RoqmeDDSTopics::RoqmeBoolContext booleanContext;
 		booleanContext.name("PeopleInRoom");
 		booleanContext.value().push_back(input.getIs_visible());
+		boolean_dw.write(booleanContext);
 		unsigned long long now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 		std::cout << now << " - PeopleInRoom - " << input.getIs_visible() << std::endl;
-		boolean_dw.write(booleanContext);
 	}
 	catch(Roqme::RoqmeDDSException& e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
-	
+	*/
 	
 }

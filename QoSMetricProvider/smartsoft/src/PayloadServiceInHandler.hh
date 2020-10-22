@@ -19,6 +19,9 @@
 
 #include "PayloadServiceInHandlerCore.hh"
 #include <RoqmeWriterImpl.h>
+#ifdef ROQME_DEBUG
+#include <RoqmeDebug.h>
+#endif
 	
 class PayloadServiceInHandler  : public PayloadServiceInHandlerCore
 {		
@@ -29,7 +32,13 @@ public:
 	virtual void on_PayloadServiceIn(const CommBasicObjects::RobotPayload &input);
 
 private:
-	Roqme::RoqmeEnumWriter available_space_dw, payload_weight_dw;
+	Roqme::RoqmeEnumWriter available_space_dw;
+	Roqme::RoqmeEnumWriter payload_weight_dw;
+#ifdef ROQME_DEBUG
+	Roqme::RoqmeDebug roqmeOut;
+#endif
+	std::string prev_available;
+	std::string prev_payload;
 	const double MAX_MASS = 5.0;
 	const unsigned int MAX_ITEMS = 3;
 

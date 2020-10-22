@@ -39,7 +39,7 @@ int ObjectTask::on_entry()
     return -1;
 
   object_bump_threshold_ = COMP->getParameters().getObject_properties().getObject_bump_threshold();
-  std::cout << "bump threshold: " << object_bump_threshold_ << std::endl;
+  //std::cout << "bump threshold: " << object_bump_threshold_ << std::endl;
   object_bump_type_ = COMP->getParameters().getObject_properties().getObject_bump_type();
 
   return 0;
@@ -84,7 +84,7 @@ const BaseState& base) {
         simple_bump_state.setIs_bumped(true);
         ids.push_back(obj.getObject_id());
         bump.setState(CommObjectRecognitionObjects::ObjectBumpState::BUMP);
-        std::cout << "Object bump! Object is: " << obj.getObject_type() << "\n";
+       // std::cout << "Object bump! Object is: " << obj.getObject_type() << "\n";
       }
     }
   }

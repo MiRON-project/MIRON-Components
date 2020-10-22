@@ -35,44 +35,64 @@ void PayloadServiceInHandler::on_PayloadServiceIn(const CommBasicObjects::RobotP
 	const double mass = input.getMass();
 	const unsigned int num_items = input.getNumber_of_items();
 
-	//std::cout << __LINE__ << " : " << __FILE__ << " => " << mass << ", " << num_items << std::endl;
+	static bool first_execution = true;
+	std::string current_available;
+	std::string current_payload;
 
-	try {
-
-		RoqmeDDSTopics::RoqmeEnumContext payloadContext, availableSpaceContext;
-		payloadContext.name("PayLoadWeight");
-
-		if(mass >= 4 && mass <= MAX_MASS) {
-			payloadContext.value().push_back("HIGH");
-		}
-		else if (mass == 3) {
-			payloadContext.value().push_back("HALF");
-		}
-		else{
-			payloadContext.value().push_back("LOW");
-		}
-
-		availableSpaceContext.name("AvailableSpace");
-		if(num_items == MAX_ITEMS){
-			availableSpaceContext.value().push_back("LOW");
-		}
-		else if (num_items == 2){
-			availableSpaceContext.value().push_back("HALF");
-		}
-		else{
-			availableSpaceContext.value().push_back("HIGH");
-		}
-
-		unsigned long long now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-		std::cout << now << " - PayLoadWeight - " << payloadContext.value().at(0) << std::endl;
-		std::cout << now << " - AvailableSpace - " << availableSpaceContext.value().at(0) << std::endl;
-
-
-		payload_weight_dw.write(payloadContext);
-		available_space_dw.write(availableSpaceContext);
+	if(mass >= 4 && mass <= MAX_MASS) {
+		current_payload = "HIGH";
 	}
-	catch(Roqme::RoqmeDDSException& e)
+	else if (mass >= 3) {
+		current_payload = "HALF";
+	}
+	else{
+		current_payload = "LOW";
+	}
+
+	if(first_execution || (!first_execution && prev_payload.compare(current_payload)))
 	{
-		std::cerr << e.what() << std::endl;
+		try {
+			RoqmeDDSTopics::RoqmeEnumContext payloadContext;
+			payloadContext.name("PayLoadWeight");
+			payloadContext.value().push_back(current_payload);
+			payload_weight_dw.write(payloadContext);
+#ifdef ROQME_DEBUG
+			roqmeOut.roqmeDebug(Roqme::RoqmeDebug::ContextType::ENUM, "PayLoadWeight", payloadContext.value().at(0));
+#else
+			unsigned long long now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+			std::cout << now << " - PayLoadWeight - " << payloadContext.value().at(0) << std::endl;
+#endif
+			prev_payload = current_payload;
+		}
+		catch(Roqme::RoqmeDDSException& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
 	}
+
+	if(num_items == MAX_ITEMS){
+		current_available= "LOW";
+	}
+	else if (num_items == 2){
+		current_available= "HALF";
+	}
+	else{
+		current_available = "HIGH";
+	}
+
+	if(first_execution || (!first_execution && prev_available.compare(current_available)))
+	{
+		RoqmeDDSTopics::RoqmeEnumContext availableSpaceContext;
+		availableSpaceContext.name("AvailableSpace");
+		availableSpaceContext.value().push_back(current_available);
+		available_space_dw.write(availableSpaceContext);
+#ifdef ROQME_DEBUG
+		roqmeOut.roqmeDebug(Roqme::RoqmeDebug::ContextType::ENUM, "AvailableSpace", availableSpaceContext.value().at(0));
+#else
+		unsigned long long now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+		std::cout << now << " - AvailableSpace - " << availableSpaceContext.value().at(0)  << availableSpaceContext.value().size()<< std::endl;
+#endif
+		prev_available = current_available;
+	}
+	first_execution = false;
 }

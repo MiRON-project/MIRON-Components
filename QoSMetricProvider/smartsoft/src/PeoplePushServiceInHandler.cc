@@ -32,17 +32,44 @@ void PeoplePushServiceInHandler::on_PeoplePushServiceIn(const CommObjectRecognit
 {
 	// implement business logic here
 	// (do not use blocking calls here, otherwise this might block the InputPort PeoplePushServiceIn)
-	try
-	{
-		RoqmeDDSTopics::RoqmeUIntContext context;
-		context.name("PeopleInRoom");
-		context.value().push_back(input.getPeopleSize());
-		unsigned long long now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-		std::cout << now << " - PeopleInRoom - " << input.getPeopleSize() << std::endl;
-		writer.write(context);
+
+	static bool first_execution = true;
+	std::string current_value;
+
+	const size_t &peopleSize = input.getPeopleSize();
+
+	if(peopleSize >= 4) {
+		current_value = "FULL";
 	}
-	catch(Roqme::RoqmeDDSException& e)
+	else if (peopleSize >= 1) {
+		current_value = "HALF";
+	}
+	else {
+		current_value = "EMPTY";
+	}
+
+	if(first_execution || (!first_execution && prev_value.compare(current_value)))
 	{
-		std::cerr << e.what() << std::endl;
+		try
+		{
+			RoqmeDDSTopics::RoqmeEnumContext peopleContext;
+			peopleContext.name("PeopleInRoom");
+			peopleContext.value().push_back(current_value);
+
+			peopleWriter.write(peopleContext);
+
+#ifdef ROQME_DEBUG
+			roqmeOut.roqmeDebug(Roqme::RoqmeDebug::ContextType::ENUM, "PeopleInRoom", peopleContext.value().at(0));
+#else
+			unsigned long long now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+			std::cout << now << " - PeopleInRoom - " << peopleContext.value().at(0) << std::endl;
+#endif
+			prev_value = current_value;
+			first_execution = false;
+		}
+		catch(Roqme::RoqmeDDSException& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
 	}
 }

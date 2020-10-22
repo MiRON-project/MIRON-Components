@@ -25,4 +25,7 @@ InputPort PayloadServiceIn implements CommBasicObjects.PayloadService {
 InputPort PeoplePushServiceIn implements CommObjectRecognitionObjects.PeoplePushService {
 	}
 	InputHandler PeoplePushServiceInHandler triggeredFrom PeoplePushServiceIn { }
+InputPort DistanceToGoalServiceIn implements CommNavigationObjects.DistanceToGoalService {
+	}
+	InputHandler DistanceToGoalServiceInHandler triggeredFrom DistanceToGoalServiceIn { }
 }
