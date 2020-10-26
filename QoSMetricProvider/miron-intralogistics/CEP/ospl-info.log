@@ -1527,3 +1527,149 @@ Node        : Zotac-Miron
 Process     : java <18964>
 Thread      : conflictResolver 7fa37a919700
 Internals   : 6.9.190403OSS/bb590263/bb590263/v_serviceChangeState/v_service.c/266/0/1603363211.428108858/0
+========================================================================================
+Report      : INFO
+Date        : 2020-10-22T13:30:41+0200
+Description : ---------------------------------------------------------------
+              -- The service is using the following configuration settings --
+              ---------------------------------------------------------------
+              Domain (id)          : ospl_sp_ddsi (0)
+              Storage              : 0 Kbytes
+              Storage threshold    : 1024 Kbytes
+              Storage address      : Not available
+              Locking              : default
+              Memory mode          : Heap memory
+              Builtin topics       : true
+              Priority inheritance : false
+              SystemId             : 628665368 from [1,2147483647]
+Node        : Zotac-Miron
+Process     : java <25216>
+Thread      : spliced 7f0f9c0e1700
+Internals   : 6.9.190403OSS/bb590263/bb590263/The OpenSplice domain service/u_domain.c/785/0/1603366241.767899013/0
+========================================================================================
+Report      : INFO
+Date        : 2020-10-22T13:30:41+0200
+Description : Service cmsoap disabled
+Node        : Zotac-Miron
+Process     : java <25216>
+Thread      : spliced 7f0f9c0e1700
+Internals   : 6.9.190403OSS/bb590263/bb590263/OpenSplice domain service/sr_componentInfo.c/446/0/1603366241.768153274/0
+========================================================================================
+Report      : INFO
+Date        : 2020-10-22T13:30:41+0200
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'splicedaemon' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : Zotac-Miron
+Process     : java <25216>
+Thread      : spliced 7f0f9c0e1700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_serviceChangeState/v_service.c/266/0/1603366241.770213977/0
+========================================================================================
+Report      : INFO
+Date        : 2020-10-22T13:30:41+0200
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'ddsi2' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : Zotac-Miron
+Process     : java <25216>
+Thread      : ddsi2 7f0f802b8700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_serviceChangeState/v_service.c/266/0/1603366241.775932332/0
+========================================================================================
+Report      : INFO
+Date        : 2020-10-22T13:30:42+0200
+Description : The durability service can be identified by ID: 628665368
+Node        : Zotac-Miron
+Process     : java <25216>
+Thread      : durability 7f0f8065c700
+Internals   : 6.9.190403OSS/bb590263/bb590263/DurabilityService/d_durability.c/554/0/1603366242.086465857/0
+========================================================================================
+Report      : INFO
+Date        : 2020-10-22T13:30:49+0200
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'durability' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : Zotac-Miron
+Process     : java <25216>
+Thread      : conflictResolver 7f0f7bf22700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_serviceChangeState/v_service.c/266/0/1603366249.764034308/0
+========================================================================================
+Report      : INFO
+Date        : 2020-10-26T16:05:39+0100
+Description : ---------------------------------------------------------------
+              -- The service is using the following configuration settings --
+              ---------------------------------------------------------------
+              Domain (id)          : ospl_sp_ddsi (0)
+              Storage              : 0 Kbytes
+              Storage threshold    : 1024 Kbytes
+              Storage address      : Not available
+              Locking              : default
+              Memory mode          : Heap memory
+              Builtin topics       : true
+              Priority inheritance : false
+              SystemId             : 1188033291 from [1,2147483647]
+Node        : Zotac-Miron
+Process     : java <29428>
+Thread      : spliced 7fb8c8016700
+Internals   : 6.9.190403OSS/bb590263/bb590263/The OpenSplice domain service/u_domain.c/785/0/1603724739.350845638/0
+========================================================================================
+Report      : INFO
+Date        : 2020-10-26T16:05:39+0100
+Description : Service cmsoap disabled
+Node        : Zotac-Miron
+Process     : java <29428>
+Thread      : spliced 7fb8c8016700
+Internals   : 6.9.190403OSS/bb590263/bb590263/OpenSplice domain service/sr_componentInfo.c/446/0/1603724739.351600711/0
+========================================================================================
+Report      : INFO
+Date        : 2020-10-26T16:05:39+0100
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'splicedaemon' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : Zotac-Miron
+Process     : java <29428>
+Thread      : spliced 7fb8c8016700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_serviceChangeState/v_service.c/266/0/1603724739.352273484/0
+========================================================================================
+Report      : INFO
+Date        : 2020-10-26T16:05:39+0100
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'ddsi2' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : Zotac-Miron
+Process     : java <29428>
+Thread      : ddsi2 7fb8ba547700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_serviceChangeState/v_service.c/266/0/1603724739.363237586/0
+========================================================================================
+Report      : INFO
+Date        : 2020-10-26T16:05:39+0100
+Description : The durability service can be identified by ID: 1188033291
+Node        : Zotac-Miron
+Process     : java <29428>
+Thread      : durability 7fb8ba8eb700
+Internals   : 6.9.190403OSS/bb590263/bb590263/DurabilityService/d_durability.c/554/0/1603724739.668266037/0
+========================================================================================
+Report      : INFO
+Date        : 2020-10-26T16:05:47+0100
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'durability' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : Zotac-Miron
+Process     : java <29428>
+Thread      : conflictResolver 7fb8ba1d2700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_serviceChangeState/v_service.c/266/0/1603724747.331431192/0
+========================================================================================
+Report      : INFO
+Date        : 2020-10-26T16:24:43+0100
+Description : Missed heartbeat for node 2142871658. (DCPSPublication is complete)
+Node        : Zotac-Miron
+Process     : java <29428>
+Thread      : OSPL Garbage Collector 7fb8bb18a700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_spliced/v_spliced.c/2062/769/1603725883.495341908/0
+========================================================================================
+Report      : INFO
+Date        : 2020-10-26T16:24:43+0100
+Description : Missed heartbeat for node 1120452063. (DCPSPublication is complete)
+Node        : Zotac-Miron
+Process     : java <29428>
+Thread      : OSPL Garbage Collector 7fb8bb18a700
+Internals   : 6.9.190403OSS/bb590263/bb590263/v_spliced/v_spliced.c/2062/769/1603725883.918766247/0
