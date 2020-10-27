@@ -71,7 +71,6 @@ void StaticGlobalPlanner::ObstaclesServiceIn(
   COMP->validity_checker = std::make_shared<BoundingBoxValidityChecker>(
     simple_setup_->getSpaceInformation(), obstacles, robot_footprint);
   simple_setup_->setStateValidityChecker(COMP->validity_checker);
-  
   COMP->validity_checker_Mutex.release();
 }
 
@@ -144,7 +143,6 @@ int StaticGlobalPlanner::on_execute()
   Smart::StatusCode obj_status = obstaclesServiceInGetUpdate(objs);
   if (obj_status == Smart::SMART_OK && !obstacles_init)
   {
-    std::cout << "Obstacles Init\n";
     obstacles_init = true;
     ObstaclesServiceIn(objs);
   }

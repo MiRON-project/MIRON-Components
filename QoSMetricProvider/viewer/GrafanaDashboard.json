@@ -1,0 +1,2848 @@
+{
+  "__inputs": [
+    {
+      "name": "RoqmeSystemWebotsIntralogistics",
+      "label": "RoqmeSystemWebotsIntralogistics",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "influxdb",
+      "pluginName": "InfluxDB"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "5.3.2"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": "5.0.0"
+    },
+    {
+      "type": "datasource",
+      "id": "influxdb",
+      "name": "InfluxDB",
+      "version": "5.0.0"
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${RoqmeSystemWebotsIntralogistics}",
+      "fill": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 0,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 2,
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+    	{
+    	  "alias": "RobotBump",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "In_Context",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "RobotBump"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "PersonBump",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "In_Context",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "PersonBump"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "ObjectBump",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "In_Context",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "ObjectBump"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "PeopleInRoom",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "In_Context",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "PeopleInRoom"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "WantedPersonFound",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "In_Context",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "WantedPersonFound"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	
+    	{
+    	  "alias": "AvailableSpace.HIGH",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "In_Context",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "AvailableSpace.HIGH"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "AvailableSpace.HALF",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "In_Context",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "AvailableSpace.HALF"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "AvailableSpace.LOW",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "In_Context",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "AvailableSpace.LOW"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	
+    	{
+    	  "alias": "PayLoadWeight.HIGH",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "In_Context",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "PayLoadWeight.HIGH"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "PayLoadWeight.HALF",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "In_Context",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "PayLoadWeight.HALF"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "PayLoadWeight.LOW",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "In_Context",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "PayLoadWeight.LOW"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "BatteryCharging",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "In_Context",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "BatteryCharging"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "ObjectIdentified",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "In_Context",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "ObjectIdentified"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "SearchingPerson",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "In_Context",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "SearchingPerson"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},{
+    	  "alias": "o13",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o13"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o2",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o2"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o14",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o14"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o1",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o1"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o11",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o11"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o12",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o12"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o15",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o15"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o16",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o16"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o19",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o19"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o21",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o21"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o5",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o5"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o18",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o18"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o3",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o3"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o9",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o9"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	}
+      ],
+      "aliasColors": {
+      "RobotBump" : "#7e1e9c",
+        "PersonBump" : "#acc2d9",
+        "ObjectBump" : "#15b01a",
+        "PeopleInRoom" : "#56ae57",
+        "WantedPersonFound" : "#0343df",
+        "AvailableSpace.HIGH" : "#b2996e",
+        "AvailableSpace.HALF" : "#ff81c0",
+        "AvailableSpace.LOW" : "#a8ff04",
+        "PayLoadWeight.HIGH" : "#653700",
+        "PayLoadWeight.HALF" : "#69d84f",
+        "PayLoadWeight.LOW" : "#e50000",
+        "BatteryCharging" : "#894585",
+        "ObjectIdentified" : "#95d0fc",
+        "SearchingPerson" : "#70b23f",
+        "o13" : "#029386",
+        "o2" : "#d4ffff",
+        "o14" : "#f97306",
+        "o1" : "#65ab7c",
+        "o11" : "#96f97b",
+        "o12" : "#952e8f",
+        "o15" : "#c20078",
+        "o16" : "#fcfc81",
+        "o19" : "#ffff14",
+        "o21" : "#a5a391",
+        "o5" : "#75bbfd",
+        "o18" : "#388004",
+        "o3" : "#929591",
+        "o9" : "#4c9085"
+      },
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Discrets Contexts",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${RoqmeSystemWebotsIntralogistics}",
+      "fill": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 1,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "nullPointMode": "connected",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+    	{
+    	  "alias": "BatteryLevel",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "In_Context",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "BatteryLevel"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},{
+    	  "alias": "o4",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o4"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o7",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o7"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o23",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o23"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	}
+      ],
+      "aliasColors": {
+      "BatteryLevel" : "#89fe05",
+        "o4" : "#5e9b8a",
+        "o7" : "#bf77f6",
+        "o23" : "#efb435"
+      },
+      "seriesOverrides": [
+      {
+       "alias": "o4",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o7",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o23",
+       "nullPointMode": "null"	  	
+      }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "BatteryLevel",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${RoqmeSystemWebotsIntralogistics}",
+      "fill": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "id": 2,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "nullPointMode": "connected",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+    	{
+    	  "alias": "safety",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Out_Estimate",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "safety"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},{
+    	  "alias": "o9",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o9"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o10",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o10"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o11",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o11"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o12",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o12"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o13",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o13"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o14",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o14"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o15",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o15"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o16",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o16"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o17",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o17"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	}
+      ],
+      "aliasColors": {
+      "safety" : "#9a0eea",
+      "o9" : "#d99b82",
+      "o10" : "#033500",
+      "o11" : "#0a5f38",
+      "o12" : "#06c2ac",
+      "o13" : "#0c06f7",
+      "o14" : "#c79fef",
+      "o15" : "#61de2a",
+      "o16" : "#00035b",
+      "o17" : "#3778bf"
+      },
+      "seriesOverrides": [
+      {
+       "alias": "o9",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o10",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o11",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o12",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o13",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o14",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o15",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o16",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o17",
+       "nullPointMode": "null"	  	
+      }
+      ],      
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "safety",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${RoqmeSystemWebotsIntralogistics}",
+      "fill": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 27
+      },
+      "id": 3,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "nullPointMode": "connected",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+    	{
+    	  "alias": "mission_completion",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Out_Estimate",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "mission_completion"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},{
+    	  "alias": "o1",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o1"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o2",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o2"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o3",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o3"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o4",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o4"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o5",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o5"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o6",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o6"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o7",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o7"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o8",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o8"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	}
+      ],
+      "aliasColors": {
+      "mission_completion" : "#d1b26f",
+      "o1" : "#2242c7",
+      "o2" : "#00ffff",
+      "o3" : "#533cc6",
+      "o4" : "#13eac9",
+      "o5" : "#9bb53c",
+      "o6" : "#06470c",
+      "o7" : "#05ffa6",
+      "o8" : "#ae7181"
+      },
+      "seriesOverrides": [
+      {
+       "alias": "o9",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o10",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o11",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o12",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o13",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o14",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o15",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o16",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o17",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o1",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o2",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o3",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o4",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o5",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o6",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o7",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o8",
+       "nullPointMode": "null"	  	
+      }
+      ],      
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "mission_completion",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${RoqmeSystemWebotsIntralogistics}",
+      "fill": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 36
+      },
+      "id": 4,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "nullPointMode": "connected",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+    	{
+    	  "alias": "power_autonomy",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Out_Estimate",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "power_autonomy"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},{
+    	  "alias": "o18",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o18"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o19",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o19"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o20",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o20"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o21",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o21"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o22",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o22"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o23",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o23"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	}
+      ],
+      "aliasColors": {
+      "power_autonomy" : "#1f6357",
+      "o18" : "#35063e",
+      "o19" : "#017374",
+      "o20" : "#01ff07",
+      "o21" : "#0cb577",
+      "o22" : "#650021",
+      "o23" : "#ff0789"
+      },
+      "seriesOverrides": [
+      {
+       "alias": "o9",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o10",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o11",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o12",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o13",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o14",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o15",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o16",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o17",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o1",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o2",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o3",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o4",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o5",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o6",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o7",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o8",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o18",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o19",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o20",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o21",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o22",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o23",
+       "nullPointMode": "null"	  	
+      }
+      ],      
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "power_autonomy",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+  }
+  ],
+  "refresh": "1s",
+  "schemaVersion": 16,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "1s",
+      "2s",
+      "5s",
+      "0s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "",
+  "title": "RoQME",
+  "uid": "hcRqpXTmk",
+  "version": 24
+}
