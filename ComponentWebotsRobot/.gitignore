@@ -2,6 +2,9 @@
 # Specific rules #
 ##################
 
+*.log
+*.csv
+/src-gen/*
 
 # untracked files
 BatteryEventServiceOutEventTestHandler.*
