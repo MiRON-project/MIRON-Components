@@ -9,11 +9,11 @@ EstimateListener::EstimateListener(EstimateActivity* activity)
 
 void EstimateListener::dataAvailable(const RoqmeDDSTopics::RoqmeEstimate& data, const dds::sub::SampleInfo& sampleInfo)
 {
-	/*
-	std::cout << "ESTIMATE sample available:" << std::endl;
+
+	/*std::cout << "ESTIMATE sample available:" << std::endl;
 	std::cout << "\t name: " << data.name() << std::endl;
 	std::cout << "\t value: " << data.value() << std::endl;
-	*/
+*/
 
 	CommRoqmeEstimate::RoqmeEstimate estimate;
 	estimate.setName(data.name());

@@ -15,20 +15,31 @@ SimpleWantedPeoplePushServiceInHandlerWantedPersonFound::~SimpleWantedPeoplePush
 
 void SimpleWantedPeoplePushServiceInHandlerWantedPersonFound::on_SimpleWantedPeoplePushServiceInWantedPersonFound(const CommObjectRecognitionObjects::SimpleRecognitionState &input)
 {
-	
-	try
-	{
-		RoqmeDDSTopics::RoqmeBoolContext booleanContext;
-		booleanContext.name("WantedPersonFound");
-		booleanContext.value().push_back(input.getIs_visible());
-		unsigned long long now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-		std::cout << now << " - WantedPersonFound - " << input.getIs_visible() << std::endl;
-		boolean_dw.write(booleanContext);
+	static bool first_execution = true;
+	bool current_value = input.getIs_visible();
+
+	if(first_execution || (!first_execution && previous_value != current_value)){
+		try
+		{
+			RoqmeDDSTopics::RoqmeBoolContext booleanContext;
+			booleanContext.name("WantedPersonFound");
+			booleanContext.value().push_back(input.getIs_visible());
+			boolean_dw.write(booleanContext);
+#ifdef ROQME_DEBUG
+			if(input.getIs_visible())
+				roqmeOut.roqmeDebug(Roqme::RoqmeDebug::ContextType::BOOLEAN, "WantedPersonFound", "true");
+			else
+				roqmeOut.roqmeDebug(Roqme::RoqmeDebug::ContextType::BOOLEAN, "WantedPersonFound", "false");
+#else
+			unsigned long long now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+			std::cout << now << " - WantedPersonFound - " << input.getIs_visible() << std::endl;
+#endif
+			previous_value = current_value;
+			first_execution = false;
+		}
+		catch(Roqme::RoqmeDDSException& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
 	}
-	catch(Roqme::RoqmeDDSException& e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
-	
-	
 }

@@ -5,6 +5,9 @@
 
 #include "BatteryPushServiceInHandlerBatteryLevelCore.hh"
 #include <RoqmeWriterImpl.h>
+#ifdef ROQME_DEBUG
+#include <RoqmeDebug.h>
+#endif
 	
 class BatteryPushServiceInHandlerBatteryLevel : public BatteryPushServiceInHandlerBatteryLevelCore
 {		
@@ -15,7 +18,11 @@ public:
 	virtual void on_BatteryPushServiceInBatteryLevel(const CommBasicObjects::CommBatteryLevel &input);
 	
 private:
-	Roqme::RoqmeDoubleWriter int32_dw;
+	Roqme::RoqmeDoubleWriter contextWr;
+#ifdef ROQME_DEBUG
+	Roqme::RoqmeDebug roqmeOut;
+#endif
+	double previous_value;
 };
 
 #endif

@@ -3,6 +3,10 @@
 	<name>QoSMetricProvider</name>
 	<comment></comment>
 	<projects>
+		<project>CommBasicObjects</project>
+		<project>CommNavigationObjects</project>
+		<project>CommObjectRecognitionObjects</project>
+		<project>CommRoqmeEstimate</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

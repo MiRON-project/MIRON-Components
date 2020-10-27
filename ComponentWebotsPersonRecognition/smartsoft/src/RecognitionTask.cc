@@ -234,6 +234,7 @@ void RecognitionTask::comparePeopleJson()
       wanted_person_state.setObject_id({(unsigned int)people[i].getId()});
       simple_wanted_state.setIds({(unsigned int)people[i].getId()});
       simple_wanted_state.setIs_visible(true);
+      std::cout << "Wanted person found!" << std::endl;
     }
     ids.push_back(people[i].getId());
   }
@@ -254,6 +255,8 @@ void RecognitionTask::comparePeopleJson()
   people_out.setIs_valid(true);
   people_out.setPeople(people);
   checkBump(people_out);
+  if(people.size() > 0)
+	  std::cout << "Número de personas detectadas: " << people.size() << std::endl;
   peoplePushServiceOutPut(people_out);
 }
 
@@ -297,6 +300,7 @@ void RecognitionTask::checkBump(const CommObjectRecognitionObjects::CommPeople &
                pow(people.getPose().get_y(1) - pose.getBasePose().get_y(1), 2)) <
           people_bump_threshold_)
       {
+    	std::cout << "Person bumped!!!" << std::endl;
         ids.push_back(people.getId());
         bump_state.setState(CommObjectRecognitionObjects::ObjectBumpState::BUMP);
         simple_bump_state.setIs_bumped(true);

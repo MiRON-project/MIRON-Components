@@ -5,6 +5,9 @@
 
 #include "BatteryPushServiceInHandlerBatteryChargingCore.hh"
 #include <RoqmeWriterImpl.h>
+#ifdef ROQME_DEBUG
+#include <RoqmeDebug.h>
+#endif
 	
 class BatteryPushServiceInHandlerBatteryCharging : public BatteryPushServiceInHandlerBatteryChargingCore
 {		
@@ -16,6 +19,10 @@ public:
 	
 private:
 	Roqme::RoqmeBoolWriter boolean_dw;
+#ifdef ROQME_DEBUG
+	Roqme::RoqmeDebug roqmeOut;
+#endif
+	bool previous_value;
 };
 
 #endif
