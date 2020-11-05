@@ -19,9 +19,9 @@
 	],
 	"observations" : [
 		{
-			"name" : "o1",
+			"name" : "o1_ms",
 			"influence" : "reinforces",
-			"strength" : "very_high",
+			"strength" : "medium",
 			"property" : "mission_completion",
 			"survival" : {
 				"value" : 10000,
@@ -29,9 +29,9 @@
 			}
 		},
 		{
-			"name" : "o2",
+			"name" : "o2_ms",
 			"influence" : "reinforces",
-			"strength" : "low",
+			"strength" : "medium",
 			"property" : "mission_completion",
 			"survival" : {
 				"value" : 10000,
@@ -39,7 +39,7 @@
 			}
 		},
 		{
-			"name" : "o3",
+			"name" : "o3_ms",
 			"influence" : "reinforces",
 			"strength" : "low",
 			"property" : "mission_completion",
@@ -49,7 +49,7 @@
 			}
 		},	
 		{
-			"name" : "o4",
+			"name" : "o4_ms",
 			"influence" : "reinforces",
 			"strength" : "low",
 			"property" : "mission_completion",
@@ -59,7 +59,7 @@
 			}
 		},
 		{
-			"name" : "o5",
+			"name" : "o5_ms",
 			"influence" : "undermines",
 			"strength" : "very_high",
 			"property" : "mission_completion",
@@ -69,9 +69,9 @@
 			}
 		},		
 		{
-			"name" : "o6",
+			"name" : "o6_ms",
 			"influence" : "undermines",
-			"strength" : "medium",
+			"strength" : "low",
 			"property" : "mission_completion",
 			"survival" : {
 				"value" : 10000,
@@ -79,7 +79,7 @@
 			}
 		},	
 		{
-			"name" : "o7",
+			"name" : "o7_ms",
 			"influence" : "undermines",
 			"strength" : "low",
 			"property" : "mission_completion",
@@ -89,17 +89,7 @@
 			}
 		},
 		{
-			"name" : "o8",
-			"influence" : "undermines",
-			"strength" : "low",
-			"property" : "mission_completion",
-			"survival" : {
-				"value" : 10000,
-				"unit" : "seconds"
-			}
-		},
-		{
-			"name" : "o9",
+			"name" : "o1_s",
 			"influence" : "reinforces",
 			"strength" : "very_low",
 			"property" : "safety",
@@ -108,8 +98,8 @@
 				"unit" : "seconds"
 			}
 		},		
-				{
-			"name" : "o10",
+		{
+			"name" : "o2_s",
 			"influence" : "reinforces",
 			"strength" : "medium",
 			"property" : "safety",
@@ -119,17 +109,7 @@
 			}
 		},
 		{
-			"name" : "o11",
-			"influence" : "reinforces",
-			"strength" : "high",
-			"property" : "safety",
-			"survival" : {
-				"value" : 10000,
-				"unit" : "seconds"
-			}
-		},
-		{
-			"name" : "o12",
+			"name" : "o3_s",
 			"influence" : "reinforces",
 			"strength" : "medium",
 			"property" : "safety",
@@ -139,9 +119,29 @@
 			}
 		},
 		{
-			"name" : "o13",
+			"name" : "o4_s",
 			"influence" : "reinforces",
-			"strength" : "high",
+			"strength" : "medium",
+			"property" : "safety",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o5_s",
+			"influence" : "reinforces",
+			"strength" : "medium",
+			"property" : "safety",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o6_s",
+			"influence" : "reinforces",
+			"strength" : "medium",
 			"property" : "safety",
 			"survival" : {
 				"value" : 10000,
@@ -150,7 +150,7 @@
 		},
 
 		{
-			"name" : "o14",
+			"name" : "o7_s",
 			"influence" : "reinforces",
 			"strength" : "medium",
 			"property" : "safety",
@@ -160,27 +160,7 @@
 			}
 		},
 		{
-			"name" : "o15",
-			"influence" : "reinforces",
-			"strength" : "medium",
-			"property" : "safety",
-			"survival" : {
-				"value" : 10000,
-				"unit" : "seconds"
-			}
-		},
-		{
-			"name" : "o16",
-			"influence" : "reinforces",
-			"strength" : "medium",
-			"property" : "safety",
-			"survival" : {
-				"value" : 10000,
-				"unit" : "seconds"
-			}
-		},
-		{
-			"name" : "o17",
+			"name" : "o8_s",
 			"influence" : "reinforces",
 			"strength" : "low",
 			"property" : "safety",
@@ -190,7 +170,17 @@
 			}
 		},
 		{
-			"name" : "o18",
+			"name" : "09_s",
+			"influence" : "reinforces",
+			"strength" : "low",
+			"property" : "safety",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o10_s",
 			"influence" : "undermines",
 			"strength" : "medium",
 			"property" : "safety",
@@ -200,7 +190,7 @@
 			}
 		},
 		{
-			"name" : "o19",
+			"name" : "o11_s",
 			"influence" : "undermines",
 			"strength" : "medium",
 			"property" : "safety",
@@ -210,7 +200,7 @@
 			}
 		},
 		{
-			"name" : "o20",
+			"name" : "o12_s",
 			"influence" : "undermines",
 			"strength" : "medium",
 			"property" : "safety",
@@ -220,7 +210,7 @@
 			}
 		},
 		{
-			"name" : "o21",
+			"name" : "o13_s",
 			"influence" : "undermines",
 			"strength" : "medium",
 			"property" : "safety",
@@ -230,7 +220,27 @@
 			}
 		},
 		{
-			"name" : "o22",
+			"name" : "o14_s",
+			"influence" : "undermines",
+			"strength" : "medium",
+			"property" : "safety",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o15_s",
+			"influence" : "undermines",
+			"strength" : "medium",
+			"property" : "safety",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o16_s",
 			"influence" : "undermines",
 			"strength" : "high",
 			"property" : "safety",
@@ -238,39 +248,8 @@
 				"value" : 10000,
 				"unit" : "seconds"
 			}
-		},
-		{
-			"name" : "o23",
-			"influence" : "undermines",
-			"strength" : "medium",
-			"property" : "safety",
-			"survival" : {
-				"value" : 10000,
-				"unit" : "seconds"
-			}
-		},
-		{
-			"name" : "o24",
-			"influence" : "undermines",
-			"strength" : "high",
-			"property" : "safety",
-			"survival" : {
-				"value" : 10000,
-				"unit" : "seconds"
-			}
-		},
-		{
-			"name" : "o25",
-			"influence" : "undermines",
-			"strength" : "high",
-			"property" : "safety",
-			"survival" : {
-				"value" : 10000,
-				"unit" : "seconds"
-			}
-		},
-		{
-			"name" : "o26",
+		},		{
+			"name" : "o1_pa",
 			"influence" : "reinforces",
 			"strength" : "medium",
 			"property" : "power_autonomy",
@@ -280,7 +259,7 @@
 			}
 		},
 		{
-			"name" : "o27",
+			"name" : "o2_pa",
 			"influence" : "reinforces",
 			"strength" : "low",
 			"property" : "power_autonomy",
@@ -290,7 +269,7 @@
 			}
 		},
 		{
-			"name" : "o28",
+			"name" : "o3_pa",
 			"influence" : "undermines",
 			"strength" : "low",
 			"property" : "power_autonomy",
@@ -300,7 +279,7 @@
 			}
 		},
 		{
-			"name" : "o29",
+			"name" : "o4_pa",
 			"influence" : "undermines",
 			"strength" : "medium",
 			"property" : "power_autonomy",
@@ -310,7 +289,37 @@
 			}
 		},
 		{
-			"name" : "o30",
+			"name" : "o5_pa",
+			"influence" : "undermines",
+			"strength" : "medium",
+			"property" : "power_autonomy",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o6_pa",
+			"influence" : "undermines",
+			"strength" : "low",
+			"property" : "power_autonomy",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o7_pa",
+			"influence" : "undermines",
+			"strength" : "medium",
+			"property" : "power_autonomy",
+			"survival" : {
+				"value" : 10000,
+				"unit" : "seconds"
+			}
+		},
+		{
+			"name" : "o8_pa",
 			"influence" : "undermines",
 			"strength" : "high",
 			"property" : "power_autonomy",
@@ -320,7 +329,7 @@
 			}
 		},
 		{
-			"name" : "o31",
+			"name" : "o9_pa",
 			"influence" : "undermines",
 			"strength" : "very_high",
 			"property" : "power_autonomy",

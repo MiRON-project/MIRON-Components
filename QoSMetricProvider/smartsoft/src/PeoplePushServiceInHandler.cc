@@ -38,7 +38,7 @@ void PeoplePushServiceInHandler::on_PeoplePushServiceIn(const CommObjectRecognit
 
 	const size_t &peopleSize = input.getPeopleSize();
 
-	if(peopleSize >= 4) {
+	if(peopleSize >= 3) {
 		current_value = "FULL";
 	}
 	else if (peopleSize >= 1) {

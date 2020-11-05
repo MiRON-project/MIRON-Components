@@ -7,74 +7,56 @@ roqme RoqmeSystemWebotsIntralogistics
 context RobotBump : boolean
 context PersonBump : boolean
 context ObjectBump : boolean
-
-context WantedPersonFound : boolean
 context AvailableSpace : enum { HIGH, HALF, LOW }
 context PayLoadWeight : enum { HIGH, HALF, LOW }
 context PeopleInRoom : enum {FULL, HALF, EMPTY}
-
 context BatteryLevel : number
 context BatteryCharging : boolean
 context ObjectIdentified : boolean
 context SearchingPerson : boolean
-
 context DistanceToGoal : number
+
 property safety reference 1
 property mission_completion reference 0.5
 property power_autonomy reference 1
 
-observation o1 : 	eventWhen(WantedPersonFound) reinforces mission_completion veryhigh
 
-observation o2 :  	eventWhen(!WantedPersonFound) and eventWhen(!PeopleInRoom::EMPTY) reinforces mission_completion low 
-observation o3 : 	eventWhen(ObjectIdentified) reinforces mission_completion low
-observation o4 : 	eventWhen(BatteryLevel >= 20) reinforces mission_completion low
-observation o5 : 	eventWhen(BatteryCharging) undermines mission_completion veryhigh
-observation o6 : 	eventWhen(!WantedPersonFound) or eventWhen(PeopleInRoom::EMPTY) undermines mission_completion
-observation o7 : 	eventWhen (BatteryLevel < 20) undermines mission_completion low
-observation o8 :  	eventWhen(RobotBump) or eventWhen(PersonBump)  undermines mission_completion low
+// Mission completion
+observation o1_ms : (AvailableSpace::HIGH -> AvailableSpace::HALF) reinforces mission_completion 
+observation o2_ms :	(AvailableSpace::HALF -> AvailableSpace::LOW) reinforces mission_completion  
+observation o3_ms : eventWhen(ObjectIdentified) reinforces mission_completion low
+observation o4_ms : eventWhen(BatteryLevel >= 20) reinforces mission_completion low
+observation o5_ms : eventWhen(BatteryCharging) undermines mission_completion veryhigh
+observation o6_ms : eventWhen (BatteryLevel < 20) undermines mission_completion low
+observation o7_ms : eventWhen(RobotBump) or eventWhen(PersonBump)  undermines mission_completion low
 
-observation o9 : 	eventWhen(ObjectIdentified) reinforces safety verylow
-
-observation o10 : 	(PayLoadWeight::HIGH -> PayLoadWeight::HALF) or
-					(PayLoadWeight::HALF -> PayLoadWeight::LOW)	 reinforces safety
-observation o11 : 	(PayLoadWeight::HIGH -> PayLoadWeight::LOW)	reinforces safety high
-					
-observation o12:	(AvailableSpace::LOW -> AvailableSpace::HALF) or
-					(AvailableSpace::HALF -> AvailableSpace::HIGH) reinforces safety
-observation o13 :	(AvailableSpace::LOW -> AvailableSpace::HIGH) reinforces safety high
-					
-observation o14 : 	eventWhen(PeopleInRoom::EMPTY) or (PeopleInRoom::HALF -> PeopleInRoom::EMPTY) reinforces safety 
-observation o15 :  	(PeopleInRoom::FULL -> PeopleInRoom::HALF) reinforces safety	
-observation o16 :  	(PeopleInRoom::FULL -> PeopleInRoom::EMPTY)  reinforces safety
-
-observation o17 : 	(RobotBump -> !RobotBump) or (PersonBump -> !PersonBump) reinforces safety low
-
-observation o18 : 	(PeopleInRoom::HALF range(1,1)) or (PeopleInRoom::EMPTY -> PeopleInRoom::HALF) undermines safety
-observation o19:  	eventWhen(PeopleInRoom::FULL) or (PeopleInRoom::HALF -> PeopleInRoom::FULL) undermines safety
-observation o20 : 	(PeopleInRoom::EMPTY -> PeopleInRoom::FULL) undermines safety
-					 	
-					 	
-observation o21 :   (PayLoadWeight::LOW -> PayLoadWeight::HALF) or
-					(PayLoadWeight::HALF -> PayLoadWeight::HIGH) undermines safety
-observation o22 :	(PayLoadWeight::LOW -> PayLoadWeight::HIGH) undermines safety high
-					
-observation o23 :   (AvailableSpace::HIGH -> AvailableSpace::HALF) or 
-					(AvailableSpace::HALF -> AvailableSpace::LOW) undermines safety
-observation o24 : 	(AvailableSpace::HIGH -> AvailableSpace::LOW) undermines safety high
-
-observation o25 : 	eventWhen(PersonBump) or eventWhen(RobotBump)  undermines safety high
-				
-observation o26 : 	BatteryCharging and (eventWhen (BatteryLevel=25) or eventWhen(BatteryLevel=50) or eventWhen(BatteryLevel=75) or eventWhen(BatteryLevel=100)) reinforces power_autonomy
-observation o27 : 	(PayLoadWeight::HALF -> PayLoadWeight::LOW) or
-					(PayLoadWeight::HIGH -> PayLoadWeight::HALF) reinforces power_autonomy low
-observation o28 :	(eventWhen(BatteryLevel >= 90) and eventWhen(BatteryLevel < 100)) or 	
+//Safety
+observation o1_s : 	eventWhen(ObjectIdentified) reinforces safety verylow
+observation o2_s : 	(PayLoadWeight::HIGH -> PayLoadWeight::HALF) reinforces safety
+observation o3_s :	(PayLoadWeight::HALF -> PayLoadWeight::LOW)	 reinforces safety	
+observation o4_s :	(AvailableSpace::LOW -> AvailableSpace::HALF) reinforces safety
+observation o5_s :	(AvailableSpace::HALF -> AvailableSpace::HIGH) reinforces safety
+observation o6_s : 	eventWhen(PeopleInRoom::EMPTY) or (PeopleInRoom::HALF -> PeopleInRoom::EMPTY)reinforces safety
+observation o7_s :  (PeopleInRoom::FULL -> PeopleInRoom::HALF) reinforces safety	
+observation o8_s :	(RobotBump -> !RobotBump) reinforces safety low
+observation o9_s :	(PersonBump -> !PersonBump) reinforces safety low
+observation o10_s : (PeopleInRoom::HALF range(1,1)) or (PeopleInRoom::EMPTY -> PeopleInRoom::HALF)undermines safety
+observation o11_s : (PeopleInRoom::FULL range(1,1)) or (PeopleInRoom::HALF -> PeopleInRoom::FULL) undermines safety		 	
+observation o12_s : (PayLoadWeight::LOW -> PayLoadWeight::HALF) undermines safety
+observation o13_s :	(PayLoadWeight::HALF -> PayLoadWeight::HIGH) undermines safety				
+observation o14_s : (AvailableSpace::HIGH -> AvailableSpace::HALF) undermines safety 
+observation o15_s :	(AvailableSpace::HALF -> AvailableSpace::LOW) undermines safety
+observation o16_s :  eventWhen(PersonBump) or eventWhen(RobotBump)  undermines safety high
+	
+//Power autonomy				
+observation o1_pa : BatteryCharging and (eventWhen (BatteryLevel=25) or eventWhen(BatteryLevel=50) or eventWhen(BatteryLevel=75) or eventWhen(BatteryLevel=100)) reinforces power_autonomy
+observation o2_pa : (PayLoadWeight::HALF -> PayLoadWeight::LOW) reinforces power_autonomy low
+observation o3_pa : (PayLoadWeight::HIGH -> PayLoadWeight::HALF) reinforces power_autonomy low
+observation o4_pa :	(PayLoadWeight::LOW -> PayLoadWeight::HALF) undermines power_autonomy
+observation o5_pa : (PayLoadWeight::HALF -> PayLoadWeight::HIGH)  undermines power_autonomy	
+observation o6_pa :	(eventWhen(BatteryLevel >= 90) and eventWhen(BatteryLevel < 100)) or 	
 					(eventWhen(BatteryLevel >= 75) and eventWhen(BatteryLevel < 90)) or
 					(eventWhen(BatteryLevel >= 50) and eventWhen(BatteryLevel < 75)) undermines power_autonomy low
-observation o29 : 	(eventWhen(BatteryLevel >= 20) and eventWhen(BatteryLevel < 50)) or
-					(PayLoadWeight::LOW -> PayLoadWeight::HALF) or
-					(PayLoadWeight::HALF -> PayLoadWeight::HIGH)  undermines power_autonomy			 
-observation o30 : 	eventWhen(BatteryLevel < 20) and eventWhen(BatteryLevel >= 10) undermines power_autonomy high
-observation o31 : 	eventWhen(BatteryLevel < 10) undermines power_autonomy veryhigh
-
- 
-					
+observation o7_pa : (eventWhen(BatteryLevel >= 20) and eventWhen(BatteryLevel < 50)) undermines power_autonomy 		 
+observation o8_pa : eventWhen(BatteryLevel < 20) and eventWhen(BatteryLevel >= 10) undermines power_autonomy high
+observation o9_pa : eventWhen(BatteryLevel < 10) undermines power_autonomy veryhigh		

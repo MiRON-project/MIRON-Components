@@ -193,43 +193,6 @@
     	  ],
     	  "tags": []
     	},
-    	{
-    	  "alias": "WantedPersonFound",
-    	  "groupBy": [
-    	    {
-    	      "params": [
-    	        "$__interval"
-    	      ],
-    	      "type": "time"
-    	    },
-    	    {
-    	      "params": [
-    	        "null"
-    	      ],
-    	      "type": "fill"
-    	    }
-    	  ],
-    	  "measurement": "In_Context",
-    	  "orderByTime": "ASC",
-    	  "policy": "default",
-    	  "refId": "A",
-    	  "resultFormat": "time_series",
-    	  "select": [
-    	    [
-    	      {
-    	        "params": [
-    	          "WantedPersonFound"
-    	        ],
-    	        "type": "field"
-    	      },
-    	      {
-    	        "params": [],
-    	        "type": "mean"
-    	      }
-    	    ]
-    	  ],
-    	  "tags": []
-    	},
     	
     	{
     	  "alias": "AvailableSpace.HIGH",
@@ -677,7 +640,7 @@
     	  ],
     	  "tags": []
     	},{
-    	  "alias": "o17",
+    	  "alias": "o9_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -701,7 +664,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o17"
+    	          "o9_s"
     	        ],
     	        "type": "field"
     	      },
@@ -714,7 +677,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o1",
+    	  "alias": "o10_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -738,7 +701,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o1"
+    	          "o10_s"
     	        ],
     	        "type": "field"
     	      },
@@ -751,7 +714,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o10",
+    	  "alias": "o1_ms",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -775,7 +738,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o10"
+    	          "o1_ms"
     	        ],
     	        "type": "field"
     	      },
@@ -788,7 +751,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o11",
+    	  "alias": "o2_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -812,7 +775,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o11"
+    	          "o2_s"
     	        ],
     	        "type": "field"
     	      },
@@ -825,7 +788,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o12",
+    	  "alias": "o5_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -849,7 +812,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o12"
+    	          "o5_s"
     	        ],
     	        "type": "field"
     	      },
@@ -862,7 +825,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o13",
+    	  "alias": "o15_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -886,7 +849,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o13"
+    	          "o15_s"
     	        ],
     	        "type": "field"
     	      },
@@ -899,7 +862,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o21",
+    	  "alias": "o16_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -923,7 +886,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o21"
+    	          "o16_s"
     	        ],
     	        "type": "field"
     	      },
@@ -936,7 +899,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o22",
+    	  "alias": "o3_pa",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -960,7 +923,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o22"
+    	          "o3_pa"
     	        ],
     	        "type": "field"
     	      },
@@ -973,7 +936,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o23",
+    	  "alias": "o5_pa",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -997,7 +960,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o23"
+    	          "o5_pa"
     	        ],
     	        "type": "field"
     	      },
@@ -1010,7 +973,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o24",
+    	  "alias": "o2_ms",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -1034,7 +997,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o24"
+    	          "o2_ms"
     	        ],
     	        "type": "field"
     	      },
@@ -1047,7 +1010,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o27",
+    	  "alias": "o3_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -1071,7 +1034,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o27"
+    	          "o3_s"
     	        ],
     	        "type": "field"
     	      },
@@ -1084,7 +1047,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o29",
+    	  "alias": "o4_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -1108,7 +1071,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o29"
+    	          "o4_s"
     	        ],
     	        "type": "field"
     	      },
@@ -1121,7 +1084,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o14",
+    	  "alias": "o7_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -1145,7 +1108,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o14"
+    	          "o7_s"
     	        ],
     	        "type": "field"
     	      },
@@ -1158,7 +1121,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o15",
+    	  "alias": "o8_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -1182,7 +1145,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o15"
+    	          "o8_s"
     	        ],
     	        "type": "field"
     	      },
@@ -1195,7 +1158,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o18",
+    	  "alias": "o11_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -1219,7 +1182,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o18"
+    	          "o11_s"
     	        ],
     	        "type": "field"
     	      },
@@ -1232,7 +1195,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o19",
+    	  "alias": "o13_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -1256,7 +1219,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o19"
+    	          "o13_s"
     	        ],
     	        "type": "field"
     	      },
@@ -1269,7 +1232,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o16",
+    	  "alias": "o14_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -1293,7 +1256,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o16"
+    	          "o14_s"
     	        ],
     	        "type": "field"
     	      },
@@ -1306,7 +1269,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o20",
+    	  "alias": "o17_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -1330,7 +1293,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o20"
+    	          "o17_s"
     	        ],
     	        "type": "field"
     	      },
@@ -1343,7 +1306,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o5",
+    	  "alias": "o2_pa",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -1367,7 +1330,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o5"
+    	          "o2_pa"
     	        ],
     	        "type": "field"
     	      },
@@ -1380,7 +1343,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o26",
+    	  "alias": "o4_pa",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -1404,7 +1367,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o26"
+    	          "o4_pa"
     	        ],
     	        "type": "field"
     	      },
@@ -1417,7 +1380,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o3",
+    	  "alias": "o6_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -1441,7 +1404,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o3"
+    	          "o6_s"
     	        ],
     	        "type": "field"
     	      },
@@ -1454,7 +1417,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o9",
+    	  "alias": "o5_ms",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -1478,7 +1441,118 @@
     	    [
     	      {
     	        "params": [
-    	          "o9"
+    	          "o5_ms"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o1_pa",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o1_pa"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o3_ms",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o3_ms"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o1_s",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o1_s"
     	        ],
     	        "type": "field"
     	      },
@@ -1495,41 +1569,43 @@
       "RobotBump" : "#7e1e9c",
         "PersonBump" : "#acc2d9",
         "ObjectBump" : "#15b01a",
-        "WantedPersonFound" : "#56ae57",
-        "AvailableSpace.HIGH" : "#0343df",
-        "AvailableSpace.HALF" : "#b2996e",
-        "AvailableSpace.LOW" : "#ff81c0",
-        "PayLoadWeight.HIGH" : "#a8ff04",
-        "PayLoadWeight.HALF" : "#653700",
-        "PayLoadWeight.LOW" : "#69d84f",
-        "PeopleInRoom.FULL" : "#e50000",
-        "PeopleInRoom.HALF" : "#894585",
-        "PeopleInRoom.EMPTY" : "#95d0fc",
-        "BatteryCharging" : "#70b23f",
-        "ObjectIdentified" : "#029386",
-        "SearchingPerson" : "#d4ffff",
-        "o17" : "#f97306",
-        "o1" : "#65ab7c",
-        "o10" : "#96f97b",
-        "o11" : "#952e8f",
-        "o12" : "#c20078",
-        "o13" : "#fcfc81",
-        "o21" : "#ffff14",
-        "o22" : "#a5a391",
-        "o23" : "#75bbfd",
-        "o24" : "#388004",
-        "o27" : "#929591",
-        "o29" : "#4c9085",
-        "o14" : "#89fe05",
-        "o15" : "#5e9b8a",
-        "o18" : "#bf77f6",
-        "o19" : "#efb435",
-        "o16" : "#9a0eea",
-        "o20" : "#d99b82",
-        "o5" : "#033500",
-        "o26" : "#0a5f38",
-        "o3" : "#06c2ac",
-        "o9" : "#0c06f7"
+        "AvailableSpace.HIGH" : "#56ae57",
+        "AvailableSpace.HALF" : "#0343df",
+        "AvailableSpace.LOW" : "#b2996e",
+        "PayLoadWeight.HIGH" : "#ff81c0",
+        "PayLoadWeight.HALF" : "#a8ff04",
+        "PayLoadWeight.LOW" : "#653700",
+        "PeopleInRoom.FULL" : "#69d84f",
+        "PeopleInRoom.HALF" : "#e50000",
+        "PeopleInRoom.EMPTY" : "#894585",
+        "BatteryCharging" : "#95d0fc",
+        "ObjectIdentified" : "#70b23f",
+        "SearchingPerson" : "#029386",
+        "o9_s" : "#d4ffff",
+        "o10_s" : "#f97306",
+        "o1_ms" : "#65ab7c",
+        "o2_s" : "#96f97b",
+        "o5_s" : "#952e8f",
+        "o15_s" : "#c20078",
+        "o16_s" : "#fcfc81",
+        "o3_pa" : "#ffff14",
+        "o5_pa" : "#a5a391",
+        "o2_ms" : "#75bbfd",
+        "o3_s" : "#388004",
+        "o4_s" : "#929591",
+        "o7_s" : "#4c9085",
+        "o8_s" : "#89fe05",
+        "o11_s" : "#5e9b8a",
+        "o13_s" : "#bf77f6",
+        "o14_s" : "#efb435",
+        "o17_s" : "#9a0eea",
+        "o2_pa" : "#d99b82",
+        "o4_pa" : "#033500",
+        "o6_s" : "#0a5f38",
+        "o5_ms" : "#06c2ac",
+        "o1_pa" : "#0c06f7",
+        "o3_ms" : "#c79fef",
+        "o1_s" : "#61de2a"
       },
       "thresholds": [],
       "timeFrom": null,
@@ -1642,7 +1718,7 @@
     	  ],
     	  "tags": []
     	},{
-    	  "alias": "o4",
+    	  "alias": "o4_ms",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -1666,7 +1742,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o4"
+    	          "o4_ms"
     	        ],
     	        "type": "field"
     	      },
@@ -1679,7 +1755,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o7",
+    	  "alias": "o6_ms",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -1703,7 +1779,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o7"
+    	          "o6_ms"
     	        ],
     	        "type": "field"
     	      },
@@ -1716,7 +1792,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o31",
+    	  "alias": "o9_pa",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -1740,7 +1816,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o31"
+    	          "o9_pa"
     	        ],
     	        "type": "field"
     	      },
@@ -1754,20 +1830,20 @@
     	}
       ],
       "aliasColors": {
-      "BatteryLevel" : "#c79fef",
-        "o4" : "#61de2a",
-        "o7" : "#00035b",
-        "o31" : "#3778bf"
+      "BatteryLevel" : "#00035b",
+        "o4_ms" : "#3778bf",
+        "o6_ms" : "#d1b26f",
+        "o9_pa" : "#2242c7"
       },
       "seriesOverrides": [
       {
-       "alias": "o4",
+       "alias": "o4_ms",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o7",
+       "alias": "o6_ms",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o31",
+       "alias": "o9_pa",
        "nullPointMode": "null"	  	
       }
       ],
@@ -1884,17 +1960,17 @@
     	}
       ],
       "aliasColors": {
-      "DistanceToGoal" : "#d1b26f"
+      "DistanceToGoal" : "#00ffff"
       },
       "seriesOverrides": [
       {
-       "alias": "o4",
+       "alias": "o4_ms",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o7",
+       "alias": "o6_ms",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o31",
+       "alias": "o9_pa",
        "nullPointMode": "null"	  	
       }
       ],
@@ -2009,7 +2085,7 @@
     	  ],
     	  "tags": []
     	},{
-    	  "alias": "o9",
+    	  "alias": "o1_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2033,7 +2109,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o9"
+    	          "o1_s"
     	        ],
     	        "type": "field"
     	      },
@@ -2046,7 +2122,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o10",
+    	  "alias": "o2_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2070,7 +2146,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o10"
+    	          "o2_s"
     	        ],
     	        "type": "field"
     	      },
@@ -2083,7 +2159,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o11",
+    	  "alias": "o3_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2107,7 +2183,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o11"
+    	          "o3_s"
     	        ],
     	        "type": "field"
     	      },
@@ -2120,7 +2196,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o12",
+    	  "alias": "o4_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2144,7 +2220,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o12"
+    	          "o4_s"
     	        ],
     	        "type": "field"
     	      },
@@ -2157,7 +2233,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o13",
+    	  "alias": "o5_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2181,7 +2257,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o13"
+    	          "o5_s"
     	        ],
     	        "type": "field"
     	      },
@@ -2194,7 +2270,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o14",
+    	  "alias": "o6_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2218,7 +2294,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o14"
+    	          "o6_s"
     	        ],
     	        "type": "field"
     	      },
@@ -2231,7 +2307,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o15",
+    	  "alias": "o7_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2255,7 +2331,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o15"
+    	          "o7_s"
     	        ],
     	        "type": "field"
     	      },
@@ -2268,7 +2344,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o16",
+    	  "alias": "o8_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2292,7 +2368,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o16"
+    	          "o8_s"
     	        ],
     	        "type": "field"
     	      },
@@ -2305,7 +2381,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o17",
+    	  "alias": "o9_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2329,7 +2405,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o17"
+    	          "o9_s"
     	        ],
     	        "type": "field"
     	      },
@@ -2342,7 +2418,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o18",
+    	  "alias": "o10_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2366,7 +2442,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o18"
+    	          "o10_s"
     	        ],
     	        "type": "field"
     	      },
@@ -2379,7 +2455,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o19",
+    	  "alias": "o11_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2403,7 +2479,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o19"
+    	          "o11_s"
     	        ],
     	        "type": "field"
     	      },
@@ -2416,7 +2492,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o20",
+    	  "alias": "o13_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2440,7 +2516,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o20"
+    	          "o13_s"
     	        ],
     	        "type": "field"
     	      },
@@ -2453,7 +2529,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o21",
+    	  "alias": "o14_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2477,7 +2553,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o21"
+    	          "o14_s"
     	        ],
     	        "type": "field"
     	      },
@@ -2490,7 +2566,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o22",
+    	  "alias": "o15_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2514,7 +2590,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o22"
+    	          "o15_s"
     	        ],
     	        "type": "field"
     	      },
@@ -2527,7 +2603,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o23",
+    	  "alias": "o16_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2551,7 +2627,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o23"
+    	          "o16_s"
     	        ],
     	        "type": "field"
     	      },
@@ -2564,7 +2640,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o24",
+    	  "alias": "o17_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2588,7 +2664,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o24"
+    	          "o17_s"
     	        ],
     	        "type": "field"
     	      },
@@ -2601,7 +2677,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o25",
+    	  "alias": "o18_s",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2625,7 +2701,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o25"
+    	          "o18_s"
     	        ],
     	        "type": "field"
     	      },
@@ -2639,76 +2715,76 @@
     	}
       ],
       "aliasColors": {
-      "safety" : "#2242c7",
-      "o9" : "#00ffff",
-      "o10" : "#533cc6",
-      "o11" : "#13eac9",
-      "o12" : "#9bb53c",
-      "o13" : "#06470c",
-      "o14" : "#05ffa6",
-      "o15" : "#ae7181",
-      "o16" : "#1f6357",
-      "o17" : "#35063e",
-      "o18" : "#017374",
-      "o19" : "#01ff07",
-      "o20" : "#0cb577",
-      "o21" : "#650021",
-      "o22" : "#ff0789",
-      "o23" : "#6e750e",
-      "o24" : "#afa88b",
-      "o25" : "#ff796c"
+      "safety" : "#533cc6",
+      "o1_s" : "#13eac9",
+      "o2_s" : "#9bb53c",
+      "o3_s" : "#06470c",
+      "o4_s" : "#05ffa6",
+      "o5_s" : "#ae7181",
+      "o6_s" : "#1f6357",
+      "o7_s" : "#35063e",
+      "o8_s" : "#017374",
+      "o9_s" : "#01ff07",
+      "o10_s" : "#0cb577",
+      "o11_s" : "#650021",
+      "o13_s" : "#ff0789",
+      "o14_s" : "#6e750e",
+      "o15_s" : "#afa88b",
+      "o16_s" : "#ff796c",
+      "o17_s" : "#08787f",
+      "o18_s" : "#e6daa6"
       },
       "seriesOverrides": [
       {
-       "alias": "o9",
+       "alias": "o1_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o10",
+       "alias": "o2_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o11",
+       "alias": "o3_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o12",
+       "alias": "o4_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o13",
+       "alias": "o5_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o14",
+       "alias": "o6_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o15",
+       "alias": "o7_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o16",
+       "alias": "o8_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o17",
+       "alias": "o9_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o18",
+       "alias": "o10_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o19",
+       "alias": "o11_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o20",
+       "alias": "o13_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o21",
+       "alias": "o14_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o22",
+       "alias": "o15_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o23",
+       "alias": "o16_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o24",
+       "alias": "o17_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o25",
+       "alias": "o18_s",
        "nullPointMode": "null"	  	
       }
       ],      
@@ -2823,7 +2899,7 @@
     	  ],
     	  "tags": []
     	},{
-    	  "alias": "o1",
+    	  "alias": "o1_ms",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2847,7 +2923,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o1"
+    	          "o1_ms"
     	        ],
     	        "type": "field"
     	      },
@@ -2860,7 +2936,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o2",
+    	  "alias": "o2_ms",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2884,7 +2960,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o2"
+    	          "o2_ms"
     	        ],
     	        "type": "field"
     	      },
@@ -2897,7 +2973,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o3",
+    	  "alias": "o3_ms",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2921,7 +2997,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o3"
+    	          "o3_ms"
     	        ],
     	        "type": "field"
     	      },
@@ -2934,7 +3010,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o4",
+    	  "alias": "o4_ms",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2958,7 +3034,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o4"
+    	          "o4_ms"
     	        ],
     	        "type": "field"
     	      },
@@ -2971,7 +3047,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o5",
+    	  "alias": "o5_ms",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -2995,7 +3071,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o5"
+    	          "o5_ms"
     	        ],
     	        "type": "field"
     	      },
@@ -3008,7 +3084,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o6",
+    	  "alias": "o6_ms",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -3032,7 +3108,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o6"
+    	          "o6_ms"
     	        ],
     	        "type": "field"
     	      },
@@ -3045,7 +3121,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o7",
+    	  "alias": "o7_ms",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -3069,44 +3145,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o7"
-    	        ],
-    	        "type": "field"
-    	      },
-    	      {
-    	        "params": [],
-    	        "type": "mean"
-    	      }
-    	    ]
-    	  ],
-    	  "tags": []
-    	},
-    	{
-    	  "alias": "o8",
-    	  "groupBy": [
-    	    {
-    	      "params": [
-    	        "$__interval"
-    	      ],
-    	      "type": "time"
-    	    },
-    	    {
-    	      "params": [
-    	        "null"
-    	      ],
-    	      "type": "fill"
-    	    }
-    	  ],
-    	  "measurement": "Observation",
-    	  "orderByTime": "ASC",
-    	  "policy": "default",
-    	  "refId": "A",
-    	  "resultFormat": "time_series",
-    	  "select": [
-    	    [
-    	      {
-    	        "params": [
-    	          "o8"
+    	          "o7_ms"
     	        ],
     	        "type": "field"
     	      },
@@ -3120,91 +3159,87 @@
     	}
       ],
       "aliasColors": {
-      "mission_completion" : "#08787f",
-      "o1" : "#e6daa6",
-      "o2" : "#dd85d7",
-      "o3" : "#0504aa",
-      "o4" : "#a6c875",
-      "o5" : "#001146",
-      "o6" : "#a7ffb5",
-      "o7" : "#cea2fd",
-      "o8" : "#c2b709"
+      "mission_completion" : "#dd85d7",
+      "o1_ms" : "#0504aa",
+      "o2_ms" : "#a6c875",
+      "o3_ms" : "#001146",
+      "o4_ms" : "#a7ffb5",
+      "o5_ms" : "#cea2fd",
+      "o6_ms" : "#c2b709",
+      "o7_ms" : "#000000"
       },
       "seriesOverrides": [
       {
-       "alias": "o9",
+       "alias": "o1_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o10",
+       "alias": "o2_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o11",
+       "alias": "o3_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o12",
+       "alias": "o4_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o13",
+       "alias": "o5_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o14",
+       "alias": "o6_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o15",
+       "alias": "o7_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o16",
+       "alias": "o8_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o17",
+       "alias": "o9_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o18",
+       "alias": "o10_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o19",
+       "alias": "o11_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o20",
+       "alias": "o13_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o21",
+       "alias": "o14_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o22",
+       "alias": "o15_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o23",
+       "alias": "o16_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o24",
+       "alias": "o17_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o25",
+       "alias": "o18_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o1",
+       "alias": "o1_ms",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o2",
+       "alias": "o2_ms",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o3",
+       "alias": "o3_ms",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o4",
+       "alias": "o4_ms",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o5",
+       "alias": "o5_ms",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o6",
+       "alias": "o6_ms",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o7",
-       "nullPointMode": "null"	  	
-      },  {
-       "alias": "o8",
+       "alias": "o7_ms",
        "nullPointMode": "null"	  	
       }
       ],      
@@ -3319,7 +3354,7 @@
     	  ],
     	  "tags": []
     	},{
-    	  "alias": "o26",
+    	  "alias": "o1_pa",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -3343,7 +3378,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o26"
+    	          "o1_pa"
     	        ],
     	        "type": "field"
     	      },
@@ -3356,7 +3391,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o27",
+    	  "alias": "o2_pa",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -3380,7 +3415,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o27"
+    	          "o2_pa"
     	        ],
     	        "type": "field"
     	      },
@@ -3393,7 +3428,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o28",
+    	  "alias": "o3_pa",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -3417,7 +3452,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o28"
+    	          "o3_pa"
     	        ],
     	        "type": "field"
     	      },
@@ -3430,7 +3465,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o29",
+    	  "alias": "o4_pa",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -3454,7 +3489,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o29"
+    	          "o4_pa"
     	        ],
     	        "type": "field"
     	      },
@@ -3467,7 +3502,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o30",
+    	  "alias": "o5_pa",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -3491,7 +3526,7 @@
     	    [
     	      {
     	        "params": [
-    	          "o30"
+    	          "o5_pa"
     	        ],
     	        "type": "field"
     	      },
@@ -3504,7 +3539,7 @@
     	  "tags": []
     	},
     	{
-    	  "alias": "o31",
+    	  "alias": "o6_pa",
     	  "groupBy": [
     	    {
     	      "params": [
@@ -3528,7 +3563,118 @@
     	    [
     	      {
     	        "params": [
-    	          "o31"
+    	          "o6_pa"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o7_pa",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o7_pa"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o8_pa",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o8_pa"
+    	        ],
+    	        "type": "field"
+    	      },
+    	      {
+    	        "params": [],
+    	        "type": "mean"
+    	      }
+    	    ]
+    	  ],
+    	  "tags": []
+    	},
+    	{
+    	  "alias": "o9_pa",
+    	  "groupBy": [
+    	    {
+    	      "params": [
+    	        "$__interval"
+    	      ],
+    	      "type": "time"
+    	    },
+    	    {
+    	      "params": [
+    	        "null"
+    	      ],
+    	      "type": "fill"
+    	    }
+    	  ],
+    	  "measurement": "Observation",
+    	  "orderByTime": "ASC",
+    	  "policy": "default",
+    	  "refId": "A",
+    	  "resultFormat": "time_series",
+    	  "select": [
+    	    [
+    	      {
+    	        "params": [
+    	          "o9_pa"
     	        ],
     	        "type": "field"
     	      },
@@ -3542,107 +3688,116 @@
     	}
       ],
       "aliasColors": {
-      "power_autonomy" : "#000000",
-      "o26" : "#e78ea5",
-      "o27" : "#ff028d",
-      "o28" : "#966ebd",
-      "o29" : "#ad8150",
-      "o30" : "#ccad60",
-      "o31" : "#c7fdb5"
+      "power_autonomy" : "#e78ea5",
+      "o1_pa" : "#ff028d",
+      "o2_pa" : "#966ebd",
+      "o3_pa" : "#ad8150",
+      "o4_pa" : "#ccad60",
+      "o5_pa" : "#c7fdb5",
+      "o6_pa" : "#ac86a8",
+      "o7_pa" : "#ffb07c",
+      "o8_pa" : "#947e94",
+      "o9_pa" : "#677a04"
       },
       "seriesOverrides": [
       {
-       "alias": "o9",
+       "alias": "o1_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o10",
+       "alias": "o2_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o11",
+       "alias": "o3_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o12",
+       "alias": "o4_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o13",
+       "alias": "o5_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o14",
+       "alias": "o6_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o15",
+       "alias": "o7_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o16",
+       "alias": "o8_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o17",
+       "alias": "o9_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o18",
+       "alias": "o10_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o19",
+       "alias": "o11_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o20",
+       "alias": "o13_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o21",
+       "alias": "o14_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o22",
+       "alias": "o15_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o23",
+       "alias": "o16_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o24",
+       "alias": "o17_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o25",
+       "alias": "o18_s",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o1",
+       "alias": "o1_ms",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o2",
+       "alias": "o2_ms",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o3",
+       "alias": "o3_ms",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o4",
+       "alias": "o4_ms",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o5",
+       "alias": "o5_ms",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o6",
+       "alias": "o6_ms",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o7",
+       "alias": "o7_ms",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o8",
+       "alias": "o1_pa",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o26",
+       "alias": "o2_pa",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o27",
+       "alias": "o3_pa",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o28",
+       "alias": "o4_pa",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o29",
+       "alias": "o5_pa",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o30",
+       "alias": "o6_pa",
        "nullPointMode": "null"	  	
       },  {
-       "alias": "o31",
+       "alias": "o7_pa",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o8_pa",
+       "nullPointMode": "null"	  	
+      },  {
+       "alias": "o9_pa",
        "nullPointMode": "null"	  	
       }
       ],      

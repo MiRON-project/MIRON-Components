@@ -32,17 +32,31 @@ void PayloadServiceInHandler::on_PayloadServiceIn(const CommBasicObjects::RobotP
 {
 	// implement business logic here
 	// (do not use blocking calls here, otherwise this might block the InputPort PayloadServiceIn)
-	const double mass = input.getMass();
+	double mass = input.getMass();
+	static double acc_mass = mass;
+	static double prev_mass = -1;
 	const unsigned int num_items = input.getNumber_of_items();
 
 	static bool first_execution = true;
 	std::string current_available;
 	std::string current_payload;
 
+if(prev_mass > mass or prev_mass < mass)
+{
+		prev_mass = mass;
+
+		std::cout << "1.- mass: " << mass << std::endl;
+		if (mass > 0.1)
+		{
+			acc_mass += mass + 1.5;
+			mass = acc_mass;
+		}
+		std::cout << "2.- mass: " << mass << std::endl;
+
 	if(mass >= 4 && mass <= MAX_MASS) {
 		current_payload = "HIGH";
 	}
-	else if (mass >= 3) {
+	else if (mass >= 2) {
 		current_payload = "HALF";
 	}
 	else{
@@ -69,11 +83,13 @@ void PayloadServiceInHandler::on_PayloadServiceIn(const CommBasicObjects::RobotP
 			std::cerr << e.what() << std::endl;
 		}
 	}
+}
 
-	if(num_items == MAX_ITEMS){
+	//std::cout << "num_items" << num_items << std::endl;
+	if(num_items >= MAX_ITEMS){
 		current_available= "LOW";
 	}
-	else if (num_items == 2){
+	else if (num_items >= 2){
 		current_available= "HALF";
 	}
 	else{
@@ -95,4 +111,5 @@ void PayloadServiceInHandler::on_PayloadServiceIn(const CommBasicObjects::RobotP
 		prev_available = current_available;
 	}
 	first_execution = false;
+
 }

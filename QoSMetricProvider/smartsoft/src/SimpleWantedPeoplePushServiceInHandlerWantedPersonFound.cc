@@ -15,7 +15,7 @@ SimpleWantedPeoplePushServiceInHandlerWantedPersonFound::~SimpleWantedPeoplePush
 
 void SimpleWantedPeoplePushServiceInHandlerWantedPersonFound::on_SimpleWantedPeoplePushServiceInWantedPersonFound(const CommObjectRecognitionObjects::SimpleRecognitionState &input)
 {
-	static bool first_execution = true;
+/*	static bool first_execution = true;
 	bool current_value = input.getIs_visible();
 
 	if(first_execution || (!first_execution && previous_value != current_value)){
@@ -42,4 +42,5 @@ void SimpleWantedPeoplePushServiceInHandlerWantedPersonFound::on_SimpleWantedPeo
 			std::cerr << e.what() << std::endl;
 		}
 	}
+*/
 }
