@@ -56,7 +56,7 @@ INCLUDE_DIRECTORIES(
   $ENV{OSPL_HOME}/include/dcps/C++/SACPP
 )
 
-add_definitions(-DROQME_DEBUG)
+#add_definitions(-DROQME_DEBUG)
 
 LINK_DIRECTORIES($ENV{OSPL_HOME}/lib)
 LINK_DIRECTORIES($ENV{ROQME_ROOT}/roqmeDDS/lib)

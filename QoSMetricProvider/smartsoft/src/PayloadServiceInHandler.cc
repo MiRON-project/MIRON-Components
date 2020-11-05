@@ -33,14 +33,15 @@ void PayloadServiceInHandler::on_PayloadServiceIn(const CommBasicObjects::RobotP
 	// implement business logic here
 	// (do not use blocking calls here, otherwise this might block the InputPort PayloadServiceIn)
 	double mass = input.getMass();
-	static double acc_mass = mass;
-	static double prev_mass = -1;
 	const unsigned int num_items = input.getNumber_of_items();
 
 	static bool first_execution = true;
 	std::string current_available;
 	std::string current_payload;
 
+/*
+ *  //static double acc_mass = mass;
+	//static double prev_mass = -1;
 if(prev_mass > mass or prev_mass < mass)
 {
 		prev_mass = mass;
@@ -52,7 +53,7 @@ if(prev_mass > mass or prev_mass < mass)
 			mass = acc_mass;
 		}
 		std::cout << "2.- mass: " << mass << std::endl;
-
+*/
 	if(mass >= 4 && mass <= MAX_MASS) {
 		current_payload = "HIGH";
 	}
@@ -83,7 +84,7 @@ if(prev_mass > mass or prev_mass < mass)
 			std::cerr << e.what() << std::endl;
 		}
 	}
-}
+//}
 
 	//std::cout << "num_items" << num_items << std::endl;
 	if(num_items >= MAX_ITEMS){

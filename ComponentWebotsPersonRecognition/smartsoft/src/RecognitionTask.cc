@@ -255,8 +255,8 @@ void RecognitionTask::comparePeopleJson()
   people_out.setIs_valid(true);
   people_out.setPeople(people);
   checkBump(people_out);
-  if(people.size() > 0)
-	  std::cout << "Número de personas detectadas: " << people.size() << std::endl;
+  //if(people.size() > 0)
+//	  std::cout << "Número de personas detectadas: " << people.size() << std::endl;
   peoplePushServiceOutPut(people_out);
 }
 
